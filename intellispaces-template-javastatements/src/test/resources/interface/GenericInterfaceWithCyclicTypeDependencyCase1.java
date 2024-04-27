@@ -1,6 +1,6 @@
-package intellispaces.javastatements.sample;
+package tech.intellispacesframework.javastatements.sample;
 
-import intellispaces.javastatements.support.TesteeType;
+import tech.intellispacesframework.javastatements.support.TesteeType;
 
 @TesteeType
 public interface GenericInterfaceWithCyclicTypeDependencyCase1<T extends GenericInterfaceWithCyclicTypeDependencyCase1<T>> {

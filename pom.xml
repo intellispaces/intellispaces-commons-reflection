@@ -3,11 +3,11 @@
 
     <parent>
         <groupId>intellispaces</groupId>
-        <artifactId>intellispaces-parent-pom</artifactId>
+        <artifactId>intellispacesframework-parent-pom</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>intellispaces-javastatements-root</artifactId>
+    <artifactId>intellispacesframework-javastatements-root</artifactId>
     <packaging>pom</packaging>
 
     <modules>
@@ -20,12 +20,12 @@
             <!-- Intellispaces -->
             <dependency>
                 <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-javastatements-model</artifactId>
+                <artifactId>intellispacesframework-javastatements-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-commons</artifactId>
+                <artifactId>intellispacesframework-commons</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>

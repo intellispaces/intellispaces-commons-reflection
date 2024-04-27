@@ -1,6 +1,7 @@
-package intellispaces.javastatements.sample;
+package tech.intellispacesframework.javastatements.sample;
 
-import intellispaces.javastatements.support.TesteeType;
+import tech.intellispacesframework.javastatements.sample.TestEnum;
+import tech.intellispacesframework.javastatements.support.TesteeType;
 
 @TesteeType
 public enum EnumWithEnumGetter {

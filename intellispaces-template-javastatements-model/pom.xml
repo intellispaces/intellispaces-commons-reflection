@@ -3,11 +3,11 @@
 
     <parent>
         <groupId>intellispaces</groupId>
-        <artifactId>intellispaces-javastatements-root</artifactId>
+        <artifactId>intellispacesframework-javastatements-root</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>intellispaces-javastatements-model</artifactId>
+    <artifactId>intellispacesframework-javastatements-model</artifactId>
     <packaging>jar</packaging>
 	
     <build>
@@ -30,7 +30,7 @@
     <dependencies>
         <dependency>
             <groupId>intellispaces</groupId>
-            <artifactId>intellispaces-commons</artifactId>
+            <artifactId>intellispacesframework-commons</artifactId>
         </dependency>
     </dependencies>
 </project>
