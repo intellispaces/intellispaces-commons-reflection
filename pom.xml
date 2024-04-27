@@ -11,8 +11,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-template-javastatements-model</module>
-        <module>intellispaces-template-javastatements</module>
+        <module>intellispacesframework-javastatements-model</module>
+        <module>intellispacesframework-javastatements</module>
     </modules>
 
     <dependencyManagement>
