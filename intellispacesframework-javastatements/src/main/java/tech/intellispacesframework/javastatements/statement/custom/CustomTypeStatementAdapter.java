@@ -2,6 +2,7 @@ package tech.intellispacesframework.javastatements.statement.custom;
 
 import tech.intellispacesframework.commons.action.ActionBuilders;
 import tech.intellispacesframework.commons.action.Getter;
+import tech.intellispacesframework.commons.type.TypeFunctions;
 import tech.intellispacesframework.javastatements.context.TypeContext;
 import tech.intellispacesframework.javastatements.context.TypeContextBuilder;
 import tech.intellispacesframework.javastatements.statement.DependencyFunctions;
@@ -44,6 +45,11 @@ abstract class CustomTypeStatementAdapter implements CustomType {
     TypeContextBuilder builder = TypeContextBuilder.get().parentContext(parentContext);
     typeParams.forEach(typeParam -> builder.addTypeParam(typeParam.name(), typeParam));
     return builder.build();
+  }
+
+  @Override
+  public boolean isAbstract() {
+    return TypeFunctions.isAbstractElement(typeElement);
   }
 
   @Override

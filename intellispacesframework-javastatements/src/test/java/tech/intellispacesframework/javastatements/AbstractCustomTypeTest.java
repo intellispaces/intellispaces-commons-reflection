@@ -10,8 +10,8 @@ import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 import tech.intellispacesframework.javastatements.statement.custom.MethodStatement;
 import tech.intellispacesframework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.PrimitiveTypeReferences;
-import tech.intellispacesframework.javastatements.sample.TestEnum;
-import tech.intellispacesframework.javastatements.sample.TestRecord;
+import tech.intellispacesframework.javastatements.samples.TestEnum;
+import tech.intellispacesframework.javastatements.samples.TestRecord;
 import tech.intellispacesframework.javastatements.support.TesteeTypeAnnotationProcessor;
 
 import javax.lang.model.element.TypeElement;

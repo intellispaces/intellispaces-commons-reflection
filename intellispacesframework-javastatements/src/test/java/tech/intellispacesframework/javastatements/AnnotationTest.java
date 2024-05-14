@@ -12,9 +12,9 @@ import tech.intellispacesframework.javastatements.statement.instance.AnnotationI
 import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.reference.PrimitiveTypeReferences;
 import tech.intellispacesframework.javastatements.support.TesteeType;
-import tech.intellispacesframework.javastatements.sample.AnnotationWithElementsView;
-import tech.intellispacesframework.javastatements.sample.TestAnnotation;
-import tech.intellispacesframework.javastatements.sample.TestEnum;
+import tech.intellispacesframework.javastatements.samples.AnnotationWithElementsView;
+import tech.intellispacesframework.javastatements.samples.TestAnnotation;
+import tech.intellispacesframework.javastatements.samples.TestEnum;
 import org.junit.jupiter.api.Test;
 
 import javax.lang.model.element.TypeElement;
@@ -43,8 +43,9 @@ public class AnnotationTest extends AbstractCustomTypeTest {
     AnnotationStatement annotationStatement = customTypeStatement.asAnnotation().orElse(null);
     assertThat(annotationStatement).isNotNull();
 
+    assertThat(annotationStatement.isAbstract()).isTrue();
     assertThat(annotationStatement.simpleName()).isEqualTo("EmptyAnnotation");
-    assertThat(annotationStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.EmptyAnnotation");
+    assertThat(annotationStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyAnnotation");
 
     assertThat(annotationStatement.typeParameters()).isEmpty();
 
@@ -384,7 +385,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
 
   private void testAnnotationWithElement(String className, String elementMethodName, Handler<MethodStatement> methodValidator) {
     // Given
-    String canonicalClassName = "tech.intellispacesframework.javastatements.sample." + className;
+    String canonicalClassName = "tech.intellispacesframework.javastatements.samples." + className;
     TypeElement typeElement = getTestElement("annotation/" + className + ".java");
 
     // When
@@ -429,7 +430,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testCyclicAnnotation() {
     // Given
     TypeElement typeElement = getTestElement("annotation/CyclicAnnotations.java");
-    String annotationClassName = "tech.intellispacesframework.javastatements.sample.CyclicAnnotations.SomeAnnotation";
+    String annotationClassName = "tech.intellispacesframework.javastatements.samples.CyclicAnnotations.SomeAnnotation";
 
     // When
     InterfaceStatement interfaceStatement = JavaStatements.interfaceStatement(typeElement);

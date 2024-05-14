@@ -15,6 +15,8 @@ import java.util.Optional;
  */
 public interface CustomType extends AnnotatedStatement {
 
+  boolean isAbstract();
+
   /**
    * Canonical class name.
    */

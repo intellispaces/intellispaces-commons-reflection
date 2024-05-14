@@ -1,5 +1,6 @@
 package tech.intellispacesframework.javastatements.statement.custom;
 
+import tech.intellispacesframework.commons.type.TypeFunctions;
 import tech.intellispacesframework.javastatements.statement.StatementType;
 import tech.intellispacesframework.javastatements.statement.StatementTypes;
 import tech.intellispacesframework.javastatements.exception.JavaStatementException;
@@ -22,6 +23,11 @@ class ClassToClassStatementAdapter implements ClassStatement {
   @Override
   public StatementType statementType() {
     return StatementTypes.Class;
+  }
+
+  @Override
+  public boolean isAbstract() {
+    return TypeFunctions.isAbstractClass(aClass);
   }
 
   @Override

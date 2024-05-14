@@ -37,8 +37,9 @@ public class EnumTest extends AbstractCustomTypeTest {
     EnumStatement enumStatement = customTypeStatement.asEnum().orElse(null);
     assertThat(enumStatement).isNotNull();
 
+    assertThat(enumStatement.isAbstract()).isFalse();
     assertThat(enumStatement.simpleName()).isEqualTo("EmptyEnum");
-    assertThat(enumStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.EmptyEnum");
+    assertThat(enumStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyEnum");
 
     assertThat(enumStatement.typeParameters()).isEmpty();
     assertThat(enumStatement.implementedInterfaces()).isEmpty();
@@ -66,8 +67,8 @@ public class EnumTest extends AbstractCustomTypeTest {
   @Test
   public void testEnumImplementedTwoInterfaces() {
     // Given
-    final var interface1Name = "tech.intellispacesframework.javastatements.sample.EnumImplementedTwoInterfaces.Interface1";
-    final var interface2Name = "tech.intellispacesframework.javastatements.sample.EnumImplementedTwoInterfaces.Interface2";
+    final var interface1Name = "tech.intellispacesframework.javastatements.samples.EnumImplementedTwoInterfaces.Interface1";
+    final var interface2Name = "tech.intellispacesframework.javastatements.samples.EnumImplementedTwoInterfaces.Interface2";
     TypeElement typeElement = getTestElement("enum/EnumImplementedTwoInterfaces.java");
 
     // When
@@ -76,7 +77,7 @@ public class EnumTest extends AbstractCustomTypeTest {
     // Then
     assertThat(enumStatement).isNotNull();
     assertThat(enumStatement.simpleName()).isEqualTo("TesteeEnum");
-    assertThat(enumStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.EnumImplementedTwoInterfaces.TesteeEnum");
+    assertThat(enumStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EnumImplementedTwoInterfaces.TesteeEnum");
 
     assertThat(enumStatement.typeParameters()).isEmpty();
 
@@ -262,7 +263,7 @@ public class EnumTest extends AbstractCustomTypeTest {
       String className, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
-    String enumClassName = "tech.intellispacesframework.javastatements.sample." + className;
+    String enumClassName = "tech.intellispacesframework.javastatements.samples." + className;
     TypeElement typeElement = getTestElement("enum/" + className + ".java");
     Session session = SessionBuilder.buildSession();
 

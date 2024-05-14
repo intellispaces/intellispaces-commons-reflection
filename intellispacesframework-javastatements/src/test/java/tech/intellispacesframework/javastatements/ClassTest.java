@@ -41,8 +41,9 @@ public class ClassTest extends AbstractCustomTypeTest {
     ClassStatement classStatement = customTypeStatement.asClass().orElse(null);
     assertThat(classStatement).isNotNull();
 
+    assertThat(classStatement.isAbstract()).isFalse();
     assertThat(classStatement.simpleName()).isEqualTo("EmptyClass");
-    assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.EmptyClass");
+    assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyClass");
 
     assertThat(classStatement.typeParameters()).isEmpty();
     assertThat(classStatement.extendedClass()).isEmpty();
@@ -64,9 +65,9 @@ public class ClassTest extends AbstractCustomTypeTest {
   @Test
   public void testClassExtendedSuperClassAndImplementedTwoInterfaces() {
     // Given
-    final var superClassName = "tech.intellispacesframework.javastatements.sample.ClassExtendedSuperClassAndImplementedTwoInterfaces.SuperClass";
-    final var interface1Name = "tech.intellispacesframework.javastatements.sample.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface1";
-    final var interface2Name = "tech.intellispacesframework.javastatements.sample.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface2";
+    final var superClassName = "tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.SuperClass";
+    final var interface1Name = "tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface1";
+    final var interface2Name = "tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface2";
     TypeElement typeElement = getTestElement("class/ClassExtendedSuperClassAndImplementedTwoInterfaces.java");
 
     // When
@@ -76,7 +77,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     assertThat(classStatement).isNotNull();
 
     assertThat(classStatement.simpleName()).isEqualTo("TesteeClass");
-    assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.ClassExtendedSuperClassAndImplementedTwoInterfaces.TesteeClass");
+    assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.TesteeClass");
 
     assertThat(classStatement.typeParameters()).isEmpty();
 
@@ -414,7 +415,7 @@ public class ClassTest extends AbstractCustomTypeTest {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
       HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
-        assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.GenericClassWithCyclicTypeDependencyCase2.ClassB");
+        assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericClassWithCyclicTypeDependencyCase2.ClassB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
@@ -428,7 +429,7 @@ public class ClassTest extends AbstractCustomTypeTest {
       String className, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
-    String canonicalClassName = "tech.intellispacesframework.javastatements.sample." + className;
+    String canonicalClassName = "tech.intellispacesframework.javastatements.samples." + className;
     TypeElement typeElement = getTestElement("class/" + className + ".java");
     Session session = SessionBuilder.buildSession();
 

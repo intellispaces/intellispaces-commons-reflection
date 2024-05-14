@@ -40,8 +40,9 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     InterfaceStatement interfaceStatement = customTypeStatement.asInterface().orElse(null);
     assertThat(interfaceStatement).isNotNull();
 
+    assertThat(interfaceStatement.isAbstract()).isTrue();
     assertThat(interfaceStatement.simpleName()).isEqualTo("EmptyInterface");
-    assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.EmptyInterface");
+    assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyInterface");
 
     assertThat(interfaceStatement.typeParameters()).isEmpty();
     assertThat(interfaceStatement.extendedInterfaces()).isEmpty();
@@ -62,8 +63,8 @@ public class InterfaceTest extends AbstractCustomTypeTest {
   @Test
   public void testInterfaceExtendedTwoInterfaces() {
     // Given
-    final var interface1Name = "tech.intellispacesframework.javastatements.sample.InterfaceExtendedTwoInterfaces.Interface1";
-    final var interface2Name = "tech.intellispacesframework.javastatements.sample.InterfaceExtendedTwoInterfaces.Interface2";
+    final var interface1Name = "tech.intellispacesframework.javastatements.samples.InterfaceExtendedTwoInterfaces.Interface1";
+    final var interface2Name = "tech.intellispacesframework.javastatements.samples.InterfaceExtendedTwoInterfaces.Interface2";
     TypeElement typeElement = getTestElement("interface/InterfaceExtendedTwoInterfaces.java");
 
     // When
@@ -72,7 +73,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     // Then
     assertThat(interfaceStatement).isNotNull();
     assertThat(interfaceStatement.simpleName()).isEqualTo("TesteeInterface");
-    assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.InterfaceExtendedTwoInterfaces.TesteeInterface");
+    assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.InterfaceExtendedTwoInterfaces.TesteeInterface");
 
     assertThat(interfaceStatement.typeParameters()).isEmpty();
 
@@ -291,7 +292,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
       HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
-        assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB");
+        assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
@@ -305,7 +306,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
       String interfaceName, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
-    String canonicalClassName = "tech.intellispacesframework.javastatements.sample." + interfaceName;
+    String canonicalClassName = "tech.intellispacesframework.javastatements.samples." + interfaceName;
     TypeElement typeElement = getTestElement("interface/" + interfaceName + ".java");
     Session session = SessionBuilder.buildSession();
 

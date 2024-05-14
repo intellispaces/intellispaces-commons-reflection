@@ -39,8 +39,9 @@ public class RecordTest extends AbstractCustomTypeTest {
     RecordStatement recordStatement = customTypeStatement.asRecord().orElse(null);
     assertThat(recordStatement).isNotNull();
 
+    assertThat(recordStatement.isAbstract()).isFalse();
     assertThat(recordStatement.simpleName()).isEqualTo("EmptyRecord");
-    assertThat(recordStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.EmptyRecord");
+    assertThat(recordStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyRecord");
 
     assertThat(recordStatement.typeParameters()).isEmpty();
     assertThat(recordStatement.implementedInterfaces()).isEmpty();
@@ -68,8 +69,8 @@ public class RecordTest extends AbstractCustomTypeTest {
   @Test
   public void testRecordImplementedTwoInterfaces() {
     // Given
-    final var interface1Name = "tech.intellispacesframework.javastatements.sample.RecordImplementedTwoInterfaces.Interface1";
-    final var interface2Name = "tech.intellispacesframework.javastatements.sample.RecordImplementedTwoInterfaces.Interface2";
+    final var interface1Name = "tech.intellispacesframework.javastatements.samples.RecordImplementedTwoInterfaces.Interface1";
+    final var interface2Name = "tech.intellispacesframework.javastatements.samples.RecordImplementedTwoInterfaces.Interface2";
     TypeElement typeElement = getTestElement("record/RecordImplementedTwoInterfaces.java");
 
     // When
@@ -78,7 +79,7 @@ public class RecordTest extends AbstractCustomTypeTest {
     // Then
     assertThat(recordStatement).isNotNull();
     assertThat(recordStatement.simpleName()).isEqualTo("TesteeRecord");
-    assertThat(recordStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.RecordImplementedTwoInterfaces.TesteeRecord");
+    assertThat(recordStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.RecordImplementedTwoInterfaces.TesteeRecord");
 
     assertThat(recordStatement.typeParameters()).isEmpty();
 
@@ -307,7 +308,7 @@ public class RecordTest extends AbstractCustomTypeTest {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
       HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
-        assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.sample.GenericRecordWithCyclicTypeDependencyCase2.RecordB");
+        assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
@@ -321,7 +322,7 @@ public class RecordTest extends AbstractCustomTypeTest {
       String recordName, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
-    String canonicalClassName = "tech.intellispacesframework.javastatements.sample." + recordName;
+    String canonicalClassName = "tech.intellispacesframework.javastatements.samples." + recordName;
     TypeElement typeElement = getTestElement("record/" + recordName + ".java");
     Session session = SessionBuilder.buildSession();
 
