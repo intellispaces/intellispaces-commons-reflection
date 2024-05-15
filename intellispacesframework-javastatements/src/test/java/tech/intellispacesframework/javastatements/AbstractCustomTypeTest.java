@@ -35,6 +35,17 @@ class AbstractCustomTypeTest {
     return annotationProcessor.testee();
   }
 
+  protected void validateDefaultConstructor(MethodStatement method) {
+    assertThat(method.name()).isEqualTo("<init>");
+    assertThat(method.isPublic()).isTrue();
+    assertThat(method.isStatic()).isFalse();
+    assertThat(method.isDefault()).isFalse();
+    assertThat(method.typeParameters()).isEmpty();
+    assertThat(method.returnType()).isEmpty();
+    assertThat(method.params()).isEmpty();
+    assertThat(method.exceptions()).isEmpty();
+  }
+
   protected void validateSimpleMethod(MethodStatement method) {
     assertThat(method.isPublic()).isTrue();
     assertThat(method.isStatic()).isFalse();

@@ -133,6 +133,14 @@ public interface TypeElementFunctions {
     return AnnotationFunctions.getAnnotations(typeElement.getAnnotationMirrors(), session);
   }
 
+  static List<MethodStatement> getConstructors(TypeElement typeElement, CustomType methodOwner, TypeContext typeContext, Session session) {
+    return typeElement.getEnclosedElements().stream()
+        .filter(element -> element.getKind() == ElementKind.CONSTRUCTOR)
+        .map(element -> (ExecutableElement) element)
+        .map(element -> MethodStatementBuilder.build(element, methodOwner, typeContext, session))
+        .toList();
+  }
+
   static List<MethodStatement> getDeclaredMethods(TypeElement typeElement, CustomType methodOwner, TypeContext typeContext, Session session) {
     return typeElement.getEnclosedElements().stream()
         .filter(element -> element.getKind() == ElementKind.METHOD)

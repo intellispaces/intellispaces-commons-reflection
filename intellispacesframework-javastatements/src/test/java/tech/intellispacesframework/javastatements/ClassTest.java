@@ -49,6 +49,8 @@ public class ClassTest extends AbstractCustomTypeTest {
     assertThat(classStatement.extendedClass()).isEmpty();
     assertThat(classStatement.implementedInterfaces()).isEmpty();
     assertThat(classStatement.parentTypes()).isEmpty();
+    assertThat(classStatement.constructors()).hasSize(1);
+    validateDefaultConstructor(classStatement.constructors().get(0));
     assertThat(classStatement.declaredMethods()).isEmpty();
 
     assertThat(classStatement.annotations()).hasSize(1);
@@ -126,6 +128,22 @@ public class ClassTest extends AbstractCustomTypeTest {
     assertThat(classStatement.extendedClass().orElseThrow().referenceDeclaration()).isEqualTo("SuperClass");
     assertThat(classStatement.implementedInterfaces().get(0).referenceDeclaration()).isEqualTo("Interface1");
     assertThat(classStatement.implementedInterfaces().get(1).referenceDeclaration()).isEqualTo("Interface2");
+  }
+
+  @Test
+  public void testClassWithDefaultConstructor() {
+    // Given
+    String canonicalClassName = "tech.intellispacesframework.javastatements.samples.ClassWithDefaultConstructor";
+    TypeElement typeElement = getTestElement("class/ClassWithDefaultConstructor.java");
+    Session session = SessionBuilder.buildSession();
+
+    // When
+    ClassStatement classStatement = JavaStatements.classStatement(typeElement, session);
+    List<MethodStatement> constructors = classStatement.constructors();
+
+    // Then
+    assertThat(constructors).hasSize(1);
+    validateDefaultConstructor(constructors.get(0));
   }
 
   @Test

@@ -3,7 +3,6 @@ package tech.intellispacesframework.javastatements.statement.custom;
 import tech.intellispacesframework.commons.type.TypeFunctions;
 import tech.intellispacesframework.javastatements.statement.StatementType;
 import tech.intellispacesframework.javastatements.statement.StatementTypes;
-import tech.intellispacesframework.javastatements.exception.JavaStatementException;
 import tech.intellispacesframework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispacesframework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.NamedTypeReference;
@@ -46,72 +45,77 @@ class ClassToClassStatementAdapter implements ClassStatement {
   }
 
   @Override
+  public List<MethodStatement> constructors() {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  @Override
   public Optional<CustomTypeReference> extendedClass() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<CustomTypeReference> implementedInterfaces() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<NamedTypeReference> typeParameters() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<CustomTypeReference> parentTypes() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<AnnotationInstance> annotations() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public Optional<AnnotationInstance> selectAnnotation(String annotationClass) {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public <A extends Annotation> Optional<A> selectAnnotation(Class<A> annotationClass) {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<MethodStatement> declaredMethods() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<MethodStatement> declaredMethodsWithName(String name) {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<MethodStatement> actualMethods() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public List<MethodStatement> actualMethodsWithName(String name) {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public Collection<CustomType> dependencies() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
   public Collection<String> dependencyTypenames() {
-    throw JavaStatementException.withMessage("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 }

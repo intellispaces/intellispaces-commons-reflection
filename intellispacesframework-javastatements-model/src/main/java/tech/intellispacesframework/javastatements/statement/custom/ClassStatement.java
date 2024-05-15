@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface ClassStatement extends CustomType {
 
+  List<MethodStatement> constructors();
+
   /**
    * Extended class references.
    */

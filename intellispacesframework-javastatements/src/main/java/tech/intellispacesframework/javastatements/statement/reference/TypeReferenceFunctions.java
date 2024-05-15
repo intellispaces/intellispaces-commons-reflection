@@ -31,7 +31,7 @@ public interface TypeReferenceFunctions {
           return Optional.empty();
         }
       } else {
-        throw JavaStatementException.withMessage("Not implemented yet");
+        throw new UnsupportedOperationException("Not implemented yet");
       }
     } else if (typeReference1.asCustomTypeReference().isPresent() && typeReference2.asCustomTypeReference().isPresent()) {
       CustomType type1 = typeReference1.asCustomTypeReference().orElseThrow().targetType();
@@ -78,7 +78,7 @@ public interface TypeReferenceFunctions {
       var namedTypeReference2 = typeReference2.asNamedTypeReference().get();
       if (!namedTypeReference1.extendedBounds().isEmpty() || !namedTypeReference2.extendedBounds().isEmpty()) {
         // todo: compare extended bounds
-        throw JavaStatementException.withMessage("Not implemented yet");
+        throw new UnsupportedOperationException("Not implemented yet");
       }
     } else {
       sameParams = false;
