@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 abstract class CustomTypeStatementAdapter implements CustomType {
   private final TypeElement typeElement;
   private final List<NamedTypeReference> typeParams;
+  private final Getter<String> typeParametersFullDeclarationGetter;
+  private final Getter<String> typeParametersBriefDeclarationGetter;
   private final Getter<List<CustomTypeReference>> parentTypesGetter;
   private final Getter<List<AnnotationInstance>> annotationsGetter;
   private final Getter<List<MethodStatement>> declaredMethodsGetter;
@@ -33,6 +35,9 @@ abstract class CustomTypeStatementAdapter implements CustomType {
     this.typeElement = typeElement;
     this.typeParams = TypeElementFunctions.getTypeParameters(typeElement, typeContext, session);
     TypeContext classNameContext = createNameContext(typeContext, this.typeParams);
+
+    this.typeParametersFullDeclarationGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
+    this.typeParametersBriefDeclarationGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
     this.parentTypesGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getParentTypes, typeElement, typeContext, session);
     this.annotationsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getAnnotations, typeElement, session);
     this.declaredMethodsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getDeclaredMethods, typeElement, this, classNameContext, session);
@@ -70,6 +75,16 @@ abstract class CustomTypeStatementAdapter implements CustomType {
   @Override
   public List<NamedTypeReference> typeParameters() {
     return typeParams;
+  }
+
+  @Override
+  public String typeParametersFullDeclaration() {
+    return typeParametersFullDeclarationGetter.get();
+  }
+
+  @Override
+  public String typeParametersBriefDeclaration() {
+    return typeParametersBriefDeclarationGetter.get();
   }
 
   @Override

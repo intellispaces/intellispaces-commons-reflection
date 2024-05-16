@@ -115,19 +115,19 @@ public interface TypeReferenceFunctions {
     return getTypeDeclaration(typeReference, false);
   }
 
-  static String getTypeDeclaration(TypeReference typeReference, boolean expanded) {
+  static String getTypeDeclaration(TypeReference typeReference, boolean fullDeclaration) {
     if (typeReference.asPrimitiveTypeReference().isPresent()) {
       return typeReference.asPrimitiveTypeReference().get().typename();
     } else if (typeReference.asArrayTypeReference().isPresent()) {
       TypeReference elementType = typeReference.asArrayTypeReference().get().elementType();
-      return getTypeDeclaration(elementType, expanded) + "[]";
+      return getTypeDeclaration(elementType, fullDeclaration) + "[]";
     } else if (typeReference.asCustomTypeReference().isPresent()) {
       CustomType customType = typeReference.asCustomTypeReference().get().targetType();
-      return customType.simpleName() + getTypeParametersDeclaration(customType, expanded);
+      return customType.simpleName() + CustomTypeFunctions.getTypeParametersDeclaration(customType, fullDeclaration);
     } else if (typeReference.asNamedTypeReference().isPresent()) {
-      return getNamedTypeReferenceDeclaration(typeReference.asNamedTypeReference().get(), expanded);
+      return getNamedTypeReferenceDeclaration(typeReference.asNamedTypeReference().get(), fullDeclaration);
     } else if (typeReference.asWildcardTypeReference().isPresent()) {
-      return getWildcardDeclaration(typeReference.asWildcardTypeReference().get(), expanded);
+      return getWildcardDeclaration(typeReference.asWildcardTypeReference().get(), fullDeclaration);
     } else {
       throw JavaStatementException.withMessage("Unsupported reference type {}", typeReference.statementType().typename());
     }
@@ -140,15 +140,8 @@ public interface TypeReferenceFunctions {
     return (arguments.isEmpty() ? "" : "<" + arguments + ">");
   }
 
-  static String getTypeParametersDeclaration(CustomType customType, boolean expanded) {
-    var parametersSource = customType.typeParameters().stream()
-        .map(param -> getNamedTypeReferenceDeclaration(param, expanded))
-        .collect(Collectors.joining(", "));
-    return (parametersSource.isEmpty() ? "" : "<" + parametersSource + ">");
-  }
-
-  static String getNamedTypeReferenceDeclaration(NamedTypeReference typeReference, boolean expanded) {
-    if (!expanded || typeReference.extendedBounds().isEmpty()) {
+  static String getNamedTypeReferenceDeclaration(NamedTypeReference typeReference, boolean fullDeclaration) {
+    if (!fullDeclaration || typeReference.extendedBounds().isEmpty()) {
       return typeReference.name();
     } else {
       var sb = new StringBuilder();
@@ -164,8 +157,8 @@ public interface TypeReferenceFunctions {
     }
   }
 
-  static String getWildcardDeclaration(WildcardTypeReference typeReference, boolean expanded) {
-    if (!expanded) {
+  static String getWildcardDeclaration(WildcardTypeReference typeReference, boolean fullDeclaration) {
+    if (!fullDeclaration) {
       return "?";
     } else {
       var sb = new StringBuilder();

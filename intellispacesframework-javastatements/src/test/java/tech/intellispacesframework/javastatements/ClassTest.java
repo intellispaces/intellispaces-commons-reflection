@@ -294,6 +294,8 @@ public class ClassTest extends AbstractCustomTypeTest {
     assertThat(typeReference.referenceDeclaration()).isEqualTo("GenericClassWithOneTypeParameter");
     assertThat(typeReference.typeFullDeclaration()).isEqualTo("GenericClassWithOneTypeParameter<T>");
     assertThat(typeReference.typeBriefDeclaration()).isEqualTo("GenericClassWithOneTypeParameter<T>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T>");
+    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
     Assertions.assertThat(typeReference.targetType().asClass()).isPresent();
     ClassStatement classStatement = typeReference.targetType().asClass().orElseThrow();
@@ -326,6 +328,8 @@ public class ClassTest extends AbstractCustomTypeTest {
     assertThat(typeReference.referenceDeclaration()).isEqualTo("GenericClassWithMultipleTypeParameters");
     assertThat(typeReference.typeFullDeclaration()).isEqualTo("GenericClassWithMultipleTypeParameters<T1, T2 extends T1, T3 extends Number, T4 extends AutoCloseable & DataInput>");
     assertThat(typeReference.typeBriefDeclaration()).isEqualTo("GenericClassWithMultipleTypeParameters<T1, T2, T3, T4>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1, T2 extends T1, T3 extends Number, T4 extends AutoCloseable & DataInput>");
+    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1, T2, T3, T4>");
 
     Assertions.assertThat(typeReference.targetType().asClass()).isPresent();
     ClassStatement classStatement = typeReference.targetType().asClass().orElseThrow();
@@ -424,6 +428,8 @@ public class ClassTest extends AbstractCustomTypeTest {
     assertThat(typeReference.referenceDeclaration()).isEqualTo("ClassA");
     assertThat(typeReference.typeFullDeclaration()).isEqualTo("ClassA<T1 extends ClassB<?>>");
     assertThat(typeReference.typeBriefDeclaration()).isEqualTo("ClassA<T1>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends ClassB<?>>");
+    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
     Assertions.assertThat(typeReference.targetType().asClass()).isPresent();
     ClassStatement classAStatement = typeReference.targetType().asClass().orElseThrow();

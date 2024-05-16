@@ -65,6 +65,16 @@ class ClassToClassStatementAdapter implements ClassStatement {
   }
 
   @Override
+  public String typeParametersFullDeclaration() {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  @Override
+  public String typeParametersBriefDeclaration() {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  @Override
   public List<CustomTypeReference> parentTypes() {
     throw new UnsupportedOperationException("Not implemented yet");
   }

@@ -40,6 +40,16 @@ public interface CustomType extends AnnotatedStatement {
   List<NamedTypeReference> typeParameters();
 
   /**
+   * Full declaration of the type parameters.
+   */
+  String typeParametersFullDeclaration();
+
+  /**
+   * Brief declaration of the type parameters.
+   */
+  String typeParametersBriefDeclaration();
+
+  /**
    * Declared type parent types.
    *
    * <p>Some types have not a parent types.

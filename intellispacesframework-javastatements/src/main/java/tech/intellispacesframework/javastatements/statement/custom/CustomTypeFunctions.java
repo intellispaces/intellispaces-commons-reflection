@@ -174,4 +174,11 @@ public interface CustomTypeFunctions {
     parents.addAll(curParents);
     curParents.forEach(p -> populateParents(p, parents));
   }
+
+  static String getTypeParametersDeclaration(CustomType customType, boolean fullDeclaration) {
+    var parametersSource = customType.typeParameters().stream()
+        .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, fullDeclaration))
+        .collect(Collectors.joining(", "));
+    return (parametersSource.isEmpty() ? "" : "<" + parametersSource + ">");
+  }
 }

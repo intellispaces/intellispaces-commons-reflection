@@ -65,12 +65,12 @@ public interface TypeReference extends Statement {
   String referenceDeclaration();
 
   /**
-   * Full declaration of the related type.
+   * Full declaration of the type reference.
    */
   String typeFullDeclaration();
 
   /**
-   * Brief declaration of the related type.
+   * Brief declaration of the type reference.
    */
   String typeBriefDeclaration();
 }

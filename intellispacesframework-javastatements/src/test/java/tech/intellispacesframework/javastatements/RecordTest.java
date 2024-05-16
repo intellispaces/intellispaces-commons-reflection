@@ -272,6 +272,8 @@ public class RecordTest extends AbstractCustomTypeTest {
     assertThat(typeReference.referenceDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1");
     assertThat(typeReference.typeFullDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.typeBriefDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
     Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();
     RecordStatement recordStatement = typeReference.targetType().asRecord().orElseThrow();
@@ -299,6 +301,8 @@ public class RecordTest extends AbstractCustomTypeTest {
     assertThat(typeReference.referenceDeclaration()).isEqualTo("RecordA");
     assertThat(typeReference.typeFullDeclaration()).isEqualTo("RecordA<T1 extends RecordB<?>>");
     assertThat(typeReference.typeBriefDeclaration()).isEqualTo("RecordA<T1>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends RecordB<?>>");
+    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
     Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();
     RecordStatement recordStatement = typeReference.targetType().asRecord().orElseThrow();
