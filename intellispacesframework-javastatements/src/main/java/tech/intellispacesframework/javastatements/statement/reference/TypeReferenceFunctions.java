@@ -87,14 +87,14 @@ public interface TypeReferenceFunctions {
   }
 
   /**
-   * Returns type reference declaration.
+   * Returns actual type reference declaration.
    */
-  static String getReferenceDeclaration(TypeReference typeReference) {
+  static String getActualTypeReferenceDeclaration(TypeReference typeReference) {
     if (typeReference.asPrimitiveTypeReference().isPresent()) {
       return typeReference.asPrimitiveTypeReference().get().typename();
     } else if (typeReference.asArrayTypeReference().isPresent()) {
       TypeReference elementType = typeReference.asArrayTypeReference().get().elementType();
-      return getReferenceDeclaration(elementType) + "[]";
+      return getActualTypeReferenceDeclaration(elementType) + "[]";
     } else if (typeReference.asCustomTypeReference().isPresent()) {
       CustomType customType = typeReference.asCustomTypeReference().get().targetType();
       return customType.simpleName() + getTypeArgumentsDeclaration(typeReference.asCustomTypeReference().get());
@@ -107,20 +107,20 @@ public interface TypeReferenceFunctions {
     }
   }
 
-  static String getTypeFullDeclaration(TypeReference typeReference) {
-    return getTypeDeclaration(typeReference, true);
+  static String getFormalFullTypeReferenceDeclaration(TypeReference typeReference) {
+    return getFormalTypeReferenceDeclaration(typeReference, true);
   }
 
-  static String getTypeBriefDeclaration(TypeReference typeReference) {
-    return getTypeDeclaration(typeReference, false);
+  static String getFormalBriefTypeReferenceDeclaration(TypeReference typeReference) {
+    return getFormalTypeReferenceDeclaration(typeReference, false);
   }
 
-  static String getTypeDeclaration(TypeReference typeReference, boolean fullDeclaration) {
+  static String getFormalTypeReferenceDeclaration(TypeReference typeReference, boolean fullDeclaration) {
     if (typeReference.asPrimitiveTypeReference().isPresent()) {
       return typeReference.asPrimitiveTypeReference().get().typename();
     } else if (typeReference.asArrayTypeReference().isPresent()) {
       TypeReference elementType = typeReference.asArrayTypeReference().get().elementType();
-      return getTypeDeclaration(elementType, fullDeclaration) + "[]";
+      return getFormalTypeReferenceDeclaration(elementType, fullDeclaration) + "[]";
     } else if (typeReference.asCustomTypeReference().isPresent()) {
       CustomType customType = typeReference.asCustomTypeReference().get().targetType();
       return customType.simpleName() + CustomTypeFunctions.getTypeParametersDeclaration(customType, fullDeclaration);
@@ -135,7 +135,7 @@ public interface TypeReferenceFunctions {
 
   static String getTypeArgumentsDeclaration(CustomTypeReference typeReference) {
     String arguments = typeReference.typeArguments().stream()
-        .map(TypeReferenceFunctions::getReferenceDeclaration)
+        .map(TypeReferenceFunctions::getActualTypeReferenceDeclaration)
         .collect(Collectors.joining(", "));
     return (arguments.isEmpty() ? "" : "<" + arguments + ">");
   }
@@ -151,7 +151,7 @@ public interface TypeReferenceFunctions {
           sb.append(" & ");
         }
         first = false;
-        sb.append(getReferenceDeclaration(extendedTypeReference));
+        sb.append(getActualTypeReferenceDeclaration(extendedTypeReference));
       }
       return typeReference.name() + " extends " + sb;
     }
@@ -165,11 +165,11 @@ public interface TypeReferenceFunctions {
       sb.append("?");
       if (typeReference.extendedBound().isPresent()) {
         sb.append(" extends ");
-        sb.append(getReferenceDeclaration(typeReference.extendedBound().get()));
+        sb.append(getActualTypeReferenceDeclaration(typeReference.extendedBound().get()));
       }
       if (typeReference.superBound().isPresent()) {
         sb.append(" super ");
-        sb.append(getReferenceDeclaration(typeReference.superBound().get()));
+        sb.append(getActualTypeReferenceDeclaration(typeReference.superBound().get()));
       }
       return sb.toString();
     }

@@ -2,11 +2,11 @@ package tech.intellispacesframework.javastatements.statement.custom;
 
 import tech.intellispacesframework.commons.action.ActionBuilders;
 import tech.intellispacesframework.commons.action.Getter;
+import tech.intellispacesframework.javastatements.context.TypeContext;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.StatementType;
 import tech.intellispacesframework.javastatements.statement.StatementTypes;
-import tech.intellispacesframework.javastatements.context.TypeContext;
 import tech.intellispacesframework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispacesframework.javastatements.session.Session;
 
 import javax.lang.model.element.TypeElement;
 import java.util.List;

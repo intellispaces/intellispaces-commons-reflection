@@ -56,6 +56,8 @@ public interface CustomType extends AnnotatedStatement {
    */
   List<CustomTypeReference> parentTypes();
 
+  boolean hasParent(String parentCanonicalName);
+
   /**
    * Declared methods.
    */

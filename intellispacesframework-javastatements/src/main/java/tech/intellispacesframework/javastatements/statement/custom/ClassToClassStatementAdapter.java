@@ -80,6 +80,11 @@ class ClassToClassStatementAdapter implements ClassStatement {
   }
 
   @Override
+  public boolean hasParent(String parentCanonicalName) {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  @Override
   public List<AnnotationInstance> annotations() {
     throw new UnsupportedOperationException("Not implemented yet");
   }

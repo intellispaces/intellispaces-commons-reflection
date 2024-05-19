@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 abstract class AbstractTypeReference implements TypeReference {
   private final Getter<Collection<CustomType>> dependenciesGetter;
   private final Getter<Collection<String>> dependencyTypesGetter;
-  private final Getter<String> referenceDeclarationGetter;
-  private final Getter<String> typeFullDeclarationGetter;
-  private final Getter<String> typeBriefDeclarationGetter;
+  private final Getter<String> actualDeclarationGetter;
+  private final Getter<String> formalFullDeclarationGetter;
+  private final Getter<String> formalBriefDeclarationGetter;
 
   protected AbstractTypeReference() {
     this.dependenciesGetter = ActionBuilders.cachedLazyGetter(DependencyFunctions::getTypeReferenceDependencies, this);
     this.dependencyTypesGetter = ActionBuilders.cachedLazyGetter(AbstractTypeReference::collectDependencyTypenames, this);
-    this.referenceDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getReferenceDeclaration, this);
-    this.typeFullDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getTypeFullDeclaration, this);
-    this.typeBriefDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getTypeBriefDeclaration, this);
+    this.actualDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getActualTypeReferenceDeclaration, this);
+    this.formalFullDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getFormalFullTypeReferenceDeclaration, this);
+    this.formalBriefDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getFormalBriefTypeReferenceDeclaration, this);
   }
 
   @Override
@@ -40,17 +40,17 @@ abstract class AbstractTypeReference implements TypeReference {
   }
 
   @Override
-  public String referenceDeclaration() {
-    return referenceDeclarationGetter.get();
+  public String actualDeclaration() {
+    return actualDeclarationGetter.get();
   }
 
   @Override
-  public String typeFullDeclaration() {
-    return typeFullDeclarationGetter.get();
+  public String formalFullDeclaration() {
+    return formalFullDeclarationGetter.get();
   }
 
   @Override
-  public String typeBriefDeclaration() {
-    return typeBriefDeclarationGetter.get();
+  public String formalBriefDeclaration() {
+    return formalBriefDeclarationGetter.get();
   }
 }

@@ -1,8 +1,8 @@
 package tech.intellispacesframework.javastatements.statement.reference;
 
 import tech.intellispacesframework.javastatements.context.TypeContext;
-import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 import tech.intellispacesframework.javastatements.session.Session;
+import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;

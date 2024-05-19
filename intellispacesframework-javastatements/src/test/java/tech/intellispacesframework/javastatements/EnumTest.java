@@ -1,15 +1,15 @@
 package tech.intellispacesframework.javastatements;
 
+import org.junit.jupiter.api.Test;
 import tech.intellispacesframework.commons.action.Handler;
 import tech.intellispacesframework.commons.collection.CollectionFunctions;
 import tech.intellispacesframework.commons.datahandle.HandleFunctions;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.session.SessionBuilder;
 import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 import tech.intellispacesframework.javastatements.statement.custom.EnumStatement;
 import tech.intellispacesframework.javastatements.statement.custom.MethodStatement;
-import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.support.TesteeType;
-import org.junit.jupiter.api.Test;
 
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
@@ -122,8 +122,8 @@ public class EnumTest extends AbstractCustomTypeTest {
         "tech.intellispacesframework.javastatements.support.TesteeType"
     );
 
-    assertThat(enumStatement.implementedInterfaces().get(0).referenceDeclaration()).isEqualTo("Interface1");
-    assertThat(enumStatement.implementedInterfaces().get(1).referenceDeclaration()).isEqualTo("Interface2");
+    assertThat(enumStatement.implementedInterfaces().get(0).actualDeclaration()).isEqualTo("Interface1");
+    assertThat(enumStatement.implementedInterfaces().get(1).actualDeclaration()).isEqualTo("Interface2");
   }
 
   @Test

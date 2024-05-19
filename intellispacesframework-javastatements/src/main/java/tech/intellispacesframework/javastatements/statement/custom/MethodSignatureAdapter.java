@@ -2,18 +2,18 @@ package tech.intellispacesframework.javastatements.statement.custom;
 
 import tech.intellispacesframework.commons.action.ActionBuilders;
 import tech.intellispacesframework.commons.action.Getter;
-import tech.intellispacesframework.javastatements.statement.method.MethodFunctions;
+import tech.intellispacesframework.javastatements.context.TypeContext;
+import tech.intellispacesframework.javastatements.context.TypeContextBuilder;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.StatementType;
 import tech.intellispacesframework.javastatements.statement.StatementTypes;
 import tech.intellispacesframework.javastatements.statement.TypeElementFunctions;
-import tech.intellispacesframework.javastatements.context.TypeContext;
-import tech.intellispacesframework.javastatements.context.TypeContextBuilder;
 import tech.intellispacesframework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispacesframework.javastatements.statement.instance.Instance;
+import tech.intellispacesframework.javastatements.statement.method.MethodFunctions;
 import tech.intellispacesframework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.TypeReference;
-import tech.intellispacesframework.javastatements.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;

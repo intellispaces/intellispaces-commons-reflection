@@ -6,12 +6,12 @@ import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
 import tech.intellispacesframework.commons.collection.CollectionFunctions;
 import tech.intellispacesframework.commons.datahandle.HandleFunctions;
+import tech.intellispacesframework.javastatements.samples.TestEnum;
+import tech.intellispacesframework.javastatements.samples.TestRecord;
 import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 import tech.intellispacesframework.javastatements.statement.custom.MethodStatement;
 import tech.intellispacesframework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.PrimitiveTypeReferences;
-import tech.intellispacesframework.javastatements.samples.TestEnum;
-import tech.intellispacesframework.javastatements.samples.TestRecord;
 import tech.intellispacesframework.javastatements.support.TesteeTypeAnnotationProcessor;
 
 import javax.lang.model.element.TypeElement;
@@ -89,7 +89,7 @@ class AbstractCustomTypeTest {
       assertThat(returnType.typeArguments().get(0).asWildcardTypeReference()).isPresent();
       assertThat(returnType.typeArguments().get(0).asWildcardTypeReference().orElseThrow().extendedBound()).isEmpty();
       assertThat(returnType.typeArguments().get(0).asWildcardTypeReference().orElseThrow().superBound()).isEmpty();
-      assertThat(returnType.referenceDeclaration()).isEqualTo("List<?>");
+      assertThat(returnType.actualDeclaration()).isEqualTo("List<?>");
     });
 
     assertThat(method.params()).hasSize(1);
@@ -100,7 +100,7 @@ class AbstractCustomTypeTest {
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcardTypeReference()).isPresent();
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcardTypeReference().orElseThrow().extendedBound()).isEmpty();
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcardTypeReference().orElseThrow().superBound()).isEmpty();
-      assertThat(param.type().referenceDeclaration()).isEqualTo("Collection<?>");
+      assertThat(param.type().actualDeclaration()).isEqualTo("Collection<?>");
     });
   }
 
@@ -118,7 +118,7 @@ class AbstractCustomTypeTest {
             .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Number.class.getCanonicalName());
         assertThat(wildcard.orElseThrow().superBound()).isEmpty();
       });
-      assertThat(param.type().referenceDeclaration()).isEqualTo("Collection<? extends Number>");
+      assertThat(param.type().actualDeclaration()).isEqualTo("Collection<? extends Number>");
     });
   }
 
@@ -138,7 +138,7 @@ class AbstractCustomTypeTest {
             .targetType().canonicalName()).isEqualTo(Number.class.getCanonicalName());
         assertThat(wildcard.orElseThrow().extendedBound()).isEmpty();
       });
-      assertThat(param.type().referenceDeclaration()).isEqualTo("Collection<? super Number[]>");
+      assertThat(param.type().actualDeclaration()).isEqualTo("Collection<? super Number[]>");
     });
   }
 
@@ -154,7 +154,7 @@ class AbstractCustomTypeTest {
       assertThat(returnType.typeArguments().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T");
       assertThat(returnType.typeArguments().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).isEmpty();
       assertThat(returnType.typeArguments().get(0).asNamedTypeReference().orElseThrow()).isSameAs(typeParamT);
-      assertThat(returnType.referenceDeclaration()).isEqualTo("List<T>");
+      assertThat(returnType.actualDeclaration()).isEqualTo("List<T>");
     });
 
     assertThat(method.params()).hasSize(1);
@@ -164,62 +164,62 @@ class AbstractCustomTypeTest {
       assertThat(param.type().asNamedTypeReference().orElseThrow().name()).isEqualTo("T");
       assertThat(param.type().asNamedTypeReference().orElseThrow().extendedBounds()).isEmpty();
       assertThat(param.type().asNamedTypeReference().orElseThrow()).isSameAs(typeParamT);
-      assertThat(param.type().referenceDeclaration()).isEqualTo("T");
+      assertThat(param.type().actualDeclaration()).isEqualTo("T");
     });
   }
 
   protected void validateByteGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Byte);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("byte");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("byte");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateShortGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Short);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("short");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("short");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateIntGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("int");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateLongGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Long);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("long");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("long");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateFloatGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Float);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("float");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("float");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateDoubleGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Double);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("double");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("double");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateCharGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Char);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("char");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("char");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateBooleanGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Boolean);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("boolean");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("boolean");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateStringGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("String");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String");
     assertThat(method.params()).isEmpty();
   }
 
@@ -227,7 +227,7 @@ class AbstractCustomTypeTest {
     assertThat(method.returnType().orElseThrow()
         .asArrayTypeReference().orElseThrow()
         .elementType().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("int[]");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int[]");
     assertThat(method.params()).isEmpty();
   }
 
@@ -236,14 +236,14 @@ class AbstractCustomTypeTest {
         .asArrayTypeReference().orElseThrow()
         .elementType().asArrayTypeReference().orElseThrow()
         .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("String[][]");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String[][]");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateEnumGetter(MethodStatement method) {
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("TestEnum");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestEnum");
     assertThat(method.params()).isEmpty();
   }
 
@@ -251,7 +251,7 @@ class AbstractCustomTypeTest {
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestRecord.class.getCanonicalName());
     assertThat(method.params()).isEmpty();
-    assertThat(method.returnType().orElseThrow().referenceDeclaration()).isEqualTo("TestRecord");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestRecord");
   }
 
   protected void testCustomTypeWithInheritedMethod(String filePath) {

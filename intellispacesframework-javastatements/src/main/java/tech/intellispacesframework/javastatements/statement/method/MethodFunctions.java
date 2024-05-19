@@ -1,14 +1,14 @@
 package tech.intellispacesframework.javastatements.statement.method;
 
 import tech.intellispacesframework.javastatements.context.TypeContext;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.TypeElementFunctions;
 import tech.intellispacesframework.javastatements.statement.custom.MethodParam;
+import tech.intellispacesframework.javastatements.statement.custom.MethodParamBuilder;
 import tech.intellispacesframework.javastatements.statement.instance.Instance;
 import tech.intellispacesframework.javastatements.statement.instance.InstanceFunctions;
 import tech.intellispacesframework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.TypeReference;
-import tech.intellispacesframework.javastatements.session.Session;
-import tech.intellispacesframework.javastatements.statement.custom.MethodParamBuilder;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.TypeKind;

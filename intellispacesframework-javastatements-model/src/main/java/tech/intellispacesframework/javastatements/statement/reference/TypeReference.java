@@ -60,17 +60,17 @@ public interface TypeReference extends Statement {
   Collection<String> dependencyTypenames();
 
   /**
-   * Type reference declaration.
+   * Actual type reference declaration.
    */
-  String referenceDeclaration();
+  String actualDeclaration();
 
   /**
-   * Full declaration of the type reference.
+   * Formal full reference declaration.
    */
-  String typeFullDeclaration();
+  String formalFullDeclaration();
 
   /**
-   * Brief declaration of the type reference.
+   * Formal brief reference declaration.
    */
-  String typeBriefDeclaration();
+  String formalBriefDeclaration();
 }

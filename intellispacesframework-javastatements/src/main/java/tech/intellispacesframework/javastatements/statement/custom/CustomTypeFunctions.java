@@ -1,17 +1,17 @@
 package tech.intellispacesframework.javastatements.statement.custom;
 
-import tech.intellispacesframework.javastatements.statement.reference.TypeReferenceFunctions;
-import tech.intellispacesframework.javastatements.context.NameContextFunctions;
-import tech.intellispacesframework.javastatements.exception.JavaStatementException;
 import tech.intellispacesframework.javastatements.context.ContextTypeParameter;
+import tech.intellispacesframework.javastatements.context.NameContextFunctions;
 import tech.intellispacesframework.javastatements.context.TypeContext;
+import tech.intellispacesframework.javastatements.exception.JavaStatementException;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.StatementTypes;
 import tech.intellispacesframework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.NonPrimitiveTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.TypeReference;
-import tech.intellispacesframework.javastatements.session.Session;
+import tech.intellispacesframework.javastatements.statement.reference.TypeReferenceFunctions;
 
 import java.util.ArrayList;
 import java.util.Iterator;

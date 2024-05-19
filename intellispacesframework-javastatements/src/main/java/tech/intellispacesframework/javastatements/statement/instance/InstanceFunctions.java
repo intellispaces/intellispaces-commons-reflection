@@ -1,17 +1,17 @@
 package tech.intellispacesframework.javastatements.statement.instance;
 
-import tech.intellispacesframework.javastatements.statement.custom.AnnotationFunctions;
-import tech.intellispacesframework.javastatements.statement.TypeElementFunctions;
 import tech.intellispacesframework.javastatements.exception.JavaStatementException;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.StatementTypes;
+import tech.intellispacesframework.javastatements.statement.TypeElementFunctions;
+import tech.intellispacesframework.javastatements.statement.custom.AnnotationFunctions;
+import tech.intellispacesframework.javastatements.statement.custom.ClassStatementBuilder;
 import tech.intellispacesframework.javastatements.statement.custom.EnumStatement;
 import tech.intellispacesframework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispacesframework.javastatements.statement.reference.PrimitiveTypeReference;
-import tech.intellispacesframework.javastatements.statement.reference.TypeReference;
-import tech.intellispacesframework.javastatements.session.Session;
-import tech.intellispacesframework.javastatements.statement.custom.ClassStatementBuilder;
 import tech.intellispacesframework.javastatements.statement.reference.CustomTypeReferenceBuilder;
+import tech.intellispacesframework.javastatements.statement.reference.PrimitiveTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.PrimitiveTypeReferences;
+import tech.intellispacesframework.javastatements.statement.reference.TypeReference;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;

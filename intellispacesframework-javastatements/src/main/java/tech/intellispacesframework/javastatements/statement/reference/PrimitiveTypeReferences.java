@@ -44,22 +44,22 @@ public enum PrimitiveTypeReferences implements PrimitiveTypeReference {
   }
 
   @Override
-  public String referenceDeclaration() {
+  public String actualDeclaration() {
     return typename;
   }
 
   @Override
-  public String typeFullDeclaration() {
+  public String formalFullDeclaration() {
     return typename;
   }
 
   @Override
-  public String typeBriefDeclaration() {
+  public String formalBriefDeclaration() {
     return typename;
   }
 
   @Override
   public String toString() {
-    return referenceDeclaration();
+    return actualDeclaration();
   }
 }

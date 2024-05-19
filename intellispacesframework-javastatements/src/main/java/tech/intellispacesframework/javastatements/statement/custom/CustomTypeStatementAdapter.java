@@ -5,12 +5,12 @@ import tech.intellispacesframework.commons.action.Getter;
 import tech.intellispacesframework.commons.type.TypeFunctions;
 import tech.intellispacesframework.javastatements.context.TypeContext;
 import tech.intellispacesframework.javastatements.context.TypeContextBuilder;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.DependencyFunctions;
 import tech.intellispacesframework.javastatements.statement.TypeElementFunctions;
 import tech.intellispacesframework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispacesframework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispacesframework.javastatements.session.Session;
 
 import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;
@@ -93,6 +93,21 @@ abstract class CustomTypeStatementAdapter implements CustomType {
   }
 
   @Override
+  public boolean hasParent(String parentCanonicalName) {
+    for (CustomTypeReference parent : parentTypes()) {
+      if (parentCanonicalName.equals(parent.targetType().canonicalName())) {
+        return true;
+      }
+    }
+    for (CustomTypeReference parent : parentTypes()) {
+      if (parent.targetType().hasParent(parentCanonicalName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override
   public List<AnnotationInstance> annotations() {
     return annotationsGetter.get();
   }
@@ -114,7 +129,7 @@ abstract class CustomTypeStatementAdapter implements CustomType {
 
   @Override
   public List<MethodStatement> declaredMethods() {
-    return declaredMethodsGetter.execute();
+    return declaredMethodsGetter.get();
   }
 
   @Override

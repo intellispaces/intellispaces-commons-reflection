@@ -1,7 +1,12 @@
 package tech.intellispacesframework.javastatements;
 
+import org.junit.jupiter.api.Test;
 import tech.intellispacesframework.commons.action.Handler;
 import tech.intellispacesframework.commons.datahandle.HandleFunctions;
+import tech.intellispacesframework.javastatements.samples.AnnotationWithElementsView;
+import tech.intellispacesframework.javastatements.samples.TestAnnotation;
+import tech.intellispacesframework.javastatements.samples.TestEnum;
+import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.session.SessionBuilder;
 import tech.intellispacesframework.javastatements.statement.custom.AnnotationStatement;
 import tech.intellispacesframework.javastatements.statement.custom.ClassStatement;
@@ -9,16 +14,10 @@ import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 import tech.intellispacesframework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispacesframework.javastatements.statement.custom.MethodStatement;
 import tech.intellispacesframework.javastatements.statement.instance.AnnotationInstance;
-import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.statement.reference.PrimitiveTypeReferences;
 import tech.intellispacesframework.javastatements.support.TesteeType;
-import tech.intellispacesframework.javastatements.samples.AnnotationWithElementsView;
-import tech.intellispacesframework.javastatements.samples.TestAnnotation;
-import tech.intellispacesframework.javastatements.samples.TestEnum;
-import org.junit.jupiter.api.Test;
 
 import javax.lang.model.element.TypeElement;
-
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.stream.Collectors;
