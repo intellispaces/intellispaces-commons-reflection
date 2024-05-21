@@ -74,6 +74,10 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     assertThat(interfaceStatement.simpleName()).isEqualTo("TesteeInterface");
     assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.InterfaceExtendedTwoInterfaces.TesteeInterface");
 
+    assertThat(interfaceStatement.hasParent(interface1Name)).isTrue();
+    assertThat(interfaceStatement.hasParent(interface2Name)).isTrue();
+    assertThat(interfaceStatement.hasParent(Object.class.getCanonicalName())).isFalse();
+
     assertThat(interfaceStatement.typeParameters()).isEmpty();
 
     assertThat(interfaceStatement.extendedInterfaces()).hasSize(2);

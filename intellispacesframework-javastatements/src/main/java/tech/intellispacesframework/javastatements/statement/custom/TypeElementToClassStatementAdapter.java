@@ -20,7 +20,7 @@ class TypeElementToClassStatementAdapter extends CustomTypeStatementAdapter impl
 
   TypeElementToClassStatementAdapter(TypeElement typeElement, TypeContext typeContext, Session session) {
     super(typeElement, typeContext, session);
-    this.constructorGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getConstructors, typeElement, this, typeContext, session);
+    this.constructorGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getConstructors, typeElement, this, customTypeContext(), session);
     this.extendedClassGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);
     this.implementedInterfacesGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getImplementedInterfaces, this);
   }

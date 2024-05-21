@@ -79,6 +79,11 @@ public class EnumTest extends AbstractCustomTypeTest {
     assertThat(enumStatement.simpleName()).isEqualTo("TesteeEnum");
     assertThat(enumStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EnumImplementedTwoInterfaces.TesteeEnum");
 
+    assertThat(enumStatement.hasParent(interface1Name)).isTrue();
+    assertThat(enumStatement.hasParent(interface2Name)).isTrue();
+    assertThat(enumStatement.hasParent(Object.class.getCanonicalName())).isFalse();
+    assertThat(enumStatement.hasParent(Enum.class.getCanonicalName())).isTrue();
+
     assertThat(enumStatement.typeParameters()).isEmpty();
 
     assertThat(enumStatement.implementedInterfaces()).hasSize(2);

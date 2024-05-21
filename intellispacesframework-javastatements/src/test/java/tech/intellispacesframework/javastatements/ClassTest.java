@@ -80,6 +80,11 @@ public class ClassTest extends AbstractCustomTypeTest {
     assertThat(classStatement.simpleName()).isEqualTo("TesteeClass");
     assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.TesteeClass");
 
+    assertThat(classStatement.hasParent(superClassName)).isTrue();
+    assertThat(classStatement.hasParent(interface1Name)).isTrue();
+    assertThat(classStatement.hasParent(interface2Name)).isTrue();
+    assertThat(classStatement.hasParent(Object.class.getCanonicalName())).isFalse();
+
     assertThat(classStatement.typeParameters()).isEmpty();
 
     assertThat(classStatement.extendedClass()).isPresent();

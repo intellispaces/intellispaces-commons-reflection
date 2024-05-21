@@ -30,20 +30,25 @@ abstract class CustomTypeStatementAdapter implements CustomType {
   private final Getter<List<MethodStatement>> actualMethodsGetter;
   private final Getter<Collection<CustomType>> dependenciesGetter;
   private final Getter<Collection<String>> dependencyTypesGetter;
+  private final TypeContext customTypeContext;
 
   CustomTypeStatementAdapter(TypeElement typeElement, TypeContext typeContext, Session session) {
     this.typeElement = typeElement;
     this.typeParams = TypeElementFunctions.getTypeParameters(typeElement, typeContext, session);
-    TypeContext classNameContext = createNameContext(typeContext, this.typeParams);
+    this.customTypeContext = createNameContext(typeContext, this.typeParams);
 
     this.typeParametersFullDeclarationGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
     this.typeParametersBriefDeclarationGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
     this.parentTypesGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getParentTypes, typeElement, typeContext, session);
     this.annotationsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getAnnotations, typeElement, session);
-    this.declaredMethodsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getDeclaredMethods, typeElement, this, classNameContext, session);
-    this.actualMethodsGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getActualMethods, this, classNameContext, session);
+    this.declaredMethodsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getDeclaredMethods, typeElement, this, customTypeContext, session);
+    this.actualMethodsGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getActualMethods, this, customTypeContext, session);
     this.dependenciesGetter = ActionBuilders.cachedLazyGetter(DependencyFunctions::getCustomTypeDependencies, this);
     this.dependencyTypesGetter = ActionBuilders.cachedLazyGetter(CustomTypeStatementAdapter::collectDependencyTypenames, this);
+  }
+
+  protected TypeContext customTypeContext() {
+    return customTypeContext;
   }
 
   private TypeContext createNameContext(TypeContext parentContext, List<NamedTypeReference> typeParams) {

@@ -81,6 +81,11 @@ public class RecordTest extends AbstractCustomTypeTest {
     assertThat(recordStatement.simpleName()).isEqualTo("TesteeRecord");
     assertThat(recordStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.RecordImplementedTwoInterfaces.TesteeRecord");
 
+    assertThat(recordStatement.hasParent(interface1Name)).isTrue();
+    assertThat(recordStatement.hasParent(interface2Name)).isTrue();
+    assertThat(recordStatement.hasParent(Object.class.getCanonicalName())).isFalse();
+    assertThat(recordStatement.hasParent(Record.class.getCanonicalName())).isTrue();
+
     assertThat(recordStatement.typeParameters()).isEmpty();
 
     assertThat(recordStatement.implementedInterfaces()).hasSize(2);
