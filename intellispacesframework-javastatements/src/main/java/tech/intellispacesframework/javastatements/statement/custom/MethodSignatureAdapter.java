@@ -103,6 +103,11 @@ class MethodSignatureAdapter implements MethodSignature {
   }
 
   @Override
+  public boolean isAbstract() {
+    return executableElement.getModifiers().contains(Modifier.ABSTRACT);
+  }
+
+  @Override
   public boolean isPublic() {
     return executableElement.getModifiers().contains(Modifier.PUBLIC);
   }

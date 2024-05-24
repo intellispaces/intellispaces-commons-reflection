@@ -54,8 +54,12 @@ public interface CustomTypeFunctions {
     );
   }
 
-  private static MethodSignature getEffectiveMethodSignature(MethodSignature originMethodSignature, TypeContext typeContext) {
+  private static MethodSignature getEffectiveMethodSignature(
+      MethodSignature originMethodSignature, TypeContext typeContext
+  ) {
     return MethodSignatureBuilder.get()
+        .isAbstract(originMethodSignature.isAbstract())
+        .isPublic(originMethodSignature.isPublic())
         .isDefault(originMethodSignature.isDefault())
         .isStatic(originMethodSignature.isStatic())
         .name(originMethodSignature.name())
@@ -83,12 +87,16 @@ public interface CustomTypeFunctions {
         .build();
   }
 
-  private static void inheritedMethods(CustomType customType, List<MethodStatement> allMethods, TypeContext typeContext) {
+  private static void inheritedMethods(
+      CustomType customType, List<MethodStatement> allMethods, TypeContext typeContext
+  ) {
     customType.parentTypes().forEach(parent ->
         extractMethods(parent, allMethods, typeContext));
   }
 
-  private static void extractMethods(CustomTypeReference customTypeReference, List<MethodStatement> allMethods, TypeContext typeContext) {
+  private static void extractMethods(
+      CustomTypeReference customTypeReference, List<MethodStatement> allMethods, TypeContext typeContext
+  ) {
     CustomType customType = customTypeReference.targetType();
     TypeContext actualNameContext = NameContextFunctions.getActualNameContext(
         typeContext, customType.typeParameters(), customTypeReference.typeArguments()
@@ -99,7 +107,9 @@ public interface CustomTypeFunctions {
     inheritedMethods(customType, allMethods, actualNameContext);
   }
 
-  private static void addMethod(MethodStatement addedMethod, List<MethodStatement> allMethods, TypeContext typeContext) {
+  private static void addMethod(
+      MethodStatement addedMethod, List<MethodStatement> allMethods, TypeContext typeContext
+  ) {
     MethodStatement effectiveAddedMethod = getEffectiveMethod(addedMethod, typeContext);
     MethodSignature effectiveAddedSignature = effectiveAddedMethod.signature();
     int index = 0;
@@ -115,10 +125,12 @@ public interface CustomTypeFunctions {
           TypeReference effectiveAddedMethodReturnType = effectiveAddedSignature.returnType().get();
           Optional<TypeReference> narrowType = TypeReferenceFunctions.narrowestOf(methodReturnType, effectiveAddedMethodReturnType);
           if (narrowType.isEmpty()) {
-            throw JavaStatementException.withMessage("Incompatible types: {} and {} of method {}", methodReturnType, effectiveAddedMethodReturnType,
-                methodSignature.name());
+            throw JavaStatementException.withMessage("Incompatible types: {} and {} of method {}",
+                methodReturnType, effectiveAddedMethodReturnType, methodSignature.name());
           }
-          if (narrowType.get() == effectiveAddedMethodReturnType && AnnotationFunctions.hasAnnotation(effectiveAddedMethod.signature(), Override.class)) {
+          if (narrowType.get() == effectiveAddedMethodReturnType
+              && AnnotationFunctions.hasAnnotation(effectiveAddedMethod.signature(), Override.class)
+          ) {
             // Replace override method
             allMethods.set(index, effectiveAddedMethod);
           }
@@ -134,7 +146,9 @@ public interface CustomTypeFunctions {
   private static TypeReference getActualTypeReference(TypeReference typeReference, TypeContext typeContext) {
     if (typeReference.asNamedTypeReference().isPresent())  {
       NamedTypeReference namedTypeReference = typeReference.asNamedTypeReference().orElseThrow();
-      Optional<NonPrimitiveTypeReference> actualType = typeContext.get(namedTypeReference.name()).map(ContextTypeParameter::type);
+      Optional<NonPrimitiveTypeReference> actualType = typeContext
+          .get(namedTypeReference.name())
+          .map(ContextTypeParameter::type);
       if (actualType.isPresent()) {
         return actualType.get();
       }

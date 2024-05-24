@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 class MethodSignatureImpl implements MethodSignature {
   private final String name;
+  private final boolean isAbstract;
   private final boolean isPublic;
   private final boolean isDefault;
   private final boolean isStatic;
@@ -30,6 +31,7 @@ class MethodSignatureImpl implements MethodSignature {
 
   MethodSignatureImpl(
       String name,
+      boolean isAbstract,
       boolean isPublic,
       boolean isDefault,
       boolean isStatic,
@@ -41,6 +43,7 @@ class MethodSignatureImpl implements MethodSignature {
       List<AnnotationInstance> annotations
   ) {
     this.name = name;
+    this.isAbstract = isAbstract;
     this.isPublic = isPublic;
     this.isDefault = isDefault;
     this.isStatic = isStatic;
@@ -61,6 +64,11 @@ class MethodSignatureImpl implements MethodSignature {
   @Override
   public String name() {
     return name;
+  }
+
+  @Override
+  public boolean isAbstract() {
+    return isAbstract;
   }
 
   @Override

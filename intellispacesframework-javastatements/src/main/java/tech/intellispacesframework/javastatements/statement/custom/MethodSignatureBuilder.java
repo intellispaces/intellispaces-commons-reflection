@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public final class MethodSignatureBuilder {
   private String name;
+  private boolean isAbstract = false;
   private boolean isPublic = true;
   private boolean isDefault = false;
   private boolean isStatic = false;
@@ -34,6 +35,11 @@ public final class MethodSignatureBuilder {
 
   public MethodSignatureBuilder name(String name) {
     this.name = name;
+    return this;
+  }
+
+  public MethodSignatureBuilder isAbstract(boolean isAbstract) {
+    this.isAbstract = isAbstract;
     return this;
   }
 
@@ -86,6 +92,7 @@ public final class MethodSignatureBuilder {
     validate();
     return new MethodSignatureImpl(
       name,
+      isAbstract,
       isPublic,
       isDefault,
       isStatic,

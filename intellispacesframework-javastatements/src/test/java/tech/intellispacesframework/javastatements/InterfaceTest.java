@@ -380,6 +380,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
   }
 
   private void validateDefaultMethod(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
     assertThat(method.isPublic()).isTrue();
     assertThat(method.isStatic()).isFalse();
     assertThat(method.isDefault()).isTrue();

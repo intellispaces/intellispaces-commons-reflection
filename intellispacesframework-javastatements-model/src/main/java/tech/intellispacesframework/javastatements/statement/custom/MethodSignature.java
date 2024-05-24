@@ -44,6 +44,8 @@ public interface MethodSignature extends AnnotatedStatement {
    */
   List<ExceptionCompatibleTypeReference> exceptions();
 
+  boolean isAbstract();
+
   boolean isPublic();
 
   /**

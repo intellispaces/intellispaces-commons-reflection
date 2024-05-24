@@ -82,6 +82,10 @@ public interface MethodStatement extends AnnotatedStatement {
     return signature().defaultValue();
   }
 
+  default boolean isAbstract() {
+    return signature().isAbstract();
+  }
+
   /**
    * Default method sign.
    */

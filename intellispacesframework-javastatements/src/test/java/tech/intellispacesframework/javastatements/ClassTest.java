@@ -66,6 +66,25 @@ public class ClassTest extends AbstractCustomTypeTest {
   }
 
   @Test
+  public void testAbstractClass() {
+    // Given
+    TypeElement typeElement = getTestElement("class/AbstractClass.java");
+
+    // When
+    CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
+
+    // Then
+    assertThat(customTypeStatement).isInstanceOf(ClassStatement.class);
+    ClassStatement classStatement = customTypeStatement.asClass().orElse(null);
+    assertThat(classStatement).isNotNull();
+
+    assertThat(classStatement.isAbstract()).isTrue();
+
+    assertThat(classStatement.declaredMethods()).hasSize(1);
+    assertThat(classStatement.declaredMethods().get(0).isAbstract()).isTrue();
+  }
+
+  @Test
   public void testNestedClass() {
     // Given
     TypeElement typeElement = getTestElement("class/NestedClass.java");
@@ -330,6 +349,7 @@ public class ClassTest extends AbstractCustomTypeTest {
 
     assertThat(classStatement.declaredMethods()).hasSize(1);
     HandleFunctions.handle(classStatement.declaredMethods().get(0), method -> {
+      assertThat(method.isAbstract()).isFalse();
       assertThat(method.name()).isEqualTo("process");
       assertThat(method.params()).hasSize(1);
       assertThat(method.params().get(0).name()).isEqualTo("arg");
