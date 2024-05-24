@@ -172,6 +172,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateByteGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Byte);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("byte");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractByteGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Byte);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("byte");
@@ -179,6 +186,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateShortGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Short);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("short");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractShortGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Short);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("short");
@@ -186,6 +200,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateIntGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractIntGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int");
@@ -193,6 +214,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateLongGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Long);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("long");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractLongGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Long);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("long");
@@ -200,6 +228,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateFloatGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Float);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("float");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractFloatGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Float);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("float");
@@ -207,6 +242,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateDoubleGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Double);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("double");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractDoubleGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Double);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("double");
@@ -214,6 +256,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateCharGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Char);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("char");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractCharGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Char);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("char");
@@ -221,6 +270,13 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateBooleanGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Boolean);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("boolean");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractBooleanGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Boolean);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("boolean");
@@ -228,6 +284,14 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateStringGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow()
+        .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractStringGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
@@ -236,6 +300,15 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateArrayOfIntGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow()
+        .asArrayTypeReference().orElseThrow()
+        .elementType().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int[]");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractArrayOfIntGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asArrayTypeReference().orElseThrow()
@@ -245,6 +318,16 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateDoubleArrayOfStringGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow()
+        .asArrayTypeReference().orElseThrow()
+        .elementType().asArrayTypeReference().orElseThrow()
+        .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String[][]");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractDoubleArrayOfStringGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asArrayTypeReference().orElseThrow()
@@ -255,6 +338,14 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateEnumGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow()
+        .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestEnum");
+    assertThat(method.params()).isEmpty();
+  }
+
+  protected void validateAbstractEnumGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
@@ -263,6 +354,14 @@ class AbstractCustomTypeTest {
   }
 
   protected void validateRecordGetter(MethodStatement method) {
+    assertThat(method.isAbstract()).isFalse();
+    assertThat(method.returnType().orElseThrow()
+        .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestRecord.class.getCanonicalName());
+    assertThat(method.params()).isEmpty();
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestRecord");
+  }
+
+  protected void validateAbstractRecordGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestRecord.class.getCanonicalName());

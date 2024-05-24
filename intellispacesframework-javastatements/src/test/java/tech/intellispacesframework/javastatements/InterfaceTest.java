@@ -7,7 +7,6 @@ import tech.intellispacesframework.commons.collection.CollectionFunctions;
 import tech.intellispacesframework.commons.datahandle.HandleFunctions;
 import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.session.SessionBuilder;
-import tech.intellispacesframework.javastatements.statement.custom.ClassStatement;
 import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 import tech.intellispacesframework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispacesframework.javastatements.statement.custom.MethodStatement;
@@ -182,67 +181,67 @@ public class InterfaceTest extends AbstractCustomTypeTest {
 
   @Test
   public void testInterfaceWithByteGetter() {
-    testInterfaceWithOneMethod("InterfaceWithByteGetter", "byteGetter", this::validateByteGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithByteGetter", "byteGetter", this::validateAbstractByteGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithShortGetter() {
-    testInterfaceWithOneMethod("InterfaceWithShortGetter", "shortGetter", this::validateShortGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithShortGetter", "shortGetter", this::validateAbstractShortGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithIntGetter() {
-    testInterfaceWithOneMethod("InterfaceWithIntGetter", "intGetter", this::validateIntGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithIntGetter", "intGetter", this::validateAbstractIntGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithLongGetter() {
-    testInterfaceWithOneMethod("InterfaceWithLongGetter", "longGetter", this::validateLongGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithLongGetter", "longGetter", this::validateAbstractLongGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithFloatGetter() {
-    testInterfaceWithOneMethod("InterfaceWithFloatGetter", "floatGetter", this::validateFloatGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithFloatGetter", "floatGetter", this::validateAbstractFloatGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithDoubleGetter() {
-    testInterfaceWithOneMethod("InterfaceWithDoubleGetter", "doubleGetter", this::validateDoubleGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithDoubleGetter", "doubleGetter", this::validateAbstractDoubleGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithCharGetter() {
-    testInterfaceWithOneMethod("InterfaceWithCharGetter", "charGetter", this::validateCharGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithCharGetter", "charGetter", this::validateAbstractCharGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithBooleanGetter() {
-    testInterfaceWithOneMethod("InterfaceWithBooleanGetter", "booleanGetter", this::validateBooleanGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithBooleanGetter", "booleanGetter", this::validateAbstractBooleanGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithStringGetter() {
-    testInterfaceWithOneMethod("InterfaceWithStringGetter", "stringGetter", this::validateStringGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithStringGetter", "stringGetter", this::validateAbstractStringGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithArrayOfIntGetter() {
-    testInterfaceWithOneMethod("InterfaceWithArrayOfIntGetter", "arrayOfIntGetter", this::validateArrayOfIntGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithArrayOfIntGetter", "arrayOfIntGetter", this::validateAbstractArrayOfIntGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithDoubleArrayOfStringGetter() {
-    testInterfaceWithOneMethod("InterfaceWithDoubleArrayOfStringGetter", "doubleArrayOfStringGetter", this::validateDoubleArrayOfStringGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithDoubleArrayOfStringGetter", "doubleArrayOfStringGetter", this::validateAbstractDoubleArrayOfStringGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithEnumGetter() {
-    testInterfaceWithOneMethod("InterfaceWithEnumGetter", "enumGetter", this::validateEnumGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithEnumGetter", "enumGetter", this::validateAbstractEnumGetter, List.of());
   }
 
   @Test
   public void testInterfaceWithRecordGetter() {
-    testInterfaceWithOneMethod("InterfaceWithRecordGetter", "recordGetter", this::validateRecordGetter, List.of());
+    testInterfaceWithOneMethod("InterfaceWithRecordGetter", "recordGetter", this::validateAbstractRecordGetter, List.of());
   }
 
   @Test
