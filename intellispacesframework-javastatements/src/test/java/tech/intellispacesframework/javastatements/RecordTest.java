@@ -42,6 +42,7 @@ public class RecordTest extends AbstractCustomTypeTest {
     assertThat(recordStatement.isAbstract()).isFalse();
     assertThat(recordStatement.simpleName()).isEqualTo("EmptyRecord");
     assertThat(recordStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyRecord");
+    assertThat(recordStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyRecord");
 
     assertThat(recordStatement.typeParameters()).isEmpty();
     assertThat(recordStatement.implementedInterfaces()).isEmpty();
@@ -80,6 +81,7 @@ public class RecordTest extends AbstractCustomTypeTest {
     assertThat(recordStatement).isNotNull();
     assertThat(recordStatement.simpleName()).isEqualTo("TesteeRecord");
     assertThat(recordStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.RecordImplementedTwoInterfaces.TesteeRecord");
+    assertThat(recordStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.RecordImplementedTwoInterfaces$TesteeRecord");
 
     assertThat(recordStatement.hasParent(interface1Name)).isTrue();
     assertThat(recordStatement.hasParent(interface2Name)).isTrue();
@@ -318,6 +320,7 @@ public class RecordTest extends AbstractCustomTypeTest {
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
       HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB");
+        assertThat(classBExtendedBound.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericRecordWithCyclicTypeDependencyCase2$RecordB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
@@ -359,11 +362,11 @@ public class RecordTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = recordStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.execute(declaredMethods.get(0));
+    methodValidator.handle(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = recordStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.execute(actualMethods.get(0));
+    methodValidator.handle(actualMethods.get(0));
 
     assertThat(recordStatement.annotations()).hasSize(1);
     HandleFunctions.handle(recordStatement.annotations().get(0), annInstance -> {

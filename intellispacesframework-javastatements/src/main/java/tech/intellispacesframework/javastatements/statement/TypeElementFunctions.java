@@ -61,6 +61,31 @@ public interface TypeElementFunctions {
     return typeElement.getQualifiedName().toString();
   }
 
+  static String getClassName(TypeElement typeElement) {
+    if (typeElement.getEnclosingElement().getKind().equals(ElementKind.PACKAGE)) {
+      return typeElement.getQualifiedName().toString();
+    }
+
+    List<String> typenames = new ArrayList<>();
+    Element curElement = typeElement;
+    while (true) {
+      Element enclosingElement = curElement.getEnclosingElement();
+      if (!enclosingElement.getKind().isClass() && !enclosingElement.getKind().isInterface()) {
+        break;
+      }
+      typenames.add(curElement.getSimpleName().toString());
+      curElement = curElement.getEnclosingElement();
+    }
+
+    var sb = new StringBuilder();
+    sb.append(((TypeElement) curElement).getQualifiedName().toString());
+    for (int i = typenames.size() - 1; i >= 0; i--) {
+      sb.append("$");
+      sb.append(typenames.get(i));
+    }
+    return sb.toString();
+  }
+
   static String getSimpleName(TypeElement typeElement) {
     return typeElement.getSimpleName().toString();
   }

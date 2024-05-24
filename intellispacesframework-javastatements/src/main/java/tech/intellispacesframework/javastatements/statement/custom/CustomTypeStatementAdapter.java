@@ -12,6 +12,7 @@ import tech.intellispacesframework.javastatements.statement.instance.AnnotationI
 import tech.intellispacesframework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispacesframework.javastatements.statement.reference.NamedTypeReference;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
@@ -68,6 +69,11 @@ abstract class CustomTypeStatementAdapter implements CustomType {
   }
 
   @Override
+  public String className() {
+    return TypeElementFunctions.getClassName(typeElement);
+  }
+
+  @Override
   public String simpleName() {
     return TypeElementFunctions.getSimpleName(typeElement);
   }
@@ -75,6 +81,12 @@ abstract class CustomTypeStatementAdapter implements CustomType {
   @Override
   public String packageName() {
     return TypeElementFunctions.getPackageName(typeElement);
+  }
+
+  @Override
+  public boolean isNested() {
+    Element enclosingElement = typeElement.getEnclosingElement();
+    return enclosingElement.getKind().isClass() || enclosingElement.getKind().isInterface();
   }
 
   @Override

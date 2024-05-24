@@ -85,6 +85,7 @@ class AbstractCustomTypeTest {
     assertThat(method.returnType()).isPresent();
     HandleFunctions.handle(method.returnType().orElseThrow().asCustomTypeReference().orElseThrow(), returnType -> {
       assertThat(returnType.targetType().canonicalName()).isEqualTo(List.class.getCanonicalName());
+      assertThat(returnType.targetType().className()).isEqualTo(List.class.getName());
       assertThat(returnType.typeArguments()).hasSize(1);
       assertThat(returnType.typeArguments().get(0).asWildcardTypeReference()).isPresent();
       assertThat(returnType.typeArguments().get(0).asWildcardTypeReference().orElseThrow().extendedBound()).isEmpty();
@@ -96,6 +97,7 @@ class AbstractCustomTypeTest {
     HandleFunctions.handle(method.params().get(0), param -> {
       assertThat(param.name()).isEqualTo("arg");
       assertThat(param.type().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Collection.class.getCanonicalName());
+      assertThat(param.type().asCustomTypeReference().orElseThrow().targetType().className()).isEqualTo(Collection.class.getName());
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments()).hasSize(1);
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcardTypeReference()).isPresent();
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcardTypeReference().orElseThrow().extendedBound()).isEmpty();
@@ -149,6 +151,7 @@ class AbstractCustomTypeTest {
     assertThat(method.returnType()).isPresent();
     HandleFunctions.handle(method.returnType().orElseThrow().asCustomTypeReference().orElseThrow(), returnType -> {
       assertThat(returnType.targetType().canonicalName()).isEqualTo(List.class.getCanonicalName());
+      assertThat(returnType.targetType().className()).isEqualTo(List.class.getName());
       assertThat(returnType.typeArguments()).hasSize(1);
       assertThat(returnType.typeArguments().get(0).asNamedTypeReference()).isPresent();
       assertThat(returnType.typeArguments().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T");

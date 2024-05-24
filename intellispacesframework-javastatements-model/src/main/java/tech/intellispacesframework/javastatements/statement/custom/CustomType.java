@@ -23,6 +23,13 @@ public interface CustomType extends AnnotatedStatement {
   String canonicalName();
 
   /**
+   * Class name.
+   *
+   * For nested classes name includes the '$' character.
+   */
+  String className();
+
+  /**
    * Simple class name.
    */
   String simpleName();
@@ -31,6 +38,11 @@ public interface CustomType extends AnnotatedStatement {
    * Package name.
    */
   String packageName();
+
+  /**
+   * Returns <code>true</code> if this type is nested or <code>false</code> otherwise.
+   */
+  boolean isNested();
 
   /**
    * Declared type parameters.

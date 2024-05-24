@@ -35,6 +35,11 @@ class ClassToClassStatementAdapter implements ClassStatement {
   }
 
   @Override
+  public String className() {
+    return aClass.getName();
+  }
+
+  @Override
   public String simpleName() {
     return aClass.getSimpleName();
   }
@@ -42,6 +47,11 @@ class ClassToClassStatementAdapter implements ClassStatement {
   @Override
   public String packageName() {
     return aClass.getPackageName();
+  }
+
+  @Override
+  public boolean isNested() {
+    return aClass.isMemberClass();
   }
 
   @Override

@@ -40,6 +40,7 @@ public class EnumTest extends AbstractCustomTypeTest {
     assertThat(enumStatement.isAbstract()).isFalse();
     assertThat(enumStatement.simpleName()).isEqualTo("EmptyEnum");
     assertThat(enumStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyEnum");
+    assertThat(enumStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyEnum");
 
     assertThat(enumStatement.typeParameters()).isEmpty();
     assertThat(enumStatement.implementedInterfaces()).isEmpty();
@@ -78,6 +79,7 @@ public class EnumTest extends AbstractCustomTypeTest {
     assertThat(enumStatement).isNotNull();
     assertThat(enumStatement.simpleName()).isEqualTo("TesteeEnum");
     assertThat(enumStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EnumImplementedTwoInterfaces.TesteeEnum");
+    assertThat(enumStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.EnumImplementedTwoInterfaces$TesteeEnum");
 
     assertThat(enumStatement.hasParent(interface1Name)).isTrue();
     assertThat(enumStatement.hasParent(interface2Name)).isTrue();
@@ -312,11 +314,11 @@ public class EnumTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = enumStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.execute(declaredMethods.get(0));
+    methodValidator.handle(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = enumStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.execute(actualMethods.get(0));
+    methodValidator.handle(actualMethods.get(0));
 
     assertThat(enumStatement.annotations()).hasSize(1);
     HandleFunctions.handle(enumStatement.annotations().get(0), annInstance -> {

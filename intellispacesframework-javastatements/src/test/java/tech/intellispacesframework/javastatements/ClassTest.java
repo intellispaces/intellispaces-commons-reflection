@@ -40,9 +40,11 @@ public class ClassTest extends AbstractCustomTypeTest {
     ClassStatement classStatement = customTypeStatement.asClass().orElse(null);
     assertThat(classStatement).isNotNull();
 
+    assertThat(classStatement.isNested()).isFalse();
     assertThat(classStatement.isAbstract()).isFalse();
     assertThat(classStatement.simpleName()).isEqualTo("EmptyClass");
     assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyClass");
+    assertThat(classStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyClass");
 
     assertThat(classStatement.typeParameters()).isEmpty();
     assertThat(classStatement.extendedClass()).isEmpty();
@@ -64,6 +66,21 @@ public class ClassTest extends AbstractCustomTypeTest {
   }
 
   @Test
+  public void testNestedClass() {
+    // Given
+    TypeElement typeElement = getTestElement("class/NestedClass.java");
+
+    // When
+    ClassStatement classStatement = JavaStatements.classStatement(typeElement);
+
+    // Then
+    assertThat(classStatement.isNested()).isTrue();
+    assertThat(classStatement.simpleName()).isEqualTo("NestedClass2");
+    assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.NestedClass.NestedClass1.NestedClass2");
+    assertThat(classStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.NestedClass$NestedClass1$NestedClass2");
+  }
+
+  @Test
   public void testClassExtendedSuperClassAndImplementedTwoInterfaces() {
     // Given
     final var superClassName = "tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.SuperClass";
@@ -79,6 +96,7 @@ public class ClassTest extends AbstractCustomTypeTest {
 
     assertThat(classStatement.simpleName()).isEqualTo("TesteeClass");
     assertThat(classStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.TesteeClass");
+    assertThat(classStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces$TesteeClass");
 
     assertThat(classStatement.hasParent(superClassName)).isTrue();
     assertThat(classStatement.hasParent(interface1Name)).isTrue();
@@ -444,6 +462,7 @@ public class ClassTest extends AbstractCustomTypeTest {
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
       HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericClassWithCyclicTypeDependencyCase2.ClassB");
+        assertThat(classBExtendedBound.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericClassWithCyclicTypeDependencyCase2$ClassB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
@@ -485,11 +504,11 @@ public class ClassTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = classStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.execute(declaredMethods.get(0));
+    methodValidator.handle(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = classStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.execute(actualMethods.get(0));
+    methodValidator.handle(actualMethods.get(0));
 
     assertThat(classStatement.annotations()).hasSize(1);
     HandleFunctions.handle(classStatement.annotations().get(0), annInstance -> {

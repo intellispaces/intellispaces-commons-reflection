@@ -45,6 +45,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
     assertThat(annotationStatement.isAbstract()).isTrue();
     assertThat(annotationStatement.simpleName()).isEqualTo("EmptyAnnotation");
     assertThat(annotationStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyAnnotation");
+    assertThat(annotationStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyAnnotation");
 
     assertThat(annotationStatement.typeParameters()).isEmpty();
 
@@ -418,7 +419,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> methods = annotationStatement.declaredMethodsWithName(elementMethodName);
     assertThat(methods).hasSize(1);
-    methodValidator.execute(methods.get(0));
+    methodValidator.handle(methods.get(0));
 
     assertThat(annotationStatement.dependencyTypenames()).containsExactlyInAnyOrder("tech.intellispacesframework.javastatements.support.TesteeType");
 

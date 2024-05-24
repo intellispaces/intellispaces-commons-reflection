@@ -7,6 +7,7 @@ import tech.intellispacesframework.commons.collection.CollectionFunctions;
 import tech.intellispacesframework.commons.datahandle.HandleFunctions;
 import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.session.SessionBuilder;
+import tech.intellispacesframework.javastatements.statement.custom.ClassStatement;
 import tech.intellispacesframework.javastatements.statement.custom.CustomType;
 import tech.intellispacesframework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispacesframework.javastatements.statement.custom.MethodStatement;
@@ -39,9 +40,11 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     InterfaceStatement interfaceStatement = customTypeStatement.asInterface().orElse(null);
     assertThat(interfaceStatement).isNotNull();
 
+    assertThat(interfaceStatement.isNested()).isFalse();
     assertThat(interfaceStatement.isAbstract()).isTrue();
     assertThat(interfaceStatement.simpleName()).isEqualTo("EmptyInterface");
     assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyInterface");
+    assertThat(interfaceStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.EmptyInterface");
 
     assertThat(interfaceStatement.typeParameters()).isEmpty();
     assertThat(interfaceStatement.extendedInterfaces()).isEmpty();
@@ -60,6 +63,21 @@ public class InterfaceTest extends AbstractCustomTypeTest {
   }
 
   @Test
+  public void testNestedInterface() {
+    // Given
+    TypeElement typeElement = getTestElement("interface/NestedInterface.java");
+
+    // When
+    InterfaceStatement interfaceStatement = JavaStatements.interfaceStatement(typeElement);
+
+    // Then
+    assertThat(interfaceStatement.isNested()).isTrue();
+    assertThat(interfaceStatement.simpleName()).isEqualTo("NestedInterface2");
+    assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.NestedInterface.NestedInterface1.NestedInterface2");
+    assertThat(interfaceStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.NestedInterface$NestedInterface1$NestedInterface2");
+  }
+
+  @Test
   public void testInterfaceExtendedTwoInterfaces() {
     // Given
     final var interface1Name = "tech.intellispacesframework.javastatements.samples.InterfaceExtendedTwoInterfaces.Interface1";
@@ -73,6 +91,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     assertThat(interfaceStatement).isNotNull();
     assertThat(interfaceStatement.simpleName()).isEqualTo("TesteeInterface");
     assertThat(interfaceStatement.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.InterfaceExtendedTwoInterfaces.TesteeInterface");
+    assertThat(interfaceStatement.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.InterfaceExtendedTwoInterfaces$TesteeInterface");
 
     assertThat(interfaceStatement.hasParent(interface1Name)).isTrue();
     assertThat(interfaceStatement.hasParent(interface2Name)).isTrue();
@@ -300,6 +319,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
       HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB");
+        assertThat(classBExtendedBound.className()).isEqualTo("tech.intellispacesframework.javastatements.samples.GenericInterfaceWithCyclicTypeDependencyCase2$InterfaceB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
         assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
@@ -340,11 +360,11 @@ public class InterfaceTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = interfaceStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.execute(declaredMethods.get(0));
+    methodValidator.handle(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = interfaceStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.execute(actualMethods.get(0));
+    methodValidator.handle(actualMethods.get(0));
 
     assertThat(interfaceStatement.annotations()).hasSize(1);
     HandleFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {
