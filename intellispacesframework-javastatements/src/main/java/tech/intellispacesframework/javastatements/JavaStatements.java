@@ -2,6 +2,7 @@ package tech.intellispacesframework.javastatements;
 
 import tech.intellispacesframework.javastatements.session.Session;
 import tech.intellispacesframework.javastatements.session.SessionBuilder;
+import tech.intellispacesframework.javastatements.statement.ClassFunctions;
 import tech.intellispacesframework.javastatements.statement.TypeElementFunctions;
 import tech.intellispacesframework.javastatements.statement.custom.AnnotationStatement;
 import tech.intellispacesframework.javastatements.statement.custom.ClassStatement;
@@ -18,6 +19,10 @@ import javax.lang.model.type.DeclaredType;
  * Java statements facade functions.
  */
 public interface JavaStatements {
+
+  static CustomType customTypeStatement(Class<?> aClass) {
+    return ClassFunctions.asCustomTypeStatement(aClass);
+  }
 
   static CustomType customTypeStatement(TypeElement typeElement) {
     return TypeElementFunctions.asCustomTypeStatement(typeElement, SessionBuilder.buildSession());
