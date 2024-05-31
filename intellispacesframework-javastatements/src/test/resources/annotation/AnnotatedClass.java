@@ -1,6 +1,9 @@
-package tech.intellispacesframework.javastatements.samples;
+package tech.intellispaces.framework.javastatements.samples;
 
-import tech.intellispacesframework.javastatements.support.TesteeType;
+import tech.intellispaces.framework.javastatements.samples.AnnotationWithElementsView;
+import tech.intellispaces.framework.javastatements.samples.TestAnnotation;
+import tech.intellispaces.framework.javastatements.samples.TestEnum;
+import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 public interface AnnotatedClass {
 

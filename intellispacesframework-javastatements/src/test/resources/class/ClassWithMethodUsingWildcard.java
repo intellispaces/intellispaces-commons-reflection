@@ -1,6 +1,6 @@
-package tech.intellispacesframework.javastatements.samples;
+package tech.intellispaces.framework.javastatements.samples;
 
-import tech.intellispacesframework.javastatements.support.TesteeType;
+import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 import java.util.Collection;
 import java.util.List;
