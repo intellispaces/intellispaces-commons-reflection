@@ -110,6 +110,11 @@ abstract class CustomTypeStatementAdapter implements CustomType {
   }
 
   @Override
+  public boolean hasParent(Class<?> aClass) {
+    return hasParent(aClass.getCanonicalName());
+  }
+
+  @Override
   public boolean hasParent(String parentCanonicalName) {
     for (CustomTypeReference parent : parentTypes()) {
       if (parentCanonicalName.equals(parent.targetType().canonicalName())) {

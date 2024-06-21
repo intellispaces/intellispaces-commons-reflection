@@ -21,6 +21,26 @@ public interface PrimitiveTypeReference extends TypeReference {
   }
 
   @Override
+  default boolean isArrayTypeReference() {
+    return false;
+  }
+
+  @Override
+  default boolean isCustomTypeReference() {
+    return false;
+  }
+
+  @Override
+  default boolean isNamedTypeReference() {
+    return false;
+  }
+
+  @Override
+  default boolean isWildcardTypeReference() {
+    return false;
+  }
+
+  @Override
   default Optional<PrimitiveTypeReference> asPrimitiveTypeReference() {
     return Optional.of(this);
   }

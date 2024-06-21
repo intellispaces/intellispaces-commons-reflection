@@ -68,6 +68,8 @@ public interface CustomType extends AnnotatedStatement {
    */
   List<CustomTypeReference> parentTypes();
 
+  boolean hasParent(Class<?> aClass);
+
   boolean hasParent(String parentCanonicalName);
 
   /**

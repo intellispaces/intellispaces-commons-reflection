@@ -13,11 +13,23 @@ public interface TypeReference extends Statement {
 
   boolean isPrimitive();
 
+  boolean isArrayTypeReference();
+
+  boolean isCustomTypeReference();
+
+  boolean isNamedTypeReference();
+
+  boolean isWildcardTypeReference();
+
   /**
    * Related primitive type reference.
    */
   default Optional<PrimitiveTypeReference> asPrimitiveTypeReference() {
     return Optional.empty();
+  }
+
+  default PrimitiveTypeReference asPrimitiveTypeReferenceSurely() {
+    return asPrimitiveTypeReference().orElseThrow();
   }
 
   /**
@@ -34,11 +46,19 @@ public interface TypeReference extends Statement {
     return Optional.empty();
   }
 
+  default ArrayTypeReference asArrayTypeReferenceSurely() {
+    return asArrayTypeReference().orElseThrow();
+  }
+
   /**
    * Related named type reference.
    */
   default Optional<NamedTypeReference> asNamedTypeReference() {
     return Optional.empty();
+  }
+
+  default NamedTypeReference asNamedTypeReferenceSurely() {
+    return asNamedTypeReference().orElseThrow();
   }
 
   /**
@@ -48,11 +68,19 @@ public interface TypeReference extends Statement {
     return Optional.empty();
   }
 
+  default WildcardTypeReference asWildcardTypeReferenceSurely() {
+    return asWildcardTypeReference().orElseThrow();
+  }
+
   /**
    * Related custom type reference.
    */
   default Optional<CustomTypeReference> asCustomTypeReference() {
     return Optional.empty();
+  }
+
+  default CustomTypeReference asCustomTypeReferenceSurely() {
+    return asCustomTypeReference().orElseThrow();
   }
 
   Collection<CustomType> dependencies();

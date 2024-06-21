@@ -15,6 +15,26 @@ public interface NamedTypeReference extends NonPrimitiveTypeReference, TypeBound
   List<TypeBoundReference> extendedBounds();
 
   @Override
+  default boolean isArrayTypeReference() {
+    return false;
+  }
+
+  @Override
+  default boolean isCustomTypeReference() {
+    return false;
+  }
+
+  @Override
+  default boolean isNamedTypeReference() {
+    return true;
+  }
+
+  @Override
+  default boolean isWildcardTypeReference() {
+    return false;
+  }
+
+  @Override
   default Optional<NamedTypeReference> asNamedTypeReference() {
     return Optional.of(this);
   }

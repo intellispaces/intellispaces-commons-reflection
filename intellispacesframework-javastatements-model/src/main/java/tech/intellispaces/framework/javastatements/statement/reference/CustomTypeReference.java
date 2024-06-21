@@ -21,6 +21,26 @@ public interface CustomTypeReference extends NonPrimitiveTypeReference, TypeBoun
   List<NonPrimitiveTypeReference> typeArguments();
 
   @Override
+  default boolean isArrayTypeReference() {
+    return false;
+  }
+
+  @Override
+  default boolean isCustomTypeReference() {
+    return true;
+  }
+
+  @Override
+  default boolean isNamedTypeReference() {
+    return false;
+  }
+
+  @Override
+  default boolean isWildcardTypeReference() {
+    return false;
+  }
+
+  @Override
   default Optional<CustomTypeReference> asCustomTypeReference() {
     return Optional.of(this);
   }
