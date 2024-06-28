@@ -1,8 +1,8 @@
 package tech.intellispaces.framework.javastatements.context;
 
+import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 
 import java.util.HashMap;
 import java.util.Map;

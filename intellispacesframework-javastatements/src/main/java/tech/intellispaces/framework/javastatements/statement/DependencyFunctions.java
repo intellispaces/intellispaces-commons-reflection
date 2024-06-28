@@ -1,16 +1,16 @@
 package tech.intellispaces.framework.javastatements.statement;
 
+import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.MethodParam;
+import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ArrayTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.WildcardTypeReference;
-import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodParam;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 
 import java.util.ArrayList;
 import java.util.Collection;

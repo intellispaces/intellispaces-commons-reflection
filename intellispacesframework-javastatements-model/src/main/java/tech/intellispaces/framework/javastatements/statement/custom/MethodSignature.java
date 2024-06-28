@@ -1,10 +1,10 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
+import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
-import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,8 +1,8 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
+import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 
 import java.util.Collection;
 import java.util.List;

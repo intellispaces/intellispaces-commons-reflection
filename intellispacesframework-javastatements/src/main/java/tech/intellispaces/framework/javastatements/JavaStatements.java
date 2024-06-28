@@ -1,5 +1,6 @@
 package tech.intellispaces.framework.javastatements;
 
+import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.SessionBuilder;
 import tech.intellispaces.framework.javastatements.statement.ClassFunctions;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
@@ -10,7 +11,6 @@ import tech.intellispaces.framework.javastatements.statement.custom.EnumStatemen
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.session.Session;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;

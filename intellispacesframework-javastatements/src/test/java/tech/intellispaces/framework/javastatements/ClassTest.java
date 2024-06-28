@@ -2,7 +2,6 @@ package tech.intellispaces.framework.javastatements;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.framework.javastatements.support.TesteeType;
 import tech.intellispaces.framework.commons.action.Handler;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
@@ -12,6 +11,7 @@ import tech.intellispaces.framework.javastatements.statement.custom.ClassStateme
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;
 import java.io.DataInput;

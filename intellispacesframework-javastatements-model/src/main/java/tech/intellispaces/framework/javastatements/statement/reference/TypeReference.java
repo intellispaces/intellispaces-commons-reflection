@@ -5,6 +5,7 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * The type reference.
@@ -91,6 +92,11 @@ public interface TypeReference extends Statement {
    * Actual type reference declaration.
    */
   String actualDeclaration();
+
+  /**
+   * Actual type reference declaration.
+   */
+  String actualDeclaration(Function<String, String> simpleNameMapper);
 
   /**
    * Formal full reference declaration.

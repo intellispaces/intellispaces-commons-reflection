@@ -1,9 +1,9 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import javax.lang.model.element.VariableElement;
 import java.util.List;

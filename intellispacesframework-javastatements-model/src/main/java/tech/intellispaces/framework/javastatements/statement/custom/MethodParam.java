@@ -1,7 +1,7 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 /**
  * Formal method parameter.

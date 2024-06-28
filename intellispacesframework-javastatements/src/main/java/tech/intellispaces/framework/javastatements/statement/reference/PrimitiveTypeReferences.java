@@ -3,6 +3,8 @@ package tech.intellispaces.framework.javastatements.statement.reference;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 
+import java.util.function.Function;
+
 public enum PrimitiveTypeReferences implements PrimitiveTypeReference {
 
   Byte("byte", java.lang.Byte.class),
@@ -47,6 +49,12 @@ public enum PrimitiveTypeReferences implements PrimitiveTypeReference {
   public String actualDeclaration() {
     return typename;
   }
+
+  @Override
+  public String actualDeclaration(Function<String, String> simpleNameMapper) {
+    return typename;
+  }
+
 
   @Override
   public String formalFullDeclaration() {

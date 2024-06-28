@@ -1,7 +1,5 @@
 package tech.intellispaces.framework.javastatements.statement.instance;
 
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferenceBuilder;
-import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
@@ -10,7 +8,9 @@ import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFu
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferenceBuilder;
 import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import javax.lang.model.element.AnnotationMirror;

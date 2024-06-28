@@ -1,6 +1,5 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 import tech.intellispaces.framework.commons.action.ActionBuilders;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
@@ -9,6 +8,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import javax.lang.model.element.VariableElement;
 import java.lang.annotation.Annotation;

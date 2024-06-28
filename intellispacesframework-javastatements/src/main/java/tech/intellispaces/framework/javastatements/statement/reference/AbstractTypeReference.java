@@ -6,6 +6,7 @@ import tech.intellispaces.framework.javastatements.statement.DependencyFunctions
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.Collection;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 abstract class AbstractTypeReference implements TypeReference {
@@ -42,6 +43,11 @@ abstract class AbstractTypeReference implements TypeReference {
   @Override
   public String actualDeclaration() {
     return actualDeclarationGetter.get();
+  }
+
+  @Override
+  public String actualDeclaration(Function<String, String> simpleNameMapper) {
+    return TypeReferenceFunctions.getActualTypeReferenceDeclaration(this, simpleNameMapper);
   }
 
   @Override

@@ -4,15 +4,15 @@ import com.google.testing.compile.Compilation;
 import com.google.testing.compile.CompilationSubject;
 import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
-import tech.intellispaces.framework.javastatements.samples.TestEnum;
-import tech.intellispaces.framework.javastatements.samples.TestRecord;
-import tech.intellispaces.framework.javastatements.support.TesteeTypeAnnotationProcessor;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
+import tech.intellispaces.framework.javastatements.samples.TestEnum;
+import tech.intellispaces.framework.javastatements.samples.TestRecord;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
+import tech.intellispaces.framework.javastatements.support.TesteeTypeAnnotationProcessor;
 
 import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;

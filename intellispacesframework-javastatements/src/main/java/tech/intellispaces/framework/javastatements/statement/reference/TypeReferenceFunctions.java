@@ -1,5 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.reference;
 
+import tech.intellispaces.framework.commons.type.TypeFunctions;
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomTypeFunctions;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public interface TypeReferenceFunctions {
@@ -90,6 +92,15 @@ public interface TypeReferenceFunctions {
    * Returns actual type reference declaration.
    */
   static String getActualTypeReferenceDeclaration(TypeReference typeReference) {
+    return getActualTypeReferenceDeclaration(typeReference, TypeFunctions::getSimpleName);
+  }
+
+  /**
+   * Returns actual type reference declaration.
+   */
+  static String getActualTypeReferenceDeclaration(
+      TypeReference typeReference, Function<String, String> simpleNameMapper
+  ) {
     if (typeReference.asPrimitiveTypeReference().isPresent()) {
       return typeReference.asPrimitiveTypeReference().get().typename();
     } else if (typeReference.asArrayTypeReference().isPresent()) {
@@ -97,7 +108,8 @@ public interface TypeReferenceFunctions {
       return getActualTypeReferenceDeclaration(elementType) + "[]";
     } else if (typeReference.asCustomTypeReference().isPresent()) {
       CustomType customType = typeReference.asCustomTypeReference().get().targetType();
-      return customType.simpleName() + getTypeArgumentsDeclaration(typeReference.asCustomTypeReference().get());
+      String simpleName = simpleNameMapper.apply(customType.canonicalName());
+      return simpleName + getTypeArgumentsDeclaration(typeReference.asCustomTypeReference().get(), simpleNameMapper);
     } else if (typeReference.asNamedTypeReference().isPresent()) {
       return getNamedTypeReferenceDeclaration(typeReference.asNamedTypeReference().get(), false);
     } else if (typeReference.asWildcardTypeReference().isPresent()) {
@@ -133,9 +145,11 @@ public interface TypeReferenceFunctions {
     }
   }
 
-  static String getTypeArgumentsDeclaration(CustomTypeReference typeReference) {
+  static String getTypeArgumentsDeclaration(
+      CustomTypeReference typeReference, Function<String, String> simpleNameMapper
+  ) {
     String arguments = typeReference.typeArguments().stream()
-        .map(TypeReferenceFunctions::getActualTypeReferenceDeclaration)
+        .map(t -> getActualTypeReferenceDeclaration(t, simpleNameMapper))
         .collect(Collectors.joining(", "));
     return (arguments.isEmpty() ? "" : "<" + arguments + ">");
   }

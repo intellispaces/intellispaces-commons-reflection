@@ -1,7 +1,6 @@
 package tech.intellispaces.framework.javastatements;
 
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.framework.javastatements.support.TesteeType;
 import tech.intellispaces.framework.commons.action.Handler;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
@@ -10,6 +9,7 @@ import tech.intellispaces.framework.javastatements.session.SessionBuilder;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
+import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
