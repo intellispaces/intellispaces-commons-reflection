@@ -145,6 +145,10 @@ public interface TypeReferenceFunctions {
     }
   }
 
+  static String getTypeArgumentsDeclaration(CustomTypeReference typeReference) {
+    return getTypeArgumentsDeclaration(typeReference, Function.identity());
+  }
+
   static String getTypeArgumentsDeclaration(
       CustomTypeReference typeReference, Function<String, String> simpleNameMapper
   ) {

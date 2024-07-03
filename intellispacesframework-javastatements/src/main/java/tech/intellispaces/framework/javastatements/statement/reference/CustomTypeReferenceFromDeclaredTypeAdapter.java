@@ -12,16 +12,19 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import java.util.List;
+import java.util.function.Function;
 
 class CustomTypeReferenceFromDeclaredTypeAdapter extends AbstractTypeReference implements CustomTypeReference {
   private final Getter<CustomType> targetTypeGetter;
   private final Getter<List<NonPrimitiveTypeReference>> typeArgumentsGetter;
+  private final Getter<String> typeArgumentsDeclarationGetter;
 
   CustomTypeReferenceFromDeclaredTypeAdapter(DeclaredType declaredType, TypeContext typeContext, Session session) {
     super();
     TypeElement typeElement = (TypeElement) declaredType.asElement();
     this.targetTypeGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::asCustomTypeStatement, typeElement, session);
     this.typeArgumentsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getTypeArguments, declaredType, typeContext, session);
+    this.typeArgumentsDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
   }
 
   @Override
@@ -37,5 +40,15 @@ class CustomTypeReferenceFromDeclaredTypeAdapter extends AbstractTypeReference i
   @Override
   public List<NonPrimitiveTypeReference> typeArguments() {
     return typeArgumentsGetter.get();
+  }
+
+  @Override
+  public String typeArgumentsDeclaration() {
+    return typeArgumentsDeclarationGetter.get();
+  }
+
+  @Override
+  public String typeArgumentsDeclaration(Function<String, String> simpleNameMapper) {
+    return TypeReferenceFunctions.getTypeArgumentsDeclaration(this, simpleNameMapper);
   }
 }

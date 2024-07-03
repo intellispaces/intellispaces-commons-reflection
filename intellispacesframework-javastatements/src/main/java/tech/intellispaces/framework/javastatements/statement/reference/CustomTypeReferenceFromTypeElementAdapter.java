@@ -11,6 +11,7 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import javax.lang.model.element.TypeElement;
 import java.util.List;
+import java.util.function.Function;
 
 class CustomTypeReferenceFromTypeElementAdapter extends AbstractTypeReference implements CustomTypeReference {
   private final Getter<CustomType> targetTypeGetter;
@@ -33,5 +34,15 @@ class CustomTypeReferenceFromTypeElementAdapter extends AbstractTypeReference im
   @Override
   public List<NonPrimitiveTypeReference> typeArguments() {
     return List.of();
+  }
+
+  @Override
+  public String typeArgumentsDeclaration() {
+    return "";
+  }
+
+  @Override
+  public String typeArgumentsDeclaration(Function<String, String> simpleNameMapper) {
+    return "";
   }
 }

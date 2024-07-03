@@ -4,6 +4,7 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * The custom type reference.
@@ -19,6 +20,10 @@ public interface CustomTypeReference extends NonPrimitiveTypeReference, TypeBoun
    * Actual arguments of type parameters.
    */
   List<NonPrimitiveTypeReference> typeArguments();
+
+  String typeArgumentsDeclaration();
+
+  String typeArgumentsDeclaration(Function<String, String> simpleNameMapper);
 
   @Override
   default boolean isArrayTypeReference() {
