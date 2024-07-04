@@ -2,6 +2,8 @@ package tech.intellispaces.framework.javastatements.statement;
 
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferenceBuilder;
 
 public interface ClassFunctions {
 
@@ -17,5 +19,9 @@ public interface ClassFunctions {
     } else {
       return ClassStatementBuilder.build(aClass);
     }
+  }
+
+  static CustomTypeReference asCustomTypeReference(Class<?> aClass) {
+    return CustomTypeReferenceBuilder.build(aClass);
   }
 }

@@ -72,6 +72,10 @@ public interface JavaStatements {
     return TypeElementFunctions.asAnnotationStatement(typeElement, session);
   }
 
+  static CustomTypeReference customTypeReference(Class<?> aClass) {
+    return ClassFunctions.asCustomTypeReference(aClass);
+  }
+
   static CustomTypeReference customTypeReference(TypeElement typeElement) {
     return TypeElementFunctions.asTypeReference(typeElement, SessionBuilder.buildSession());
   }

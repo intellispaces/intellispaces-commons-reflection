@@ -14,6 +14,10 @@ public interface CustomTypeReferenceBuilder {
     return build(targetType, List.of());
   }
 
+  static CustomTypeReference build(Class<?> aClass) {
+    return new ClassToCustomTypeReferenceAdapter(aClass);
+  }
+
   static CustomTypeReference build(CustomType targetType, List<NonPrimitiveTypeReference> typeArguments) {
     return new CustomTypeReferenceImpl(targetType, typeArguments);
   }
