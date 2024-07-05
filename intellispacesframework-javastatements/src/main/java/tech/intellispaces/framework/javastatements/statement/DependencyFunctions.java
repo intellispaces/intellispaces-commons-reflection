@@ -2,10 +2,10 @@ package tech.intellispaces.framework.javastatements.statement;
 
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodParam;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
+import tech.intellispaces.framework.javastatements.statement.method.MethodParam;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.ArrayTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;

@@ -1,15 +1,22 @@
-package tech.intellispaces.framework.javastatements.statement.custom;
+package tech.intellispaces.framework.javastatements.statement.method;
 
+import tech.intellispaces.framework.commons.action.ActionBuilders;
+import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+
+import java.util.List;
 
 class MethodStatementImpl implements MethodStatement {
   private final CustomType holder;
   private final MethodSignature signature;
+  private final Getter<List<MethodStatement>> overrideMethodsGetter;
 
   MethodStatementImpl(CustomType holder, MethodSignature signature) {
     this.holder = holder;
     this.signature = signature;
+    this.overrideMethodsGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
   }
 
   @Override
@@ -25,5 +32,10 @@ class MethodStatementImpl implements MethodStatement {
   @Override
   public MethodSignature signature() {
     return signature;
+  }
+
+  @Override
+  public List<MethodStatement> overrideMethods() {
+    return overrideMethodsGetter.get();
   }
 }

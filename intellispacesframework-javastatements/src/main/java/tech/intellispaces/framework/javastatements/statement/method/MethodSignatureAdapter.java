@@ -1,4 +1,4 @@
-package tech.intellispaces.framework.javastatements.statement.custom;
+package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.commons.action.ActionBuilders;
 import tech.intellispaces.framework.commons.action.Getter;
@@ -8,9 +8,9 @@ import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
-import tech.intellispaces.framework.javastatements.statement.method.MethodFunctions;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;

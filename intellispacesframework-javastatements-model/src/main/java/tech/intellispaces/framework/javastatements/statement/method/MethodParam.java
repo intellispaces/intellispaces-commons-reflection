@@ -1,4 +1,4 @@
-package tech.intellispaces.framework.javastatements.statement.custom;
+package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;

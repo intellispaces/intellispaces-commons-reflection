@@ -1,5 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 
 import java.util.List;

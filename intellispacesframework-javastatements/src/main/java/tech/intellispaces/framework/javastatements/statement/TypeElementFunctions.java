@@ -17,13 +17,13 @@ import tech.intellispaces.framework.javastatements.statement.custom.EnumStatemen
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatementBuilder;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodSignature;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodSignatureBuilder;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.method.MethodSignature;
+import tech.intellispaces.framework.javastatements.statement.method.MethodSignatureBuilder;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.reference.ArrayTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.ArrayTypeReferenceBuilder;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;

@@ -9,7 +9,7 @@ import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.samples.TestEnum;
 import tech.intellispaces.framework.javastatements.samples.TestRecord;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
 import tech.intellispaces.framework.javastatements.support.TesteeTypeAnnotationProcessor;

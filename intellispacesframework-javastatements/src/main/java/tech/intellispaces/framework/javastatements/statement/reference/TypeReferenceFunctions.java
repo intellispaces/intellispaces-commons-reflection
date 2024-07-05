@@ -1,5 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.reference;
 
+import tech.intellispaces.framework.commons.exception.UnexpectedViolationException;
 import tech.intellispaces.framework.commons.type.TypeFunctions;
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
@@ -59,7 +60,7 @@ public interface TypeReferenceFunctions {
         .toList();
   }
 
-  static boolean compareStrict(TypeReference typeReference1, TypeReference typeReference2) {
+  static boolean isEqualTypes(TypeReference typeReference1, TypeReference typeReference2) {
     boolean sameParams = true;
     if (typeReference1.isPrimitive() && typeReference2.isPrimitive()) {
       if (!Objects.equals(
@@ -86,6 +87,20 @@ public interface TypeReferenceFunctions {
       sameParams = false;
     }
     return sameParams;
+  }
+
+  static boolean isEquivalentTypes(TypeReference type1, TypeReference type2) {
+    if (type1.isPrimitive() && type2.isPrimitive()) {
+      PrimitiveTypeReference primitiveType1 = type1.asPrimitiveTypeReferenceSurely();
+      PrimitiveTypeReference primitiveType2 = type2.asPrimitiveTypeReferenceSurely();
+      return primitiveType1.typename().equals(primitiveType2.typename());
+    } else if (type1.isCustomTypeReference() && type2.isCustomTypeReference()) {
+      CustomType customType1 = type1.asCustomTypeReferenceSurely().targetType();
+      CustomType customType2 = type2.asCustomTypeReferenceSurely().targetType();
+      return customType1.canonicalName().equals(customType2.canonicalName());
+    } else {
+      throw UnexpectedViolationException.withMessage("Not implemented");
+    }
   }
 
   /**

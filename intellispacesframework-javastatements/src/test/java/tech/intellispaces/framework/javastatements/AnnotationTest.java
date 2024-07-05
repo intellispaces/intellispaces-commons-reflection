@@ -12,8 +12,8 @@ import tech.intellispaces.framework.javastatements.statement.custom.AnnotationSt
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatement;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
 import tech.intellispaces.framework.javastatements.support.TesteeType;
 

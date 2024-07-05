@@ -8,7 +8,7 @@ import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.SessionBuilder;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
-import tech.intellispaces.framework.javastatements.statement.custom.MethodStatement;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;

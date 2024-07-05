@@ -1,6 +1,7 @@
-package tech.intellispaces.framework.javastatements.statement.custom;
+package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
@@ -17,6 +18,16 @@ public interface MethodStatement extends AnnotatedStatement {
    * Method holder.
    */
   CustomType holder();
+
+  /**
+   * Method signature.
+   */
+  MethodSignature signature();
+
+  /**
+   * List of override methods.
+   */
+  List<MethodStatement> overrideMethods();
 
   /**
    * Declared type parameters.
@@ -103,9 +114,4 @@ public interface MethodStatement extends AnnotatedStatement {
   default boolean isStatic() {
     return signature().isStatic();
   }
-
-  /**
-   * Method signature.
-   */
-  MethodSignature signature();
 }

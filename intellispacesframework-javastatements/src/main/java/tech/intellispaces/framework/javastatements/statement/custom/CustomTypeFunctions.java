@@ -6,6 +6,12 @@ import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
+import tech.intellispaces.framework.javastatements.statement.method.MethodParam;
+import tech.intellispaces.framework.javastatements.statement.method.MethodParamBuilder;
+import tech.intellispaces.framework.javastatements.statement.method.MethodSignature;
+import tech.intellispaces.framework.javastatements.statement.method.MethodSignatureBuilder;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
@@ -161,7 +167,7 @@ public interface CustomTypeFunctions {
     Iterator<MethodParam> testMethodParams = addedMethod.params().iterator();
     Iterator<MethodParam> methodParams = otherMethod.params().iterator();
     while (testMethodParams.hasNext() && methodParams.hasNext()) {
-      if (!TypeReferenceFunctions.compareStrict(testMethodParams.next().type(), methodParams.next().type())) {
+      if (!TypeReferenceFunctions.isEqualTypes(testMethodParams.next().type(), methodParams.next().type())) {
         sameParams = false;
         break;
       }
