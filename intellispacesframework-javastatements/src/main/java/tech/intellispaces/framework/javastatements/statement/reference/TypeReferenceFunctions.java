@@ -17,9 +17,9 @@ public interface TypeReferenceFunctions {
 
   static Optional<TypeReference> narrowestOf(TypeReference typeReference1, TypeReference typeReference2) {
     if (typeReference1.asPrimitiveTypeReference().isPresent() && typeReference2.asPrimitiveTypeReference().isPresent()) {
-      String type1 = typeReference1.asPrimitiveTypeReference().orElseThrow().typename();
-      String type2 = typeReference2.asPrimitiveTypeReference().orElseThrow().typename();
-      if (type1.equals(type2)) {
+      String typename1 = typeReference1.asPrimitiveTypeReference().orElseThrow().typename();
+      String typename2 = typeReference2.asPrimitiveTypeReference().orElseThrow().typename();
+      if (typename1.equals(typename2)) {
         return Optional.of(typeReference1);
       } else {
         return Optional.empty();
@@ -27,14 +27,10 @@ public interface TypeReferenceFunctions {
     } else if (typeReference1.asNamedTypeReference().isPresent() && typeReference2.asNamedTypeReference().isPresent()) {
       NamedTypeReference type1 = typeReference1.asNamedTypeReference().orElseThrow();
       NamedTypeReference type2 = typeReference2.asNamedTypeReference().orElseThrow();
-      if (type1.extendedBounds().isEmpty() && type2.extendedBounds().isEmpty()) {
-        if (type1.name().equals(type2.name())) {
-          return Optional.of(typeReference1);
-        } else {
-          return Optional.empty();
-        }
+      if (type1.name().equals(type2.name())) {
+        return Optional.of(typeReference1);
       } else {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.empty();
       }
     } else if (typeReference1.asCustomTypeReference().isPresent() && typeReference2.asCustomTypeReference().isPresent()) {
       CustomType type1 = typeReference1.asCustomTypeReference().orElseThrow().targetType();
