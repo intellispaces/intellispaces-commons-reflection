@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-class CustomTypeReferenceFromTypeElementAdapter extends AbstractTypeReference implements CustomTypeReference {
+class CustomTypeReferenceFromTypeElementAdapter extends AbstractCustomTypeReference {
   private final Getter<CustomType> targetTypeGetter;
 
   CustomTypeReferenceFromTypeElementAdapter(TypeElement typeElement, TypeContext typeContext, Session session) {

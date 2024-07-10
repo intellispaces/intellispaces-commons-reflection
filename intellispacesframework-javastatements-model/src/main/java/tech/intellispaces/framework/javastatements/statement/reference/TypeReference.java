@@ -4,6 +4,7 @@ import tech.intellispaces.framework.javastatements.statement.Statement;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -83,6 +84,8 @@ public interface TypeReference extends Statement {
   default CustomTypeReference asCustomTypeReferenceSurely() {
     return asCustomTypeReference().orElseThrow();
   }
+
+  TypeReference specify(Map<String, NonPrimitiveTypeReference> typeMapping);
 
   Collection<CustomType> dependencies();
 

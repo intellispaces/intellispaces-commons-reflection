@@ -51,6 +51,11 @@ class ClassToCustomTypeReferenceAdapter extends AbstractTypeReference implements
   }
 
   @Override
+  public TypeReference specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    return this;
+  }
+
+  @Override
   public String typeArgumentsDeclaration() {
     return "";
   }

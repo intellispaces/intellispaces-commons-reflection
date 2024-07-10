@@ -4,6 +4,7 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -43,6 +44,11 @@ public interface PrimitiveTypeReference extends TypeReference {
   @Override
   default Optional<PrimitiveTypeReference> asPrimitiveTypeReference() {
     return Optional.of(this);
+  }
+
+  @Override
+  default TypeReference specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    return this;
   }
 
   @Override

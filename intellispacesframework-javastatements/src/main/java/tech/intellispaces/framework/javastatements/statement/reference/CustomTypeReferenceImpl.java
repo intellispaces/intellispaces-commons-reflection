@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-class CustomTypeReferenceImpl extends AbstractTypeReference implements CustomTypeReference {
+class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
   private final CustomType targetType;
   private final List<NonPrimitiveTypeReference> typeArguments;
   private final Getter<Map<String, NonPrimitiveTypeReference>> typeArgumentMappingsGetter;

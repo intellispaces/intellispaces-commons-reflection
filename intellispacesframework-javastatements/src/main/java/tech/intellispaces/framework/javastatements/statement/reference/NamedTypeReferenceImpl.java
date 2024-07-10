@@ -1,26 +1,20 @@
 package tech.intellispaces.framework.javastatements.statement.reference;
 
-import tech.intellispaces.framework.commons.action.ActionBuilders;
-import tech.intellispaces.framework.commons.action.Getter;
-import tech.intellispaces.framework.javastatements.context.TypeContext;
-import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 
-import javax.lang.model.element.TypeParameterElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class NamedTypeReferenceAdapter extends AbstractTypeReference implements NamedTypeReference {
+class NamedTypeReferenceImpl extends AbstractTypeReference implements NamedTypeReference {
   private final String name;
-  private final Getter<List<TypeBoundReference>> extendedBoundsGetter;
+  private final List<TypeBoundReference> extendedBounds;
 
-  NamedTypeReferenceAdapter(TypeParameterElement typeParameter, TypeContext typeContext, Session session) {
+  NamedTypeReferenceImpl(String name, List<TypeBoundReference> extendedBounds) {
     super();
-    this.name = typeParameter.getSimpleName().toString();
-    this.extendedBoundsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getExtendedBounds, typeParameter, typeContext, session);
+    this.name = name;
+    this.extendedBounds = extendedBounds;
   }
 
   @Override
@@ -35,7 +29,7 @@ class NamedTypeReferenceAdapter extends AbstractTypeReference implements NamedTy
 
   @Override
   public List<TypeBoundReference> extendedBounds() {
-    return extendedBoundsGetter.get();
+    return extendedBounds;
   }
 
   @Override

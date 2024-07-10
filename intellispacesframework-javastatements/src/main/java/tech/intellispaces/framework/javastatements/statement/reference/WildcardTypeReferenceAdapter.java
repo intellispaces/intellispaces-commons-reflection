@@ -9,6 +9,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 
 import javax.lang.model.type.WildcardType;
+import java.util.Map;
 import java.util.Optional;
 
 class WildcardTypeReferenceAdapter extends AbstractTypeReference implements WildcardTypeReference {
@@ -34,5 +35,18 @@ class WildcardTypeReferenceAdapter extends AbstractTypeReference implements Wild
   @Override
   public Optional<TypeBoundReference> superBound() {
     return superBoundGetter.get();
+  }
+
+  @Override
+  public TypeReference specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    TypeBoundReference extendedBound = extendedBound().orElse(null);
+    if (extendedBound != null) {
+      extendedBound = (TypeBoundReference) extendedBound.specify(typeMapping);
+    }
+    TypeBoundReference superBound = superBound().orElse(null);
+    if (superBound != null) {
+      superBound = (TypeBoundReference) superBound.specify(typeMapping);
+    }
+    return new WildcardTypeReferenceImpl(extendedBound, superBound);
   }
 }

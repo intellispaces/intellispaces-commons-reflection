@@ -9,13 +9,15 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 
 import javax.lang.model.type.ArrayType;
+import java.util.Map;
 
 class ArrayTypeReferenceAdapter extends AbstractTypeReference implements ArrayTypeReference {
   private final Getter<TypeReference> elementTypeGetter;
 
   ArrayTypeReferenceAdapter(ArrayType arrayType, TypeContext typeContext, Session session) {
     super();
-    this.elementTypeGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getTypeReference, arrayType.getComponentType(), typeContext, session);
+    this.elementTypeGetter = ActionBuilders.cachedLazyGetter(
+        TypeElementFunctions::getTypeReference, arrayType.getComponentType(), typeContext, session);
   }
 
   @Override
@@ -26,5 +28,11 @@ class ArrayTypeReferenceAdapter extends AbstractTypeReference implements ArrayTy
   @Override
   public TypeReference elementType() {
     return elementTypeGetter.get();
+  }
+
+  @Override
+  public TypeReference specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    TypeReference elementType = elementType().specify(typeMapping);
+    return new ArrayTypeReferenceImpl(elementType);
   }
 }
