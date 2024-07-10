@@ -6,10 +6,12 @@ import tech.intellispaces.framework.javastatements.statement.instance.Annotation
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface MethodStatement extends AnnotatedStatement {
@@ -28,6 +30,8 @@ public interface MethodStatement extends AnnotatedStatement {
    * List of override methods.
    */
   List<MethodStatement> overrideMethods();
+
+  MethodStatement specify(Map<String, NonPrimitiveTypeReference> typeMapping);
 
   /**
    * Declared type parameters.

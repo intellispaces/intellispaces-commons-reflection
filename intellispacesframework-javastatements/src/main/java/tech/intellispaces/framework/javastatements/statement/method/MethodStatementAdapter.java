@@ -8,9 +8,11 @@ import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 
 import javax.lang.model.element.ExecutableElement;
 import java.util.List;
+import java.util.Map;
 
 class MethodStatementAdapter implements MethodStatement {
   private final CustomType holder;
@@ -41,5 +43,10 @@ class MethodStatementAdapter implements MethodStatement {
   @Override
   public List<MethodStatement> overrideMethods() {
     return overrideMethodsGetter.get();
+  }
+
+  @Override
+  public MethodStatement specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    return new MethodStatementImpl(holder, signature().specify(typeMapping));
   }
 }

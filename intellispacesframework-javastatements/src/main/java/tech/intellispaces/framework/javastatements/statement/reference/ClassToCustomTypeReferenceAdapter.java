@@ -46,6 +46,11 @@ class ClassToCustomTypeReferenceAdapter extends AbstractTypeReference implements
   }
 
   @Override
+  public CustomType effectiveTargetType() {
+    return targetType;
+  }
+
+  @Override
   public Map<String, NonPrimitiveTypeReference> typeArgumentMapping() {
     return Map.of();
   }

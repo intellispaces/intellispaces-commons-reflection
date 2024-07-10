@@ -7,6 +7,7 @@ import tech.intellispaces.framework.javastatements.statement.instance.Annotation
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
@@ -131,5 +132,22 @@ class MethodSignatureImpl implements MethodSignature {
   @Override
   public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
     return annotationMap.containsKey(annotationClass.getCanonicalName());
+  }
+
+  @Override
+  public MethodSignature specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    return new MethodSignatureImpl(
+        name(),
+        isAbstract(),
+        isPublic(),
+        isDefault(),
+        isStatic(),
+        typeParameters(),
+        returnType().map(t -> t.specify(typeMapping)).orElse(null),
+        defaultValue().orElse(null),
+        params().stream().map(p -> p.specify(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ExceptionCompatibleTypeReference) e.specify(typeMapping)).toList(),
+        annotations()
+    );
   }
 }

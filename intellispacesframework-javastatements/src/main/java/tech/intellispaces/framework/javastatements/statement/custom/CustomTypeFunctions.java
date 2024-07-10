@@ -195,6 +195,20 @@ public interface CustomTypeFunctions {
     curParents.forEach(p -> populateParents(p, parents));
   }
 
+  static boolean hasParent(CustomType customType, String parentCanonicalName) {
+    for (CustomTypeReference parent : customType.parentTypes()) {
+      if (parentCanonicalName.equals(parent.targetType().canonicalName())) {
+        return true;
+      }
+    }
+    for (CustomTypeReference parent : customType.parentTypes()) {
+      if (parent.targetType().hasParent(parentCanonicalName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static String getTypeParametersDeclaration(CustomType customType, boolean fullDeclaration) {
     var parametersSource = customType.typeParameters().stream()
         .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, fullDeclaration))

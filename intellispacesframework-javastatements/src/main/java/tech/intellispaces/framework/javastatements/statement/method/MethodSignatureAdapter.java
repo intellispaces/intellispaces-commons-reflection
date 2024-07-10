@@ -13,12 +13,14 @@ import tech.intellispaces.framework.javastatements.statement.instance.Annotation
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 class MethodSignatureAdapter implements MethodSignature {
@@ -120,5 +122,22 @@ class MethodSignatureAdapter implements MethodSignature {
   @Override
   public boolean isStatic() {
     return executableElement.getModifiers().contains(Modifier.STATIC);
+  }
+
+  @Override
+  public MethodSignature specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    return new MethodSignatureImpl(
+        name(),
+        isAbstract(),
+        isPublic(),
+        isDefault(),
+        isStatic(),
+        typeParameters(),
+        returnType().map(t -> t.specify(typeMapping)).orElse(null),
+        defaultValue().orElse(null),
+        params().stream().map(p -> p.specify(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ExceptionCompatibleTypeReference) e.specify(typeMapping)).toList(),
+        annotations()
+    );
   }
 }

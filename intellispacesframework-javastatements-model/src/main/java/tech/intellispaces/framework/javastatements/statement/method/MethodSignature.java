@@ -4,9 +4,11 @@ import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -57,4 +59,6 @@ public interface MethodSignature extends AnnotatedStatement {
    * Static method sign.
    */
   boolean isStatic();
+
+  MethodSignature specify(Map<String, NonPrimitiveTypeReference> typeMapping);
 }

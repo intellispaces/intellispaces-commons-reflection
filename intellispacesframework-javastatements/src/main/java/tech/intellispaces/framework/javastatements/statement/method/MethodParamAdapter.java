@@ -9,11 +9,13 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import javax.lang.model.element.VariableElement;
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 class MethodParamAdapter implements MethodParam {
@@ -60,5 +62,14 @@ class MethodParamAdapter implements MethodParam {
   @Override
   public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
     return AnnotationFunctions.hasAnnotation(this, annotationClass);
+  }
+
+  @Override
+  public MethodParam specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    return new MethodParamImpl(
+        name(),
+        type().specify(typeMapping),
+        annotations()
+    );
   }
 }

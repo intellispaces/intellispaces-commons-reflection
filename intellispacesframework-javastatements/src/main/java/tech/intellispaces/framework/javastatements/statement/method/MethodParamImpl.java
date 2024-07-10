@@ -4,6 +4,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
@@ -60,5 +61,14 @@ class MethodParamImpl implements MethodParam {
   @Override
   public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
     return annotationMap.containsKey(annotationClass.getCanonicalName());
+  }
+
+  @Override
+  public MethodParam specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+    return new MethodParamImpl(
+        name(),
+        type().specify(typeMapping),
+        annotations()
+    );
   }
 }

@@ -22,6 +22,8 @@ public interface CustomTypeReference extends NonPrimitiveTypeReference, TypeBoun
    */
   List<NonPrimitiveTypeReference> typeArguments();
 
+  CustomType effectiveTargetType();
+
   Map<String, NonPrimitiveTypeReference> typeArgumentMapping();
 
   String typeArgumentsDeclaration();
