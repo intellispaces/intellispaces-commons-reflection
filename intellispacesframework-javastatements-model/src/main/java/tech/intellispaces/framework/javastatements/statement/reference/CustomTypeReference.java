@@ -3,6 +3,7 @@ package tech.intellispaces.framework.javastatements.statement.reference;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -20,6 +21,8 @@ public interface CustomTypeReference extends NonPrimitiveTypeReference, TypeBoun
    * Actual arguments of type parameters.
    */
   List<NonPrimitiveTypeReference> typeArguments();
+
+  Map<String, NonPrimitiveTypeReference> typeArgumentMapping();
 
   String typeArgumentsDeclaration();
 

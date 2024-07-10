@@ -7,17 +7,20 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 class CustomTypeReferenceImpl extends AbstractTypeReference implements CustomTypeReference {
   private final CustomType targetType;
   private final List<NonPrimitiveTypeReference> typeArguments;
+  private final Getter<Map<String, NonPrimitiveTypeReference>> typeArgumentMappingsGetter;
   private final Getter<String> typeArgumentsDeclarationGetter;
 
   CustomTypeReferenceImpl(CustomType targetType, List<NonPrimitiveTypeReference> typeArguments) {
     super();
     this.targetType = targetType;
     this.typeArguments = typeArguments;
+    this.typeArgumentMappingsGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentMapping, this);
     this.typeArgumentsDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
   }
 
@@ -34,6 +37,11 @@ class CustomTypeReferenceImpl extends AbstractTypeReference implements CustomTyp
   @Override
   public List<NonPrimitiveTypeReference> typeArguments() {
     return typeArguments;
+  }
+
+  @Override
+  public Map<String, NonPrimitiveTypeReference> typeArgumentMapping() {
+    return typeArgumentMappingsGetter.get();
   }
 
   @Override

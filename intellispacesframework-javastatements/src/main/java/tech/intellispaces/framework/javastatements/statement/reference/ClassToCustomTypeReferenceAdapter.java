@@ -6,6 +6,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 class ClassToCustomTypeReferenceAdapter extends AbstractTypeReference implements CustomTypeReference {
@@ -42,6 +43,11 @@ class ClassToCustomTypeReferenceAdapter extends AbstractTypeReference implements
   @Override
   public List<NonPrimitiveTypeReference> typeArguments() {
     return List.of();
+  }
+
+  @Override
+  public Map<String, NonPrimitiveTypeReference> typeArgumentMapping() {
+    return Map.of();
   }
 
   @Override

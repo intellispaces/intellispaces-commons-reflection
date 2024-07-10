@@ -7,7 +7,10 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomTypeFunctions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -202,5 +205,28 @@ public interface TypeReferenceFunctions {
       }
       return sb.toString();
     }
+  }
+
+  static Map<String, NonPrimitiveTypeReference> getTypeArgumentMapping(CustomTypeReference customTypeReference) {
+    List<NonPrimitiveTypeReference> typeArguments = customTypeReference.typeArguments();
+    List<NamedTypeReference> typeParams = customTypeReference.targetType().typeParameters();
+    if (typeArguments.isEmpty() && typeParams.isEmpty()) {
+      return Map.of();
+    }
+    if (typeArguments.size() != typeParams.size()) {
+      throw UnexpectedViolationException.withMessage("Number of type arguments {} does not match with " +
+          "number of type parameters {}. See reference {}",
+          typeArguments.size(), typeParams.size(), customTypeReference.formalFullDeclaration());
+    }
+
+    Map<String, NonPrimitiveTypeReference> mapping = new HashMap<>();
+    Iterator<NonPrimitiveTypeReference> typeArgumentIterator = customTypeReference.typeArguments().iterator();
+    Iterator<NamedTypeReference> typeParamIterator = customTypeReference.targetType().typeParameters().iterator();
+    while (typeArgumentIterator.hasNext()) {
+      NonPrimitiveTypeReference typeArgument = typeArgumentIterator.next();
+      NamedTypeReference typeParam = typeParamIterator.next();
+      mapping.put(typeParam.name(), typeArgument);
+    }
+    return mapping;
   }
 }
