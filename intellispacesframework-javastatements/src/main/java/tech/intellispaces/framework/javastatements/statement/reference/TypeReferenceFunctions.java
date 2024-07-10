@@ -45,6 +45,10 @@ public interface TypeReferenceFunctions {
       } else {
         return Optional.empty();
       }
+    } else if (typeReference1.asNamedTypeReference().isPresent() && typeReference2.asCustomTypeReference().isPresent()) {
+      return Optional.of(typeReference2);
+    } else if (typeReference1.asCustomTypeReference().isPresent() && typeReference2.asNamedTypeReference().isPresent()) {
+      return Optional.of(typeReference1);
     } else {
       return Optional.empty();
     }
