@@ -109,6 +109,13 @@ class MethodSignatureImpl implements MethodSignature {
   }
 
   @Override
+  public List<TypeReference> parameterTypes() {
+    return params().stream()
+        .map(MethodParam::type)
+        .toList();
+  }
+
+  @Override
   public List<ExceptionCompatibleTypeReference> exceptions() {
     return exceptions;
   }

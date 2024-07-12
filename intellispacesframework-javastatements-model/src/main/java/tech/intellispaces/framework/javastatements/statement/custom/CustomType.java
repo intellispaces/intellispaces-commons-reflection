@@ -4,6 +4,7 @@ import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import java.util.Collection;
 import java.util.List;
@@ -79,6 +80,8 @@ public interface CustomType extends AnnotatedStatement {
   List<MethodStatement> declaredMethods();
 
   List<MethodStatement> declaredMethodsWithName(String name);
+
+  Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes);
 
   /**
    * Actual methods.

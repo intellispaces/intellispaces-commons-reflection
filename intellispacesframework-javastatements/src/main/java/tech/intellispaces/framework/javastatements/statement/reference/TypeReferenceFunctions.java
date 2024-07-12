@@ -63,6 +63,22 @@ public interface TypeReferenceFunctions {
         .toList();
   }
 
+  static boolean isEqualTypes(List<TypeReference> types1, List<TypeReference> types2) {
+    if (types1.size() != types2.size()) {
+      throw UnexpectedViolationException.withMessage("Expected two lists with equal size");
+    }
+    Iterator<TypeReference> iteratorTypes1 = types1.iterator();
+    Iterator<TypeReference> iteratorTypes2 = types2.iterator();
+    while (iteratorTypes1.hasNext()) {
+      TypeReference type1 = iteratorTypes1.next();
+      TypeReference type2 = iteratorTypes2.next();
+      if (!isEqualTypes(type1, type2)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   static boolean isEqualTypes(TypeReference typeReference1, TypeReference typeReference2) {
     boolean sameParams = true;
     if (typeReference1.isPrimitive() && typeReference2.isPrimitive()) {

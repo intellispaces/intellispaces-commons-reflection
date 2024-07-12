@@ -41,6 +41,8 @@ public interface MethodSignature extends AnnotatedStatement {
    */
   List<MethodParam> params();
 
+  List<TypeReference> parameterTypes();
+
   /**
    * Method exceptions.
    */

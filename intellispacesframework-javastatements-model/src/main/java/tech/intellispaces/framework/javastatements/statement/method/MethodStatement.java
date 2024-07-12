@@ -61,6 +61,10 @@ public interface MethodStatement extends AnnotatedStatement {
     return signature().params();
   }
 
+  default List<TypeReference> parameterTypes() {
+    return signature().parameterTypes();
+  }
+
   /**
    * Method exceptions.
    */

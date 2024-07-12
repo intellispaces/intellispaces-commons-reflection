@@ -7,6 +7,7 @@ import tech.intellispaces.framework.javastatements.statement.instance.Annotation
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
@@ -127,6 +128,11 @@ class ClassToClassStatementAdapter implements ClassStatement {
 
   @Override
   public List<MethodStatement> declaredMethodsWithName(String name) {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  @Override
+  public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes) {
     throw new UnsupportedOperationException("Not implemented yet");
   }
 

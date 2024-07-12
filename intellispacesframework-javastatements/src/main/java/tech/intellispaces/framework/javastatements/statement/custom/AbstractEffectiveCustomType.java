@@ -8,6 +8,8 @@ import tech.intellispaces.framework.javastatements.statement.method.MethodStatem
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReferenceFunctions;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
@@ -125,6 +127,15 @@ public abstract class AbstractEffectiveCustomType implements CustomType {
     return declaredMethods().stream()
         .filter(m -> name.equals(m.name()))
         .toList();
+  }
+
+  @Override
+  public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes) {
+    return declaredMethods().stream()
+        .filter(m -> name.equals(m.name()))
+        .filter(m -> m.params().size() == parameterTypes.size())
+        .filter(m -> TypeReferenceFunctions.isEqualTypes(m.parameterTypes(), parameterTypes))
+        .findFirst();
   }
 
   @Override

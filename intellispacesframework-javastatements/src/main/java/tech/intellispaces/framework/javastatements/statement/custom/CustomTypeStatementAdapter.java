@@ -12,6 +12,8 @@ import tech.intellispaces.framework.javastatements.statement.instance.Annotation
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.TypeReferenceFunctions;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -150,6 +152,15 @@ abstract class CustomTypeStatementAdapter implements CustomType {
     return declaredMethods().stream()
         .filter(m -> name.equals(m.name()))
         .toList();
+  }
+
+  @Override
+  public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes) {
+    return declaredMethods().stream()
+        .filter(m -> name.equals(m.name()))
+        .filter(m -> m.params().size() == parameterTypes.size())
+        .filter(m -> TypeReferenceFunctions.isEqualTypes(m.parameterTypes(), parameterTypes))
+        .findFirst();
   }
 
   @Override
