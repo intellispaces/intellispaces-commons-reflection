@@ -14,6 +14,7 @@ import tech.intellispaces.framework.javastatements.statement.reference.TypeRefer
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -91,6 +92,23 @@ public interface MethodFunctions {
       MethodParam param1 = paramIterator1.next();
       MethodParam param2 = paramIterator2.next();
       if (!TypeReferenceFunctions.isEquivalentTypes(param1.type(), param2.type())) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  static boolean isEquivalentMethods(Method method1, Method method2) {
+    if (!method1.getName().equals(method2.getName())) {
+      return false;
+    }
+    if (method1.getParameterCount() != method2.getParameterCount()) {
+      return false;
+    }
+    for (int i = 0; i < method1.getParameterCount(); i++) {
+      Class<?> typeParam1 = method1.getParameters()[i].getType();
+      Class<?> typeParam2 = method2.getParameters()[i].getType();
+      if (typeParam1 != typeParam2) {
         return false;
       }
     }

@@ -55,6 +55,10 @@ public enum PrimitiveTypeReferences implements PrimitiveTypeReference {
     return typename;
   }
 
+  @Override
+  public String actualBlindDeclaration(Function<String, String> simpleNameMapper) {
+    return typename;
+  }
 
   @Override
   public String formalFullDeclaration() {

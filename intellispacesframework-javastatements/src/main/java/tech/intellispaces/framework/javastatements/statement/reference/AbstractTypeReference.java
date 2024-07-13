@@ -51,6 +51,11 @@ abstract class AbstractTypeReference implements TypeReference {
   }
 
   @Override
+  public String actualBlindDeclaration(Function<String, String> simpleNameMapper) {
+    return TypeReferenceFunctions.getActualBlindTypeReferenceDeclaration(this, simpleNameMapper);
+  }
+
+  @Override
   public String formalFullDeclaration() {
     return formalFullDeclarationGetter.get();
   }

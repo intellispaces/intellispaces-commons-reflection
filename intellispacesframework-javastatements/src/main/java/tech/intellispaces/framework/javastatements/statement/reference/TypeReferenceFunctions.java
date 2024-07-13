@@ -126,28 +126,48 @@ public interface TypeReferenceFunctions {
    * Returns actual type reference declaration.
    */
   static String getActualTypeReferenceDeclaration(TypeReference typeReference) {
-    return getActualTypeReferenceDeclaration(typeReference, TypeFunctions::getSimpleName);
+    return getActualTypeReferenceDeclaration(typeReference, false);
+  }
+
+  static String getActualTypeReferenceDeclaration(
+      TypeReference typeReference, Function<String, String> simpleNameMapper
+  ) {
+    return getActualTypeReferenceDeclaration(typeReference, false, simpleNameMapper);
+  }
+
+  static String getActualBlindTypeReferenceDeclaration(TypeReference typeReference) {
+    return getActualTypeReferenceDeclaration(typeReference, true);
+  }
+
+  static String getActualBlindTypeReferenceDeclaration(
+      TypeReference typeReference, Function<String, String> simpleNameMapper
+  ) {
+    return getActualTypeReferenceDeclaration(typeReference, true, simpleNameMapper);
+  }
+
+  private static String getActualTypeReferenceDeclaration(TypeReference typeReference, boolean blind) {
+    return getActualTypeReferenceDeclaration(typeReference, blind, TypeFunctions::getSimpleName);
   }
 
   /**
    * Returns actual type reference declaration.
    */
-  static String getActualTypeReferenceDeclaration(
-      TypeReference typeReference, Function<String, String> simpleNameMapper
+  private static String getActualTypeReferenceDeclaration(
+      TypeReference typeReference, boolean blind, Function<String, String> simpleNameMapper
   ) {
     if (typeReference.asPrimitiveTypeReference().isPresent()) {
       return typeReference.asPrimitiveTypeReference().get().typename();
     } else if (typeReference.asArrayTypeReference().isPresent()) {
       TypeReference elementType = typeReference.asArrayTypeReference().get().elementType();
-      return getActualTypeReferenceDeclaration(elementType) + "[]";
+      return getActualTypeReferenceDeclaration(elementType, blind) + "[]";
     } else if (typeReference.asCustomTypeReference().isPresent()) {
       CustomType customType = typeReference.asCustomTypeReference().get().targetType();
       String simpleName = simpleNameMapper.apply(customType.canonicalName());
-      return simpleName + getTypeArgumentsDeclaration(typeReference.asCustomTypeReference().get(), simpleNameMapper);
+      return simpleName + getTypeArgumentsDeclaration(typeReference.asCustomTypeReference().get(), blind, simpleNameMapper);
     } else if (typeReference.asNamedTypeReference().isPresent()) {
-      return getNamedTypeReferenceDeclaration(typeReference.asNamedTypeReference().get(), false);
+      return getNamedTypeReferenceDeclaration(typeReference.asNamedTypeReference().get(), blind, false);
     } else if (typeReference.asWildcardTypeReference().isPresent()) {
-      return getWildcardDeclaration(typeReference.asWildcardTypeReference().get(), true);
+      return getWildcardDeclaration(typeReference.asWildcardTypeReference().get(), blind, true);
     } else {
       throw JavaStatementException.withMessage("Unsupported reference type {}", typeReference.statementType().typename());
     }
@@ -171,30 +191,42 @@ public interface TypeReferenceFunctions {
       CustomType customType = typeReference.asCustomTypeReference().get().targetType();
       return customType.simpleName() + CustomTypeFunctions.getTypeParametersDeclaration(customType, fullDeclaration);
     } else if (typeReference.asNamedTypeReference().isPresent()) {
-      return getNamedTypeReferenceDeclaration(typeReference.asNamedTypeReference().get(), fullDeclaration);
+      return getNamedTypeReferenceDeclaration(typeReference.asNamedTypeReference().get(), false, fullDeclaration);
     } else if (typeReference.asWildcardTypeReference().isPresent()) {
-      return getWildcardDeclaration(typeReference.asWildcardTypeReference().get(), fullDeclaration);
+      return getWildcardDeclaration(typeReference.asWildcardTypeReference().get(), false, fullDeclaration);
     } else {
       throw JavaStatementException.withMessage("Unsupported reference type {}", typeReference.statementType().typename());
     }
   }
 
   static String getTypeArgumentsDeclaration(CustomTypeReference typeReference) {
-    return getTypeArgumentsDeclaration(typeReference, Function.identity());
+    return getTypeArgumentsDeclaration(typeReference, false, Function.identity());
   }
 
   static String getTypeArgumentsDeclaration(
       CustomTypeReference typeReference, Function<String, String> simpleNameMapper
   ) {
+    return getTypeArgumentsDeclaration(typeReference, false, simpleNameMapper);
+  }
+
+  static String getTypeArgumentsDeclaration(
+      CustomTypeReference typeReference, boolean blind, Function<String, String> simpleNameMapper
+  ) {
     String arguments = typeReference.typeArguments().stream()
-        .map(t -> getActualTypeReferenceDeclaration(t, simpleNameMapper))
+        .map(t -> getActualTypeReferenceDeclaration(t, blind, simpleNameMapper))
         .collect(Collectors.joining(", "));
     return (arguments.isEmpty() ? "" : "<" + arguments + ">");
   }
 
   static String getNamedTypeReferenceDeclaration(NamedTypeReference typeReference, boolean fullDeclaration) {
+    return getNamedTypeReferenceDeclaration(typeReference, false, fullDeclaration);
+  }
+
+  static String getNamedTypeReferenceDeclaration(
+      NamedTypeReference typeReference, boolean blind, boolean fullDeclaration
+  ) {
     if (!fullDeclaration || typeReference.extendedBounds().isEmpty()) {
-      return typeReference.name();
+      return blind ? "?" : typeReference.name();
     } else {
       var sb = new StringBuilder();
       boolean first = true;
@@ -203,13 +235,13 @@ public interface TypeReferenceFunctions {
           sb.append(" & ");
         }
         first = false;
-        sb.append(getActualTypeReferenceDeclaration(extendedTypeReference));
+        sb.append(getActualTypeReferenceDeclaration(extendedTypeReference, blind));
       }
-      return typeReference.name() + " extends " + sb;
+      return (blind ? "?" : typeReference.name()) + " extends " + sb;
     }
   }
 
-  static String getWildcardDeclaration(WildcardTypeReference typeReference, boolean fullDeclaration) {
+  static String getWildcardDeclaration(WildcardTypeReference typeReference, boolean blind, boolean fullDeclaration) {
     if (!fullDeclaration) {
       return "?";
     } else {
@@ -217,11 +249,11 @@ public interface TypeReferenceFunctions {
       sb.append("?");
       if (typeReference.extendedBound().isPresent()) {
         sb.append(" extends ");
-        sb.append(getActualTypeReferenceDeclaration(typeReference.extendedBound().get()));
+        sb.append(getActualTypeReferenceDeclaration(typeReference.extendedBound().get(), blind));
       }
       if (typeReference.superBound().isPresent()) {
         sb.append(" super ");
-        sb.append(getActualTypeReferenceDeclaration(typeReference.superBound().get()));
+        sb.append(getActualTypeReferenceDeclaration(typeReference.superBound().get(), blind));
       }
       return sb.toString();
     }
