@@ -55,7 +55,7 @@ public interface CustomTypeFunctions {
 
   private static MethodStatement getEffectiveMethod(MethodStatement originMethod, TypeContext typeContext) {
     return MethodStatementBuilder.build(
-        originMethod.holder(),
+        originMethod.owner(),
         getEffectiveMethodSignature(originMethod.signature(), typeContext)
     );
   }

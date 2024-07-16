@@ -1,5 +1,7 @@
 package tech.intellispaces.framework.javastatements.statement.reference;
 
+import tech.intellispaces.framework.javastatements.statement.Statement;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,8 @@ public interface NamedTypeReference extends NonPrimitiveTypeReference, TypeBound
   String name();
 
   List<TypeBoundReference> extendedBounds();
+
+  Statement owner();
 
   @Override
   default boolean isArrayTypeReference() {

@@ -2,7 +2,9 @@ package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.commons.action.ActionBuilders;
 import tech.intellispaces.framework.commons.action.Getter;
+import tech.intellispaces.framework.javastatements.JavaStatements;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
+import tech.intellispaces.framework.javastatements.context.TypeContextBuilder;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
@@ -11,17 +13,37 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
 import java.util.List;
 import java.util.Map;
 
 class MethodStatementAdapter implements MethodStatement {
-  private final CustomType holder;
+  private final Getter<CustomType> ownerGetter;
   private final Getter<MethodSignature> signatureGetter;
   private final Getter<List<MethodStatement>> overrideMethodsGetter;
 
-  MethodStatementAdapter(ExecutableElement executableElement, CustomType holder, TypeContext typeContext, Session session) {
-    this.holder = holder;
-    this.signatureGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::asMethodSignature, executableElement, typeContext, session);
+  MethodStatementAdapter(ExecutableElement executableElement, Session session) {
+    this(
+        executableElement,
+        ActionBuilders.cachedLazyGetter(
+            JavaStatements::customTypeStatement, (TypeElement) executableElement.getEnclosingElement()),
+        TypeContextBuilder.empty(),
+        session
+    );
+  }
+
+  MethodStatementAdapter(
+      ExecutableElement executableElement, CustomType owner, TypeContext typeContext, Session session
+  ) {
+    this(executableElement, ActionBuilders.getter(owner), typeContext, session);
+  }
+
+  MethodStatementAdapter(
+      ExecutableElement executableElement, Getter<CustomType> ownerGetter, TypeContext typeContext, Session session
+  ) {
+    this.ownerGetter = ownerGetter;
+    this.signatureGetter = ActionBuilders.cachedLazyGetter(
+        TypeElementFunctions::asMethodSignature, executableElement, typeContext, session);
     this.overrideMethodsGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
   }
 
@@ -31,8 +53,8 @@ class MethodStatementAdapter implements MethodStatement {
   }
 
   @Override
-  public CustomType holder() {
-    return holder;
+  public CustomType owner() {
+    return ownerGetter.get();
   }
 
   @Override
@@ -47,6 +69,6 @@ class MethodStatementAdapter implements MethodStatement {
 
   @Override
   public MethodStatement specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
-    return new MethodStatementImpl(holder, signature().specify(typeMapping));
+    return new MethodStatementImpl(owner(), signature().specify(typeMapping));
   }
 }

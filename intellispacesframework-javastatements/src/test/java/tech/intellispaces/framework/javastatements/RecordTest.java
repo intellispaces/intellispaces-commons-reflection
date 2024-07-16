@@ -2,7 +2,6 @@ package tech.intellispaces.framework.javastatements;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.framework.commons.action.Handler;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
@@ -17,6 +16,7 @@ import javax.lang.model.element.TypeElement;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +29,7 @@ public class RecordTest extends AbstractCustomTypeTest {
   @Test
   public void testEmptyRecord() {
     // Given
-    TypeElement typeElement = getTestElement("record/EmptyRecord.java");
+    TypeElement typeElement = getTestElement("records/EmptyRecord.java");
 
     // When
     CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
@@ -72,7 +72,7 @@ public class RecordTest extends AbstractCustomTypeTest {
     // Given
     final var interface1Name = "tech.intellispaces.framework.javastatements.samples.RecordImplementedTwoInterfaces.Interface1";
     final var interface2Name = "tech.intellispaces.framework.javastatements.samples.RecordImplementedTwoInterfaces.Interface2";
-    TypeElement typeElement = getTestElement("record/RecordImplementedTwoInterfaces.java");
+    TypeElement typeElement = getTestElement("records/RecordImplementedTwoInterfaces.java");
 
     // When
     RecordStatement recordStatement = JavaStatements.recordStatement(typeElement);
@@ -136,133 +136,212 @@ public class RecordTest extends AbstractCustomTypeTest {
 
   @Test
   public void testRecordWithSimpleMethod() {
-    testRecordWithOneMethod("RecordWithSimpleMethod", "simpleMethod", this::validateSimpleMethod, List.of());
+    testRecordWithOneMethod(
+        "RecordWithSimpleMethod",
+        "simpleMethod",
+        this::validateSimpleMethod,
+        List.of());
   }
 
   @Test
   public void testRecordWithMethodThrowsTwoExceptions() {
-    testRecordWithOneMethod("RecordWithMethodThrowsTwoExceptions", "methodThrowsTwoExceptions", this::validateMethodThrowsTwoExceptions,
+    testRecordWithOneMethod(
+        "RecordWithMethodThrowsTwoExceptions",
+        "methodThrowsTwoExceptions",
+        this::validateMethodThrowsTwoExceptions,
         List.of(IOException.class.getCanonicalName()));
   }
 
   @Test
   public void testRecordWithStaticMethod() {
-    testRecordWithOneMethod("RecordWithStaticMethod", "staticMethod", this::validateStaticMethod, List.of());
+    testRecordWithOneMethod(
+        "RecordWithStaticMethod",
+        "staticMethod",
+        this::validateStaticMethod,
+        List.of());
   }
 
   @Test
   public void testRecordWithMethodUsingLocalTypeParameter() {
-    testRecordWithOneMethod("RecordWithMethodUsingLocalTypeParameter", "methodUsingLocalTypeParameter", this::validateMethodUsingLocalTypeParameter,
+    testRecordWithOneMethod(
+        "RecordWithMethodUsingLocalTypeParameter",
+        "methodUsingLocalTypeParameter",
+        this::validateMethodUsingLocalTypeParameter,
         List.of(List.class.getCanonicalName()));
   }
 
   @Test
   public void testRecordWithMethodUsingWildcard() {
-    testRecordWithOneMethod("RecordWithMethodUsingWildcard", "methodUsingWildcard", this::validateMethodUsingWildcard,
+    testRecordWithOneMethod(
+        "RecordWithMethodUsingWildcard",
+        "methodUsingWildcard",
+        this::validateMethodUsingWildcard,
         List.of(List.class.getCanonicalName(), Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testRecordWithMethodUsingWildcardThatExtendsOtherClass() {
-    testRecordWithOneMethod("RecordWithMethodUsingWildcardThatExtendsOtherClass", "methodUsingWildcardThatExtendsOtherClass", this::validateMethodUsingWildcardThatExtendsOtherClass,
+    testRecordWithOneMethod(
+        "RecordWithMethodUsingWildcardThatExtendsOtherClass",
+        "methodUsingWildcardThatExtendsOtherClass",
+        this::validateMethodUsingWildcardThatExtendsOtherClass,
         List.of(Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testRecordWithMethodUsingWildcardThatSuperOtherClass() {
-    testRecordWithOneMethod("RecordWithMethodUsingWildcardThatSuperOtherClass", "methodUsingWildcardThatSuperOtherClass", this::validateMethodUsingWildcardThatSuperOtherClass,
+    testRecordWithOneMethod(
+        "RecordWithMethodUsingWildcardThatSuperOtherClass",
+        "methodUsingWildcardThatSuperOtherClass",
+        this::validateMethodUsingWildcardThatSuperOtherClass,
         List.of(Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testRecordWithByteGetter() {
-    testRecordWithOneMethod("RecordWithByteGetter", "byteGetter", this::validateByteGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithByteGetter",
+        "byteGetter",
+        this::validateByteGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithShortGetter() {
-    testRecordWithOneMethod("RecordWithShortGetter", "shortGetter", this::validateShortGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithShortGetter",
+        "shortGetter",
+        this::validateShortGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithIntGetter() {
-    testRecordWithOneMethod("RecordWithIntGetter", "intGetter", this::validateIntGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithIntGetter",
+        "intGetter",
+        this::validateIntGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithLongGetter() {
-    testRecordWithOneMethod("RecordWithLongGetter", "longGetter", this::validateLongGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithLongGetter",
+        "longGetter",
+        this::validateLongGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithFloatGetter() {
-    testRecordWithOneMethod("RecordWithFloatGetter", "floatGetter", this::validateFloatGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithFloatGetter",
+        "floatGetter",
+        this::validateFloatGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithDoubleGetter() {
-    testRecordWithOneMethod("RecordWithDoubleGetter", "doubleGetter", this::validateDoubleGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithDoubleGetter",
+        "doubleGetter",
+        this::validateDoubleGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithCharGetter() {
-    testRecordWithOneMethod("RecordWithCharGetter", "charGetter", this::validateCharGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithCharGetter",
+        "charGetter",
+        this::validateCharGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithBooleanGetter() {
-    testRecordWithOneMethod("RecordWithBooleanGetter", "booleanGetter", this::validateBooleanGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithBooleanGetter",
+        "booleanGetter",
+        this::validateBooleanGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithStringGetter() {
-    testRecordWithOneMethod("RecordWithStringGetter", "stringGetter", this::validateStringGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithStringGetter",
+        "stringGetter",
+        this::validateStringGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithArrayOfIntGetter() {
-    testRecordWithOneMethod("RecordWithArrayOfIntGetter", "arrayOfIntGetter", this::validateArrayOfIntGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithArrayOfIntGetter",
+        "arrayOfIntGetter",
+        this::validateArrayOfIntGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithDoubleArrayOfStringGetter() {
-    testRecordWithOneMethod("RecordWithDoubleArrayOfStringGetter", "doubleArrayOfStringGetter", this::validateDoubleArrayOfStringGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithDoubleArrayOfStringGetter",
+        "doubleArrayOfStringGetter",
+        this::validateDoubleArrayOfStringGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithEnumGetter() {
-    testRecordWithOneMethod("RecordWithEnumGetter", "enumGetter", this::validateEnumGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithEnumGetter",
+        "enumGetter",
+        this::validateEnumGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithRecordGetter() {
-    testRecordWithOneMethod("RecordWithRecordGetter", "recordGetter", this::validateRecordGetter, List.of());
+    testRecordWithOneMethod(
+        "RecordWithRecordGetter",
+        "recordGetter",
+        this::validateRecordGetter,
+        List.of());
   }
 
   @Test
   public void testRecordWithImplementedMethodFromInterface() {
-    testCustomTypeWithImplementedMethodFromInterface("record/RecordWithImplementedMethodFromInterface.java",
+    testCustomTypeWithImplementedMethodFromInterface(
+        "records/RecordWithImplementedMethodFromInterface.java",
         List.of("hashCode", "equals", "toString"),
         List.of("hashCode", "equals", "toString"));
   }
 
   @Test
   public void testRecordWithInheritedDefaultMethodFromInterface() {
-    testCustomTypeWithInheritedDefaultMethodFromInterface("record/RecordWithInheritedDefaultMethodFromInterface.java",
+    testCustomTypeWithInheritedDefaultMethodFromInterface(
+        "records/RecordWithInheritedDefaultMethodFromInterface.java",
         List.of("hashCode", "equals", "toString"),
         List.of("hashCode", "equals", "toString"));
   }
 
   @Test
   public void testRecordWithImplementedMethod() {
-    testCustomerTypeWithOverrideMethod("record/RecordWithImplementedMethod.java",
+    testCustomerTypeWithOverrideMethod(
+        "records/RecordWithImplementedMethod.java",
         List.of("hashCode", "equals", "toString"),
         List.of("hashCode", "equals", "toString"));
   }
 
   @Test
   public void testRecordWithOverrideMethodAndNarrowedReturnType() {
-    testCustomTypeWithOverrideMethodAndNarrowedReturnType("record/RecordWithOverrideMethodAndNarrowedReturnType.java",
+    testCustomTypeWithOverrideMethodAndNarrowedReturnType(
+        "records/RecordWithOverrideMethodAndNarrowedReturnType.java",
         List.of("hashCode", "equals", "toString"),
         List.of("hashCode", "equals", "toString"));
   }
@@ -270,7 +349,7 @@ public class RecordTest extends AbstractCustomTypeTest {
   @Test
   public void testGenericRecordWithCyclicTypeDependencyCase1() {
     // Given
-    TypeElement typeElement = getTestElement("record/GenericRecordWithCyclicTypeDependencyCase1.java");
+    TypeElement typeElement = getTestElement("records/GenericRecordWithCyclicTypeDependencyCase1.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -299,7 +378,7 @@ public class RecordTest extends AbstractCustomTypeTest {
   @Test
   public void testGenericRecordWithCyclicTypeDependencyCase2() {
     // Given
-    TypeElement typeElement = getTestElement("record/GenericRecordWithCyclicTypeDependencyCase2.java");
+    TypeElement typeElement = getTestElement("records/GenericRecordWithCyclicTypeDependencyCase2.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -331,11 +410,11 @@ public class RecordTest extends AbstractCustomTypeTest {
   }
 
   private void testRecordWithOneMethod(
-      String recordName, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
+      String recordName, String methodName, Consumer<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + recordName;
-    TypeElement typeElement = getTestElement("record/" + recordName + ".java");
+    TypeElement typeElement = getTestElement("records/" + recordName + ".java");
     Session session = SessionBuilder.buildSession();
 
     // When
@@ -362,11 +441,11 @@ public class RecordTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = recordStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.handle(declaredMethods.get(0));
+    methodValidator.accept(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = recordStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.handle(actualMethods.get(0));
+    methodValidator.accept(actualMethods.get(0));
 
     assertThat(recordStatement.annotations()).hasSize(1);
     HandleFunctions.handle(recordStatement.annotations().get(0), annInstance -> {

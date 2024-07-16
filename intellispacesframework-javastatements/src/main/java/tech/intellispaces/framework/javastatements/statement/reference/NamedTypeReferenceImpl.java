@@ -1,5 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.reference;
 
+import tech.intellispaces.framework.javastatements.statement.Statement;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 
@@ -9,11 +10,13 @@ import java.util.Map;
 
 class NamedTypeReferenceImpl extends AbstractTypeReference implements NamedTypeReference {
   private final String name;
+  private final Statement owner;
   private final List<TypeBoundReference> extendedBounds;
 
-  NamedTypeReferenceImpl(String name, List<TypeBoundReference> extendedBounds) {
+  NamedTypeReferenceImpl(String name, Statement owner, List<TypeBoundReference> extendedBounds) {
     super();
     this.name = name;
+    this.owner = owner;
     this.extendedBounds = extendedBounds;
   }
 
@@ -25,6 +28,11 @@ class NamedTypeReferenceImpl extends AbstractTypeReference implements NamedTypeR
   @Override
   public String name() {
     return name;
+  }
+
+  @Override
+  public Statement owner() {
+    return owner;
   }
 
   @Override
@@ -43,6 +51,6 @@ class NamedTypeReferenceImpl extends AbstractTypeReference implements NamedTypeR
     for (TypeBoundReference curExtendedBound : curExtendedBounds) {
       newExtendedBounds.add((TypeBoundReference) curExtendedBound.specify(typeMapping));
     }
-    return new NamedTypeReferenceImpl(name, newExtendedBounds);
+    return new NamedTypeReferenceImpl(name, owner(), newExtendedBounds);
   }
 }

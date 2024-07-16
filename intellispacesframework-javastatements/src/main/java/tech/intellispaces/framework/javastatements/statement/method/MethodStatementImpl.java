@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 class MethodStatementImpl implements MethodStatement {
-  private final CustomType holder;
+  private final CustomType owner;
   private final MethodSignature signature;
   private final Getter<List<MethodStatement>> overrideMethodsGetter;
 
-  MethodStatementImpl(CustomType holder, MethodSignature signature) {
-    this.holder = holder;
+  MethodStatementImpl(CustomType owner, MethodSignature signature) {
+    this.owner = owner;
     this.signature = signature;
     this.overrideMethodsGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
   }
@@ -27,8 +27,8 @@ class MethodStatementImpl implements MethodStatement {
   }
 
   @Override
-  public CustomType holder() {
-    return holder;
+  public CustomType owner() {
+    return owner;
   }
 
   @Override
@@ -43,6 +43,6 @@ class MethodStatementImpl implements MethodStatement {
 
   @Override
   public MethodStatement specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
-    return new MethodStatementImpl(holder, signature().specify(typeMapping));
+    return new MethodStatementImpl(owner, signature().specify(typeMapping));
   }
 }

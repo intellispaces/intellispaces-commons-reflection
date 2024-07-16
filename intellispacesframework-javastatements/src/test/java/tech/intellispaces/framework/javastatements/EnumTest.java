@@ -1,7 +1,6 @@
 package tech.intellispaces.framework.javastatements;
 
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.framework.commons.action.Handler;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
@@ -15,6 +14,7 @@ import javax.lang.model.element.TypeElement;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +27,7 @@ public class EnumTest extends AbstractCustomTypeTest {
   @Test
   public void testEmptyEnum() {
     // Given
-    TypeElement typeElement = getTestElement("enum/EmptyEnum.java");
+    TypeElement typeElement = getTestElement("enums/EmptyEnum.java");
 
     // When
     CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
@@ -70,7 +70,7 @@ public class EnumTest extends AbstractCustomTypeTest {
     // Given
     final var interface1Name = "tech.intellispaces.framework.javastatements.samples.EnumImplementedTwoInterfaces.Interface1";
     final var interface2Name = "tech.intellispaces.framework.javastatements.samples.EnumImplementedTwoInterfaces.Interface2";
-    TypeElement typeElement = getTestElement("enum/EnumImplementedTwoInterfaces.java");
+    TypeElement typeElement = getTestElement("enums/EnumImplementedTwoInterfaces.java");
 
     // When
     EnumStatement enumStatement = JavaStatements.enumStatement(typeElement);
@@ -135,143 +135,226 @@ public class EnumTest extends AbstractCustomTypeTest {
 
   @Test
   public void testEnumWithSimpleMethod() {
-    testEnumWithOneMethod("EnumWithSimpleMethod", "simpleMethod", this::validateSimpleMethod, List.of());
+    testEnumWithOneMethod(
+        "EnumWithSimpleMethod",
+        "simpleMethod",
+        this::validateSimpleMethod,
+        List.of());
   }
 
   @Test
   public void testEnumWithMethodThrowsTwoExceptions() {
-    testEnumWithOneMethod("EnumWithMethodThrowsTwoExceptions", "methodThrowsTwoExceptions", this::validateMethodThrowsTwoExceptions,
+    testEnumWithOneMethod(
+        "EnumWithMethodThrowsTwoExceptions",
+        "methodThrowsTwoExceptions",
+        this::validateMethodThrowsTwoExceptions,
         List.of(IOException.class.getCanonicalName()));
   }
 
   @Test
   public void testEnumWithStaticMethod() {
-    testEnumWithOneMethod("EnumWithStaticMethod", "staticMethod", this::validateStaticMethod, List.of());
+    testEnumWithOneMethod(
+        "EnumWithStaticMethod",
+        "staticMethod",
+        this::validateStaticMethod,
+        List.of());
   }
 
   @Test
   public void testEnumWithMethodUsingLocalTypeParameter() {
-    testEnumWithOneMethod("EnumWithMethodUsingLocalTypeParameter", "methodUsingLocalTypeParameter", this::validateMethodUsingLocalTypeParameter,
+    testEnumWithOneMethod(
+        "EnumWithMethodUsingLocalTypeParameter",
+        "methodUsingLocalTypeParameter",
+        this::validateMethodUsingLocalTypeParameter,
         List.of(List.class.getCanonicalName()));
   }
 
   @Test
   public void testEnumWithMethodUsingWildcard() {
-    testEnumWithOneMethod("EnumWithMethodUsingWildcard", "methodUsingWildcard", this::validateMethodUsingWildcard,
+    testEnumWithOneMethod(
+        "EnumWithMethodUsingWildcard",
+        "methodUsingWildcard",
+        this::validateMethodUsingWildcard,
         List.of(List.class.getCanonicalName(), Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testEnumWithMethodUsingWildcardThatExtendsOtherClass() {
-    testEnumWithOneMethod("EnumWithMethodUsingWildcardThatExtendsOtherClass", "methodUsingWildcardThatExtendsOtherClass", this::validateMethodUsingWildcardThatExtendsOtherClass,
+    testEnumWithOneMethod(
+        "EnumWithMethodUsingWildcardThatExtendsOtherClass",
+        "methodUsingWildcardThatExtendsOtherClass",
+        this::validateMethodUsingWildcardThatExtendsOtherClass,
         List.of(Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testEnumWithMethodUsingWildcardThatSuperOtherClass() {
-    testEnumWithOneMethod("EnumWithMethodUsingWildcardThatSuperOtherClass", "methodUsingWildcardThatSuperOtherClass", this::validateMethodUsingWildcardThatSuperOtherClass,
+    testEnumWithOneMethod(
+        "EnumWithMethodUsingWildcardThatSuperOtherClass",
+        "methodUsingWildcardThatSuperOtherClass",
+        this::validateMethodUsingWildcardThatSuperOtherClass,
         List.of(Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testEnumWithByteGetter() {
-    testEnumWithOneMethod("EnumWithByteGetter", "byteGetter", this::validateByteGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithByteGetter",
+        "byteGetter",
+        this::validateByteGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithShortGetter() {
-    testEnumWithOneMethod("EnumWithShortGetter", "shortGetter", this::validateShortGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithShortGetter",
+        "shortGetter",
+        this::validateShortGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithIntGetter() {
-    testEnumWithOneMethod("EnumWithIntGetter", "intGetter", this::validateIntGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithIntGetter",
+        "intGetter",
+        this::validateIntGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithLongGetter() {
-    testEnumWithOneMethod("EnumWithLongGetter", "longGetter", this::validateLongGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithLongGetter",
+        "longGetter",
+        this::validateLongGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithFloatGetter() {
-    testEnumWithOneMethod("EnumWithFloatGetter", "floatGetter", this::validateFloatGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithFloatGetter",
+        "floatGetter",
+        this::validateFloatGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithDoubleGetter() {
-    testEnumWithOneMethod("EnumWithDoubleGetter", "doubleGetter", this::validateDoubleGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithDoubleGetter",
+        "doubleGetter",
+        this::validateDoubleGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithCharGetter() {
-    testEnumWithOneMethod("EnumWithCharGetter", "charGetter", this::validateCharGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithCharGetter",
+        "charGetter",
+        this::validateCharGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithBooleanGetter() {
-    testEnumWithOneMethod("EnumWithBooleanGetter", "booleanGetter", this::validateBooleanGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithBooleanGetter",
+        "booleanGetter",
+        this::validateBooleanGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithStringGetter() {
-    testEnumWithOneMethod("EnumWithStringGetter", "stringGetter", this::validateStringGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithStringGetter",
+        "stringGetter",
+        this::validateStringGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithArrayOfIntGetter() {
-    testEnumWithOneMethod("EnumWithArrayOfIntGetter", "arrayOfIntGetter", this::validateArrayOfIntGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithArrayOfIntGetter",
+        "arrayOfIntGetter",
+        this::validateArrayOfIntGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithDoubleArrayOfStringGetter() {
-    testEnumWithOneMethod("EnumWithDoubleArrayOfStringGetter", "doubleArrayOfStringGetter", this::validateDoubleArrayOfStringGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithDoubleArrayOfStringGetter",
+        "doubleArrayOfStringGetter",
+        this::validateDoubleArrayOfStringGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithEnumGetter() {
-    testEnumWithOneMethod("EnumWithEnumGetter", "enumGetter", this::validateEnumGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithEnumGetter",
+        "enumGetter",
+        this::validateEnumGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithRecordGetter() {
-    testEnumWithOneMethod("EnumWithRecordGetter", "recordGetter", this::validateRecordGetter, List.of());
+    testEnumWithOneMethod(
+        "EnumWithRecordGetter",
+        "recordGetter",
+        this::validateRecordGetter,
+        List.of());
   }
 
   @Test
   public void testEnumWithImplementedMethodFromInterface() {
-    testCustomTypeWithImplementedMethodFromInterface("enum/EnumWithImplementedMethodFromInterface.java",
+    testCustomTypeWithImplementedMethodFromInterface(
+        "enums/EnumWithImplementedMethodFromInterface.java",
         List.of("valueOf", "values"),
-        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject", "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
+        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject",
+            "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
   }
 
   @Test
   public void testEnumWithInheritedDefaultMethodFromInterface() {
-    testCustomTypeWithInheritedDefaultMethodFromInterface("enum/EnumWithInheritedDefaultMethodFromInterface.java",
+    testCustomTypeWithInheritedDefaultMethodFromInterface(
+        "enums/EnumWithInheritedDefaultMethodFromInterface.java",
         List.of("valueOf", "values"),
-        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject", "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
+        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject",
+            "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
   }
 
   @Test
   public void testEnumWithImplementedMethod() {
-    testCustomerTypeWithOverrideMethod("enum/EnumWithImplementedMethod.java",
+    testCustomerTypeWithOverrideMethod(
+        "enums/EnumWithImplementedMethod.java",
         List.of("valueOf", "values"),
-        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject", "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
+        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject",
+            "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
   }
 
   @Test
   public void testEnumWithOverrideMethodAndNarrowedReturnType() {
-    testCustomTypeWithOverrideMethodAndNarrowedReturnType("enum/EnumWithOverrideMethodAndNarrowedReturnType.java",
+    testCustomTypeWithOverrideMethodAndNarrowedReturnType(
+        "enums/EnumWithOverrideMethodAndNarrowedReturnType.java",
         List.of("valueOf", "values"),
-        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject", "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
+        List.of("valueOf", "values", "readObjectNoData", "compareTo", "describeConstable", "readObject",
+            "getDeclaringClass", "hashCode", "equals", "name", "clone", "toString", "finalize", "ordinal"));
   }
 
   private void testEnumWithOneMethod(
-      String className, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
+      String className, String methodName, Consumer<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
     String enumClassName = "tech.intellispaces.framework.javastatements.samples." + className;
-    TypeElement typeElement = getTestElement("enum/" + className + ".java");
+    TypeElement typeElement = getTestElement("enums/" + className + ".java");
     Session session = SessionBuilder.buildSession();
 
     // When
@@ -314,11 +397,11 @@ public class EnumTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = enumStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.handle(declaredMethods.get(0));
+    methodValidator.accept(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = enumStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.handle(actualMethods.get(0));
+    methodValidator.accept(actualMethods.get(0));
 
     assertThat(enumStatement.annotations()).hasSize(1);
     HandleFunctions.handle(enumStatement.annotations().get(0), annInstance -> {

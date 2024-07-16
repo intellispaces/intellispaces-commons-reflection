@@ -1,7 +1,6 @@
 package tech.intellispaces.framework.javastatements;
 
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.framework.commons.action.Handler;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.samples.AnnotationWithElementsView;
 import tech.intellispaces.framework.javastatements.samples.TestAnnotation;
@@ -20,6 +19,7 @@ import tech.intellispaces.framework.javastatements.support.TesteeType;
 import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,7 +32,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testEmptyAnnotation() {
     // Given
-    TypeElement typeElement = getTestElement("annotation/EmptyAnnotation.java");
+    TypeElement typeElement = getTestElement("annotations/EmptyAnnotation.java");
 
     // When
     CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
@@ -383,10 +383,10 @@ public class AnnotationTest extends AbstractCustomTypeTest {
     });
   }
 
-  private void testAnnotationWithElement(String className, String elementMethodName, Handler<MethodStatement> methodValidator) {
+  private void testAnnotationWithElement(String className, String elementMethodName, Consumer<MethodStatement> methodValidator) {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + className;
-    TypeElement typeElement = getTestElement("annotation/" + className + ".java");
+    TypeElement typeElement = getTestElement("annotations/" + className + ".java");
 
     // When
     Session session = SessionBuilder.buildSession();
@@ -419,7 +419,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> methods = annotationStatement.declaredMethodsWithName(elementMethodName);
     assertThat(methods).hasSize(1);
-    methodValidator.handle(methods.get(0));
+    methodValidator.accept(methods.get(0));
 
     assertThat(annotationStatement.dependencyTypenames()).containsExactlyInAnyOrder("tech.intellispaces.framework.javastatements.support.TesteeType");
 
@@ -429,7 +429,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testCyclicAnnotation() {
     // Given
-    TypeElement typeElement = getTestElement("annotation/CyclicAnnotations.java");
+    TypeElement typeElement = getTestElement("annotations/CyclicAnnotations.java");
     String annotationClassName = "tech.intellispaces.framework.javastatements.samples.CyclicAnnotations.SomeAnnotation";
 
     // When
@@ -447,7 +447,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationInstance() {
     // Given
-    TypeElement typeElement = getTestElement("annotation/AnnotatedClass.java");
+    TypeElement typeElement = getTestElement("annotations/AnnotatedClass.java");
 
     // When
     ClassStatement annotatedClass = JavaStatements.classStatement(typeElement);

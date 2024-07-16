@@ -104,7 +104,9 @@ public interface TypeElementFunctions {
     return getParentTypes(typeElement, TypeContextBuilder.empty(), session);
   }
 
-  static List<CustomTypeReference> getParentTypes(TypeElement typeElement, TypeContext typeContext, Session session) {
+  static List<CustomTypeReference> getParentTypes(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     List<TypeMirror> parentTypeMirrors = new ArrayList<>(1 + typeElement.getInterfaces().size());
     TypeMirror superClass = typeElement.getSuperclass();
     if (superClass != null && TypeKind.NONE != superClass.getKind()) {
@@ -127,7 +129,9 @@ public interface TypeElementFunctions {
     return getTypeParameters(typeElement, TypeContextBuilder.empty(), session);
   }
 
-  static List<NamedTypeReference> getTypeParameters(Parameterizable parameterizable, TypeContext typeContext, Session session) {
+  static List<NamedTypeReference> getTypeParameters(
+      Parameterizable parameterizable, TypeContext typeContext, Session session
+  ) {
     TypeContextBlank nameContextBlank = TypeContextBuilder.blank();
     nameContextBlank.setParentContext(typeContext);
     List<NamedTypeReference> typeParams = parameterizable.getTypeParameters().stream()
@@ -137,11 +141,15 @@ public interface TypeElementFunctions {
     return typeParams;
   }
 
-  private static NamedTypeReference getTypeParameter(TypeParameterElement typeParameter, TypeContext typeContext, Session session) {
+  private static NamedTypeReference getTypeParameter(
+      TypeParameterElement typeParameter, TypeContext typeContext, Session session
+  ) {
     return NamedTypeReferenceBuilder.build(typeParameter, typeContext, session);
   }
 
-  static List<NonPrimitiveTypeReference> getTypeArguments(DeclaredType declaredType, TypeContext typeContext, Session session) {
+  static List<NonPrimitiveTypeReference> getTypeArguments(
+      DeclaredType declaredType, TypeContext typeContext, Session session
+  ) {
     List<NonPrimitiveTypeReference> typeArguments = new ArrayList<>();
     for (TypeMirror typeArgumentsMirror : declaredType.getTypeArguments()) {
       TypeReference typeArgumentsReference = getTypeReference(typeArgumentsMirror, typeContext, session);
@@ -158,7 +166,9 @@ public interface TypeElementFunctions {
     return AnnotationFunctions.getAnnotations(typeElement.getAnnotationMirrors(), session);
   }
 
-  static List<MethodStatement> getConstructors(TypeElement typeElement, CustomType methodOwner, TypeContext typeContext, Session session) {
+  static List<MethodStatement> getConstructors(
+      TypeElement typeElement, CustomType methodOwner, TypeContext typeContext, Session session
+  ) {
     return typeElement.getEnclosedElements().stream()
         .filter(element -> element.getKind() == ElementKind.CONSTRUCTOR)
         .map(element -> (ExecutableElement) element)
@@ -166,7 +176,9 @@ public interface TypeElementFunctions {
         .toList();
   }
 
-  static List<MethodStatement> getDeclaredMethods(TypeElement typeElement, CustomType methodOwner, TypeContext typeContext, Session session) {
+  static List<MethodStatement> getDeclaredMethods(
+      TypeElement typeElement, CustomType methodOwner, TypeContext typeContext, Session session
+  ) {
     return typeElement.getEnclosedElements().stream()
         .filter(element -> element.getKind() == ElementKind.METHOD)
         .map(element -> (ExecutableElement) element)
@@ -245,7 +257,9 @@ public interface TypeElementFunctions {
     return aClass;
   }
 
-  static List<TypeBoundReference> getExtendedBounds(TypeParameterElement typeParameter, TypeContext typeContext, Session session) {
+  static List<TypeBoundReference> getExtendedBounds(
+      TypeParameterElement typeParameter, TypeContext typeContext, Session session
+  ) {
     List<TypeBoundReference> bounds = new ArrayList<>(typeParameter.getBounds().size());
     for (TypeMirror bound : typeParameter.getBounds()) {
       getBound(bound, typeContext, session).ifPresent(bounds::add);
@@ -253,26 +267,34 @@ public interface TypeElementFunctions {
     return bounds;
   }
 
-  static Optional<TypeBoundReference> getExtendedBound(WildcardType wildcardType, TypeContext typeContext, Session session) {
+  static Optional<TypeBoundReference> getExtendedBound(
+      WildcardType wildcardType, TypeContext typeContext, Session session
+  ) {
     if (wildcardType.getExtendsBound() == null) {
       return Optional.empty();
     }
     return getBound(wildcardType.getExtendsBound(), typeContext, session);
   }
 
-  static Optional<TypeBoundReference> getSuperBound(WildcardType wildcardType, TypeContext typeContext, Session session) {
+  static Optional<TypeBoundReference> getSuperBound(
+      WildcardType wildcardType, TypeContext typeContext, Session session
+  ) {
     if (wildcardType.getSuperBound() == null) {
       return Optional.empty();
     }
     return getBound(wildcardType.getSuperBound(), typeContext, session);
   }
 
-  private static Optional<TypeBoundReference> getBound(TypeMirror bound, TypeContext typeContext, Session session) {
+  private static Optional<TypeBoundReference> getBound(
+      TypeMirror bound, TypeContext typeContext, Session session
+  ) {
     TypeBoundReference boundTypeReference = null;
     if (bound.getKind() == TypeKind.TYPEVAR) {
       TypeVariable typeVariable = (TypeVariable) bound;
       String typeParamName = typeVariable.asElement().getSimpleName().toString();
-      NamedTypeReference namedTypeReference = typeContext.get(typeParamName).map(ContextTypeParameter::reference).orElse(null);
+      NamedTypeReference namedTypeReference = typeContext.get(typeParamName)
+          .map(ContextTypeParameter::reference)
+          .orElse(null);
       if (namedTypeReference == null) {
         throw JavaStatementException.withMessage("Type variable named {} is not found", typeParamName);
       }
@@ -307,7 +329,8 @@ public interface TypeElementFunctions {
     } else if (typeElement.getKind() == ElementKind.ANNOTATION_TYPE) {
       return asAnnotationStatement(typeElement, typeContext, session);
     } else {
-      throw JavaStatementException.withMessage("Type element of kind can't be represented as custom type statement" + typeElement.getKind());
+      throw JavaStatementException.withMessage("Type element of kind can't be represented as custom type statement {}",
+          typeElement.getKind());
     }
   }
 
@@ -315,40 +338,55 @@ public interface TypeElementFunctions {
     return asClassStatement(typeElement, TypeContextBuilder.empty(), session);
   }
 
-  static ClassStatement asClassStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return asCustomTypeStatement(typeElement, ElementKind.CLASS, ClassStatementBuilder::build, typeContext, session);
+  static ClassStatement asClassStatement(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
+    return asCustomTypeStatement(typeElement, ElementKind.CLASS,
+        ClassStatementBuilder::build, typeContext, session);
   }
 
   static InterfaceStatement asInterfaceStatement(TypeElement typeElement, Session session) {
     return asInterfaceStatement(typeElement, TypeContextBuilder.empty(), session);
   }
 
-  static InterfaceStatement asInterfaceStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return asCustomTypeStatement(typeElement, ElementKind.INTERFACE, InterfaceStatementBuilder::build, typeContext, session);
+  static InterfaceStatement asInterfaceStatement(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
+    return asCustomTypeStatement(typeElement, ElementKind.INTERFACE,
+        InterfaceStatementBuilder::build, typeContext, session);
   }
 
   static RecordStatement asRecordStatement(TypeElement typeElement, Session session) {
     return asRecordStatement(typeElement, TypeContextBuilder.empty(), session);
   }
 
-  static RecordStatement asRecordStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return asCustomTypeStatement(typeElement, ElementKind.RECORD, RecordStatementBuilder::build, typeContext, session);
+  static RecordStatement asRecordStatement(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
+    return asCustomTypeStatement(typeElement, ElementKind.RECORD,
+        RecordStatementBuilder::build, typeContext, session);
   }
 
   static EnumStatement asEnumStatement(TypeElement typeElement, Session session) {
     return asEnumStatement(typeElement, TypeContextBuilder.empty(), session);
   }
 
-  static EnumStatement asEnumStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return asCustomTypeStatement(typeElement, ElementKind.ENUM, EnumStatementBuilder::build, typeContext, session);
+  static EnumStatement asEnumStatement(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
+    return asCustomTypeStatement(typeElement, ElementKind.ENUM,
+        EnumStatementBuilder::build, typeContext, session);
   }
 
   static AnnotationStatement asAnnotationStatement(TypeElement typeElement, Session session) {
     return asAnnotationStatement(typeElement, TypeContextBuilder.empty(), session);
   }
 
-  static AnnotationStatement asAnnotationStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return asCustomTypeStatement(typeElement, ElementKind.ANNOTATION_TYPE, AnnotationStatementBuilder::build, typeContext, session);
+  static AnnotationStatement asAnnotationStatement(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
+    return asCustomTypeStatement(typeElement, ElementKind.ANNOTATION_TYPE,
+        AnnotationStatementBuilder::build, typeContext, session);
   }
 
   @SuppressWarnings("unchecked")
@@ -360,7 +398,8 @@ public interface TypeElementFunctions {
       Session session
   ) {
     if (typeElement.getKind() != expectedElementKind) {
-      throw JavaStatementException.withMessage("Expected type element of the kind {} but actual is {}", expectedElementKind, typeElement.getKind());
+      throw JavaStatementException.withMessage("Expected type element of the kind {} but actual is {}",
+          expectedElementKind, typeElement.getKind());
     }
 
     String typeName = getCanonicalName(typeElement);
@@ -396,7 +435,9 @@ public interface TypeElementFunctions {
     return ArrayTypeReferenceBuilder.build(arrayType, typeContext, session);
   }
 
-  static MethodSignature asMethodSignature(ExecutableElement executableElement, TypeContext typeContext, Session session) {
+  static MethodSignature asMethodSignature(
+      ExecutableElement executableElement, TypeContext typeContext, Session session
+  ) {
     return MethodSignatureBuilder.build(executableElement, typeContext, session);
   }
 }

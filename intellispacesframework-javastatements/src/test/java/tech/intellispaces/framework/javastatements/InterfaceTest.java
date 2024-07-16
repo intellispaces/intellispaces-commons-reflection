@@ -2,7 +2,6 @@ package tech.intellispaces.framework.javastatements;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.framework.commons.action.Handler;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
@@ -17,6 +16,7 @@ import javax.lang.model.element.TypeElement;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +29,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
   @Test
   public void testEmptyInterface() {
     // Given
-    TypeElement typeElement = getTestElement("interface/EmptyInterface.java");
+    TypeElement typeElement = getTestElement("interfaces/EmptyInterface.java");
 
     // When
     CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
@@ -64,7 +64,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
   @Test
   public void testNestedInterface() {
     // Given
-    TypeElement typeElement = getTestElement("interface/NestedInterface.java");
+    TypeElement typeElement = getTestElement("interfaces/NestedInterface.java");
 
     // When
     InterfaceStatement interfaceStatement = JavaStatements.interfaceStatement(typeElement);
@@ -81,7 +81,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     // Given
     final var interface1Name = "tech.intellispaces.framework.javastatements.samples.InterfaceExtendedTwoInterfaces.Interface1";
     final var interface2Name = "tech.intellispaces.framework.javastatements.samples.InterfaceExtendedTwoInterfaces.Interface2";
-    TypeElement typeElement = getTestElement("interface/InterfaceExtendedTwoInterfaces.java");
+    TypeElement typeElement = getTestElement("interfaces/InterfaceExtendedTwoInterfaces.java");
 
     // When
     InterfaceStatement interfaceStatement = JavaStatements.interfaceStatement(typeElement);
@@ -181,94 +181,155 @@ public class InterfaceTest extends AbstractCustomTypeTest {
 
   @Test
   public void testInterfaceWithByteGetter() {
-    testInterfaceWithOneMethod("InterfaceWithByteGetter", "byteGetter", this::validateAbstractByteGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithByteGetter",
+        "byteGetter",
+        this::validateAbstractByteGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithShortGetter() {
-    testInterfaceWithOneMethod("InterfaceWithShortGetter", "shortGetter", this::validateAbstractShortGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithShortGetter",
+        "shortGetter",
+        this::validateAbstractShortGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithIntGetter() {
-    testInterfaceWithOneMethod("InterfaceWithIntGetter", "intGetter", this::validateAbstractIntGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithIntGetter",
+        "intGetter",
+        this::validateAbstractIntGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithLongGetter() {
-    testInterfaceWithOneMethod("InterfaceWithLongGetter", "longGetter", this::validateAbstractLongGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithLongGetter",
+        "longGetter",
+        this::validateAbstractLongGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithFloatGetter() {
-    testInterfaceWithOneMethod("InterfaceWithFloatGetter", "floatGetter", this::validateAbstractFloatGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithFloatGetter",
+        "floatGetter",
+        this::validateAbstractFloatGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithDoubleGetter() {
-    testInterfaceWithOneMethod("InterfaceWithDoubleGetter", "doubleGetter", this::validateAbstractDoubleGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithDoubleGetter",
+        "doubleGetter",
+        this::validateAbstractDoubleGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithCharGetter() {
-    testInterfaceWithOneMethod("InterfaceWithCharGetter", "charGetter", this::validateAbstractCharGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithCharGetter",
+        "charGetter",
+        this::validateAbstractCharGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithBooleanGetter() {
-    testInterfaceWithOneMethod("InterfaceWithBooleanGetter", "booleanGetter", this::validateAbstractBooleanGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithBooleanGetter",
+        "booleanGetter",
+        this::validateAbstractBooleanGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithStringGetter() {
-    testInterfaceWithOneMethod("InterfaceWithStringGetter", "stringGetter", this::validateAbstractStringGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithStringGetter",
+        "stringGetter",
+        this::validateAbstractStringGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithArrayOfIntGetter() {
-    testInterfaceWithOneMethod("InterfaceWithArrayOfIntGetter", "arrayOfIntGetter", this::validateAbstractArrayOfIntGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithArrayOfIntGetter",
+        "arrayOfIntGetter",
+        this::validateAbstractArrayOfIntGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithDoubleArrayOfStringGetter() {
-    testInterfaceWithOneMethod("InterfaceWithDoubleArrayOfStringGetter", "doubleArrayOfStringGetter", this::validateAbstractDoubleArrayOfStringGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithDoubleArrayOfStringGetter",
+        "doubleArrayOfStringGetter",
+        this::validateAbstractDoubleArrayOfStringGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithEnumGetter() {
-    testInterfaceWithOneMethod("InterfaceWithEnumGetter", "enumGetter", this::validateAbstractEnumGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithEnumGetter",
+        "enumGetter",
+        this::validateAbstractEnumGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithRecordGetter() {
-    testInterfaceWithOneMethod("InterfaceWithRecordGetter", "recordGetter", this::validateAbstractRecordGetter, List.of());
+    testInterfaceWithOneMethod(
+        "InterfaceWithRecordGetter",
+        "recordGetter",
+        this::validateAbstractRecordGetter,
+        List.of());
   }
 
   @Test
   public void testInterfaceWithInheritedMethodFromExtendedClass() {
     // Given
-    testCustomTypeWithInheritedMethod("interface/InterfaceWithInheritedMethod.java");
+    testCustomTypeWithInheritedMethod("interfaces/InterfaceWithInheritedMethod.java");
   }
 
   @Test
   public void testInterfaceWithInheritedDefaultMethodFromInterface() {
-    testCustomTypeWithInheritedDefaultMethodFromInterface("interface/InterfaceWithInheritedDefaultMethodFromInterface.java", List.of(), List.of());
+    testCustomTypeWithInheritedDefaultMethodFromInterface(
+        "interfaces/InterfaceWithInheritedDefaultMethodFromInterface.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testInterfaceWithOverrideMethod() {
-    testCustomerTypeWithOverrideMethod("interface/InterfaceWithOverrideMethod.java", List.of(), List.of());
+    testCustomerTypeWithOverrideMethod(
+        "interfaces/InterfaceWithOverrideMethod.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testInterfaceWithOverrideMethodAndNarrowedReturnType() {
-    testCustomTypeWithOverrideMethodAndNarrowedReturnType("interface/InterfaceWithOverrideMethodAndNarrowedReturnType.java", List.of(), List.of());
+    testCustomTypeWithOverrideMethodAndNarrowedReturnType(
+        "interfaces/InterfaceWithOverrideMethodAndNarrowedReturnType.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testGenericInterfaceWithCyclicTypeDependencyCase1() {
     // Given
-    TypeElement typeElement = getTestElement("interface/GenericInterfaceWithCyclicTypeDependencyCase1.java");
+    TypeElement typeElement = getTestElement("interfaces/GenericInterfaceWithCyclicTypeDependencyCase1.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -297,7 +358,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
   @Test
   public void testGenericInterfaceWithCyclicTypeDependencyCase2() {
     // Given
-    TypeElement typeElement = getTestElement("interface/GenericInterfaceWithCyclicTypeDependencyCase2.java");
+    TypeElement typeElement = getTestElement("interfaces/GenericInterfaceWithCyclicTypeDependencyCase2.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -329,11 +390,11 @@ public class InterfaceTest extends AbstractCustomTypeTest {
   }
 
   private void testInterfaceWithOneMethod(
-      String interfaceName, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
+      String interfaceName, String methodName, Consumer<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + interfaceName;
-    TypeElement typeElement = getTestElement("interface/" + interfaceName + ".java");
+    TypeElement typeElement = getTestElement("interfaces/" + interfaceName + ".java");
     Session session = SessionBuilder.buildSession();
 
     // When
@@ -359,11 +420,11 @@ public class InterfaceTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = interfaceStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.handle(declaredMethods.get(0));
+    methodValidator.accept(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = interfaceStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.handle(actualMethods.get(0));
+    methodValidator.accept(actualMethods.get(0));
 
     assertThat(interfaceStatement.annotations()).hasSize(1);
     HandleFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {

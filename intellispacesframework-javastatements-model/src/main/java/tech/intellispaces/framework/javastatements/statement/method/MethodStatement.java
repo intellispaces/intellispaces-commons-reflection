@@ -17,9 +17,9 @@ import java.util.Optional;
 public interface MethodStatement extends AnnotatedStatement {
 
   /**
-   * Method holder.
+   * Method owner.
    */
-  CustomType holder();
+  CustomType owner();
 
   /**
    * Method signature.

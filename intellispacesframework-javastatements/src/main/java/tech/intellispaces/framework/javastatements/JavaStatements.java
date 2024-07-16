@@ -1,8 +1,10 @@
 package tech.intellispaces.framework.javastatements;
 
+import tech.intellispaces.framework.commons.exception.UnexpectedViolationException;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.SessionBuilder;
 import tech.intellispaces.framework.javastatements.statement.ClassFunctions;
+import tech.intellispaces.framework.javastatements.statement.Statement;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
@@ -10,8 +12,11 @@ import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatement;
+import tech.intellispaces.framework.javastatements.statement.method.MethodFunctions;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 
@@ -19,6 +24,16 @@ import javax.lang.model.type.DeclaredType;
  * Java statements facade functions.
  */
 public interface JavaStatements {
+
+  static Statement statement(Element element) {
+    if (element instanceof TypeElement typeElement) {
+      return TypeElementFunctions.asCustomTypeStatement(typeElement, SessionBuilder.buildSession());
+    } else if (element instanceof ExecutableElement executableElement) {
+      return MethodFunctions.getMethod(executableElement, SessionBuilder.buildSession());
+    } else {
+      throw UnexpectedViolationException.withMessage("Not supported element kind - {}", element.getKind());
+    }
+  }
 
   static CustomType customTypeStatement(Class<?> aClass) {
     return ClassFunctions.asCustomTypeStatement(aClass);

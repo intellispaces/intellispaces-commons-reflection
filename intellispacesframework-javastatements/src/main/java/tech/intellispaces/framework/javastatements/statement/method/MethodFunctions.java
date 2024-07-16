@@ -23,7 +23,13 @@ import java.util.stream.Collectors;
 
 public interface MethodFunctions {
 
-  static Optional<TypeReference> getMethodReturnType(ExecutableElement executableElement, TypeContext typeContext, Session session) {
+  static MethodStatement getMethod(ExecutableElement executableElement, Session session) {
+    return new MethodStatementAdapter(executableElement, session);
+  }
+
+  static Optional<TypeReference> getMethodReturnType(
+      ExecutableElement executableElement, TypeContext typeContext, Session session
+  ) {
     TypeMirror returnTypeMirror = executableElement.getReturnType();
     if (returnTypeMirror.getKind() == TypeKind.VOID || returnTypeMirror.getKind() == TypeKind.NONE
         || returnTypeMirror.getKind() == TypeKind.NULL
@@ -33,18 +39,24 @@ public interface MethodFunctions {
     return Optional.of(TypeElementFunctions.getTypeReference(returnTypeMirror, typeContext, session));
   }
 
-  static Optional<Object> getMethodDefaultValue(ExecutableElement executableElement) {
+  static Optional<Object> getMethodDefaultValue(
+      ExecutableElement executableElement
+  ) {
     if (executableElement.getDefaultValue() == null || executableElement.getDefaultValue().getValue() == null) {
       return Optional.empty();
     }
     return Optional.of(executableElement.getDefaultValue().getValue());
   }
 
-  static Optional<Instance> getMethodDefaultValueInstance(ExecutableElement executableElement, Session session) {
+  static Optional<Instance> getMethodDefaultValueInstance(
+      ExecutableElement executableElement, Session session
+  ) {
     return getMethodDefaultValue(executableElement).map(v -> InstanceFunctions.objectToInstance(v, session));
   }
 
-  static List<MethodParam> getMethodParams(ExecutableElement executableElement, TypeContext typeContext, Session session) {
+  static List<MethodParam> getMethodParams(
+      ExecutableElement executableElement, TypeContext typeContext, Session session
+  ) {
     return executableElement.getParameters().stream()
         .map(variableElement -> MethodParamBuilder.build(variableElement, typeContext, session))
         .toList();
@@ -59,10 +71,12 @@ public interface MethodFunctions {
   }
 
   static List<MethodStatement> getOverrideMethods(MethodStatement method) {
-    return getOverrideMethods(method.holder(), method, false);
+    return getOverrideMethods(method.owner(), method, false);
   }
 
-  private static List<MethodStatement> getOverrideMethods(CustomType type, MethodStatement method, boolean included) {
+  private static List<MethodStatement> getOverrideMethods(
+      CustomType type, MethodStatement method, boolean included
+  ) {
     List<MethodStatement> overrideMethods = new ArrayList<>();
     if (included) {
       for (MethodStatement parentMethod : type.declaredMethods()) {

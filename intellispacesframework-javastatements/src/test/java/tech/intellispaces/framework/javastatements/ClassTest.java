@@ -2,7 +2,6 @@ package tech.intellispaces.framework.javastatements;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.framework.commons.action.Handler;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
@@ -18,6 +17,7 @@ import java.io.DataInput;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,7 +30,7 @@ public class ClassTest extends AbstractCustomTypeTest {
   @Test
   public void testEmptyClass() {
     // Given
-    TypeElement typeElement = getTestElement("class/EmptyClass.java");
+    TypeElement typeElement = getTestElement("classes/EmptyClass.java");
 
     // When
     CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
@@ -68,7 +68,7 @@ public class ClassTest extends AbstractCustomTypeTest {
   @Test
   public void testAbstractClass() {
     // Given
-    TypeElement typeElement = getTestElement("class/AbstractClass.java");
+    TypeElement typeElement = getTestElement("classes/AbstractClass.java");
 
     // When
     CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
@@ -87,7 +87,7 @@ public class ClassTest extends AbstractCustomTypeTest {
   @Test
   public void testNestedClass() {
     // Given
-    TypeElement typeElement = getTestElement("class/NestedClass.java");
+    TypeElement typeElement = getTestElement("classes/NestedClass.java");
 
     // When
     ClassStatement classStatement = JavaStatements.classStatement(typeElement);
@@ -105,7 +105,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     final var superClassName = "tech.intellispaces.framework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.SuperClass";
     final var interface1Name = "tech.intellispaces.framework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface1";
     final var interface2Name = "tech.intellispaces.framework.javastatements.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface2";
-    TypeElement typeElement = getTestElement("class/ClassExtendedSuperClassAndImplementedTwoInterfaces.java");
+    TypeElement typeElement = getTestElement("classes/ClassExtendedSuperClassAndImplementedTwoInterfaces.java");
 
     // When
     ClassStatement classStatement = JavaStatements.classStatement(typeElement);
@@ -175,7 +175,7 @@ public class ClassTest extends AbstractCustomTypeTest {
   public void testClassWithDefaultConstructor() {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples.ClassWithDefaultConstructor";
-    TypeElement typeElement = getTestElement("class/ClassWithDefaultConstructor.java");
+    TypeElement typeElement = getTestElement("classes/ClassWithDefaultConstructor.java");
     Session session = SessionBuilder.buildSession();
 
     // When
@@ -189,144 +189,234 @@ public class ClassTest extends AbstractCustomTypeTest {
 
   @Test
   public void testClassWithSimpleMethod() {
-    testClassWithOneMethod("ClassWithSimpleMethod", "simpleMethod", this::validateSimpleMethod, List.of());
+    testClassWithOneMethod(
+        "ClassWithSimpleMethod",
+        "simpleMethod",
+        this::validateSimpleMethod,
+        List.of());
   }
 
   @Test
   public void testClassWithMethodThrowsTwoExceptions() {
-    testClassWithOneMethod("ClassWithMethodThrowsTwoExceptions", "methodThrowsTwoExceptions", this::validateMethodThrowsTwoExceptions,
+    testClassWithOneMethod(
+        "ClassWithMethodThrowsTwoExceptions",
+        "methodThrowsTwoExceptions",
+        this::validateMethodThrowsTwoExceptions,
         List.of(IOException.class.getCanonicalName()));
   }
 
   @Test
   public void testClassWithStaticMethod() {
-    testClassWithOneMethod("ClassWithStaticMethod", "staticMethod", this::validateStaticMethod, List.of());
+    testClassWithOneMethod(
+        "ClassWithStaticMethod",
+        "staticMethod",
+        this::validateStaticMethod,
+        List.of());
   }
 
   @Test
   public void testClassWithMethodUsingLocalTypeParameter() {
-    testClassWithOneMethod("ClassWithMethodUsingLocalTypeParameter", "methodUsingLocalTypeParameter", this::validateMethodUsingLocalTypeParameter,
+    testClassWithOneMethod(
+        "ClassWithMethodUsingLocalTypeParameter",
+        "methodUsingLocalTypeParameter",
+        this::validateMethodUsingLocalTypeParameter,
         List.of(List.class.getCanonicalName()));
   }
 
   @Test
   public void testClassWithMethodUsingWildcard() {
-    testClassWithOneMethod("ClassWithMethodUsingWildcard", "methodUsingWildcard", this::validateMethodUsingWildcard,
+    testClassWithOneMethod(
+        "ClassWithMethodUsingWildcard",
+        "methodUsingWildcard",
+        this::validateMethodUsingWildcard,
         List.of(List.class.getCanonicalName(), Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testClassWithMethodUsingWildcardThatExtendsOtherClass() {
-    testClassWithOneMethod("ClassWithMethodUsingWildcardThatExtendsOtherClass", "methodUsingWildcardThatExtendsOtherClass", this::validateMethodUsingWildcardThatExtendsOtherClass,
+    testClassWithOneMethod(
+        "ClassWithMethodUsingWildcardThatExtendsOtherClass",
+        "methodUsingWildcardThatExtendsOtherClass",
+        this::validateMethodUsingWildcardThatExtendsOtherClass,
         List.of(Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testClassWithMethodUsingWildcardThatSuperOtherClass() {
-    testClassWithOneMethod("ClassWithMethodUsingWildcardThatSuperOtherClass", "methodUsingWildcardThatSuperOtherClass", this::validateMethodUsingWildcardThatSuperOtherClass,
+    testClassWithOneMethod(
+        "ClassWithMethodUsingWildcardThatSuperOtherClass",
+        "methodUsingWildcardThatSuperOtherClass",
+        this::validateMethodUsingWildcardThatSuperOtherClass,
         List.of(Collection.class.getCanonicalName()));
   }
 
   @Test
   public void testClassWithByteGetter() {
-    testClassWithOneMethod("ClassWithByteGetter", "byteGetter", this::validateByteGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithByteGetter",
+        "byteGetter",
+        this::validateByteGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithShortGetter() {
-    testClassWithOneMethod("ClassWithShortGetter", "shortGetter", this::validateShortGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithShortGetter",
+        "shortGetter",
+        this::validateShortGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithIntGetter() {
-    testClassWithOneMethod("ClassWithIntGetter", "intGetter", this::validateIntGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithIntGetter",
+        "intGetter",
+        this::validateIntGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithLongGetter() {
-    testClassWithOneMethod("ClassWithLongGetter", "longGetter", this::validateLongGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithLongGetter",
+        "longGetter",
+        this::validateLongGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithFloatGetter() {
-    testClassWithOneMethod("ClassWithFloatGetter", "floatGetter", this::validateFloatGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithFloatGetter",
+        "floatGetter",
+        this::validateFloatGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithDoubleGetter() {
-    testClassWithOneMethod("ClassWithDoubleGetter", "doubleGetter", this::validateDoubleGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithDoubleGetter",
+        "doubleGetter",
+        this::validateDoubleGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithCharGetter() {
-    testClassWithOneMethod("ClassWithCharGetter", "charGetter", this::validateCharGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithCharGetter",
+        "charGetter",
+        this::validateCharGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithBooleanGetter() {
-    testClassWithOneMethod("ClassWithBooleanGetter", "booleanGetter", this::validateBooleanGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithBooleanGetter",
+        "booleanGetter",
+        this::validateBooleanGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithStringGetter() {
-    testClassWithOneMethod("ClassWithStringGetter", "stringGetter", this::validateStringGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithStringGetter",
+        "stringGetter",
+        this::validateStringGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithArrayOfIntGetter() {
-    testClassWithOneMethod("ClassWithArrayOfIntGetter", "arrayOfIntGetter", this::validateArrayOfIntGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithArrayOfIntGetter",
+        "arrayOfIntGetter",
+        this::validateArrayOfIntGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithDoubleArrayOfStringGetter() {
-    testClassWithOneMethod("ClassWithDoubleArrayOfStringGetter", "doubleArrayOfStringGetter", this::validateDoubleArrayOfStringGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithDoubleArrayOfStringGetter",
+        "doubleArrayOfStringGetter",
+        this::validateDoubleArrayOfStringGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithEnumGetter() {
-    testClassWithOneMethod("ClassWithEnumGetter", "enumGetter", this::validateEnumGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithEnumGetter",
+        "enumGetter",
+        this::validateEnumGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithRecordGetter() {
-    testClassWithOneMethod("ClassWithRecordGetter", "recordGetter", this::validateRecordGetter, List.of());
+    testClassWithOneMethod(
+        "ClassWithRecordGetter",
+        "recordGetter",
+        this::validateRecordGetter,
+        List.of());
   }
 
   @Test
   public void testClassWithInheritedMethodFromExtendedClass() {
     // Given
-    testCustomTypeWithInheritedMethod("class/ClassWithInheritedMethodFromExtendedClass.java");
+    testCustomTypeWithInheritedMethod("classes/ClassWithInheritedMethodFromExtendedClass.java");
   }
 
   @Test
   public void testClassWithImplementedMethodFromInterface() {
-    testCustomTypeWithImplementedMethodFromInterface("class/ClassWithImplementedMethodFromInterface.java", List.of(), List.of());
+    testCustomTypeWithImplementedMethodFromInterface(
+        "classes/ClassWithImplementedMethodFromInterface.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testClassWithInheritedDefaultMethodFromInterface() {
-    testCustomTypeWithInheritedDefaultMethodFromInterface("class/ClassWithInheritedDefaultMethodFromInterface.java", List.of(), List.of());
+    testCustomTypeWithInheritedDefaultMethodFromInterface(
+        "classes/ClassWithInheritedDefaultMethodFromInterface.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testClassWithImplementedMethod() {
-    testCustomerTypeWithOverrideMethod("class/ClassWithImplementedMethod.java", List.of(), List.of());
+    testCustomerTypeWithOverrideMethod(
+        "classes/ClassWithImplementedMethod.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testClassWithOverrideMethod() {
-    testCustomerTypeWithOverrideMethod("class/ClassWithOverrideMethod.java", List.of(), List.of());
+    testCustomerTypeWithOverrideMethod(
+        "classes/ClassWithOverrideMethod.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testClassWithOverrideMethodAndNarrowedReturnType() {
-    testCustomTypeWithOverrideMethodAndNarrowedReturnType("class/ClassWithOverrideMethodAndNarrowedReturnType.java", List.of(), List.of());
+    testCustomTypeWithOverrideMethodAndNarrowedReturnType(
+        "classes/ClassWithOverrideMethodAndNarrowedReturnType.java",
+        List.of(),
+        List.of());
   }
 
   @Test
   public void testGenericClassWithOneTypeParameter() {
     // Given
-    TypeElement typeElement = getTestElement("class/GenericClassWithOneTypeParameter.java");
+    TypeElement typeElement = getTestElement("classes/GenericClassWithOneTypeParameter.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -361,7 +451,7 @@ public class ClassTest extends AbstractCustomTypeTest {
   @Test
   public void testGenericClassWithMultipleTypeParameters() {
     // Given
-    TypeElement typeElement = getTestElement("class/GenericClassWithMultipleTypeParameters.java");
+    TypeElement typeElement = getTestElement("classes/GenericClassWithMultipleTypeParameters.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -434,7 +524,7 @@ public class ClassTest extends AbstractCustomTypeTest {
   @Test
   public void testGenericClassWithCyclicTypeDependencyCase1() {
     // Given
-    TypeElement typeElement = getTestElement("class/GenericClassWithCyclicTypeDependencyCase1.java");
+    TypeElement typeElement = getTestElement("classes/GenericClassWithCyclicTypeDependencyCase1.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -461,7 +551,7 @@ public class ClassTest extends AbstractCustomTypeTest {
   @Test
   public void testGenericClassWithCyclicTypeDependencyCase2() {
     // Given
-    TypeElement typeElement = getTestElement("class/GenericClassWithCyclicTypeDependencyCase2.java");
+    TypeElement typeElement = getTestElement("classes/GenericClassWithCyclicTypeDependencyCase2.java");
 
     // When
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
@@ -493,11 +583,11 @@ public class ClassTest extends AbstractCustomTypeTest {
   }
 
   private void testClassWithOneMethod(
-      String className, String methodName, Handler<MethodStatement> methodValidator, List<String> additionalImports
+      String className, String methodName, Consumer<MethodStatement> methodValidator, List<String> additionalImports
   ) {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + className;
-    TypeElement typeElement = getTestElement("class/" + className + ".java");
+    TypeElement typeElement = getTestElement("classes/" + className + ".java");
     Session session = SessionBuilder.buildSession();
 
     // When
@@ -524,11 +614,11 @@ public class ClassTest extends AbstractCustomTypeTest {
 
     List<MethodStatement> declaredMethods = classStatement.declaredMethodsWithName(methodName);
     assertThat(declaredMethods).hasSize(1);
-    methodValidator.handle(declaredMethods.get(0));
+    methodValidator.accept(declaredMethods.get(0));
 
     List<MethodStatement> actualMethods = classStatement.actualMethodsWithName(methodName);
     assertThat(actualMethods).hasSize(1);
-    methodValidator.handle(actualMethods.get(0));
+    methodValidator.accept(actualMethods.get(0));
 
     assertThat(classStatement.annotations()).hasSize(1);
     HandleFunctions.handle(classStatement.annotations().get(0), annInstance -> {
