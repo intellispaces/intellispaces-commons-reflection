@@ -37,6 +37,10 @@
             <groupId>intellispaces</groupId>
             <artifactId>intellispacesframework-commons</artifactId>
         </dependency>
+        <dependency>
+            <groupId>intellispaces</groupId>
+            <artifactId>intellispacesframework-actions</artifactId>
+        </dependency>
 
         <!-- Logging -->
         <dependency>
