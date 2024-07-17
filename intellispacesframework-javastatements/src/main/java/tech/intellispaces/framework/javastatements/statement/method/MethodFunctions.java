@@ -49,7 +49,7 @@ public interface MethodFunctions {
     List<AnnotationInstance> annotations = Arrays.stream(parameter.getAnnotations())
         .map(InstanceFunctions::getAnnotationInstance)
         .toList();
-    return MethodParamBuilder.get()
+    return MethodParams.builder()
         .name(parameter.getName())
         .type(JavaStatements.customTypeReference(parameter.getType()))
         .annotations(annotations)
@@ -87,7 +87,7 @@ public interface MethodFunctions {
       ExecutableElement executableElement, TypeContext typeContext, Session session
   ) {
     return executableElement.getParameters().stream()
-        .map(variableElement -> MethodParamBuilder.build(variableElement, typeContext, session))
+        .map(variableElement -> MethodParams.of(variableElement, typeContext, session))
         .toList();
   }
 

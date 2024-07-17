@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
-import tech.intellispaces.framework.commons.action.ActionBuilders;
+import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.session.Session;
@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Adapter of {@link VariableElement} to {@link MethodParam}.
+ */
 class MethodParamBasedOnVariableElement implements MethodParam {
   private final VariableElement variableElement;
   private final Getter<TypeReference> typeGetter;
@@ -25,8 +28,8 @@ class MethodParamBasedOnVariableElement implements MethodParam {
 
   MethodParamBasedOnVariableElement(VariableElement variableElement, TypeContext typeContext, Session session) {
     this.variableElement = variableElement;
-    this.typeGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getTypeReference, variableElement.asType(), typeContext, session);
-    this.annotationsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getAnnotations, variableElement, session);
+    this.typeGetter = Actions.cachedLazyGetter(TypeElementFunctions::getTypeReference, variableElement.asType(), typeContext, session);
+    this.annotationsGetter = Actions.cachedLazyGetter(TypeElementFunctions::getAnnotations, variableElement, session);
   }
 
   @Override

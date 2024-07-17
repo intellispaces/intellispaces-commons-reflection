@@ -6,7 +6,7 @@ import tech.intellispaces.framework.javastatements.samples.AnnotationWithElement
 import tech.intellispaces.framework.javastatements.samples.TestAnnotation;
 import tech.intellispaces.framework.javastatements.samples.TestEnum;
 import tech.intellispaces.framework.javastatements.session.Session;
-import tech.intellispaces.framework.javastatements.session.SessionBuilder;
+import tech.intellispaces.framework.javastatements.session.Sessions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
@@ -389,7 +389,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("annotations/" + className + ".java");
 
     // When
-    Session session = SessionBuilder.buildSession();
+    Session session = Sessions.create();
     AnnotationStatement annotationStatement = JavaStatements.annotationStatement(typeElement, session);
 
     // Then

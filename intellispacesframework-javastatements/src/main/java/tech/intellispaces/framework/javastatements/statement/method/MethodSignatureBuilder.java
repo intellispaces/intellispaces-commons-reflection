@@ -22,10 +22,6 @@ public final class MethodSignatureBuilder {
   private List<ExceptionCompatibleTypeReference> exceptions = List.of();
   private List<AnnotationInstance> annotations = List.of();
 
-  public static MethodSignatureBuilder get() {
-    return new MethodSignatureBuilder();
-  }
-
   public MethodSignatureBuilder name(String name) {
     this.name = name;
     return this;
@@ -102,5 +98,5 @@ public final class MethodSignatureBuilder {
     Objects.requireNonNull(name);
   }
 
-  private MethodSignatureBuilder() {}
+  MethodSignatureBuilder() {}
 }

@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
-import tech.intellispaces.framework.commons.action.ActionBuilders;
+import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
@@ -18,7 +18,7 @@ class MethodStatementImpl implements MethodStatement {
   MethodStatementImpl(CustomType owner, MethodSignature signature) {
     this.owner = owner;
     this.signature = signature;
-    this.overrideMethodsGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
+    this.overrideMethodsGetter = Actions.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
   }
 
   @Override

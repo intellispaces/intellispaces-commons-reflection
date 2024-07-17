@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.reference;
 
-import tech.intellispaces.framework.commons.action.ActionBuilders;
+import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
@@ -20,8 +20,8 @@ class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
     super();
     this.targetType = targetType;
     this.typeArguments = typeArguments;
-    this.typeArgumentMappingsGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentMapping, this);
-    this.typeArgumentsDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
+    this.typeArgumentMappingsGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentMapping, this);
+    this.typeArgumentsDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
   }
 
   @Override

@@ -13,7 +13,7 @@ class TypeContextImpl implements TypeContext, TypeContextBlank {
   private final Map<String, ContextTypeParameter> map;
 
   public TypeContextImpl() {
-    this.parentContext = TypeContextBuilder.empty();
+    this.parentContext = TypeContexts.empty();
     this.map = new HashMap<>();
   }
 

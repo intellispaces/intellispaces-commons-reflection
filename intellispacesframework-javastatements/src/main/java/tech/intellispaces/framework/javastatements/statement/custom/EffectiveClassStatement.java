@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.commons.action.ActionBuilders;
+import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
@@ -18,8 +18,8 @@ public class EffectiveClassStatement extends AbstractEffectiveCustomType impleme
 
   public EffectiveClassStatement(ClassStatement classStatement, Map<String, NonPrimitiveTypeReference> typeMapping) {
     super(classStatement, typeMapping);
-    this.extendedClassGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);
-    this.implementedInterfacesGetter = ActionBuilders.cachedLazyGetter(CustomTypeFunctions::getImplementedInterfaces, this);
+    this.extendedClassGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);
+    this.implementedInterfacesGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getImplementedInterfaces, this);
   }
 
   @Override

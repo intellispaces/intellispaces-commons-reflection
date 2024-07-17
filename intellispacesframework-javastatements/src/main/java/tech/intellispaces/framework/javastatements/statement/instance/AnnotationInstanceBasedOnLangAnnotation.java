@@ -8,6 +8,9 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * Adapter of {@link Annotation} to {@link AnnotationInstance}.
+ */
 class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
   private final Annotation annotation;
 

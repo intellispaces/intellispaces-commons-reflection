@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
-import tech.intellispaces.framework.javastatements.session.SessionBuilder;
+import tech.intellispaces.framework.javastatements.session.Sessions;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
@@ -176,7 +176,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples.ClassWithDefaultConstructor";
     TypeElement typeElement = getTestElement("classes/ClassWithDefaultConstructor.java");
-    Session session = SessionBuilder.buildSession();
+    Session session = Sessions.create();
 
     // When
     ClassStatement classStatement = JavaStatements.classStatement(typeElement, session);
@@ -588,7 +588,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + className;
     TypeElement typeElement = getTestElement("classes/" + className + ".java");
-    Session session = SessionBuilder.buildSession();
+    Session session = Sessions.create();
 
     // When
     ClassStatement classStatement = JavaStatements.classStatement(typeElement, session);

@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.reference;
 
-import tech.intellispaces.framework.commons.action.ActionBuilders;
+import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.DependencyFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
@@ -17,11 +17,11 @@ abstract class AbstractTypeReference implements TypeReference {
   private final Getter<String> formalBriefDeclarationGetter;
 
   protected AbstractTypeReference() {
-    this.dependenciesGetter = ActionBuilders.cachedLazyGetter(DependencyFunctions::getTypeReferenceDependencies, this);
-    this.dependencyTypesGetter = ActionBuilders.cachedLazyGetter(AbstractTypeReference::collectDependencyTypenames, this);
-    this.actualDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getActualTypeReferenceDeclaration, this);
-    this.formalFullDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getFormalFullTypeReferenceDeclaration, this);
-    this.formalBriefDeclarationGetter = ActionBuilders.cachedLazyGetter(TypeReferenceFunctions::getFormalBriefTypeReferenceDeclaration, this);
+    this.dependenciesGetter = Actions.cachedLazyGetter(DependencyFunctions::getTypeReferenceDependencies, this);
+    this.dependencyTypesGetter = Actions.cachedLazyGetter(AbstractTypeReference::collectDependencyTypenames, this);
+    this.actualDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getActualTypeReferenceDeclaration, this);
+    this.formalFullDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getFormalFullTypeReferenceDeclaration, this);
+    this.formalBriefDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getFormalBriefTypeReferenceDeclaration, this);
   }
 
   @Override

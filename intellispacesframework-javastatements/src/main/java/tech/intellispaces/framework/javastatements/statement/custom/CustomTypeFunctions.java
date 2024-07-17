@@ -7,11 +7,11 @@ import tech.intellispaces.framework.javastatements.exception.JavaStatementExcept
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.method.MethodParam;
-import tech.intellispaces.framework.javastatements.statement.method.MethodParamBuilder;
+import tech.intellispaces.framework.javastatements.statement.method.MethodParams;
 import tech.intellispaces.framework.javastatements.statement.method.MethodSignature;
-import tech.intellispaces.framework.javastatements.statement.method.MethodSignatureBuilder;
+import tech.intellispaces.framework.javastatements.statement.method.MethodSignatures;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.method.MethodStatementBuilder;
+import tech.intellispaces.framework.javastatements.statement.method.MethodStatements;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
@@ -54,7 +54,7 @@ public interface CustomTypeFunctions {
   }
 
   private static MethodStatement getEffectiveMethod(MethodStatement originMethod, TypeContext typeContext) {
-    return MethodStatementBuilder.build(
+    return MethodStatements.build(
         originMethod.owner(),
         getEffectiveMethodSignature(originMethod.signature(), typeContext)
     );
@@ -63,7 +63,7 @@ public interface CustomTypeFunctions {
   private static MethodSignature getEffectiveMethodSignature(
       MethodSignature originMethodSignature, TypeContext typeContext
   ) {
-    return MethodSignatureBuilder.get()
+    return MethodSignatures.builder()
         .isAbstract(originMethodSignature.isAbstract())
         .isPublic(originMethodSignature.isPublic())
         .isDefault(originMethodSignature.isDefault())
@@ -80,7 +80,7 @@ public interface CustomTypeFunctions {
                 .toList()
         )
         .params(originMethodSignature.params().stream()
-            .map(p -> MethodParamBuilder.get()
+            .map(p -> MethodParams.builder()
                 .name(p.name())
                 .type(getActualTypeReference(p.type(), typeContext))
                 .build())
@@ -129,7 +129,9 @@ public interface CustomTypeFunctions {
           }
           TypeReference methodReturnType = methodSignature.returnType().get();
           TypeReference effectiveAddedMethodReturnType = effectiveAddedSignature.returnType().get();
-          Optional<TypeReference> narrowType = TypeReferenceFunctions.narrowestOf(methodReturnType, effectiveAddedMethodReturnType);
+          Optional<TypeReference> narrowType = TypeReferenceFunctions.narrowestOf(
+              methodReturnType, effectiveAddedMethodReturnType
+          );
           if (narrowType.isEmpty()) {
             throw JavaStatementException.withMessage("Incompatible types: {} and {} of method {}",
                 methodReturnType, effectiveAddedMethodReturnType, methodSignature.name());
@@ -190,7 +192,7 @@ public interface CustomTypeFunctions {
   private static void populateParents(CustomType customType, List<CustomType> parents) {
     var curParents = customType.parentTypes().stream()
         .map(CustomTypeReference::targetType)
-        .collect(Collectors.toList());
+        .toList();
     parents.addAll(curParents);
     curParents.forEach(p -> populateParents(p, parents));
   }
@@ -214,13 +216,5 @@ public interface CustomTypeFunctions {
         .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, fullDeclaration))
         .collect(Collectors.joining(", "));
     return (parametersSource.isEmpty() ? "" : "<" + parametersSource + ">");
-  }
-
-  static InterfaceStatement getInterfaceStatement(Class<?> aClass) {
-    return new InterfaceStatementBasedOnLangClass(aClass);
-  }
-
-  static ClassStatement getClassStatement(Class<?> aClass) {
-    return new ClassStatementBasedOnLangClass(aClass);
   }
 }

@@ -1,9 +1,10 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
-import tech.intellispaces.framework.commons.action.ActionBuilders;
+import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.context.TypeContextBuilder;
+import tech.intellispaces.framework.javastatements.context.TypeContexts;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
@@ -23,6 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Adapter of {@link ExecutableElement} to {@link MethodSignature}.
+ */
 class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   private final ExecutableElement executableElement;
   private final List<NamedTypeReference> typeParams;
@@ -36,11 +40,11 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
     this.executableElement = executableElement;
     this.typeParams = TypeElementFunctions.getTypeParameters(executableElement, typeContext, session);
     TypeContext classNameContext = createNameContext(typeContext, this.typeParams);
-    this.returnTypeGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getMethodReturnType, executableElement, classNameContext, session);
-    this.defaultValueGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getMethodDefaultValueInstance, executableElement, session);
-    this.paramsGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getMethodParams, executableElement, classNameContext, session);
-    this.exceptionsGetter = ActionBuilders.cachedLazyGetter(MethodFunctions::getMethodExceptions, executableElement, classNameContext, session);
-    this.annotationsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getAnnotations, executableElement, session);
+    this.returnTypeGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodReturnType, executableElement, classNameContext, session);
+    this.defaultValueGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodDefaultValueInstance, executableElement, session);
+    this.paramsGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodParams, executableElement, classNameContext, session);
+    this.exceptionsGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodExceptions, executableElement, classNameContext, session);
+    this.annotationsGetter = Actions.cachedLazyGetter(TypeElementFunctions::getAnnotations, executableElement, session);
   }
 
   @Override
@@ -49,7 +53,7 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   }
 
   private TypeContext createNameContext(TypeContext parentContext, List<NamedTypeReference> typeParams) {
-    TypeContextBuilder builder = TypeContextBuilder.get().parentContext(parentContext);
+    TypeContextBuilder builder = TypeContexts.builder().parentContext(parentContext);
     typeParams.forEach(typeParam -> builder.addTypeParam(typeParam.name(), typeParam));
     return builder.build();
   }

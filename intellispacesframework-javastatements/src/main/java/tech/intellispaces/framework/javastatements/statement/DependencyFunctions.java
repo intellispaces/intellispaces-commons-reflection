@@ -37,7 +37,9 @@ public interface DependencyFunctions {
         .toList();
   }
 
-  private static List<CustomType> getCustomTypeDependencies(CustomType customType, boolean includeRelations, Set<String> exclusions) {
+  private static List<CustomType> getCustomTypeDependencies(
+      CustomType customType, boolean includeRelations, Set<String> exclusions
+  ) {
     if (exclusions.contains(customType.canonicalName())) {
       return List.of();
     }
@@ -110,7 +112,9 @@ public interface DependencyFunctions {
     return customTypes;
   }
 
-  private static List<CustomType> getTypeReferenceDependencies(TypeReference typeReference, boolean includeRelations, Set<String> exclusions) {
+  private static List<CustomType> getTypeReferenceDependencies(
+      TypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  ) {
     if (typeReference.isPrimitive()) {
       return List.of();
     } else {
@@ -128,7 +132,9 @@ public interface DependencyFunctions {
     }
   }
 
-  private static List<CustomType> getCustomTypeReferenceDependencies(CustomTypeReference typeReference, boolean includeRelations, Set<String> exclusions) {
+  private static List<CustomType> getCustomTypeReferenceDependencies(
+      CustomTypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  ) {
     List<CustomType> customTypes = getCustomTypeDependencies(typeReference.targetType(), includeRelations, exclusions);
     List<CustomType> allCustomTypes = new ArrayList<>(customTypes);
     typeReference.typeArguments().stream()
@@ -146,7 +152,9 @@ public interface DependencyFunctions {
         .toList();
   }
 
-  private static List<CustomType> getWildcardTypeReferenceDependencies(WildcardTypeReference typeReference, boolean includeRelations, Set<String> exclusions) {
+  private static List<CustomType> getWildcardTypeReferenceDependencies(
+      WildcardTypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  ) {
     List<CustomType> relatedClasses = new ArrayList<>();
     typeReference.extendedBound()
         .map(ref -> getTypeReferenceDependencies(ref, includeRelations, exclusions))
@@ -157,12 +165,16 @@ public interface DependencyFunctions {
     return relatedClasses;
   }
 
-  private static List<CustomType> getArrayTypeReferenceDependencies(ArrayTypeReference typeReference, boolean includeRelations, Set<String> exclusions) {
+  private static List<CustomType> getArrayTypeReferenceDependencies(
+      ArrayTypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  ) {
     if (typeReference.elementType().isPrimitive()) {
       return List.of();
     }
     return getTypeReferenceDependencies(
-        typeReference.elementType().asNonPrimitiveTypeReference().orElseThrow(IllegalStateException::new), includeRelations, exclusions
+        typeReference.elementType().asNonPrimitiveTypeReference().orElseThrow(IllegalStateException::new),
+        includeRelations,
+        exclusions
     );
   }
 }

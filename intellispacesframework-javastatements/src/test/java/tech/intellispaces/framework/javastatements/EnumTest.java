@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
-import tech.intellispaces.framework.javastatements.session.SessionBuilder;
+import tech.intellispaces.framework.javastatements.session.Sessions;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
@@ -355,7 +355,7 @@ public class EnumTest extends AbstractCustomTypeTest {
     // Given
     String enumClassName = "tech.intellispaces.framework.javastatements.samples." + className;
     TypeElement typeElement = getTestElement("enums/" + className + ".java");
-    Session session = SessionBuilder.buildSession();
+    Session session = Sessions.create();
 
     // When
     EnumStatement enumStatement = JavaStatements.enumStatement(typeElement, session);

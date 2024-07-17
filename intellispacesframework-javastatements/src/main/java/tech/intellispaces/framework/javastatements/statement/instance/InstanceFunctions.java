@@ -5,10 +5,10 @@ import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomTypeFunctions;
+import tech.intellispaces.framework.javastatements.statement.custom.ClassStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferenceBuilder;
+import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferences;
 import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
@@ -47,34 +47,34 @@ public interface InstanceFunctions {
   static Instance objectToInstance(Object value, Session session) {
     final Instance instance;
     if (value instanceof Boolean) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Boolean);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Boolean);
     } else if (value instanceof Character) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Char);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Char);
     } else if (value instanceof Byte) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Byte);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Byte);
     } else if (value instanceof Short) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Short);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Short);
     } else if (value instanceof Integer) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Integer);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Integer);
     } else if (value instanceof Long) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Long);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Long);
     } else if (value instanceof Float) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Float);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Float);
     } else if (value instanceof Double) {
-      instance = PrimitiveInstanceBuilder.build(value, PrimitiveTypeReferences.Double);
+      instance = PrimitiveInstances.of(value, PrimitiveTypeReferences.Double);
     } else if (value instanceof String) {
-      instance = StringInstanceBuilder.build((String) value);
+      instance = StringInstances.of((String) value);
     } else if (value instanceof VariableElement) {
       // Enum value
       VariableElement variableElement = (VariableElement) value;
       TypeReference typeReference = TypeElementFunctions.getTypeReference(variableElement.asType(), session);
       EnumStatement enumStatement = typeReference.asCustomTypeReference().orElseThrow().targetType().asEnum().orElseThrow();
-      return EnumInstanceBuilder.build(enumStatement, variableElement.getSimpleName().toString());
+      return EnumInstances.of(enumStatement, variableElement.getSimpleName().toString());
     } else if (value instanceof DeclaredType) {
       // Class value
       DeclaredType declaredType = (DeclaredType) value;
       CustomTypeReference typeReference = TypeElementFunctions.getTypeReference(declaredType, session);
-      return ClassInstanceBuilder.build(typeReference.targetType());
+      return ClassInstances.of(typeReference.targetType());
     } else if (value instanceof AnnotationMirror) {
       // Annotation value
       AnnotationMirror annotationMirror = (AnnotationMirror) value;
@@ -85,7 +85,7 @@ public interface InstanceFunctions {
           .map(AnnotationValue::getValue)
           .map(v -> InstanceFunctions.objectToInstance(v, session))
           .toList();
-      instance = ArrayInstanceBuilder.build(arrayItemsType(values), values);
+      instance = ArrayInstances.of(arrayItemsType(values), values);
     } else {
       throw JavaStatementException.withMessage("Unsupported object class {}", value.getClass().getCanonicalName());
     }
@@ -94,22 +94,22 @@ public interface InstanceFunctions {
 
   private static TypeReference arrayItemsType(List<Instance> values) {
     if (values.isEmpty()) {
-      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(Object.class));
+      return CustomTypeReferences.of(ClassStatements.of(Object.class));
     }
 
     Instance value = values.get(0);
     if (StatementTypes.PrimitiveInstance.equals(value.statementType())) {
       PrimitiveTypeReference primitiveType = value.asPrimitive().orElseThrow().type();
       final Class<?> wrapperClass = primitiveType.wrapperClass();
-      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(wrapperClass));
+      return CustomTypeReferences.of(ClassStatements.of(wrapperClass));
     } else if (StatementTypes.StringInstance.equals(value.statementType())) {
-      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(String.class));
+      return CustomTypeReferences.of(ClassStatements.of(String.class));
     } else if (StatementTypes.ClassInstance.equals(value.statementType())) {
-      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(Class.class));
+      return CustomTypeReferences.of(ClassStatements.of(Class.class));
     } else if (StatementTypes.EnumInstance.equals(value.statementType())) {
-      return CustomTypeReferenceBuilder.build(value.asEnum().orElseThrow().type());
+      return CustomTypeReferences.of(value.asEnum().orElseThrow().type());
     } else if (StatementTypes.AnnotationInstance.equals(value.statementType())) {
-      return CustomTypeReferenceBuilder.build(value.asAnnotation().orElseThrow().annotationStatement());
+      return CustomTypeReferences.of(value.asAnnotation().orElseThrow().annotationStatement());
     } else {
       throw JavaStatementException.withMessage("Unsupported array element type in annotation element: " + value.statementType().typename());
     }
@@ -154,7 +154,7 @@ public interface InstanceFunctions {
   }
 
   static AnnotationInstance getAnnotationInstance(AnnotationMirror annotationMirror, Session session) {
-    return new AnnotationInstanceAdapter(annotationMirror, session);
+    return new AnnotationInstanceBasedOnAnnotationMirror(annotationMirror, session);
   }
 
   static AnnotationInstance getAnnotationInstance(Annotation annotation) {

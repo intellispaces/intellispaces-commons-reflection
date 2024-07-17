@@ -4,7 +4,7 @@ import tech.intellispaces.framework.javastatements.exception.JavaStatementExcept
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationElement;
-import tech.intellispaces.framework.javastatements.statement.instance.AnnotationElementBuilder;
+import tech.intellispaces.framework.javastatements.statement.instance.AnnotationElements;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.instance.InstanceFunctions;
@@ -29,13 +29,17 @@ import java.util.stream.IntStream;
  */
 public interface AnnotationFunctions {
 
-  static List<AnnotationInstance> getAnnotations(List<? extends AnnotationMirror> annotationMirrors, Session session) {
+  static List<AnnotationInstance> getAnnotations(
+      List<? extends AnnotationMirror> annotationMirrors, Session session
+  ) {
     return annotationMirrors.stream()
         .map(mirror -> InstanceFunctions.getAnnotationInstance(mirror, session))
         .toList();
   }
 
-  static Optional<AnnotationInstance> selectAnnotation(AnnotatedStatement statement, String annotationClass) {
+  static Optional<AnnotationInstance> selectAnnotation(
+      AnnotatedStatement statement, String annotationClass
+  ) {
     for (AnnotationInstance annotation : statement.annotations()) {
       if (annotationClass.equals(annotation.annotationStatement().canonicalName())) {
         return Optional.of(annotation);
@@ -44,7 +48,9 @@ public interface AnnotationFunctions {
     return Optional.empty();
   }
 
-  static <A extends Annotation> Optional<A> selectAnnotation(AnnotatedStatement statement, Class<A> annotationClass) {
+  static <A extends Annotation> Optional<A> selectAnnotation(
+      AnnotatedStatement statement, Class<A> annotationClass
+  ) {
     String annotationTypeName = annotationClass.getCanonicalName();
     for (AnnotationInstance annotation : statement.annotations()) {
       if (annotationTypeName.equals(annotation.annotationStatement().canonicalName())) {
@@ -54,15 +60,19 @@ public interface AnnotationFunctions {
     return Optional.empty();
   }
 
-  static boolean hasAnnotation(AnnotatedStatement statement, Class<? extends Annotation> annotationClass) {
+  static boolean hasAnnotation(
+      AnnotatedStatement statement, Class<? extends Annotation> annotationClass
+  ) {
     return selectAnnotation(statement, annotationClass).isPresent();
   }
 
   @SuppressWarnings("unchecked")
-  static <A extends Annotation> A asAnnotation(AnnotationInstance instance, Class<A> annotationClass) {
+  static <A extends Annotation> A asAnnotation(
+      AnnotationInstance instance, Class<A> annotationClass
+  ) {
     if (!annotationClass.getCanonicalName().equals(instance.annotationStatement().canonicalName())) {
-      throw JavaStatementException.withMessage("Illegal annotation class. Expected {}. Actual {}", annotationClass.getCanonicalName(),
-          instance.annotationStatement().canonicalName());
+      throw JavaStatementException.withMessage("Illegal annotation class. Expected {}. Actual {}",
+          annotationClass.getCanonicalName(), instance.annotationStatement().canonicalName());
     }
     return (A) Proxy.newProxyInstance(
         AnnotationFunctions.class.getClassLoader(),
@@ -82,12 +92,14 @@ public interface AnnotationFunctions {
     );
   }
 
-  static Collection<AnnotationElement> getAnnotationElements(AnnotationMirror annotationMirror, Session session) {
+  static Collection<AnnotationElement> getAnnotationElements(
+      AnnotationMirror annotationMirror, Session session
+  ) {
     Map<String, AnnotationElement> elements = new HashMap<>();;
     for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry : annotationMirror.getElementValues().entrySet()) {
       String elementName = entry.getKey().getSimpleName().toString();
       Object elementValue = entry.getValue().getValue();
-      elements.put(elementName, AnnotationElementBuilder.build(elementName, elementValue, session));
+      elements.put(elementName, AnnotationElements.of(elementValue, elementName, session));
     }
 
     // Populate default values
@@ -98,7 +110,7 @@ public interface AnnotationFunctions {
             executableElement -> {
               String elementName = executableElement.getSimpleName().toString();
               Optional<Object> defaultValue = MethodFunctions.getMethodDefaultValue(executableElement);
-              defaultValue.ifPresent(df -> elements.putIfAbsent(elementName, AnnotationElementBuilder.build(elementName, df, session)));
+              defaultValue.ifPresent(df -> elements.putIfAbsent(elementName, AnnotationElements.of(df, elementName, session)));
             }
         );
     return elements.values();

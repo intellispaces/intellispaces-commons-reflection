@@ -8,22 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TypeContextBuilder {
-  private TypeContext parentContext = EMPTY_NAME_CONTEXT;
+  private TypeContext parentContext = TypeContexts.empty();
   private final Map<String, ContextTypeParameter> map = new HashMap<>();
-
-  private static final TypeContextEmpty EMPTY_NAME_CONTEXT = new TypeContextEmpty();
-
-  public static TypeContext empty() {
-    return EMPTY_NAME_CONTEXT;
-  }
-
-  public static TypeContextBlank blank() {
-    return new TypeContextImpl();
-  }
-
-  public static TypeContextBuilder get() {
-    return new TypeContextBuilder();
-  }
 
   public TypeContextBuilder parentContext(TypeContext parentContext) {
     this.parentContext = parentContext;
@@ -51,5 +37,5 @@ public class TypeContextBuilder {
     return new TypeContextImpl(parentContext, map);
   }
 
-  private TypeContextBuilder() {}
+  TypeContextBuilder() {}
 }

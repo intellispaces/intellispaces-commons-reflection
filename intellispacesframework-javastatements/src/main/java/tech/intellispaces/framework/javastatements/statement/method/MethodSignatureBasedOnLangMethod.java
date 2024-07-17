@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Adapter of {@link Method} to {@link MethodSignature}.
+ */
 class MethodSignatureBasedOnLangMethod implements MethodSignature {
   private final Method method;
 

@@ -9,7 +9,10 @@ import tech.intellispaces.framework.javastatements.statement.reference.CustomTyp
 import java.util.List;
 import java.util.Optional;
 
-class ClassStatementBasedOnLangClass extends CustomTypeBasedLandClass implements ClassStatement {
+/**
+ * Adapter of {@link Class} to {@link ClassStatement}.
+ */
+class ClassStatementBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements ClassStatement {
 
   ClassStatementBasedOnLangClass(Class<?> aClass) {
     super(aClass);
