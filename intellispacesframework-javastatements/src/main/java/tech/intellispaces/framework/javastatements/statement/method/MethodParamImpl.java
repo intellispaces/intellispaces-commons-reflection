@@ -24,7 +24,8 @@ class MethodParamImpl implements MethodParam {
     this.name = name;
     this.type = type;
     this.annotations = annotations;
-    this.annotationMap = annotations.stream().collect(Collectors.toMap(ant -> ant.annotationStatement().canonicalName(), Function.identity()));
+    this.annotationMap = annotations.stream()
+        .collect(Collectors.toMap(ant -> ant.annotationStatement().canonicalName(), Function.identity()));
   }
 
   @Override

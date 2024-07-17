@@ -1,9 +1,11 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
+import tech.intellispaces.framework.javastatements.JavaStatements;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.instance.InstanceFunctions;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
@@ -15,7 +17,9 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +28,32 @@ import java.util.stream.Collectors;
 public interface MethodFunctions {
 
   static MethodStatement getMethod(ExecutableElement executableElement, Session session) {
-    return new MethodStatementAdapter(executableElement, session);
+    return new MethodStatementBasedOnExecutableElement(executableElement, session);
+  }
+
+  static MethodStatement getMethod(Method method) {
+    return new MethodStatementBasedOnLangMethod(method);
+  }
+
+  static MethodSignature getMethodSignature(
+      ExecutableElement executableElement, TypeContext typeContext, Session session
+  ) {
+    return new MethodSignatureBasedOnExecutableElement(executableElement, typeContext, session);
+  }
+
+  static MethodSignature getMethodSignature(Method method) {
+    return new MethodSignatureBasedOnLangMethod(method);
+  }
+
+  static MethodParam getMethodParam(Parameter parameter) {
+    List<AnnotationInstance> annotations = Arrays.stream(parameter.getAnnotations())
+        .map(InstanceFunctions::getAnnotationInstance)
+        .toList();
+    return MethodParamBuilder.get()
+        .name(parameter.getName())
+        .type(JavaStatements.customTypeReference(parameter.getType()))
+        .annotations(annotations)
+        .build();
   }
 
   static Optional<TypeReference> getMethodReturnType(

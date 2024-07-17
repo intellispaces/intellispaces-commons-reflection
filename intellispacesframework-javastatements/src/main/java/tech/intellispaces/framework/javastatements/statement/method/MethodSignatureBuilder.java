@@ -1,14 +1,11 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
-import tech.intellispaces.framework.javastatements.context.TypeContext;
-import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
-import javax.lang.model.element.ExecutableElement;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,10 +24,6 @@ public final class MethodSignatureBuilder {
 
   public static MethodSignatureBuilder get() {
     return new MethodSignatureBuilder();
-  }
-
-  public static MethodSignature build(ExecutableElement executableElement, TypeContext typeContext, Session session) {
-    return new MethodSignatureAdapter(executableElement, typeContext, session);
   }
 
   public MethodSignatureBuilder name(String name) {

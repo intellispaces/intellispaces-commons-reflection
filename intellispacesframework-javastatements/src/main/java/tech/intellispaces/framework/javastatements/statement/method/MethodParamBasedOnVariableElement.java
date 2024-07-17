@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-class MethodParamAdapter implements MethodParam {
+class MethodParamBasedOnVariableElement implements MethodParam {
   private final VariableElement variableElement;
   private final Getter<TypeReference> typeGetter;
   private final Getter<List<AnnotationInstance>> annotationsGetter;
 
-  MethodParamAdapter(VariableElement variableElement, TypeContext typeContext, Session session) {
+  MethodParamBasedOnVariableElement(VariableElement variableElement, TypeContext typeContext, Session session) {
     this.variableElement = variableElement;
     this.typeGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getTypeReference, variableElement.asType(), typeContext, session);
     this.annotationsGetter = ActionBuilders.cachedLazyGetter(TypeElementFunctions::getAnnotations, variableElement, session);

@@ -6,7 +6,6 @@ import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationElement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationElementBuilder;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
-import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstanceBuilder;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.instance.InstanceFunctions;
 import tech.intellispaces.framework.javastatements.statement.method.MethodFunctions;
@@ -32,7 +31,7 @@ public interface AnnotationFunctions {
 
   static List<AnnotationInstance> getAnnotations(List<? extends AnnotationMirror> annotationMirrors, Session session) {
     return annotationMirrors.stream()
-        .map(mirror -> AnnotationInstanceBuilder.build(mirror, session))
+        .map(mirror -> InstanceFunctions.getAnnotationInstance(mirror, session))
         .toList();
   }
 

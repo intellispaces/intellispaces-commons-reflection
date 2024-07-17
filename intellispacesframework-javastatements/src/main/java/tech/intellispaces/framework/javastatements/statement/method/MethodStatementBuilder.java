@@ -15,6 +15,6 @@ public interface MethodStatementBuilder {
   static MethodStatement build(
       ExecutableElement executableElement, CustomType owner, TypeContext typeContext, Session session
   ) {
-    return new MethodStatementAdapter(executableElement, owner, typeContext, session);
+    return new MethodStatementBasedOnExecutableElement(executableElement, owner, typeContext, session);
   }
 }

@@ -5,7 +5,7 @@ import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
-import tech.intellispaces.framework.javastatements.statement.custom.ClassStatementBuilder;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomTypeFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferenceBuilder;
@@ -78,7 +78,7 @@ public interface InstanceFunctions {
     } else if (value instanceof AnnotationMirror) {
       // Annotation value
       AnnotationMirror annotationMirror = (AnnotationMirror) value;
-      return AnnotationInstanceBuilder.build(annotationMirror, session);
+      return getAnnotationInstance(annotationMirror, session);
     } else if (value instanceof List) {
       // Array
       List<Instance> values = ((List<AnnotationValue>) value).stream()
@@ -94,18 +94,18 @@ public interface InstanceFunctions {
 
   private static TypeReference arrayItemsType(List<Instance> values) {
     if (values.isEmpty()) {
-      return CustomTypeReferenceBuilder.build(ClassStatementBuilder.build(Object.class));
+      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(Object.class));
     }
 
     Instance value = values.get(0);
     if (StatementTypes.PrimitiveInstance.equals(value.statementType())) {
       PrimitiveTypeReference primitiveType = value.asPrimitive().orElseThrow().type();
       final Class<?> wrapperClass = primitiveType.wrapperClass();
-      return CustomTypeReferenceBuilder.build(ClassStatementBuilder.build(wrapperClass));
+      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(wrapperClass));
     } else if (StatementTypes.StringInstance.equals(value.statementType())) {
-      return CustomTypeReferenceBuilder.build(ClassStatementBuilder.build(String.class));
+      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(String.class));
     } else if (StatementTypes.ClassInstance.equals(value.statementType())) {
-      return CustomTypeReferenceBuilder.build(ClassStatementBuilder.build(Class.class));
+      return CustomTypeReferenceBuilder.build(CustomTypeFunctions.getClassStatement(Class.class));
     } else if (StatementTypes.EnumInstance.equals(value.statementType())) {
       return CustomTypeReferenceBuilder.build(value.asEnum().orElseThrow().type());
     } else if (StatementTypes.AnnotationInstance.equals(value.statementType())) {
@@ -151,5 +151,13 @@ public interface InstanceFunctions {
       throw JavaStatementException.withMessage("Class {} does not extend {}", annotationClassName, Annotation.class.getName());
     }
     return AnnotationFunctions.asAnnotation(instance, (Class<Annotation>) annotationClass);
+  }
+
+  static AnnotationInstance getAnnotationInstance(AnnotationMirror annotationMirror, Session session) {
+    return new AnnotationInstanceAdapter(annotationMirror, session);
+  }
+
+  static AnnotationInstance getAnnotationInstance(Annotation annotation) {
+    return new AnnotationInstanceBasedOnLangAnnotation(annotation);
   }
 }

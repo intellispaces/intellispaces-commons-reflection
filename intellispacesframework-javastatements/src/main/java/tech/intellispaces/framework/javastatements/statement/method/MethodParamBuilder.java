@@ -19,7 +19,7 @@ public final class MethodParamBuilder {
   }
 
   public static MethodParam build(VariableElement variableElement, TypeContext typeContext, Session session) {
-    return new MethodParamAdapter(variableElement, typeContext, session);
+    return new MethodParamBasedOnVariableElement(variableElement, typeContext, session);
   }
 
   public MethodParamBuilder name(String name) {

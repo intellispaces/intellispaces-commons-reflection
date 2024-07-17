@@ -19,17 +19,7 @@ class ClassToCustomTypeReferenceAdapter extends AbstractTypeReference implements
 
   @Override
   public StatementType statementType() {
-    if (aClass.isInterface()) {
-      return StatementTypes.Interface;
-    } else if (aClass.isRecord()) {
-      return StatementTypes.Record;
-    } else if (aClass.isEnum()) {
-      return StatementTypes.Enum;
-    } else if (aClass.isAnnotation()) {
-      return StatementTypes.Annotation;
-    } else {
-      return StatementTypes.Class;
-    }
+    return StatementTypes.CustomTypeReference;
   }
 
   @Override

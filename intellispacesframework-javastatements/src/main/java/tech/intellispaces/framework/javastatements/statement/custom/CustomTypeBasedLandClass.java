@@ -1,34 +1,23 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.commons.type.TypeFunctions;
-import tech.intellispaces.framework.javastatements.statement.StatementType;
-import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.method.MethodFunctions;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-class ClassToClassStatementAdapter implements ClassStatement {
-  private final Class<?> aClass;
+public abstract class CustomTypeBasedLandClass implements CustomType {
+  protected final Class<?> aClass;
 
-  ClassToClassStatementAdapter(Class<?> aClass) {
+  public CustomTypeBasedLandClass(Class<?> aClass) {
     this.aClass = aClass;
-  }
-
-  @Override
-  public StatementType statementType() {
-    return StatementTypes.Class;
-  }
-
-  @Override
-  public boolean isAbstract() {
-    return TypeFunctions.isAbstractClass(aClass);
   }
 
   @Override
@@ -54,21 +43,6 @@ class ClassToClassStatementAdapter implements ClassStatement {
   @Override
   public boolean isNested() {
     return aClass.isMemberClass();
-  }
-
-  @Override
-  public List<MethodStatement> constructors() {
-    throw new UnsupportedOperationException("Not implemented yet");
-  }
-
-  @Override
-  public Optional<CustomTypeReference> extendedClass() {
-    throw new UnsupportedOperationException("Not implemented yet");
-  }
-
-  @Override
-  public List<CustomTypeReference> implementedInterfaces() {
-    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
@@ -123,7 +97,9 @@ class ClassToClassStatementAdapter implements ClassStatement {
 
   @Override
   public List<MethodStatement> declaredMethods() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    return Arrays.stream(aClass.getDeclaredMethods())
+        .map(MethodFunctions::getMethod)
+        .toList();
   }
 
   @Override

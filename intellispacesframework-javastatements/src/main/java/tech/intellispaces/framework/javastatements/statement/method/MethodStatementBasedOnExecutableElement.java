@@ -17,12 +17,12 @@ import javax.lang.model.element.TypeElement;
 import java.util.List;
 import java.util.Map;
 
-class MethodStatementAdapter implements MethodStatement {
+class MethodStatementBasedOnExecutableElement implements MethodStatement {
   private final Getter<CustomType> ownerGetter;
   private final Getter<MethodSignature> signatureGetter;
   private final Getter<List<MethodStatement>> overrideMethodsGetter;
 
-  MethodStatementAdapter(ExecutableElement executableElement, Session session) {
+  MethodStatementBasedOnExecutableElement(ExecutableElement executableElement, Session session) {
     this(
         executableElement,
         ActionBuilders.cachedLazyGetter(
@@ -32,13 +32,13 @@ class MethodStatementAdapter implements MethodStatement {
     );
   }
 
-  MethodStatementAdapter(
+  MethodStatementBasedOnExecutableElement(
       ExecutableElement executableElement, CustomType owner, TypeContext typeContext, Session session
   ) {
     this(executableElement, ActionBuilders.getter(owner), typeContext, session);
   }
 
-  MethodStatementAdapter(
+  MethodStatementBasedOnExecutableElement(
       ExecutableElement executableElement, Getter<CustomType> ownerGetter, TypeContext typeContext, Session session
   ) {
     this.ownerGetter = ownerGetter;

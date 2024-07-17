@@ -215,4 +215,12 @@ public interface CustomTypeFunctions {
         .collect(Collectors.joining(", "));
     return (parametersSource.isEmpty() ? "" : "<" + parametersSource + ">");
   }
+
+  static InterfaceStatement getInterfaceStatement(Class<?> aClass) {
+    return new InterfaceStatementBasedOnLangClass(aClass);
+  }
+
+  static ClassStatement getClassStatement(Class<?> aClass) {
+    return new ClassStatementBasedOnLangClass(aClass);
+  }
 }

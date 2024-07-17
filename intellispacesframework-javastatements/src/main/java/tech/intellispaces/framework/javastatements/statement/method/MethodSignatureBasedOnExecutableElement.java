@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-class MethodSignatureAdapter implements MethodSignature {
+class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   private final ExecutableElement executableElement;
   private final List<NamedTypeReference> typeParams;
   private final Getter<Optional<TypeReference>> returnTypeGetter;
@@ -32,7 +32,7 @@ class MethodSignatureAdapter implements MethodSignature {
   private final Getter<List<ExceptionCompatibleTypeReference>> exceptionsGetter;
   private final Getter<List<AnnotationInstance>> annotationsGetter;
 
-  MethodSignatureAdapter(ExecutableElement executableElement, TypeContext typeContext, Session session) {
+  MethodSignatureBasedOnExecutableElement(ExecutableElement executableElement, TypeContext typeContext, Session session) {
     this.executableElement = executableElement;
     this.typeParams = TypeElementFunctions.getTypeParameters(executableElement, typeContext, session);
     TypeContext classNameContext = createNameContext(typeContext, this.typeParams);

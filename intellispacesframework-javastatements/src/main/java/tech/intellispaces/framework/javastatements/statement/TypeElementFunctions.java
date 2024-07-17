@@ -20,8 +20,8 @@ import tech.intellispaces.framework.javastatements.statement.custom.InterfaceSta
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
+import tech.intellispaces.framework.javastatements.statement.method.MethodFunctions;
 import tech.intellispaces.framework.javastatements.statement.method.MethodSignature;
-import tech.intellispaces.framework.javastatements.statement.method.MethodSignatureBuilder;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatementBuilder;
 import tech.intellispaces.framework.javastatements.statement.reference.ArrayTypeReference;
@@ -48,6 +48,7 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
 import javax.lang.model.type.WildcardType;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -438,6 +439,10 @@ public interface TypeElementFunctions {
   static MethodSignature asMethodSignature(
       ExecutableElement executableElement, TypeContext typeContext, Session session
   ) {
-    return MethodSignatureBuilder.build(executableElement, typeContext, session);
+    return MethodFunctions.getMethodSignature(executableElement, typeContext, session);
+  }
+
+  static MethodSignature asMethodSignature(Method method) {
+    return MethodFunctions.getMethodSignature(method);
   }
 }
