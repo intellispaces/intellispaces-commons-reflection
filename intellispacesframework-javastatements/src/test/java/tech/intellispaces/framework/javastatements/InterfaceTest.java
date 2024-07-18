@@ -395,7 +395,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + interfaceName;
     TypeElement typeElement = getTestElement("interfaces/" + interfaceName + ".java");
-    Session session = Sessions.create();
+    Session session = Sessions.get();
 
     // When
     InterfaceStatement interfaceStatement = JavaStatements.interfaceStatement(typeElement, session);

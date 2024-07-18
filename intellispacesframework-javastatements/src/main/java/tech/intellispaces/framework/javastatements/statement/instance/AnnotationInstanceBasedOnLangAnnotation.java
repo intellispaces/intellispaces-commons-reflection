@@ -14,7 +14,7 @@ import java.util.Optional;
 class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
   private final Annotation annotation;
 
-  public AnnotationInstanceBasedOnLangAnnotation(Annotation annotation) {
+  AnnotationInstanceBasedOnLangAnnotation(Annotation annotation) {
     this.annotation = annotation;
   }
 

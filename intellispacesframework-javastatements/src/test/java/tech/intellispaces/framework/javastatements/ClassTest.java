@@ -176,7 +176,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples.ClassWithDefaultConstructor";
     TypeElement typeElement = getTestElement("classes/ClassWithDefaultConstructor.java");
-    Session session = Sessions.create();
+    Session session = Sessions.get();
 
     // When
     ClassStatement classStatement = JavaStatements.classStatement(typeElement, session);
@@ -588,7 +588,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + className;
     TypeElement typeElement = getTestElement("classes/" + className + ".java");
-    Session session = Sessions.create();
+    Session session = Sessions.get();
 
     // When
     ClassStatement classStatement = JavaStatements.classStatement(typeElement, session);

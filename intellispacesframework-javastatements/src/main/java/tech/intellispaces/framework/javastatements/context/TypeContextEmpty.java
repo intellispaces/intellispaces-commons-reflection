@@ -4,6 +4,8 @@ import java.util.Optional;
 
 class TypeContextEmpty implements TypeContext {
 
+  TypeContextEmpty() {}
+
   @Override
   public boolean contains(String typeParamName) {
     return false;

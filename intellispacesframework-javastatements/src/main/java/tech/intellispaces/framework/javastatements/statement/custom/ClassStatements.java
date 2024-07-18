@@ -24,17 +24,21 @@ public interface ClassStatements {
     return TypeElementFunctions.asCustomTypeStatement(
         typeElement,
         ElementKind.CLASS,
-        ClassStatements::build,
+        ClassStatements::create,
         typeContext,
         session
     );
   }
 
-  static ClassStatement effectiveOf(ClassStatement classStatement, Map<String, NonPrimitiveTypeReference> typeMapping) {
+  static ClassStatement effectiveOf(
+      ClassStatement classStatement, Map<String, NonPrimitiveTypeReference> typeMapping
+  ) {
     return new EffectiveClassStatement(classStatement, typeMapping);
   }
 
-  private static ClassStatement build(TypeElement typeElement, TypeContext typeContext, Session session) {
+  private static ClassStatement create(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     return new ClassStatementBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   protected final Class<?> aClass;
 
-  public AbstractCustomTypeBasedLandClass(Class<?> aClass) {
+  AbstractCustomTypeBasedLandClass(Class<?> aClass) {
     this.aClass = aClass;
   }
 

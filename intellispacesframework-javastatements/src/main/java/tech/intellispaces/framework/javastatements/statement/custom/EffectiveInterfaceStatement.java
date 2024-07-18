@@ -8,7 +8,9 @@ import java.util.Map;
 
 class EffectiveInterfaceStatement extends AbstractEffectiveCustomType implements InterfaceStatement {
 
-  public EffectiveInterfaceStatement(InterfaceStatement actualType, Map<String, NonPrimitiveTypeReference> typeMapping) {
+  EffectiveInterfaceStatement(
+      InterfaceStatement actualType, Map<String, NonPrimitiveTypeReference> typeMapping
+  ) {
     super(actualType, typeMapping);
   }
 

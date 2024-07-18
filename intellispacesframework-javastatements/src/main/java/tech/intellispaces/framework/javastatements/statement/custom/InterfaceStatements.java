@@ -24,7 +24,7 @@ public interface InterfaceStatements {
     return TypeElementFunctions.asCustomTypeStatement(
         typeElement,
         ElementKind.INTERFACE,
-        InterfaceStatements::build,
+        InterfaceStatements::create,
         typeContext,
         session
     );
@@ -36,7 +36,9 @@ public interface InterfaceStatements {
     return new EffectiveInterfaceStatement(actualType, typeMapping);
   }
 
-  private static InterfaceStatement build(TypeElement typeElement, TypeContext typeContext, Session session) {
+  private static InterfaceStatement create(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     return new InterfaceStatementBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

@@ -389,7 +389,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("annotations/" + className + ".java");
 
     // When
-    Session session = Sessions.create();
+    Session session = Sessions.get();
     AnnotationStatement annotationStatement = JavaStatements.annotationStatement(typeElement, session);
 
     // Then

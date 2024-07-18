@@ -10,8 +10,10 @@ import javax.lang.model.element.TypeElement;
 /**
  * Adapter of {@link TypeElement} to {@link InterfaceStatement}.
  */
-class InterfaceStatementBasedOnTypeElement extends AbstractCustomTypeStatementBasedOnTypeElement implements InterfaceStatement {
-
+class InterfaceStatementBasedOnTypeElement
+    extends AbstractCustomTypeStatementBasedOnTypeElement
+    implements InterfaceStatement
+{
   InterfaceStatementBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super(typeElement, typeContext, session);
   }

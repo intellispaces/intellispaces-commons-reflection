@@ -10,8 +10,10 @@ import javax.lang.model.element.TypeElement;
 /**
  * Adapter of {@link TypeElement} to {@link AnnotationStatement}.
  */
-class AnnotationStatementBasedOnTypeElement extends AbstractCustomTypeStatementBasedOnTypeElement implements AnnotationStatement {
-
+class AnnotationStatementBasedOnTypeElement
+    extends AbstractCustomTypeStatementBasedOnTypeElement
+    implements AnnotationStatement
+{
   AnnotationStatementBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super(typeElement, typeContext, session);
   }

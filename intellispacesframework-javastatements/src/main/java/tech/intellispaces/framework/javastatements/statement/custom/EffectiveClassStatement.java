@@ -16,7 +16,9 @@ class EffectiveClassStatement extends AbstractEffectiveCustomType implements Cla
   private final Getter<Optional<CustomTypeReference>> extendedClassGetter;
   private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
 
-  public EffectiveClassStatement(ClassStatement classStatement, Map<String, NonPrimitiveTypeReference> typeMapping) {
+  EffectiveClassStatement(
+      ClassStatement classStatement, Map<String, NonPrimitiveTypeReference> typeMapping
+  ) {
     super(classStatement, typeMapping);
     this.extendedClassGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);
     this.implementedInterfacesGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getImplementedInterfaces, this);

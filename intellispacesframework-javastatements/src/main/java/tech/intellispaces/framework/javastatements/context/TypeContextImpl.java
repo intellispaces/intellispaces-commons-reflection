@@ -12,12 +12,12 @@ class TypeContextImpl implements TypeContext, TypeContextBlank {
   private TypeContext parentContext;
   private final Map<String, ContextTypeParameter> map;
 
-  public TypeContextImpl() {
+  TypeContextImpl() {
     this.parentContext = TypeContexts.empty();
     this.map = new HashMap<>();
   }
 
-  public TypeContextImpl(TypeContext parentContext, Map<String, ContextTypeParameter> map) {
+  TypeContextImpl(TypeContext parentContext, Map<String, ContextTypeParameter> map) {
     this.parentContext = parentContext;
     this.map = map;
   }
@@ -48,7 +48,9 @@ class TypeContextImpl implements TypeContext, TypeContextBlank {
   }
 
   @Override
-  public TypeContextBlank addTypeParam(String typeParamName, NamedTypeReference type, NonPrimitiveTypeReference value) {
+  public TypeContextBlank addTypeParam(
+      String typeParamName, NamedTypeReference type, NonPrimitiveTypeReference value
+  ) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, value));
     return this;
   }

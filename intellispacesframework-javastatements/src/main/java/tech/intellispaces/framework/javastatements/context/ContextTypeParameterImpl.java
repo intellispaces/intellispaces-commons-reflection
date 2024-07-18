@@ -7,7 +7,7 @@ class ContextTypeParameterImpl implements ContextTypeParameter {
   private final NamedTypeReference type;
   private final NonPrimitiveTypeReference actualType;
 
-  public ContextTypeParameterImpl(NamedTypeReference type, NonPrimitiveTypeReference actualType) {
+  ContextTypeParameterImpl(NamedTypeReference type, NonPrimitiveTypeReference actualType) {
     this.type = type;
     this.actualType = actualType;
   }

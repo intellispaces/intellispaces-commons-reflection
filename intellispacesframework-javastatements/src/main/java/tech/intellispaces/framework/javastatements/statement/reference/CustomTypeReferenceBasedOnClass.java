@@ -16,7 +16,7 @@ class CustomTypeReferenceBasedOnClass extends AbstractTypeReference implements C
   private final Class<?> aClass;
   private CustomType targetType;
 
-  public CustomTypeReferenceBasedOnClass(Class<?> aClass) {
+  CustomTypeReferenceBasedOnClass(Class<?> aClass) {
     this.aClass = aClass;
   }
 

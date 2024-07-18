@@ -99,7 +99,7 @@ public interface AnnotationFunctions {
     for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry : annotationMirror.getElementValues().entrySet()) {
       String elementName = entry.getKey().getSimpleName().toString();
       Object elementValue = entry.getValue().getValue();
-      elements.put(elementName, AnnotationElements.of(elementValue, elementName, session));
+      elements.put(elementName, AnnotationElements.of(elementName, elementValue, session));
     }
 
     // Populate default values
@@ -110,7 +110,7 @@ public interface AnnotationFunctions {
             executableElement -> {
               String elementName = executableElement.getSimpleName().toString();
               Optional<Object> defaultValue = MethodFunctions.getMethodDefaultValue(executableElement);
-              defaultValue.ifPresent(df -> elements.putIfAbsent(elementName, AnnotationElements.of(df, elementName, session)));
+              defaultValue.ifPresent(df -> elements.putIfAbsent(elementName, AnnotationElements.of(elementName, df, session)));
             }
         );
     return elements.values();

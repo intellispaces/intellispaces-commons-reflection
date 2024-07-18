@@ -24,7 +24,7 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   private final Getter<Collection<CustomType>> dependenciesGetter;
   private final Getter<Collection<String>> dependencyTypesGetter;
 
-  public AbstractEffectiveCustomType(CustomType actualType, Map<String, NonPrimitiveTypeReference> typeMapping) {
+  AbstractEffectiveCustomType(CustomType actualType, Map<String, NonPrimitiveTypeReference> typeMapping) {
     this.actualType = actualType;
     this.typeMapping = typeMapping;
     this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);

@@ -16,7 +16,7 @@ abstract class AbstractTypeReference implements TypeReference {
   private final Getter<String> formalFullDeclarationGetter;
   private final Getter<String> formalBriefDeclarationGetter;
 
-  protected AbstractTypeReference() {
+  AbstractTypeReference() {
     this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getTypeReferenceDependencies, this);
     this.dependencyTypesGetter = Actions.cachedLazyGetter(AbstractTypeReference::collectDependencyTypenames, this);
     this.actualDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getActualTypeReferenceDeclaration, this);

@@ -33,9 +33,9 @@ public interface JavaStatements {
 
   static Statement statement(Element element) {
     if (element instanceof TypeElement typeElement) {
-      return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.create());
+      return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
     } else if (element instanceof ExecutableElement executableElement) {
-      return MethodFunctions.getMethod(executableElement, Sessions.create());
+      return MethodFunctions.getMethod(executableElement, Sessions.get());
     } else {
       throw UnexpectedViolationException.withMessage("Not supported element kind - {}", element.getKind());
     }
@@ -46,7 +46,7 @@ public interface JavaStatements {
   }
 
   static CustomType customTypeStatement(TypeElement typeElement) {
-    return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.create());
+    return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
   }
 
   static CustomType customTypeStatement(TypeElement typeElement, Session session) {
@@ -54,7 +54,7 @@ public interface JavaStatements {
   }
 
   static ClassStatement classStatement(TypeElement typeElement) {
-    return ClassStatements.of(typeElement, Sessions.create());
+    return ClassStatements.of(typeElement, Sessions.get());
   }
 
   static ClassStatement classStatement(TypeElement typeElement, Session session) {
@@ -62,7 +62,7 @@ public interface JavaStatements {
   }
 
   static InterfaceStatement interfaceStatement(TypeElement typeElement) {
-    return InterfaceStatements.of(typeElement, Sessions.create());
+    return InterfaceStatements.of(typeElement, Sessions.get());
   }
 
   static InterfaceStatement interfaceStatement(TypeElement typeElement, Session session) {
@@ -70,7 +70,7 @@ public interface JavaStatements {
   }
 
   static RecordStatement recordStatement(TypeElement typeElement) {
-    return RecordStatements.of(typeElement, Sessions.create());
+    return RecordStatements.of(typeElement, Sessions.get());
   }
 
   static RecordStatement recordStatement(TypeElement typeElement, Session session) {
@@ -78,7 +78,7 @@ public interface JavaStatements {
   }
 
   static EnumStatement enumStatement(TypeElement typeElement) {
-    return EnumStatements.of(typeElement, Sessions.create());
+    return EnumStatements.of(typeElement, Sessions.get());
   }
 
   static EnumStatement enumStatement(TypeElement typeElement, Session session) {
@@ -86,7 +86,7 @@ public interface JavaStatements {
   }
 
   static AnnotationStatement annotationStatement(TypeElement typeElement) {
-    return AnnotationStatements.of(typeElement, Sessions.create());
+    return AnnotationStatements.of(typeElement, Sessions.get());
   }
 
   static AnnotationStatement annotationStatement(TypeElement typeElement, Session session) {
@@ -98,7 +98,7 @@ public interface JavaStatements {
   }
 
   static CustomTypeReference customTypeReference(TypeElement typeElement) {
-    return CustomTypeReferences.of(typeElement, Sessions.create());
+    return CustomTypeReferences.of(typeElement, Sessions.get());
   }
 
   static CustomTypeReference customTypeReference(TypeElement typeElement, Session session) {
@@ -106,7 +106,7 @@ public interface JavaStatements {
   }
 
   static CustomTypeReference customTypeReference(DeclaredType declaredType) {
-    return CustomTypeReferences.of(declaredType, Sessions.create());
+    return CustomTypeReferences.of(declaredType, Sessions.get());
   }
 
   static CustomTypeReference customTypeReference(DeclaredType declaredType, Session session) {

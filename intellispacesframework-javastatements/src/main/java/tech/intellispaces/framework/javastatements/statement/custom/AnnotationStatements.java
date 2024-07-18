@@ -18,13 +18,15 @@ public interface AnnotationStatements {
     return TypeElementFunctions.asCustomTypeStatement(
         typeElement,
         ElementKind.ANNOTATION_TYPE,
-        AnnotationStatements::build,
+        AnnotationStatements::create,
         typeContext,
         session
     );
   }
 
-  private static AnnotationStatement build(TypeElement typeElement, TypeContext typeContext, Session session) {
+  private static AnnotationStatement create(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     return new AnnotationStatementBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

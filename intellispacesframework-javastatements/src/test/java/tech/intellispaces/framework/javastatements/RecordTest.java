@@ -415,7 +415,7 @@ public class RecordTest extends AbstractCustomTypeTest {
     // Given
     String canonicalClassName = "tech.intellispaces.framework.javastatements.samples." + recordName;
     TypeElement typeElement = getTestElement("records/" + recordName + ".java");
-    Session session = Sessions.create();
+    Session session = Sessions.get();
 
     // When
     RecordStatement recordStatement = JavaStatements.recordStatement(typeElement, session);

@@ -355,7 +355,7 @@ public class EnumTest extends AbstractCustomTypeTest {
     // Given
     String enumClassName = "tech.intellispaces.framework.javastatements.samples." + className;
     TypeElement typeElement = getTestElement("enums/" + className + ".java");
-    Session session = Sessions.create();
+    Session session = Sessions.get();
 
     // When
     EnumStatement enumStatement = JavaStatements.enumStatement(typeElement, session);

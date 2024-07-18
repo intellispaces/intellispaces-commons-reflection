@@ -20,13 +20,15 @@ public interface RecordStatements {
     return TypeElementFunctions.asCustomTypeStatement(
         typeElement,
         ElementKind.RECORD,
-        RecordStatements::build,
+        RecordStatements::create,
         typeContext,
         session
     );
   }
 
-  private static RecordStatement build(TypeElement typeElement, TypeContext typeContext, Session session) {
+  private static RecordStatement create(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     return new RecordStatementBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

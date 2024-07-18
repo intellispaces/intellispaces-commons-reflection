@@ -12,7 +12,9 @@ public interface MethodSignatures {
     return MethodFunctions.getMethodSignature(method);
   }
 
-  static MethodSignature of(ExecutableElement executableElement, TypeContext typeContext, Session session) {
+  static MethodSignature of(
+      ExecutableElement executableElement, TypeContext typeContext, Session session
+  ) {
     return MethodFunctions.getMethodSignature(executableElement, typeContext, session);
   }
 

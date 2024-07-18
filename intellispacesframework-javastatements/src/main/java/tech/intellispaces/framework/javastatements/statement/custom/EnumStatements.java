@@ -18,13 +18,15 @@ public interface EnumStatements {
     return TypeElementFunctions.asCustomTypeStatement(
         typeElement,
         ElementKind.ENUM,
-        EnumStatements::build,
+        EnumStatements::create,
         typeContext,
         session
     );
   }
 
-  private static EnumStatement build(TypeElement typeElement, TypeContext typeContext, Session session) {
+  private static EnumStatement create(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     return new EnumStatementBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

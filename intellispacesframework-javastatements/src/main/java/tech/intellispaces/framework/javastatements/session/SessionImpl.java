@@ -8,6 +8,8 @@ import java.util.Map;
 class SessionImpl implements Session {
   private final Map<String, CustomType> types = new HashMap<>();
 
+  SessionImpl() {}
+
   @Override
   public CustomType getType(String typeName) {
     return types.get(typeName);

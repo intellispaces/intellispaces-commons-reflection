@@ -11,6 +11,8 @@ public final class MethodParamBuilder {
   private TypeReference type;
   private List<AnnotationInstance> annotations = List.of();
 
+  MethodParamBuilder() {}
+
   public MethodParamBuilder name(String name) {
     this.name = name;
     return this;
@@ -35,6 +37,4 @@ public final class MethodParamBuilder {
     Objects.requireNonNull(name);
     Objects.requireNonNull(type);
   }
-
-  MethodParamBuilder() {}
 }

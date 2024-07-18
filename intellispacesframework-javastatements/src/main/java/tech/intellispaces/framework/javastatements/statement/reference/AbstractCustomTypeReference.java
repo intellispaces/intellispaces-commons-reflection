@@ -14,7 +14,7 @@ import java.util.Map;
 
 abstract class AbstractCustomTypeReference extends AbstractTypeReference implements CustomTypeReference {
 
-  public AbstractCustomTypeReference() {
+  AbstractCustomTypeReference() {
     super();
   }
 

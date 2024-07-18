@@ -25,7 +25,7 @@ import java.util.Optional;
 class MethodSignatureBasedOnLangMethod implements MethodSignature {
   private final Method method;
 
-  public MethodSignatureBasedOnLangMethod(Method method) {
+  MethodSignatureBasedOnLangMethod(Method method) {
     this.method = method;
   }
 

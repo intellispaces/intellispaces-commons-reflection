@@ -14,7 +14,10 @@ import java.util.List;
 /**
  * Adapter of {@link TypeElement} to {@link RecordStatement}.
  */
-class RecordStatementBasedOnTypeElement extends AbstractCustomTypeStatementBasedOnTypeElement implements RecordStatement {
+class RecordStatementBasedOnTypeElement
+    extends AbstractCustomTypeStatementBasedOnTypeElement
+    implements RecordStatement
+{
   private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
 
   RecordStatementBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {

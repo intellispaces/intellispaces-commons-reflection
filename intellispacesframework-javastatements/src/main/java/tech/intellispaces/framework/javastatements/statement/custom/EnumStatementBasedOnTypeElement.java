@@ -14,12 +14,18 @@ import java.util.List;
 /**
  * Adapter of {@link TypeElement} to {@link EnumStatement}.
  */
-class EnumStatementBasedOnTypeElement extends AbstractCustomTypeStatementBasedOnTypeElement implements EnumStatement {
+class EnumStatementBasedOnTypeElement
+    extends AbstractCustomTypeStatementBasedOnTypeElement
+    implements EnumStatement
+{
   private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
 
-  EnumStatementBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
+  EnumStatementBasedOnTypeElement(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     super(typeElement, typeContext, session);
-    this.implementedInterfacesGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getImplementedInterfaces, this);
+    this.implementedInterfacesGetter = Actions.cachedLazyGetter(
+        CustomTypeFunctions::getImplementedInterfaces, this);
   }
 
   @Override

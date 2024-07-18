@@ -2,6 +2,8 @@ package tech.intellispaces.framework.javastatements.context;
 
 public final class TypeContexts {
 
+  private TypeContexts() {}
+
   public static TypeContext empty() {
     return EMPTY_CONTEXT;
   }
@@ -13,8 +15,6 @@ public final class TypeContexts {
   public static TypeContextBuilder build() {
     return new TypeContextBuilder();
   }
-
-  private TypeContexts() {}
 
   private static final TypeContextEmpty EMPTY_CONTEXT = new TypeContextEmpty();
 }
