@@ -26,7 +26,7 @@ public final class MethodParamBuilder {
     return this;
   }
 
-  public MethodParam build() {
+  public MethodParam get() {
     validate();
     return new MethodParamImpl(name, type, annotations);
   }

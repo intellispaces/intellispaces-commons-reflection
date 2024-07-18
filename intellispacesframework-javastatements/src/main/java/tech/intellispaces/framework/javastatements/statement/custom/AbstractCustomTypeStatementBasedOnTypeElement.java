@@ -7,8 +7,8 @@ import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.context.TypeContextBuilder;
 import tech.intellispaces.framework.javastatements.context.TypeContexts;
 import tech.intellispaces.framework.javastatements.session.Session;
-import tech.intellispaces.framework.javastatements.statement.DependencyFunctions;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.DependenciesFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
@@ -51,7 +51,7 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
     this.annotationsGetter = Actions.cachedLazyGetter(TypeElementFunctions::getAnnotations, typeElement, session);
     this.declaredMethodsGetter = Actions.cachedLazyGetter(TypeElementFunctions::getDeclaredMethods, typeElement, this, customTypeContext, session);
     this.actualMethodsGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getActualMethods, this, customTypeContext, session);
-    this.dependenciesGetter = Actions.cachedLazyGetter(DependencyFunctions::getCustomTypeDependencies, this);
+    this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);
     this.dependencyTypesGetter = Actions.cachedLazyGetter(AbstractCustomTypeStatementBasedOnTypeElement::collectDependencyTypenames, this);
   }
 
@@ -60,9 +60,9 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   }
 
   private TypeContext createNameContext(TypeContext parentContext, List<NamedTypeReference> typeParams) {
-    TypeContextBuilder builder = TypeContexts.builder().parentContext(parentContext);
+    TypeContextBuilder builder = TypeContexts.build().parentContext(parentContext);
     typeParams.forEach(typeParam -> builder.addTypeParam(typeParam.name(), typeParam));
-    return builder.build();
+    return builder.get();
   }
 
   @Override

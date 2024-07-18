@@ -4,13 +4,12 @@ import tech.intellispaces.framework.commons.exception.UnexpectedViolationExcepti
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.Sessions;
 import tech.intellispaces.framework.javastatements.statement.Statement;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferences;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatements;
@@ -20,6 +19,7 @@ import tech.intellispaces.framework.javastatements.statement.custom.RecordStatem
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatements;
 import tech.intellispaces.framework.javastatements.statement.method.MethodFunctions;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferences;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;

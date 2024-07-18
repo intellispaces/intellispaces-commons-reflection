@@ -3,10 +3,12 @@ package tech.intellispaces.framework.javastatements.statement.custom;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.context.TypeContexts;
 import tech.intellispaces.framework.javastatements.session.Session;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
 
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
+import java.util.Map;
 
 public interface InterfaceStatements {
 
@@ -26,6 +28,12 @@ public interface InterfaceStatements {
         typeContext,
         session
     );
+  }
+
+  static InterfaceStatement effectiveOf(
+      InterfaceStatement actualType, Map<String, NonPrimitiveTypeReference> typeMapping
+  ) {
+    return new EffectiveInterfaceStatement(actualType, typeMapping);
   }
 
   private static InterfaceStatement build(TypeElement typeElement, TypeContext typeContext, Session session) {

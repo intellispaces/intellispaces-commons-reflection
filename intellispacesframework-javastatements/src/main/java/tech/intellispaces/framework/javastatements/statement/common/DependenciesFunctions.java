@@ -1,6 +1,7 @@
-package tech.intellispaces.framework.javastatements.statement;
+package tech.intellispaces.framework.javastatements.statement.common;
 
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
+import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
@@ -21,7 +22,7 @@ import java.util.Set;
 /**
  * Functions to calculate statement dependencies.
  */
-public interface DependencyFunctions {
+public interface DependenciesFunctions {
 
   static Collection<CustomType> getCustomTypeDependencies(CustomType type) {
     return getCustomTypeDependencies(type, true, Set.of()).stream()
@@ -107,7 +108,7 @@ public interface DependencyFunctions {
     customTypes.add(annotation.annotationStatement());
 
     annotation.elements().stream()
-        .map(element -> DependencyFunctions.getInstanceDependencies(element.value(), exclusions))
+        .map(element -> DependenciesFunctions.getInstanceDependencies(element.value(), exclusions))
         .forEach(customTypes::addAll);
     return customTypes;
   }

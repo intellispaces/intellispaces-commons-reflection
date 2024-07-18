@@ -63,7 +63,7 @@ public interface CustomTypeFunctions {
   private static MethodSignature getEffectiveMethodSignature(
       MethodSignature originMethodSignature, TypeContext typeContext
   ) {
-    return MethodSignatures.builder()
+    return MethodSignatures.build()
         .isAbstract(originMethodSignature.isAbstract())
         .isPublic(originMethodSignature.isPublic())
         .isDefault(originMethodSignature.isDefault())
@@ -80,17 +80,17 @@ public interface CustomTypeFunctions {
                 .toList()
         )
         .params(originMethodSignature.params().stream()
-            .map(p -> MethodParams.builder()
+            .map(p -> MethodParams.build()
                 .name(p.name())
                 .type(getActualTypeReference(p.type(), typeContext))
-                .build())
+                .get())
             .toList()
         )
         .exceptions(originMethodSignature.exceptions().stream()
             .map(e -> (ExceptionCompatibleTypeReference) getActualTypeReference(e, typeContext))
             .toList()
         )
-        .build();
+        .get();
   }
 
   private static void inheritedMethods(

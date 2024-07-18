@@ -6,7 +6,7 @@ import tech.intellispaces.framework.javastatements.statement.reference.NonPrimit
 
 import java.util.Map;
 
-public class EffectiveInterfaceStatement extends AbstractEffectiveCustomType implements InterfaceStatement {
+class EffectiveInterfaceStatement extends AbstractEffectiveCustomType implements InterfaceStatement {
 
   public EffectiveInterfaceStatement(InterfaceStatement actualType, Map<String, NonPrimitiveTypeReference> typeMapping) {
     super(actualType, typeMapping);

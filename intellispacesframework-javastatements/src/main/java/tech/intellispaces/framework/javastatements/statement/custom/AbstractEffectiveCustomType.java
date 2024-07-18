@@ -2,7 +2,7 @@ package tech.intellispaces.framework.javastatements.statement.custom;
 
 import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
-import tech.intellispaces.framework.javastatements.statement.DependencyFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.DependenciesFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class AbstractEffectiveCustomType implements CustomType {
+abstract class AbstractEffectiveCustomType implements CustomType {
   protected final CustomType actualType;
   protected final Map<String, NonPrimitiveTypeReference> typeMapping;
   private final Getter<Collection<CustomType>> dependenciesGetter;
@@ -27,7 +27,7 @@ public abstract class AbstractEffectiveCustomType implements CustomType {
   public AbstractEffectiveCustomType(CustomType actualType, Map<String, NonPrimitiveTypeReference> typeMapping) {
     this.actualType = actualType;
     this.typeMapping = typeMapping;
-    this.dependenciesGetter = Actions.cachedLazyGetter(DependencyFunctions::getCustomTypeDependencies, this);
+    this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);
     this.dependencyTypesGetter = Actions.cachedLazyGetter(AbstractEffectiveCustomType::collectDependencyTypenames, this);
   }
 

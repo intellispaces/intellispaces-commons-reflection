@@ -6,7 +6,7 @@ import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;

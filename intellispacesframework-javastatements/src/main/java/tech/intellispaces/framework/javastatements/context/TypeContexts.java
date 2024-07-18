@@ -10,7 +10,7 @@ public final class TypeContexts {
     return new TypeContextImpl();
   }
 
-  public static TypeContextBuilder builder() {
+  public static TypeContextBuilder build() {
     return new TypeContextBuilder();
   }
 

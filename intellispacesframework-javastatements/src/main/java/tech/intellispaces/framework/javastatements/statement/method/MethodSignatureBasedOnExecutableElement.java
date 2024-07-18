@@ -8,7 +8,7 @@ import tech.intellispaces.framework.javastatements.context.TypeContexts;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
@@ -53,9 +53,9 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   }
 
   private TypeContext createNameContext(TypeContext parentContext, List<NamedTypeReference> typeParams) {
-    TypeContextBuilder builder = TypeContexts.builder().parentContext(parentContext);
+    TypeContextBuilder builder = TypeContexts.build().parentContext(parentContext);
     typeParams.forEach(typeParam -> builder.addTypeParam(typeParam.name(), typeParam));
-    return builder.build();
+    return builder.get();
   }
 
   @Override

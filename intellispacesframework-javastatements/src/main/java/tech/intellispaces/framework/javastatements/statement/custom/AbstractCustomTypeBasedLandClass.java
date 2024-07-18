@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Abstract adapter of {@link Class} to {@link CustomType}.
  */
-public abstract class AbstractCustomTypeBasedLandClass implements CustomType {
+abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   protected final Class<?> aClass;
 
   public AbstractCustomTypeBasedLandClass(Class<?> aClass) {

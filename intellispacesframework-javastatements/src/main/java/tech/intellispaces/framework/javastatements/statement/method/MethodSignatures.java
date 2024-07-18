@@ -16,7 +16,7 @@ public interface MethodSignatures {
     return MethodFunctions.getMethodSignature(executableElement, typeContext, session);
   }
 
-  static MethodSignatureBuilder builder() {
+  static MethodSignatureBuilder build() {
     return new MethodSignatureBuilder();
   }
 }

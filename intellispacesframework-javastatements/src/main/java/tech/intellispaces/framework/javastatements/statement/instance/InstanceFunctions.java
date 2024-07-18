@@ -3,7 +3,7 @@ package tech.intellispaces.framework.javastatements.statement.instance;
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;

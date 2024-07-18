@@ -3,10 +3,10 @@ package tech.intellispaces.framework.javastatements.statement.reference;
 import tech.intellispaces.framework.commons.exception.UnexpectedViolationException;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
+import tech.intellispaces.framework.javastatements.statement.custom.ClassStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
-import tech.intellispaces.framework.javastatements.statement.custom.EffectiveClassStatement;
-import tech.intellispaces.framework.javastatements.statement.custom.EffectiveInterfaceStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatement;
+import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
     Map<String, NonPrimitiveTypeReference> typeMapping = typeArgumentMapping();
     CustomType targetType = targetType();
     if (targetType.statementType() == StatementTypes.Class) {
-      return new EffectiveClassStatement((ClassStatement) targetType, typeMapping);
+      return ClassStatements.effectiveOf((ClassStatement) targetType, typeMapping);
     } else if (targetType.statementType() == StatementTypes.Interface) {
-      return new EffectiveInterfaceStatement((InterfaceStatement) targetType, typeMapping);
+      return InterfaceStatements.effectiveOf((InterfaceStatement) targetType, typeMapping);
     } else {
       throw UnexpectedViolationException.withMessage("Not implemented yet");
     }

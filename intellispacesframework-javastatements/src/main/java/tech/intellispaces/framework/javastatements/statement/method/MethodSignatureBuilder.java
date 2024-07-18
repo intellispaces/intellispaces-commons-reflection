@@ -77,7 +77,7 @@ public final class MethodSignatureBuilder {
     return this;
   }
 
-  public MethodSignature build() {
+  public MethodSignature get() {
     validate();
     return new MethodSignatureImpl(
       name,

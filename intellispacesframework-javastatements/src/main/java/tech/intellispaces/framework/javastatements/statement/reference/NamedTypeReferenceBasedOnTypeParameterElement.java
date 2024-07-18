@@ -8,7 +8,7 @@ import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.Statement;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 
 import javax.lang.model.element.TypeParameterElement;
 import java.util.ArrayList;

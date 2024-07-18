@@ -3,7 +3,7 @@ package tech.intellispaces.framework.javastatements.statement.custom;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.context.TypeContexts;
 import tech.intellispaces.framework.javastatements.session.Session;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;

@@ -1,4 +1,4 @@
-package tech.intellispaces.framework.javastatements.statement;
+package tech.intellispaces.framework.javastatements.statement.common;
 
 import tech.intellispaces.framework.commons.function.TriFunction;
 import tech.intellispaces.framework.javastatements.context.ContextTypeParameter;
@@ -7,6 +7,7 @@ import tech.intellispaces.framework.javastatements.context.TypeContextBlank;
 import tech.intellispaces.framework.javastatements.context.TypeContexts;
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.session.Session;
+import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatements;
@@ -107,10 +108,10 @@ public interface TypeElementFunctions {
     parentTypeMirrors.addAll(typeElement.getInterfaces());
 
     List<NamedTypeReference> thisTypeParams = getTypeParameters(typeElement, typeContext, session);
-    TypeContext newTypeContext = TypeContexts.builder()
+    TypeContext newTypeContext = TypeContexts.build()
         .parentContext(typeContext)
         .addTypeParams(thisTypeParams)
-        .build();
+        .get();
     return parentTypeMirrors.stream()
         .map(parent -> CustomTypeReferences.of((DeclaredType) parent, newTypeContext, session))
         .filter(ref -> !Object.class.getName().equals(ref.targetType().canonicalName()))

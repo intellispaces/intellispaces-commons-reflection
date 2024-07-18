@@ -7,7 +7,7 @@ import javax.lang.model.element.VariableElement;
 
 public interface MethodParams {
 
-  static MethodParamBuilder builder() {
+  static MethodParamBuilder build() {
     return new MethodParamBuilder();
   }
 

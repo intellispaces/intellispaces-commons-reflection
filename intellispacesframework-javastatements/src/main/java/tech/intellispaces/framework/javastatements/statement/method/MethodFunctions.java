@@ -3,7 +3,7 @@ package tech.intellispaces.framework.javastatements.statement.method;
 import tech.intellispaces.framework.javastatements.JavaStatements;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.session.Session;
-import tech.intellispaces.framework.javastatements.statement.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
@@ -49,11 +49,11 @@ public interface MethodFunctions {
     List<AnnotationInstance> annotations = Arrays.stream(parameter.getAnnotations())
         .map(InstanceFunctions::getAnnotationInstance)
         .toList();
-    return MethodParams.builder()
+    return MethodParams.build()
         .name(parameter.getName())
         .type(JavaStatements.customTypeReference(parameter.getType()))
         .annotations(annotations)
-        .build();
+        .get();
   }
 
   static Optional<TypeReference> getMethodReturnType(

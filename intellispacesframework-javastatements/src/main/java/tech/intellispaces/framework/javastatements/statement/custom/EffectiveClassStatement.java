@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class EffectiveClassStatement extends AbstractEffectiveCustomType implements ClassStatement {
+class EffectiveClassStatement extends AbstractEffectiveCustomType implements ClassStatement {
   private final Getter<Optional<CustomTypeReference>> extendedClassGetter;
   private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
 

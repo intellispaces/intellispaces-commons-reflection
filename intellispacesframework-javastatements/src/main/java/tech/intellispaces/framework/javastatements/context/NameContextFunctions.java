@@ -12,7 +12,7 @@ public interface NameContextFunctions {
   static TypeContext getActualNameContext(
       TypeContext parentNamespace, List<NamedTypeReference> typeParams, List<NonPrimitiveTypeReference> typeArguments
   ) {
-    TypeContextBuilder contextBuilder = TypeContexts.builder();
+    TypeContextBuilder contextBuilder = TypeContexts.build();
     NamedTypeReference type;
     NonPrimitiveTypeReference actualType;
     if (!typeParams.isEmpty() && typeParams.size() == typeArguments.size()) {
@@ -40,6 +40,6 @@ public interface NameContextFunctions {
         contextBuilder.addTypeParam(namedTypeReference.name(), type, actualType);
       }
     }
-    return contextBuilder.build();
+    return contextBuilder.get();
   }
 }

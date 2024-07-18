@@ -33,7 +33,7 @@ public class TypeContextBuilder {
     return this;
   }
 
-  public TypeContext build() {
+  public TypeContext get() {
     return new TypeContextImpl(parentContext, map);
   }
 
