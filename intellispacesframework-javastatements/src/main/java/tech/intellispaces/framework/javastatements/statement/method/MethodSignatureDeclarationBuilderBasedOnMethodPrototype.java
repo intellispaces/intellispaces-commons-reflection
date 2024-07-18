@@ -14,17 +14,21 @@ import java.util.stream.Collectors;
 
 public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   private final MethodStatement prototype;
-  private String name;
-  private boolean includeMethodTypeParams = true;
-  private boolean includeOwnerTypeParams = true;
-  private List<String> additionalParams = null;
+  private String methodName;
+  private boolean includeMethodTypeParams;
+  private boolean includeOwnerTypeParams ;
+  private List<String> additionalParams;
 
   MethodSignatureDeclarationBuilderBasedOnMethodPrototype(MethodStatement prototype) {
     this.prototype = prototype;
+    this.methodName = prototype.name();
+    this.includeMethodTypeParams = true;
+    this.includeOwnerTypeParams = false;
+    this.additionalParams = null;
   }
 
-  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype name(String name) {
-    this.name = name;
+  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype methodName(String name) {
+    this.methodName = name;
     return this;
   }
 
@@ -69,7 +73,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
     }
     appendReturnType(sb, importConsumer, canonicalToSimpleNameMapper);
     sb.append(" ");
-    sb.append(name);
+    sb.append(methodName);
     sb.append("(");
     appendMethodParams(sb, importConsumer, canonicalToSimpleNameMapper);
     sb.append(")");
@@ -106,9 +110,11 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Function<String, String> canonicalToSimpleNameMapper
   ) {
     Executor commaAppender = StringActions.commaAppender(sb);
-    for (String additionalParam : additionalParams) {
-      commaAppender.execute();
-      sb.append(additionalParam);
+    if (additionalParams != null) {
+      for (String additionalParam : additionalParams) {
+        commaAppender.execute();
+        sb.append(additionalParam);
+      }
     }
     for (MethodParam param : prototype.params()) {
       commaAppender.execute();
