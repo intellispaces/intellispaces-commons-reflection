@@ -1,6 +1,20 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
+import tech.intellispaces.framework.javastatements.session.Session;
+import tech.intellispaces.framework.javastatements.session.Sessions;
+import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
+
+import javax.lang.model.element.TypeElement;
+
 public interface CustomTypes {
+
+  static CustomType of(TypeElement typeElement) {
+    return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
+  }
+
+  static CustomType of(TypeElement typeElement, Session session) {
+    return TypeElementFunctions.asCustomTypeStatement(typeElement, session);
+  }
 
   static CustomType of(Class<?> aClass) {
     if (aClass.isInterface()) {

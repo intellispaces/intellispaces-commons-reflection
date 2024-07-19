@@ -1,10 +1,9 @@
 package tech.intellispaces.framework.javastatements;
 
-import tech.intellispaces.framework.commons.exception.UnexpectedViolationException;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.Sessions;
 import tech.intellispaces.framework.javastatements.statement.Statement;
-import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
+import tech.intellispaces.framework.javastatements.statement.Statements;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
@@ -17,28 +16,20 @@ import tech.intellispaces.framework.javastatements.statement.custom.InterfaceSta
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatements;
-import tech.intellispaces.framework.javastatements.statement.method.MethodFunctions;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferences;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 
 /**
- * Java statements provider.
+ * Java statements facade.
  */
 public interface JavaStatements {
 
   static Statement statement(Element element) {
-    if (element instanceof TypeElement typeElement) {
-      return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
-    } else if (element instanceof ExecutableElement executableElement) {
-      return MethodFunctions.getMethod(executableElement, Sessions.get());
-    } else {
-      throw UnexpectedViolationException.withMessage("Not supported element kind - {}", element.getKind());
-    }
+    return Statements.of(element);
   }
 
   static CustomType customTypeStatement(Class<?> aClass) {
@@ -46,11 +37,11 @@ public interface JavaStatements {
   }
 
   static CustomType customTypeStatement(TypeElement typeElement) {
-    return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
+    return CustomTypes.of(typeElement, Sessions.get());
   }
 
   static CustomType customTypeStatement(TypeElement typeElement, Session session) {
-    return TypeElementFunctions.asCustomTypeStatement(typeElement, session);
+    return CustomTypes.of(typeElement, session);
   }
 
   static ClassStatement classStatement(TypeElement typeElement) {
