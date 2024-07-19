@@ -2,7 +2,7 @@ package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.commons.action.Executor;
 import tech.intellispaces.framework.commons.action.string.StringActions;
-import tech.intellispaces.framework.commons.function.Functions;
+import tech.intellispaces.framework.commons.function.Consumers;
 import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
 import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
 
@@ -57,7 +57,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   }
 
   public String get() {
-    return get(Functions.idleConsumer(), Function.identity());
+    return get(Consumers.idle(), Function.identity());
   }
 
   public String get(
