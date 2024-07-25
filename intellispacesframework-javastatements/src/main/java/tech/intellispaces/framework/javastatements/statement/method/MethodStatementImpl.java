@@ -43,6 +43,6 @@ class MethodStatementImpl implements MethodStatement {
 
   @Override
   public MethodStatement specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
-    return new MethodStatementImpl(owner, signature().specify(typeMapping));
+    return new MethodStatementImpl(owner(), signature().specify(typeMapping));
   }
 }
