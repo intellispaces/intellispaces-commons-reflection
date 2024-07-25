@@ -69,8 +69,13 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   }
 
   @Override
-  public boolean hasParent(Class<?> aClass) {
-    throw new UnsupportedOperationException("Not implemented yet");
+  public boolean hasParent(Class<?> parent) {
+    return hasParent(parent.getCanonicalName());
+  }
+
+  @Override
+  public boolean hasParent(CustomType parent) {
+    return hasParent(parent.canonicalName());
   }
 
   @Override
@@ -122,6 +127,11 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<MethodStatement> actualMethodsWithName(String name) {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  @Override
+  public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes) {
     throw new UnsupportedOperationException("Not implemented yet");
   }
 

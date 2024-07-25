@@ -70,7 +70,9 @@ public interface CustomType extends AnnotatedStatement {
    */
   List<CustomTypeReference> parentTypes();
 
-  boolean hasParent(Class<?> aClass);
+  boolean hasParent(Class<?> parent);
+
+  boolean hasParent(CustomType parent);
 
   boolean hasParent(String parentCanonicalName);
 
@@ -89,6 +91,8 @@ public interface CustomType extends AnnotatedStatement {
   List<MethodStatement> actualMethods();
 
   List<MethodStatement> actualMethodsWithName(String name);
+
+  Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes);
 
   /**
    * Related class.

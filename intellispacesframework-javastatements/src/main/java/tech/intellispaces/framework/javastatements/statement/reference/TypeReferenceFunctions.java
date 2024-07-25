@@ -80,20 +80,20 @@ public interface TypeReferenceFunctions {
   }
 
   static boolean isEqualTypes(TypeReference typeReference1, TypeReference typeReference2) {
-    boolean sameParams = true;
+    boolean verdict = true;
     if (typeReference1.isPrimitive() && typeReference2.isPrimitive()) {
       if (!Objects.equals(
           typeReference1.asPrimitiveTypeReference().orElseThrow().typename(),
           typeReference2.asPrimitiveTypeReference().orElseThrow().typename()
       )) {
-        sameParams = false;
+        verdict = false;
       }
     } else if (typeReference1.asCustomTypeReference().isPresent() && typeReference2.asCustomTypeReference().isPresent()) {
       if (!Objects.equals(
           typeReference1.asCustomTypeReference().orElseThrow().targetType().canonicalName(),
           typeReference2.asCustomTypeReference().orElseThrow().targetType().canonicalName()
       )) {
-        sameParams = false;
+        verdict = false;
       }
     } else if (typeReference1.asNamedTypeReference().isPresent() && typeReference2.asNamedTypeReference().isPresent()) {
       var namedTypeReference1 = typeReference1.asNamedTypeReference().get();
@@ -103,9 +103,9 @@ public interface TypeReferenceFunctions {
         throw new UnsupportedOperationException("Not implemented yet");
       }
     } else {
-      sameParams = false;
+      verdict = false;
     }
-    return sameParams;
+    return verdict;
   }
 
   static boolean isEquivalentTypes(TypeReference type1, TypeReference type2) {

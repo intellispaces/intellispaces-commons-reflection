@@ -105,8 +105,13 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   }
 
   @Override
-  public boolean hasParent(Class<?> aClass) {
-    return hasParent(aClass.getCanonicalName());
+  public boolean hasParent(Class<?> parent) {
+    return hasParent(parent.getCanonicalName());
+  }
+
+  @Override
+  public boolean hasParent(CustomType parent) {
+    return hasParent(parent.canonicalName());
   }
 
   @Override
@@ -151,6 +156,15 @@ abstract class AbstractEffectiveCustomType implements CustomType {
     return actualMethods().stream()
         .filter(m -> name.equals(m.name()))
         .toList();
+  }
+
+  @Override
+  public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes) {
+    return actualMethods().stream()
+        .filter(m -> name.equals(m.name()))
+        .filter(m -> m.params().size() == parameterTypes.size())
+        .filter(m -> TypeReferenceFunctions.isEqualTypes(m.parameterTypes(), parameterTypes))
+        .findFirst();
   }
 
   @Override
