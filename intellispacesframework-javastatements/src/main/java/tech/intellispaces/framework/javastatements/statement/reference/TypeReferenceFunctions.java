@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -80,32 +79,51 @@ public interface TypeReferenceFunctions {
   }
 
   static boolean isEqualTypes(TypeReference typeReference1, TypeReference typeReference2) {
-    boolean verdict = true;
     if (typeReference1.isPrimitive() && typeReference2.isPrimitive()) {
-      if (!Objects.equals(
-          typeReference1.asPrimitiveTypeReference().orElseThrow().typename(),
-          typeReference2.asPrimitiveTypeReference().orElseThrow().typename()
-      )) {
-        verdict = false;
-      }
-    } else if (typeReference1.asCustomTypeReference().isPresent() && typeReference2.asCustomTypeReference().isPresent()) {
-      if (!Objects.equals(
-          typeReference1.asCustomTypeReference().orElseThrow().targetType().canonicalName(),
-          typeReference2.asCustomTypeReference().orElseThrow().targetType().canonicalName()
-      )) {
-        verdict = false;
-      }
-    } else if (typeReference1.asNamedTypeReference().isPresent() && typeReference2.asNamedTypeReference().isPresent()) {
-      var namedTypeReference1 = typeReference1.asNamedTypeReference().get();
-      var namedTypeReference2 = typeReference2.asNamedTypeReference().get();
-      if (!namedTypeReference1.extendedBounds().isEmpty() || !namedTypeReference2.extendedBounds().isEmpty()) {
-        // todo: compare extended bounds
-        throw new UnsupportedOperationException("Not implemented yet");
-      }
+      PrimitiveTypeReference primitiveTypeReference1 = typeReference1.asPrimitiveTypeReferenceSurely();
+      PrimitiveTypeReference primitiveTypeReference2 = typeReference2.asPrimitiveTypeReferenceSurely();
+      return isEqualPrimitiveTypeReferences(primitiveTypeReference1, primitiveTypeReference2);
+    } else if (typeReference1.isCustomTypeReference() && typeReference2.isCustomTypeReference()) {
+      CustomTypeReference customTypeReference1 = typeReference1.asCustomTypeReferenceSurely();
+      CustomTypeReference customTypeReference2 = typeReference2.asCustomTypeReferenceSurely();
+      return isEqualCustomTypeReferences(customTypeReference1, customTypeReference2);
+    } else if (typeReference1.isNamedTypeReference() && typeReference2.isNamedTypeReference()) {
+      NamedTypeReference namedTypeReference1 = typeReference1.asNamedTypeReferenceSurely();
+      NamedTypeReference namedTypeReference2 = typeReference2.asNamedTypeReferenceSurely();
+      return isEqualNamedTypeReferences(namedTypeReference1, namedTypeReference2);
     } else {
-      verdict = false;
+      return false;
     }
-    return verdict;
+  }
+
+  private static boolean isEqualPrimitiveTypeReferences(
+      PrimitiveTypeReference typeReference1, PrimitiveTypeReference typeReference2
+  ) {
+    return typeReference1.typename().equals(typeReference2.typename());
+  }
+
+  private static boolean isEqualCustomTypeReferences(
+      CustomTypeReference typeReference1, CustomTypeReference typeReference2
+  ) {
+    return typeReference1.targetType().canonicalName().equals(
+        typeReference2.targetType().canonicalName()
+    );
+  }
+
+  static boolean isEqualNamedTypeReferences(
+      NamedTypeReference typeReference1, NamedTypeReference typeReference2
+  ) {
+    if (typeReference1.extendedBounds().size() != typeReference2.extendedBounds().size()) {
+      return false;
+    }
+    Iterator<TypeBoundReference> bounds1 = typeReference1.extendedBounds().iterator();
+    Iterator<TypeBoundReference> bounds2 = typeReference2.extendedBounds().iterator();
+    while (bounds1.hasNext() && bounds2.hasNext()) {
+      if (!isEqualTypes(bounds1.next(), bounds2.next())) {
+        return false;
+      }
+    }
+    return true;
   }
 
   static boolean isEquivalentTypes(TypeReference type1, TypeReference type2) {
