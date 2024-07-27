@@ -23,7 +23,7 @@ import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 import tech.intellispaces.framework.javastatements.statement.type.CustomTypeReferences;
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
 import tech.intellispaces.framework.javastatements.statement.type.NamedTypeReferences;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.PrimitiveTypeReferences;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 import tech.intellispaces.framework.javastatements.statement.type.TypeBound;
@@ -140,14 +140,14 @@ public interface TypeElementFunctions {
     return NamedTypeReferences.of(typeParameter, typeContext, session);
   }
 
-  static List<NonPrimitiveType> getTypeArguments(
+  static List<NotPrimitiveType> getTypeArguments(
       DeclaredType declaredType, TypeContext typeContext, Session session
   ) {
-    List<NonPrimitiveType> typeArguments = new ArrayList<>();
+    List<NotPrimitiveType> typeArguments = new ArrayList<>();
     for (TypeMirror typeArgumentsMirror : declaredType.getTypeArguments()) {
       Type typeArgumentsReference = getTypeReference(typeArgumentsMirror, typeContext, session);
-      if (typeArgumentsReference instanceof NonPrimitiveType) {
-        typeArguments.add((NonPrimitiveType) typeArgumentsReference);
+      if (typeArgumentsReference instanceof NotPrimitiveType) {
+        typeArguments.add((NotPrimitiveType) typeArgumentsReference);
       } else {
         throw JavaStatementException.withMessage("Invalid type kind");
       }

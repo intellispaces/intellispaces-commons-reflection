@@ -1,7 +1,7 @@
 package tech.intellispaces.framework.javastatements.context;
 
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 
 import java.util.Iterator;
 import java.util.List;
@@ -10,14 +10,14 @@ import java.util.Optional;
 public interface NameContextFunctions {
 
   static TypeContext getActualNameContext(
-      TypeContext parentNamespace, List<NamedType> typeParams, List<NonPrimitiveType> typeArguments
+      TypeContext parentNamespace, List<NamedType> typeParams, List<NotPrimitiveType> typeArguments
   ) {
     TypeContextBuilder contextBuilder = TypeContexts.build();
     NamedType type;
-    NonPrimitiveType actualType;
+    NotPrimitiveType actualType;
     if (!typeParams.isEmpty() && typeParams.size() == typeArguments.size()) {
       Iterator<NamedType> paramIterator = typeParams.iterator();
-      Iterator<NonPrimitiveType> argumentIterator = typeArguments.iterator();
+      Iterator<NotPrimitiveType> argumentIterator = typeArguments.iterator();
       while (paramIterator.hasNext() && argumentIterator.hasNext()) {
         NamedType namedTypeReference = paramIterator.next();
         type = namedTypeReference;
@@ -27,10 +27,10 @@ public interface NameContextFunctions {
           type = parentFormalTypeReference.get();
         }
 
-        NonPrimitiveType actualTypeReference = argumentIterator.next();
+        NotPrimitiveType actualTypeReference = argumentIterator.next();
         actualType = actualTypeReference;
         if (actualTypeReference.asNamed().isPresent()) {
-          Optional<NonPrimitiveType> parentActualTypeReference = parentNamespace.get(actualTypeReference.asNamed().orElseThrow().name())
+          Optional<NotPrimitiveType> parentActualTypeReference = parentNamespace.get(actualTypeReference.asNamed().orElseThrow().name())
               .map(ContextTypeParameter::actualType);
           if (parentActualTypeReference.isPresent()) {
             actualType = parentActualTypeReference.get();

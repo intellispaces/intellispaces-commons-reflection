@@ -5,7 +5,7 @@ import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -44,7 +44,7 @@ class MethodStatementBasedOnLangMethod implements MethodStatement {
   }
 
   @Override
-  public MethodStatement specify(Map<String, NonPrimitiveType> typeMapping) {
+  public MethodStatement specify(Map<String, NotPrimitiveType> typeMapping) {
     return new MethodStatementImpl(owner(), signature().specify(typeMapping));
   }
 }

@@ -4,7 +4,7 @@ import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.List;
@@ -62,5 +62,5 @@ public interface MethodSignature extends AnnotatedStatement {
    */
   boolean isStatic();
 
-  MethodSignature specify(Map<String, NonPrimitiveType> typeMapping);
+  MethodSignature specify(Map<String, NotPrimitiveType> typeMapping);
 }

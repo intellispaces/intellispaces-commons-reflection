@@ -1,7 +1,7 @@
 package tech.intellispaces.framework.javastatements.context;
 
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +31,7 @@ public class TypeContextBuilder {
   }
 
   public TypeContextBuilder addTypeParam(
-      String typeParamName, NamedType type, NonPrimitiveType actualType
+      String typeParamName, NamedType type, NotPrimitiveType actualType
   ) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, actualType));
     return this;

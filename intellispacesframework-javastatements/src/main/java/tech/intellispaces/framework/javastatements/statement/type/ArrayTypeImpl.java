@@ -24,7 +24,7 @@ class ArrayTypeImpl extends AbstractType implements ArrayType {
   }
 
   @Override
-  public Type specify(Map<String, NonPrimitiveType> typeMapping) {
+  public Type specify(Map<String, NotPrimitiveType> typeMapping) {
     Type elementType = elementType().specify(typeMapping);
     return new ArrayTypeImpl(elementType);
   }

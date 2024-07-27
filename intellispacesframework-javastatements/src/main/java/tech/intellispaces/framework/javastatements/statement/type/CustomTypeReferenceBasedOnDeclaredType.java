@@ -20,8 +20,8 @@ import java.util.function.Function;
  */
 class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomType {
   private final Getter<CustomStatement> satementGetter;
-  private final Getter<List<NonPrimitiveType>> typeArgumentsGetter;
-  private final Getter<Map<String, NonPrimitiveType>> typeArgumentMappingsGetter;
+  private final Getter<List<NotPrimitiveType>> typeArgumentsGetter;
+  private final Getter<Map<String, NotPrimitiveType>> typeArgumentMappingsGetter;
   private final Getter<String> typeArgumentsDeclarationGetter;
 
   CustomTypeReferenceBasedOnDeclaredType(DeclaredType declaredType, TypeContext typeContext, Session session) {
@@ -44,12 +44,12 @@ class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomType {
   }
 
   @Override
-  public List<NonPrimitiveType> typeArguments() {
+  public List<NotPrimitiveType> typeArguments() {
     return typeArgumentsGetter.get();
   }
 
   @Override
-  public Map<String, NonPrimitiveType> typeArgumentMapping() {
+  public Map<String, NotPrimitiveType> typeArgumentMapping() {
     return typeArgumentMappingsGetter.get();
   }
 

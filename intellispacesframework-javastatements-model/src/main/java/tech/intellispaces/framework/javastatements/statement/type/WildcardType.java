@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * The wildcard type.
  */
-public interface WildcardType extends NonPrimitiveType {
+public interface WildcardType extends NotPrimitiveType {
 
   /**
    * Extended bound.

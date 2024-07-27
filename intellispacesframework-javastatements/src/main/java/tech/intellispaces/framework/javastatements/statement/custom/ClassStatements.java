@@ -4,7 +4,7 @@ import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.context.TypeContexts;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
@@ -31,7 +31,7 @@ public interface ClassStatements {
   }
 
   static ClassStatement effectiveOf(
-      ClassStatement classStatement, Map<String, NonPrimitiveType> typeMapping
+      ClassStatement classStatement, Map<String, NotPrimitiveType> typeMapping
   ) {
     return new EffectiveClassStatement(classStatement, typeMapping);
   }

@@ -36,12 +36,12 @@ class CustomTypeReferenceBasedOnTypeElement extends AbstractCustomType {
   }
 
   @Override
-  public List<NonPrimitiveType> typeArguments() {
+  public List<NotPrimitiveType> typeArguments() {
     return List.of();
   }
 
   @Override
-  public Map<String, NonPrimitiveType> typeArgumentMapping() {
+  public Map<String, NotPrimitiveType> typeArgumentMapping() {
     return Map.of();
   }
 

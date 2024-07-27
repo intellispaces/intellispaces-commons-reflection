@@ -32,7 +32,7 @@ class WildcardTypeImpl extends AbstractType implements WildcardType {
   }
 
   @Override
-  public Type specify(Map<String, NonPrimitiveType> typeMapping) {
+  public Type specify(Map<String, NotPrimitiveType> typeMapping) {
     TypeBound extendedBound = extendedBound().orElse(null);
     if (extendedBound != null) {
       extendedBound = (TypeBound) extendedBound.specify(typeMapping);

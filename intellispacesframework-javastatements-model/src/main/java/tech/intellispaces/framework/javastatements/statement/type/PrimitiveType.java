@@ -47,7 +47,7 @@ public interface PrimitiveType extends Type {
   }
 
   @Override
-  default Type specify(Map<String, NonPrimitiveType> typeMapping) {
+  default Type specify(Map<String, NotPrimitiveType> typeMapping) {
     return this;
   }
 

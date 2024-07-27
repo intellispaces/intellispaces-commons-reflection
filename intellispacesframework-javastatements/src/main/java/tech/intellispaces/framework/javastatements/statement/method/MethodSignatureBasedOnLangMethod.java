@@ -9,7 +9,7 @@ import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.instance.InstanceFunctions;
 import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.lang.annotation.Annotation;
@@ -122,7 +122,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
   }
 
   @Override
-  public MethodSignature specify(Map<String, NonPrimitiveType> typeMapping) {
+  public MethodSignature specify(Map<String, NotPrimitiveType> typeMapping) {
     return new MethodSignatureImpl(
         name(),
         isAbstract(),

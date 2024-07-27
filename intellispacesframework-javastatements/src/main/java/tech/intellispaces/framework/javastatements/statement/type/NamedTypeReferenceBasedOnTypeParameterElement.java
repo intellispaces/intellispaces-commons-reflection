@@ -54,7 +54,7 @@ class NamedTypeReferenceBasedOnTypeParameterElement extends AbstractType impleme
   }
 
   @Override
-  public Type specify(Map<String, NonPrimitiveType> typeMapping) {
+  public Type specify(Map<String, NotPrimitiveType> typeMapping) {
     Type specifiedReference = typeMapping.get(name);
     if (specifiedReference != null) {
       return specifiedReference;

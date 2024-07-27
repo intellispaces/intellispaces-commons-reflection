@@ -3,9 +3,9 @@ package tech.intellispaces.framework.javastatements.statement.type;
 import java.util.Optional;
 
 /**
- * Non-primitive type.
+ * Not-primitive type.
  */
-public interface NonPrimitiveType extends Type {
+public interface NotPrimitiveType extends Type {
 
   @Override
   default boolean isPrimitive() {
@@ -13,7 +13,7 @@ public interface NonPrimitiveType extends Type {
   }
 
   @Override
-  default Optional<NonPrimitiveType> asNonPrimitive() {
+  default Optional<NotPrimitiveType> asNotPrimitive() {
     return Optional.of(this);
   }
 }

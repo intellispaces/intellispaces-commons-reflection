@@ -35,7 +35,7 @@ public interface CustomTypeReferences {
     return of(targetType, List.of());
   }
 
-  static CustomType of(CustomStatement targetType, List<NonPrimitiveType> typeArguments) {
+  static CustomType of(CustomStatement targetType, List<NotPrimitiveType> typeArguments) {
     return new CustomTypeImpl(targetType, typeArguments);
   }
 }

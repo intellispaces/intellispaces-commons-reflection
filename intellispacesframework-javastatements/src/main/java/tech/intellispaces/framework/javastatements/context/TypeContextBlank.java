@@ -1,7 +1,7 @@
 package tech.intellispaces.framework.javastatements.context;
 
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 
 public interface TypeContextBlank extends TypeContext {
 
@@ -9,5 +9,5 @@ public interface TypeContextBlank extends TypeContext {
 
   TypeContextBlank addTypeParam(String typeParamName, NamedType type);
 
-  TypeContextBlank addTypeParam(String typeParamName, NamedType type, NonPrimitiveType value);
+  TypeContextBlank addTypeParam(String typeParamName, NamedType type, NotPrimitiveType value);
 }

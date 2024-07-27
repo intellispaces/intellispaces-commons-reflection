@@ -10,7 +10,7 @@ import java.util.Optional;
  *
  * <p>By default, named type is referred to {@link java.lang.Object}.
  */
-public interface NamedType extends NonPrimitiveType, TypeBound, ExceptionCompatibleType {
+public interface NamedType extends NotPrimitiveType, TypeBound, ExceptionCompatibleType {
 
   String name();
 

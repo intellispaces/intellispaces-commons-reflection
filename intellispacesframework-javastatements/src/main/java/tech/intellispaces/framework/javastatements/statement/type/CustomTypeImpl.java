@@ -12,11 +12,11 @@ import java.util.function.Function;
 
 class CustomTypeImpl extends AbstractCustomType {
   private final CustomStatement statement;
-  private final List<NonPrimitiveType> typeArguments;
-  private final Getter<Map<String, NonPrimitiveType>> typeArgumentMappingsGetter;
+  private final List<NotPrimitiveType> typeArguments;
+  private final Getter<Map<String, NotPrimitiveType>> typeArgumentMappingsGetter;
   private final Getter<String> typeArgumentsDeclarationGetter;
 
-  CustomTypeImpl(CustomStatement statement, List<NonPrimitiveType> typeArguments) {
+  CustomTypeImpl(CustomStatement statement, List<NotPrimitiveType> typeArguments) {
     super();
     this.statement = statement;
     this.typeArguments = typeArguments;
@@ -35,12 +35,12 @@ class CustomTypeImpl extends AbstractCustomType {
   }
 
   @Override
-  public List<NonPrimitiveType> typeArguments() {
+  public List<NotPrimitiveType> typeArguments() {
     return typeArguments;
   }
 
   @Override
-  public Map<String, NonPrimitiveType> typeArgumentMapping() {
+  public Map<String, NotPrimitiveType> typeArgumentMapping() {
     return typeArgumentMappingsGetter.get();
   }
 

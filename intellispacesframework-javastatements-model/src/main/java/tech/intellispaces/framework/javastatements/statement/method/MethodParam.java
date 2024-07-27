@@ -1,7 +1,7 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.Map;
@@ -15,5 +15,5 @@ public interface MethodParam extends AnnotatedStatement {
 
   Type type();
 
-  MethodParam specify(Map<String, NonPrimitiveType> typeMapping);
+  MethodParam specify(Map<String, NotPrimitiveType> typeMapping);
 }

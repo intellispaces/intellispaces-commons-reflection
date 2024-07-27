@@ -7,7 +7,7 @@ import tech.intellispaces.framework.javastatements.statement.instance.Annotation
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 import tech.intellispaces.framework.javastatements.statement.type.TypeFunctions;
 
@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 
 abstract class AbstractEffectiveCustomStatement implements CustomStatement {
   protected final CustomStatement actualType;
-  protected final Map<String, NonPrimitiveType> typeMapping;
+  protected final Map<String, NotPrimitiveType> typeMapping;
   private final Getter<Collection<CustomStatement>> dependenciesGetter;
   private final Getter<Collection<String>> dependencyTypesGetter;
 
-  AbstractEffectiveCustomStatement(CustomStatement actualType, Map<String, NonPrimitiveType> typeMapping) {
+  AbstractEffectiveCustomStatement(CustomStatement actualType, Map<String, NotPrimitiveType> typeMapping) {
     this.actualType = actualType;
     this.typeMapping = typeMapping;
     this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);

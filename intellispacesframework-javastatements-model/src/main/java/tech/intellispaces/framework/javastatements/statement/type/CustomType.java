@@ -10,7 +10,7 @@ import java.util.function.Function;
 /**
  * The custom type.
  */
-public interface CustomType extends NonPrimitiveType, TypeBound, ExceptionCompatibleType {
+public interface CustomType extends NotPrimitiveType, TypeBound, ExceptionCompatibleType {
 
   /**
    * Custom statement.
@@ -20,11 +20,11 @@ public interface CustomType extends NonPrimitiveType, TypeBound, ExceptionCompat
   /**
    * Actual arguments of type parameters.
    */
-  List<NonPrimitiveType> typeArguments();
+  List<NotPrimitiveType> typeArguments();
 
   CustomStatement effectiveStatement();
 
-  Map<String, NonPrimitiveType> typeArgumentMapping();
+  Map<String, NotPrimitiveType> typeArgumentMapping();
 
   String typeArgumentsDeclaration();
 

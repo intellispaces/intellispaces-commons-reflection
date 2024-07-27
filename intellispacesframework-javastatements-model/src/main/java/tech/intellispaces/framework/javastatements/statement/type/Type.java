@@ -37,7 +37,7 @@ public interface Type extends Statement {
   /**
    * Related non-primitive type.
    */
-  default Optional<NonPrimitiveType> asNonPrimitive() {
+  default Optional<NotPrimitiveType> asNotPrimitive() {
     return Optional.empty();
   }
 
@@ -85,7 +85,7 @@ public interface Type extends Statement {
     return asCustom().orElseThrow();
   }
 
-  Type specify(Map<String, NonPrimitiveType> typeMapping);
+  Type specify(Map<String, NotPrimitiveType> typeMapping);
 
   Collection<CustomStatement> dependencies();
 

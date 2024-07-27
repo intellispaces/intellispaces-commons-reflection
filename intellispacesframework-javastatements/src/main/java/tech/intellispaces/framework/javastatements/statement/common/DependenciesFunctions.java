@@ -173,7 +173,7 @@ public interface DependenciesFunctions {
       return List.of();
     }
     return getTypeReferenceDependencies(
-        typeReference.elementType().asNonPrimitive().orElseThrow(IllegalStateException::new),
+        typeReference.elementType().asNotPrimitive().orElseThrow(IllegalStateException::new),
         includeRelations,
         exclusions
     );

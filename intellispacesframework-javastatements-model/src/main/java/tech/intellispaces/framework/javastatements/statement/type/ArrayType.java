@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * The array type.
  */
-public interface ArrayType extends NonPrimitiveType, TypeBound {
+public interface ArrayType extends NotPrimitiveType, TypeBound {
 
   /**
    * Elements type.

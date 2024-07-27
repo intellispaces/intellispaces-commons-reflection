@@ -15,7 +15,7 @@ import tech.intellispaces.framework.javastatements.statement.method.MethodStatem
 import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 import tech.intellispaces.framework.javastatements.statement.type.TypeFunctions;
 
@@ -154,7 +154,7 @@ public interface CustomTypeFunctions {
   private static Type getActualTypeReference(Type type, TypeContext typeContext) {
     if (type.asNamed().isPresent())  {
       NamedType namedTypeReference = type.asNamed().orElseThrow();
-      Optional<NonPrimitiveType> actualType = typeContext
+      Optional<NotPrimitiveType> actualType = typeContext
           .get(namedTypeReference.name())
           .map(ContextTypeParameter::actualType);
       if (actualType.isPresent()) {

@@ -276,8 +276,8 @@ public interface TypeFunctions {
     }
   }
 
-  static Map<String, NonPrimitiveType> getTypeArgumentMapping(CustomType customTypeReference) {
-    List<NonPrimitiveType> typeArguments = customTypeReference.typeArguments();
+  static Map<String, NotPrimitiveType> getTypeArgumentMapping(CustomType customTypeReference) {
+    List<NotPrimitiveType> typeArguments = customTypeReference.typeArguments();
     List<NamedType> typeParams = customTypeReference.statement().typeParameters();
     if (typeArguments.isEmpty() && typeParams.isEmpty()) {
       return Map.of();
@@ -288,11 +288,11 @@ public interface TypeFunctions {
           typeArguments.size(), typeParams.size(), customTypeReference.formalFullDeclaration());
     }
 
-    Map<String, NonPrimitiveType> mapping = new HashMap<>();
-    Iterator<NonPrimitiveType> typeArgumentIterator = customTypeReference.typeArguments().iterator();
+    Map<String, NotPrimitiveType> mapping = new HashMap<>();
+    Iterator<NotPrimitiveType> typeArgumentIterator = customTypeReference.typeArguments().iterator();
     Iterator<NamedType> typeParamIterator = customTypeReference.statement().typeParameters().iterator();
     while (typeArgumentIterator.hasNext()) {
-      NonPrimitiveType typeArgument = typeArgumentIterator.next();
+      NotPrimitiveType typeArgument = typeArgumentIterator.next();
       NamedType typeParam = typeParamIterator.next();
       mapping.put(typeParam.name(), typeArgument);
     }

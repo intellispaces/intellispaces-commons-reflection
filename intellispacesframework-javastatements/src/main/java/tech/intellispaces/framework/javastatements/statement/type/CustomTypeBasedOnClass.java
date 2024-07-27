@@ -34,7 +34,7 @@ class CustomTypeBasedOnClass extends AbstractType implements CustomType {
   }
 
   @Override
-  public List<NonPrimitiveType> typeArguments() {
+  public List<NotPrimitiveType> typeArguments() {
     return List.of();
   }
 
@@ -44,12 +44,12 @@ class CustomTypeBasedOnClass extends AbstractType implements CustomType {
   }
 
   @Override
-  public Map<String, NonPrimitiveType> typeArgumentMapping() {
+  public Map<String, NotPrimitiveType> typeArgumentMapping() {
     return Map.of();
   }
 
   @Override
-  public Type specify(Map<String, NonPrimitiveType> typeMapping) {
+  public Type specify(Map<String, NotPrimitiveType> typeMapping) {
     return this;
   }
 

@@ -41,7 +41,7 @@ class NamedTypeImpl extends AbstractType implements NamedType {
   }
 
   @Override
-  public Type specify(Map<String, NonPrimitiveType> typeMapping) {
+  public Type specify(Map<String, NotPrimitiveType> typeMapping) {
     Type specifiedReference = typeMapping.get(name);
     if (specifiedReference != null) {
       return specifiedReference;

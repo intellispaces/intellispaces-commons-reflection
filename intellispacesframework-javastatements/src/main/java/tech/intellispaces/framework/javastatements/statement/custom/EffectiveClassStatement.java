@@ -6,7 +6,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.type.CustomType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ class EffectiveClassStatement extends AbstractEffectiveCustomStatement implement
   private final Getter<List<CustomType>> implementedInterfacesGetter;
 
   EffectiveClassStatement(
-      ClassStatement classStatement, Map<String, NonPrimitiveType> typeMapping
+      ClassStatement classStatement, Map<String, NotPrimitiveType> typeMapping
   ) {
     super(classStatement, typeMapping);
     this.extendedClassGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);

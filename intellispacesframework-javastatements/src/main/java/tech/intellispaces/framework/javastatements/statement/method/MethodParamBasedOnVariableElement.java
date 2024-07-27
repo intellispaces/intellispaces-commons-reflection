@@ -9,7 +9,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import javax.lang.model.element.VariableElement;
@@ -68,7 +68,7 @@ class MethodParamBasedOnVariableElement implements MethodParam {
   }
 
   @Override
-  public MethodParam specify(Map<String, NonPrimitiveType> typeMapping) {
+  public MethodParam specify(Map<String, NotPrimitiveType> typeMapping) {
     return new MethodParamImpl(
         name(),
         type().specify(typeMapping),

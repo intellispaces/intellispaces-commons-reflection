@@ -4,7 +4,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.lang.annotation.Annotation;
@@ -65,7 +65,7 @@ class MethodParamImpl implements MethodParam {
   }
 
   @Override
-  public MethodParam specify(Map<String, NonPrimitiveType> typeMapping) {
+  public MethodParam specify(Map<String, NotPrimitiveType> typeMapping) {
     return new MethodParamImpl(
         name(),
         type().specify(typeMapping),

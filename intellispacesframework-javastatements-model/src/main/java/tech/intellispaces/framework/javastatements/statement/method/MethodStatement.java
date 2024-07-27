@@ -6,7 +6,7 @@ import tech.intellispaces.framework.javastatements.statement.instance.Annotation
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
 import tech.intellispaces.framework.javastatements.statement.type.NamedType;
-import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.NotPrimitiveType;
 import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.lang.annotation.Annotation;
@@ -31,7 +31,7 @@ public interface MethodStatement extends AnnotatedStatement {
    */
   List<MethodStatement> overrideMethods();
 
-  MethodStatement specify(Map<String, NonPrimitiveType> typeMapping);
+  MethodStatement specify(Map<String, NotPrimitiveType> typeMapping);
 
   /**
    * Declared type parameters.
