@@ -1,8 +1,8 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ public interface MethodParam extends AnnotatedStatement {
 
   String name();
 
-  TypeReference type();
+  Type type();
 
-  MethodParam specify(Map<String, NonPrimitiveTypeReference> typeMapping);
+  MethodParam specify(Map<String, NonPrimitiveType> typeMapping);
 }

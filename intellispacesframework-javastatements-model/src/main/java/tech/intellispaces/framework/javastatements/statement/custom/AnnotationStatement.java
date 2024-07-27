@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,10 +8,10 @@ import java.util.Optional;
 /**
  * The annotation statement.
  */
-public interface AnnotationStatement extends CustomType {
+public interface AnnotationStatement extends CustomStatement {
 
   @Override
-  default List<NamedTypeReference> typeParameters() {
+  default List<NamedType> typeParameters() {
     return List.of();
   }
 
@@ -20,7 +20,7 @@ public interface AnnotationStatement extends CustomType {
     return Optional.of(this);
   }
 
-  default CustomType asCustomType() {
+  default CustomStatement asCustomType() {
     return this;
   }
 }

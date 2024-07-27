@@ -6,7 +6,7 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 /**
  * Adapter of {@link Class} to {@link InterfaceStatement}.
  */
-class InterfaceStatementBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements InterfaceStatement {
+class InterfaceStatementBasedOnLangClass extends AbstractCustomStatementBasedLandClass implements InterfaceStatement {
 
   InterfaceStatementBasedOnLangClass(Class<?> aClass) {
     super(aClass);

@@ -1,14 +1,14 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.List;
 import java.util.Objects;
 
 public final class MethodParamBuilder {
   private String name;
-  private TypeReference type;
+  private Type type;
   private List<AnnotationInstance> annotations = List.of();
 
   MethodParamBuilder() {}
@@ -18,7 +18,7 @@ public final class MethodParamBuilder {
     return this;
   }
 
-  public MethodParamBuilder type(TypeReference type) {
+  public MethodParamBuilder type(Type type) {
     this.type = type;
     return this;
   }

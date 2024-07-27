@@ -9,8 +9,8 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import javax.lang.model.element.VariableElement;
 import java.lang.annotation.Annotation;
@@ -23,7 +23,7 @@ import java.util.Optional;
  */
 class MethodParamBasedOnVariableElement implements MethodParam {
   private final VariableElement variableElement;
-  private final Getter<TypeReference> typeGetter;
+  private final Getter<Type> typeGetter;
   private final Getter<List<AnnotationInstance>> annotationsGetter;
 
   MethodParamBasedOnVariableElement(VariableElement variableElement, TypeContext typeContext, Session session) {
@@ -43,7 +43,7 @@ class MethodParamBasedOnVariableElement implements MethodParam {
   }
 
   @Override
-  public TypeReference type() {
+  public Type type() {
     return typeGetter.get();
   }
 
@@ -68,7 +68,7 @@ class MethodParamBasedOnVariableElement implements MethodParam {
   }
 
   @Override
-  public MethodParam specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+  public MethodParam specify(Map<String, NonPrimitiveType> typeMapping) {
     return new MethodParamImpl(
         name(),
         type().specify(typeMapping),

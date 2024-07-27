@@ -1,7 +1,7 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,15 +9,15 @@ import java.util.Optional;
 /**
  * The enum.
  */
-public interface EnumStatement extends CustomType {
+public interface EnumStatement extends CustomStatement {
 
   /**
    * Implemented interfaces.
    */
-  List<CustomTypeReference> implementedInterfaces();
+  List<CustomType> implementedInterfaces();
 
   @Override
-  default List<NamedTypeReference> typeParameters() {
+  default List<NamedType> typeParameters() {
     return List.of();
   }
 
@@ -26,7 +26,7 @@ public interface EnumStatement extends CustomType {
     return Optional.of(this);
   }
 
-  default CustomType asCustomType() {
+  default CustomStatement asCustomType() {
     return this;
   }
 }

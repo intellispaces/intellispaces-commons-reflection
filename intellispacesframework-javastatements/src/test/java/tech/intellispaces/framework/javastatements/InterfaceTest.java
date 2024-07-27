@@ -6,10 +6,10 @@ import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.Sessions;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Tests for {@link InterfaceStatement}.
  */
-public class InterfaceTest extends AbstractCustomTypeTest {
+public class InterfaceTest extends AbstractCustomStatementTest {
 
   @Test
   public void testEmptyInterface() {
@@ -32,11 +32,11 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("interfaces/EmptyInterface.java");
 
     // When
-    CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
+    CustomStatement customStatementStatement = JavaStatements.customTypeStatement(typeElement);
 
     // Then
-    assertThat(customTypeStatement).isInstanceOf(InterfaceStatement.class);
-    InterfaceStatement interfaceStatement = customTypeStatement.asInterface().orElse(null);
+    assertThat(customStatementStatement).isInstanceOf(InterfaceStatement.class);
+    InterfaceStatement interfaceStatement = customStatementStatement.asInterface().orElse(null);
     assertThat(interfaceStatement).isNotNull();
 
     assertThat(interfaceStatement.isNested()).isFalse();
@@ -332,7 +332,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("interfaces/GenericInterfaceWithCyclicTypeDependencyCase1.java");
 
     // When
-    CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
+    CustomType typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
     assertThat(typeReference.actualDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1");
@@ -348,10 +348,10 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(interfaceStatement.typeParameters().get(0), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T");
       assertThat(typeParam.extendedBounds()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(interfaceStatement);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().typeArguments()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().typeArguments().get(0)
-          .asNamedTypeReference().orElseThrow().name()).isEqualTo("T");
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType()).isSameAs(interfaceStatement);
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments()).hasSize(1);
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments().get(0)
+          .asNamedType().orElseThrow().name()).isEqualTo("T");
     });
   }
 
@@ -361,7 +361,7 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("interfaces/GenericInterfaceWithCyclicTypeDependencyCase2.java");
 
     // When
-    CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
+    CustomType typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
     assertThat(typeReference.actualDeclaration()).isEqualTo("InterfaceA");
@@ -377,14 +377,14 @@ public class InterfaceTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(interfaceStatement.typeParameters().get(0), classATypeParam -> {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
-      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
+      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispaces.framework.javastatements.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB");
         assertThat(classBExtendedBound.className()).isEqualTo("tech.intellispaces.framework.javastatements.samples.GenericInterfaceWithCyclicTypeDependencyCase2$InterfaceB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds().get(0)
-            .asCustomTypeReference().orElseThrow().targetType()).isSameAs(interfaceStatement);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().name()).isEqualTo("T2");
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().extendedBounds()).hasSize(1);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().extendedBounds().get(0)
+            .asCustomType().orElseThrow().targetType()).isSameAs(interfaceStatement);
       });
     });
   }

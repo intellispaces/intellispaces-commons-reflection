@@ -2,14 +2,14 @@ package tech.intellispaces.framework.javastatements.statement.custom;
 
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
 
 import java.util.Map;
 
-class EffectiveInterfaceStatement extends AbstractEffectiveCustomType implements InterfaceStatement {
+class EffectiveInterfaceStatement extends AbstractEffectiveCustomStatement implements InterfaceStatement {
 
   EffectiveInterfaceStatement(
-      InterfaceStatement actualType, Map<String, NonPrimitiveTypeReference> typeMapping
+      InterfaceStatement actualType, Map<String, NonPrimitiveType> typeMapping
   ) {
     super(actualType, typeMapping);
   }

@@ -1,12 +1,12 @@
 package tech.intellispaces.framework.javastatements.statement.instance;
 
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.List;
 
 public interface ArrayInstances {
 
-  static ArrayInstance of(TypeReference elementType, List<Instance> elements) {
+  static ArrayInstance of(Type elementType, List<Instance> elements) {
     return new ArrayInstanceImpl(elementType, elements);
   }
 }

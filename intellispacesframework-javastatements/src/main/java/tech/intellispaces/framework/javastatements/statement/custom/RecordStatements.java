@@ -29,6 +29,6 @@ public interface RecordStatements {
   private static RecordStatement create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return new RecordStatementBasedOnTypeElement(typeElement, typeContext, session);
+    return new RecordStatementBasedOnStatementElement(typeElement, typeContext, session);
   }
 }

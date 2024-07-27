@@ -4,8 +4,8 @@ import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 
 class MethodParamImpl implements MethodParam {
   private final String name;
-  private final TypeReference type;
+  private final Type type;
   private final List<AnnotationInstance> annotations;
   private final Map<String, AnnotationInstance> annotationMap;
 
-  MethodParamImpl(String name, TypeReference type, List<AnnotationInstance> annotations) {
+  MethodParamImpl(String name, Type type, List<AnnotationInstance> annotations) {
     this.name = name;
     this.type = type;
     this.annotations = annotations;
@@ -39,7 +39,7 @@ class MethodParamImpl implements MethodParam {
   }
 
   @Override
-  public TypeReference type() {
+  public Type type() {
     return type;
   }
 
@@ -65,7 +65,7 @@ class MethodParamImpl implements MethodParam {
   }
 
   @Override
-  public MethodParam specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+  public MethodParam specify(Map<String, NonPrimitiveType> typeMapping) {
     return new MethodParamImpl(
         name(),
         type().specify(typeMapping),

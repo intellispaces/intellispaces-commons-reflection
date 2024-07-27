@@ -7,11 +7,11 @@ import tech.intellispaces.framework.javastatements.statement.common.TypeElementF
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferences;
-import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
+import tech.intellispaces.framework.javastatements.statement.type.CustomTypeReferences;
+import tech.intellispaces.framework.javastatements.statement.type.PrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.PrimitiveTypeReferences;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
@@ -67,13 +67,13 @@ public interface InstanceFunctions {
     } else if (value instanceof VariableElement) {
       // Enum value
       VariableElement variableElement = (VariableElement) value;
-      TypeReference typeReference = TypeElementFunctions.getTypeReference(variableElement.asType(), session);
-      EnumStatement enumStatement = typeReference.asCustomTypeReference().orElseThrow().targetType().asEnum().orElseThrow();
+      Type type = TypeElementFunctions.getTypeReference(variableElement.asType(), session);
+      EnumStatement enumStatement = type.asCustomType().orElseThrow().targetType().asEnum().orElseThrow();
       return EnumInstances.of(enumStatement, variableElement.getSimpleName().toString());
     } else if (value instanceof DeclaredType) {
       // Class value
       DeclaredType declaredType = (DeclaredType) value;
-      CustomTypeReference typeReference = TypeElementFunctions.getTypeReference(declaredType, session);
+      CustomType typeReference = TypeElementFunctions.getTypeReference(declaredType, session);
       return ClassInstances.of(typeReference.targetType());
     } else if (value instanceof AnnotationMirror) {
       // Annotation value
@@ -92,14 +92,14 @@ public interface InstanceFunctions {
     return instance;
   }
 
-  private static TypeReference arrayItemsType(List<Instance> values) {
+  private static Type arrayItemsType(List<Instance> values) {
     if (values.isEmpty()) {
       return CustomTypeReferences.of(ClassStatements.of(Object.class));
     }
 
     Instance value = values.get(0);
     if (StatementTypes.PrimitiveInstance.equals(value.statementType())) {
-      PrimitiveTypeReference primitiveType = value.asPrimitive().orElseThrow().type();
+      PrimitiveType primitiveType = value.asPrimitive().orElseThrow().type();
       final Class<?> wrapperClass = primitiveType.wrapperClass();
       return CustomTypeReferences.of(ClassStatements.of(wrapperClass));
     } else if (StatementTypes.StringInstance.equals(value.statementType())) {

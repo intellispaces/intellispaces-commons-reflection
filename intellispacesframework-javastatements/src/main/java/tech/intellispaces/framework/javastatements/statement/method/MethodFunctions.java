@@ -4,14 +4,14 @@ import tech.intellispaces.framework.javastatements.JavaStatements;
 import tech.intellispaces.framework.javastatements.context.TypeContext;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.statement.common.TypeElementFunctions;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.instance.InstanceFunctions;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReferenceFunctions;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
+import tech.intellispaces.framework.javastatements.statement.type.TypeFunctions;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.TypeKind;
@@ -56,7 +56,7 @@ public interface MethodFunctions {
         .get();
   }
 
-  static Optional<TypeReference> getMethodReturnType(
+  static Optional<Type> getMethodReturnType(
       ExecutableElement executableElement, TypeContext typeContext, Session session
   ) {
     TypeMirror returnTypeMirror = executableElement.getReturnType();
@@ -91,11 +91,11 @@ public interface MethodFunctions {
         .toList();
   }
 
-  static List<ExceptionCompatibleTypeReference> getMethodExceptions(
+  static List<ExceptionCompatibleType> getMethodExceptions(
       ExecutableElement executableElement, TypeContext typeContext, Session session
   ) {
     return executableElement.getThrownTypes().stream()
-        .map(type -> (ExceptionCompatibleTypeReference) TypeElementFunctions.getTypeReference(type, typeContext, session))
+        .map(type -> (ExceptionCompatibleType) TypeElementFunctions.getTypeReference(type, typeContext, session))
         .collect(Collectors.toList());
   }
 
@@ -104,7 +104,7 @@ public interface MethodFunctions {
   }
 
   private static List<MethodStatement> getOverrideMethods(
-      CustomType type, MethodStatement method, boolean included
+      CustomStatement type, MethodStatement method, boolean included
   ) {
     List<MethodStatement> overrideMethods = new ArrayList<>();
     if (included) {
@@ -114,9 +114,9 @@ public interface MethodFunctions {
         }
       }
     }
-    for (CustomTypeReference parent : type.parentTypes()) {
-      if (parent.isCustomTypeReference()) {
-        overrideMethods.addAll(getOverrideMethods(parent.asCustomTypeReferenceSurely().targetType(), method, true));
+    for (CustomType parent : type.parentTypes()) {
+      if (parent.isCustomType()) {
+        overrideMethods.addAll(getOverrideMethods(parent.asCustomTypeConfidently().targetType(), method, true));
       }
     }
     return overrideMethods;
@@ -134,7 +134,7 @@ public interface MethodFunctions {
     while (paramIterator1.hasNext() && paramIterator2.hasNext()) {
       MethodParam param1 = paramIterator1.next();
       MethodParam param2 = paramIterator2.next();
-      if (!TypeReferenceFunctions.isEquivalentTypes(param1.type(), param2.type())) {
+      if (!TypeFunctions.isEquivalentTypes(param1.type(), param2.type())) {
         return false;
       }
     }

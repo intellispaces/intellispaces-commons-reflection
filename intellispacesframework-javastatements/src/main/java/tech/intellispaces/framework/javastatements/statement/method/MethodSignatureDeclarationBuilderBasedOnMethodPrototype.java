@@ -3,8 +3,8 @@ package tech.intellispaces.framework.javastatements.statement.method;
 import tech.intellispaces.framework.commons.action.Executor;
 import tech.intellispaces.framework.commons.action.string.StringActions;
 import tech.intellispaces.framework.commons.function.Consumers;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,11 +84,11 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   private void appendTypeParams(StringBuilder sb) {
     Executor commaAppender = StringActions.commaAppender(sb);
     commaAppender.execute();
-    for (NamedTypeReference typeParam : prototype.typeParameters()) {
+    for (NamedType typeParam : prototype.typeParameters()) {
       sb.append(typeParam.formalFullDeclaration());
     }
     if (includeOwnerTypeParams) {
-      for (NamedTypeReference typeParam : prototype.owner().typeParameters()) {
+      for (NamedType typeParam : prototype.owner().typeParameters()) {
         sb.append(typeParam.formalFullDeclaration());
       }
     }
@@ -99,7 +99,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Consumer<String> importConsumer,
       Function<String, String> canonicalToSimpleNameMapper
   ) {
-    TypeReference returnType = prototype.returnType().orElseThrow();
+    Type returnType = prototype.returnType().orElseThrow();
     returnType.dependencyTypenames().forEach(importConsumer);
     sb.append(returnType.actualDeclaration(canonicalToSimpleNameMapper));
   }
@@ -131,7 +131,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Function<String, String> canonicalToSimpleNameMapper
   ) {
     String exceptions = prototype.exceptions().stream()
-        .map(e -> e.asCustomTypeReference().orElseThrow().targetType())
+        .map(e -> e.asCustomType().orElseThrow().targetType())
         .peek(e -> importConsumer.accept(e.canonicalName()))
         .map(e -> canonicalToSimpleNameMapper.apply(e.canonicalName()))
         .collect(Collectors.joining(", "));

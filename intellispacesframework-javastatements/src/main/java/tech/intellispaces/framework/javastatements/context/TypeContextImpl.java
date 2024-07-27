@@ -1,8 +1,8 @@
 package tech.intellispaces.framework.javastatements.context;
 
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,14 +42,14 @@ class TypeContextImpl implements TypeContext, TypeContextBlank {
   }
 
   @Override
-  public TypeContextBlank addTypeParam(String typeParamName, NamedTypeReference type) {
+  public TypeContextBlank addTypeParam(String typeParamName, NamedType type) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, null));
     return this;
   }
 
   @Override
   public TypeContextBlank addTypeParam(
-      String typeParamName, NamedTypeReference type, NonPrimitiveTypeReference value
+      String typeParamName, NamedType type, NonPrimitiveType value
   ) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, value));
     return this;

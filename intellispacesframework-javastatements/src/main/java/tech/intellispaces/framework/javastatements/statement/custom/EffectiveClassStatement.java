@@ -5,19 +5,19 @@ import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-class EffectiveClassStatement extends AbstractEffectiveCustomType implements ClassStatement {
-  private final Getter<Optional<CustomTypeReference>> extendedClassGetter;
-  private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
+class EffectiveClassStatement extends AbstractEffectiveCustomStatement implements ClassStatement {
+  private final Getter<Optional<CustomType>> extendedClassGetter;
+  private final Getter<List<CustomType>> implementedInterfacesGetter;
 
   EffectiveClassStatement(
-      ClassStatement classStatement, Map<String, NonPrimitiveTypeReference> typeMapping
+      ClassStatement classStatement, Map<String, NonPrimitiveType> typeMapping
   ) {
     super(classStatement, typeMapping);
     this.extendedClassGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);
@@ -38,12 +38,12 @@ class EffectiveClassStatement extends AbstractEffectiveCustomType implements Cla
   }
 
   @Override
-  public Optional<CustomTypeReference> extendedClass() {
+  public Optional<CustomType> extendedClass() {
     return extendedClassGetter.get();
   }
 
   @Override
-  public List<CustomTypeReference> implementedInterfaces() {
+  public List<CustomType> implementedInterfaces() {
     return implementedInterfacesGetter.get();
   }
 }

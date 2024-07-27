@@ -73,29 +73,29 @@ public enum StatementTypes implements StatementType {
   MethodParam,
 
   /**
-   * Reference to primitive type.
+   * Primitive type.
    */
-  PrimitiveReference,
+  PrimitiveType,
 
   /**
-   * Reference to custom type.
+   * Custom type.
    */
-  CustomTypeReference,
+  CustomType,
 
   /**
-   * Reference to array.
+   * Array type.
    */
-  ArrayTypeReference,
+  ArrayType,
 
   /**
-   * Named type reference.
+   * Named type.
    */
-  NamedTypeReference,
+  NamedType,
 
   /**
-   * Wildcard type reference.
+   * Wildcard type.
    */
-  WildcardTypeReference;
+  WildcardType;
 
   @Override
   public String typename() {

@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.instance;
 
-import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.PrimitiveType;
 
 import java.util.Optional;
 
@@ -15,9 +15,9 @@ public interface PrimitiveInstance extends Instance {
   }
 
   /**
-   * Primitive type reference.
+   * Type.
    */
-  PrimitiveTypeReference type();
+  PrimitiveType type();
 
   /**
    * Primitive value.

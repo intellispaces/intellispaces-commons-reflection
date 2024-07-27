@@ -1,24 +1,24 @@
 package tech.intellispaces.framework.javastatements.context;
 
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
 
 class ContextTypeParameterImpl implements ContextTypeParameter {
-  private final NamedTypeReference type;
-  private final NonPrimitiveTypeReference actualType;
+  private final NamedType namedType;
+  private final NonPrimitiveType actualType;
 
-  ContextTypeParameterImpl(NamedTypeReference type, NonPrimitiveTypeReference actualType) {
-    this.type = type;
+  ContextTypeParameterImpl(NamedType namedType, NonPrimitiveType actualType) {
+    this.namedType = namedType;
     this.actualType = actualType;
   }
 
   @Override
-  public NamedTypeReference reference() {
-    return type;
+  public NamedType namedType() {
+    return namedType;
   }
 
   @Override
-  public NonPrimitiveTypeReference type() {
+  public NonPrimitiveType actualType() {
     return actualType;
   }
 }

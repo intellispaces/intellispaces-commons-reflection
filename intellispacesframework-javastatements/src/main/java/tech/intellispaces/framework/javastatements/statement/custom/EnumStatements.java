@@ -27,6 +27,6 @@ public interface EnumStatements {
   private static EnumStatement create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return new EnumStatementBasedOnTypeElement(typeElement, typeContext, session);
+    return new EnumStatementBasedOnStatementElement(typeElement, typeContext, session);
   }
 }

@@ -5,7 +5,7 @@ import tech.intellispaces.framework.commons.collection.CollectionFunctions;
 import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.Sessions;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.support.TesteeType;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Tests for {@link EnumStatement}.
  */
-public class EnumTest extends AbstractCustomTypeTest {
+public class EnumTest extends AbstractCustomStatementTest {
 
   @Test
   public void testEmptyEnum() {
@@ -30,11 +30,11 @@ public class EnumTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("enums/EmptyEnum.java");
 
     // When
-    CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
+    CustomStatement customStatementStatement = JavaStatements.customTypeStatement(typeElement);
 
     // Then
-    assertThat(customTypeStatement).isInstanceOf(EnumStatement.class);
-    EnumStatement enumStatement = customTypeStatement.asEnum().orElse(null);
+    assertThat(customStatementStatement).isInstanceOf(EnumStatement.class);
+    EnumStatement enumStatement = customStatementStatement.asEnum().orElse(null);
     assertThat(enumStatement).isNotNull();
 
     assertThat(enumStatement.isAbstract()).isFalse();
@@ -102,7 +102,7 @@ public class EnumTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(enumStatement.parentTypes().get(0), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
       assertThat(parentType.typeArguments()).hasSize(1);
-      assertThat(parentType.typeArguments().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(enumStatement);
+      assertThat(parentType.typeArguments().get(0).asCustomType().orElseThrow().targetType()).isSameAs(enumStatement);
     });
     HandleFunctions.handle(enumStatement.parentTypes().get(1), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(interface1Name);

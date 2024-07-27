@@ -2,10 +2,10 @@ package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.List;
 import java.util.Map;
@@ -24,12 +24,12 @@ public interface MethodSignature extends AnnotatedStatement {
   /**
    * Declared type parameters.
    */
-  List<NamedTypeReference> typeParameters();
+  List<NamedType> typeParameters();
 
   /**
    * Method returned type.
    */
-  Optional<TypeReference> returnType();
+  Optional<Type> returnType();
 
   /**
    * Method default value.
@@ -41,12 +41,12 @@ public interface MethodSignature extends AnnotatedStatement {
    */
   List<MethodParam> params();
 
-  List<TypeReference> parameterTypes();
+  List<Type> parameterTypes();
 
   /**
    * Method exceptions.
    */
-  List<ExceptionCompatibleTypeReference> exceptions();
+  List<ExceptionCompatibleType> exceptions();
 
   boolean isAbstract();
 
@@ -62,5 +62,5 @@ public interface MethodSignature extends AnnotatedStatement {
    */
   boolean isStatic();
 
-  MethodSignature specify(Map<String, NonPrimitiveTypeReference> typeMapping);
+  MethodSignature specify(Map<String, NonPrimitiveType> typeMapping);
 }

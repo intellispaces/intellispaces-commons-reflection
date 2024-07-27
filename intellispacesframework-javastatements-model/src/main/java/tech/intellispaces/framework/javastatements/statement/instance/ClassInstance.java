@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.instance;
 
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 
 import java.util.Optional;
 
@@ -17,5 +17,5 @@ public interface ClassInstance extends Instance {
   /**
    * Class type statement.
    */
-  CustomType type();
+  CustomStatement type();
 }

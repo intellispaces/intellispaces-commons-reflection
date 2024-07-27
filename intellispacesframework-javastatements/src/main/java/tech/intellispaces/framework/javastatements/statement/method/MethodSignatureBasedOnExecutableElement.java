@@ -12,10 +12,10 @@ import tech.intellispaces.framework.javastatements.statement.common.TypeElementF
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -29,11 +29,11 @@ import java.util.Optional;
  */
 class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   private final ExecutableElement executableElement;
-  private final List<NamedTypeReference> typeParams;
-  private final Getter<Optional<TypeReference>> returnTypeGetter;
+  private final List<NamedType> typeParams;
+  private final Getter<Optional<Type>> returnTypeGetter;
   private final Getter<Optional<Instance>> defaultValueGetter;
   private final Getter<List<MethodParam>> paramsGetter;
-  private final Getter<List<ExceptionCompatibleTypeReference>> exceptionsGetter;
+  private final Getter<List<ExceptionCompatibleType>> exceptionsGetter;
   private final Getter<List<AnnotationInstance>> annotationsGetter;
 
   MethodSignatureBasedOnExecutableElement(ExecutableElement executableElement, TypeContext typeContext, Session session) {
@@ -52,7 +52,7 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
     return StatementTypes.MethodSignature;
   }
 
-  private TypeContext createNameContext(TypeContext parentContext, List<NamedTypeReference> typeParams) {
+  private TypeContext createNameContext(TypeContext parentContext, List<NamedType> typeParams) {
     TypeContextBuilder builder = TypeContexts.build().parentContext(parentContext);
     typeParams.forEach(typeParam -> builder.addTypeParam(typeParam.name(), typeParam));
     return builder.get();
@@ -64,12 +64,12 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   }
 
   @Override
-  public List<NamedTypeReference> typeParameters() {
+  public List<NamedType> typeParameters() {
     return typeParams;
   }
 
   @Override
-  public Optional<TypeReference> returnType() {
+  public Optional<Type> returnType() {
     return returnTypeGetter.get();
   }
 
@@ -84,14 +84,14 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   }
 
   @Override
-  public List<TypeReference> parameterTypes() {
+  public List<Type> parameterTypes() {
     return params().stream()
         .map(MethodParam::type)
         .toList();
   }
 
   @Override
-  public List<ExceptionCompatibleTypeReference> exceptions() {
+  public List<ExceptionCompatibleType> exceptions() {
     return exceptionsGetter.get();
   }
 
@@ -136,7 +136,7 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   }
 
   @Override
-  public MethodSignature specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+  public MethodSignature specify(Map<String, NonPrimitiveType> typeMapping) {
     return new MethodSignatureImpl(
         name(),
         isAbstract(),
@@ -147,7 +147,7 @@ class MethodSignatureBasedOnExecutableElement implements MethodSignature {
         returnType().map(t -> t.specify(typeMapping)).orElse(null),
         defaultValue().orElse(null),
         params().stream().map(p -> p.specify(typeMapping)).toList(),
-        exceptions().stream().map(e -> (ExceptionCompatibleTypeReference) e.specify(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ExceptionCompatibleType) e.specify(typeMapping)).toList(),
         annotations()
     );
   }

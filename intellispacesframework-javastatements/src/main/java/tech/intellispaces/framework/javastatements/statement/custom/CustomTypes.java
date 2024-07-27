@@ -8,15 +8,15 @@ import javax.lang.model.element.TypeElement;
 
 public interface CustomTypes {
 
-  static CustomType of(TypeElement typeElement) {
+  static CustomStatement of(TypeElement typeElement) {
     return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
   }
 
-  static CustomType of(TypeElement typeElement, Session session) {
+  static CustomStatement of(TypeElement typeElement, Session session) {
     return TypeElementFunctions.asCustomTypeStatement(typeElement, session);
   }
 
-  static CustomType of(Class<?> aClass) {
+  static CustomStatement of(Class<?> aClass) {
     if (aClass.isInterface()) {
       return InterfaceStatements.of(aClass);
     } else if (aClass.isRecord()) {

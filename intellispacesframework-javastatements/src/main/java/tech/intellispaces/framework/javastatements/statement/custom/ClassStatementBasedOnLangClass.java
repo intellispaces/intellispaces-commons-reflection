@@ -4,7 +4,7 @@ import tech.intellispaces.framework.commons.type.TypeFunctions;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * Adapter of {@link Class} to {@link ClassStatement}.
  */
-class ClassStatementBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements ClassStatement {
+class ClassStatementBasedOnLangClass extends AbstractCustomStatementBasedLandClass implements ClassStatement {
 
   ClassStatementBasedOnLangClass(Class<?> aClass) {
     super(aClass);
@@ -34,12 +34,12 @@ class ClassStatementBasedOnLangClass extends AbstractCustomTypeBasedLandClass im
   }
 
   @Override
-  public Optional<CustomTypeReference> extendedClass() {
+  public Optional<CustomType> extendedClass() {
     throw new UnsupportedOperationException("Not implemented yet");
   }
 
   @Override
-  public List<CustomTypeReference> implementedInterfaces() {
+  public List<CustomType> implementedInterfaces() {
     throw new UnsupportedOperationException("Not implemented yet");
   }
 }

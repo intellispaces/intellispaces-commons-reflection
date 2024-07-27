@@ -1,16 +1,16 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface InterfaceStatement extends CustomType {
+public interface InterfaceStatement extends CustomStatement {
 
   /**
    * Extended interfaces references.
    */
-  default List<CustomTypeReference> extendedInterfaces() {
+  default List<CustomType> extendedInterfaces() {
     return parentTypes();
   }
 
@@ -22,7 +22,7 @@ public interface InterfaceStatement extends CustomType {
   /**
    * Connected custom type.
    */
-  default CustomType asCustomType() {
+  default CustomStatement asCustomType() {
     return this;
   }
 }

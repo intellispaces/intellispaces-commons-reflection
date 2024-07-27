@@ -12,12 +12,12 @@ import tech.intellispaces.framework.javastatements.statement.method.MethodSignat
 import tech.intellispaces.framework.javastatements.statement.method.MethodSignatures;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatements;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReferenceFunctions;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
+import tech.intellispaces.framework.javastatements.statement.type.TypeFunctions;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  */
 public interface CustomTypeFunctions {
 
-  static Optional<CustomTypeReference> getExtendedClass(CustomType statement) {
+  static Optional<CustomType> getExtendedClass(CustomStatement statement) {
     return statement.parentTypes().stream()
         .filter(ref -> StatementTypes.Class.equals(ref.targetType().statementType()))
         .reduce((ref1, ref2) -> {
@@ -38,18 +38,18 @@ public interface CustomTypeFunctions {
         });
   }
 
-  static List<CustomTypeReference> getImplementedInterfaces(CustomType statement) {
+  static List<CustomType> getImplementedInterfaces(CustomStatement statement) {
     return statement.parentTypes().stream()
         .filter(t -> StatementTypes.Interface.equals(t.targetType().statementType()))
         .toList();
   }
 
-  static List<MethodStatement> getActualMethods(CustomType customType, TypeContext typeContext, Session session) {
+  static List<MethodStatement> getActualMethods(CustomStatement customStatement, TypeContext typeContext, Session session) {
     List<MethodStatement> actualMethods = new ArrayList<>();
-    customType.declaredMethods().stream()
+    customStatement.declaredMethods().stream()
         .map(method -> getEffectiveMethod(method, typeContext))
         .forEach(actualMethods::add);
-    inheritedMethods(customType, actualMethods, typeContext);
+    inheritedMethods(customStatement, actualMethods, typeContext);
     return actualMethods;
   }
 
@@ -76,7 +76,7 @@ public interface CustomTypeFunctions {
         .defaultValue(originMethodSignature.defaultValue().orElse(null))
         .typeParameters(
             originMethodSignature.typeParameters().stream()
-                .map(e -> (NamedTypeReference) getActualTypeReference(e, typeContext))
+                .map(e -> (NamedType) getActualTypeReference(e, typeContext))
                 .toList()
         )
         .params(originMethodSignature.params().stream()
@@ -87,30 +87,30 @@ public interface CustomTypeFunctions {
             .toList()
         )
         .exceptions(originMethodSignature.exceptions().stream()
-            .map(e -> (ExceptionCompatibleTypeReference) getActualTypeReference(e, typeContext))
+            .map(e -> (ExceptionCompatibleType) getActualTypeReference(e, typeContext))
             .toList()
         )
         .get();
   }
 
   private static void inheritedMethods(
-      CustomType customType, List<MethodStatement> allMethods, TypeContext typeContext
+      CustomStatement customStatement, List<MethodStatement> allMethods, TypeContext typeContext
   ) {
-    customType.parentTypes().forEach(parent ->
+    customStatement.parentTypes().forEach(parent ->
         extractMethods(parent, allMethods, typeContext));
   }
 
   private static void extractMethods(
-      CustomTypeReference customTypeReference, List<MethodStatement> allMethods, TypeContext typeContext
+      CustomType customTypeReference, List<MethodStatement> allMethods, TypeContext typeContext
   ) {
-    CustomType customType = customTypeReference.targetType();
+    CustomStatement customStatement = customTypeReference.targetType();
     TypeContext actualNameContext = NameContextFunctions.getActualNameContext(
-        typeContext, customType.typeParameters(), customTypeReference.typeArguments()
+        typeContext, customStatement.typeParameters(), customTypeReference.typeArguments()
     );
-    customType.declaredMethods().forEach(
+    customStatement.declaredMethods().forEach(
         method -> addMethod(method, allMethods, actualNameContext)
     );
-    inheritedMethods(customType, allMethods, actualNameContext);
+    inheritedMethods(customStatement, allMethods, actualNameContext);
   }
 
   private static void addMethod(
@@ -127,9 +127,9 @@ public interface CustomTypeFunctions {
             // Ignore override method
             return;
           }
-          TypeReference methodReturnType = methodSignature.returnType().get();
-          TypeReference effectiveAddedMethodReturnType = effectiveAddedSignature.returnType().get();
-          Optional<TypeReference> narrowType = TypeReferenceFunctions.narrowestOf(
+          Type methodReturnType = methodSignature.returnType().get();
+          Type effectiveAddedMethodReturnType = effectiveAddedSignature.returnType().get();
+          Optional<Type> narrowType = TypeFunctions.narrowestOf(
               methodReturnType, effectiveAddedMethodReturnType
           );
           if (narrowType.isEmpty()) {
@@ -151,17 +151,17 @@ public interface CustomTypeFunctions {
     allMethods.add(effectiveAddedMethod);
   }
 
-  private static TypeReference getActualTypeReference(TypeReference typeReference, TypeContext typeContext) {
-    if (typeReference.asNamedTypeReference().isPresent())  {
-      NamedTypeReference namedTypeReference = typeReference.asNamedTypeReference().orElseThrow();
-      Optional<NonPrimitiveTypeReference> actualType = typeContext
+  private static Type getActualTypeReference(Type type, TypeContext typeContext) {
+    if (type.asNamedType().isPresent())  {
+      NamedType namedTypeReference = type.asNamedType().orElseThrow();
+      Optional<NonPrimitiveType> actualType = typeContext
           .get(namedTypeReference.name())
-          .map(ContextTypeParameter::type);
+          .map(ContextTypeParameter::actualType);
       if (actualType.isPresent()) {
         return actualType.get();
       }
     }
-    return typeReference;
+    return type;
   }
 
   private static boolean isSameParams(MethodSignature addedMethod, MethodSignature otherMethod) {
@@ -169,7 +169,7 @@ public interface CustomTypeFunctions {
     Iterator<MethodParam> testMethodParams = addedMethod.params().iterator();
     Iterator<MethodParam> methodParams = otherMethod.params().iterator();
     while (testMethodParams.hasNext() && methodParams.hasNext()) {
-      if (!TypeReferenceFunctions.isEqualTypes(testMethodParams.next().type(), methodParams.next().type())) {
+      if (!TypeFunctions.isEqualTypes(testMethodParams.next().type(), methodParams.next().type())) {
         sameParams = false;
         break;
       }
@@ -180,30 +180,30 @@ public interface CustomTypeFunctions {
     return sameParams;
   }
 
-  static List<CustomType> allParents(CustomType customType) {
-    List<CustomType> curParents = customType.parentTypes().stream()
-        .map(CustomTypeReference::targetType)
+  static List<CustomStatement> allParents(CustomStatement customStatement) {
+    List<CustomStatement> curParents = customStatement.parentTypes().stream()
+        .map(CustomType::targetType)
         .toList();
-    List<CustomType> parents = new ArrayList<>(curParents);
+    List<CustomStatement> parents = new ArrayList<>(curParents);
     curParents.forEach(p -> populateParents(p, parents));
     return parents;
   }
 
-  private static void populateParents(CustomType customType, List<CustomType> parents) {
-    var curParents = customType.parentTypes().stream()
-        .map(CustomTypeReference::targetType)
+  private static void populateParents(CustomStatement customStatement, List<CustomStatement> parents) {
+    var curParents = customStatement.parentTypes().stream()
+        .map(CustomType::targetType)
         .toList();
     parents.addAll(curParents);
     curParents.forEach(p -> populateParents(p, parents));
   }
 
-  static boolean hasParent(CustomType customType, String parentCanonicalName) {
-    for (CustomTypeReference parent : customType.parentTypes()) {
+  static boolean hasParent(CustomStatement customStatement, String parentCanonicalName) {
+    for (CustomType parent : customStatement.parentTypes()) {
       if (parentCanonicalName.equals(parent.targetType().canonicalName())) {
         return true;
       }
     }
-    for (CustomTypeReference parent : customType.parentTypes()) {
+    for (CustomType parent : customStatement.parentTypes()) {
       if (parent.targetType().hasParent(parentCanonicalName)) {
         return true;
       }
@@ -211,9 +211,9 @@ public interface CustomTypeFunctions {
     return false;
   }
 
-  static String getTypeParametersDeclaration(CustomType customType, boolean fullDeclaration) {
-    var parametersSource = customType.typeParameters().stream()
-        .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, fullDeclaration))
+  static String getTypeParametersDeclaration(CustomStatement customStatement, boolean fullDeclaration) {
+    var parametersSource = customStatement.typeParameters().stream()
+        .map(param -> TypeFunctions.getNamedTypeReferenceDeclaration(param, fullDeclaration))
         .collect(Collectors.joining(", "));
     return (parametersSource.isEmpty() ? "" : "<" + parametersSource + ">");
   }

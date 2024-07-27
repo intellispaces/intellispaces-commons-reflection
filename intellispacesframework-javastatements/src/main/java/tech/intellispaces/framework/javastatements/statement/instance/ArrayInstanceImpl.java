@@ -2,15 +2,15 @@ package tech.intellispaces.framework.javastatements.statement.instance;
 
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.List;
 
 class ArrayInstanceImpl implements ArrayInstance {
-  private final TypeReference elementType;
+  private final Type elementType;
   private final List<Instance> elements;
 
-  ArrayInstanceImpl(TypeReference elementType, List<Instance> elements) {
+  ArrayInstanceImpl(Type elementType, List<Instance> elements) {
     this.elementType = elementType;
     this.elements = elements;
   }
@@ -21,7 +21,7 @@ class ArrayInstanceImpl implements ArrayInstance {
   }
 
   @Override
-  public TypeReference elementType() {
+  public Type elementType() {
     return elementType;
   }
 

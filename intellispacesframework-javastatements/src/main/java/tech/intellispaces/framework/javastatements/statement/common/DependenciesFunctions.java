@@ -2,16 +2,16 @@ package tech.intellispaces.framework.javastatements.statement.common;
 
 import tech.intellispaces.framework.javastatements.exception.JavaStatementException;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.method.MethodParam;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.ArrayTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.WildcardTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.ArrayType;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
+import tech.intellispaces.framework.javastatements.statement.type.WildcardType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import java.util.Set;
  */
 public interface DependenciesFunctions {
 
-  static Collection<CustomType> getCustomTypeDependencies(CustomType type) {
+  static Collection<CustomStatement> getCustomTypeDependencies(CustomStatement type) {
     return getCustomTypeDependencies(type, true, Set.of()).stream()
         .filter(customType -> !customType.canonicalName().startsWith("java.lang."))
         .filter(customType -> !customType.canonicalName().equals(type.canonicalName()))
@@ -32,66 +32,66 @@ public interface DependenciesFunctions {
         .toList();
   }
 
-  static Collection<CustomType> getTypeReferenceDependencies(TypeReference typeReference) {
-    return getTypeReferenceDependencies(typeReference, false, Set.of()).stream()
+  static Collection<CustomStatement> getTypeReferenceDependencies(Type type) {
+    return getTypeReferenceDependencies(type, false, Set.of()).stream()
         .filter(customType -> !customType.canonicalName().startsWith("java.lang."))
         .toList();
   }
 
-  private static List<CustomType> getCustomTypeDependencies(
-      CustomType customType, boolean includeRelations, Set<String> exclusions
+  private static List<CustomStatement> getCustomTypeDependencies(
+      CustomStatement customStatement, boolean includeRelations, Set<String> exclusions
   ) {
-    if (exclusions.contains(customType.canonicalName())) {
+    if (exclusions.contains(customStatement.canonicalName())) {
       return List.of();
     }
     Set<String> newExclusions = new HashSet<>(exclusions);
-    newExclusions.add(customType.canonicalName());
+    newExclusions.add(customStatement.canonicalName());
 
-    List<CustomType> customTypes = new ArrayList<>();
-    customTypes.add(customType);
+    List<CustomStatement> customStatements = new ArrayList<>();
+    customStatements.add(customStatement);
     if (includeRelations) {
-      customType.annotations().stream()
+      customStatement.annotations().stream()
           .map(ant -> getAnnotationDependencies(ant, exclusions))
-          .forEach(customTypes::addAll);
-      customType.parentTypes().stream()
+          .forEach(customStatements::addAll);
+      customStatement.parentTypes().stream()
           .map(ref -> getCustomTypeReferenceDependencies(ref, false, newExclusions))
-          .forEach(customTypes::addAll);
-      customType.typeParameters().stream()
+          .forEach(customStatements::addAll);
+      customStatement.typeParameters().stream()
           .map(ref -> getNamedTypeReferenceDependencies(ref, false, newExclusions))
-          .forEach(customTypes::addAll);
-      customType.declaredMethods().stream()
+          .forEach(customStatements::addAll);
+      customStatement.declaredMethods().stream()
           .map(ref -> getMethodDependencies(ref, newExclusions))
-          .forEach(customTypes::addAll);
+          .forEach(customStatements::addAll);
     }
-    return customTypes;
+    return customStatements;
   }
 
-  private static List<CustomType> getMethodDependencies(MethodStatement method, Set<String> exclusions) {
-    List<CustomType> customTypes = new ArrayList<>();
+  private static List<CustomStatement> getMethodDependencies(MethodStatement method, Set<String> exclusions) {
+    List<CustomStatement> customStatements = new ArrayList<>();
     method.typeParameters().stream()
         .map(typeParam -> getNamedTypeReferenceDependencies(typeParam, false, exclusions))
-        .forEach(customTypes::addAll);
+        .forEach(customStatements::addAll);
     if (method.returnType().isPresent()) {
-      customTypes.addAll(getTypeReferenceDependencies(method.returnType().orElseThrow(), false, exclusions));
+      customStatements.addAll(getTypeReferenceDependencies(method.returnType().orElseThrow(), false, exclusions));
     }
     method.params().stream()
         .map(MethodParam::type)
         .map(paramType -> getTypeReferenceDependencies(paramType, false, exclusions))
-        .forEach(customTypes::addAll);
+        .forEach(customStatements::addAll);
     method.exceptions().stream()
         .map(exceptionType -> getTypeReferenceDependencies(exceptionType, false, exclusions))
-        .forEach(customTypes::addAll);
-    return customTypes;
+        .forEach(customStatements::addAll);
+    return customStatements;
   }
 
-  private static List<CustomType> getInstanceDependencies(Instance instance, Set<String> exclusions) {
+  private static List<CustomStatement> getInstanceDependencies(Instance instance, Set<String> exclusions) {
     if (StatementTypes.ClassInstance == instance.statementType()) {
-      CustomType classType = instance.asClass().orElseThrow().type();
+      CustomStatement classType = instance.asClass().orElseThrow().type();
       if (!exclusions.contains(classType.canonicalName())) {
         return List.of(classType);
       }
     } else if (StatementTypes.EnumInstance == instance.statementType()) {
-      CustomType enumType = instance.asEnum().orElseThrow().type();
+      CustomStatement enumType = instance.asEnum().orElseThrow().type();
       if (!exclusions.contains(enumType.canonicalName())) {
         return List.of(enumType);
       }
@@ -103,49 +103,49 @@ public interface DependenciesFunctions {
     return List.of();
   }
 
-  private static List<CustomType> getAnnotationDependencies(AnnotationInstance annotation, Set<String> exclusions) {
-    List<CustomType> customTypes = new ArrayList<>();
-    customTypes.add(annotation.annotationStatement());
+  private static List<CustomStatement> getAnnotationDependencies(AnnotationInstance annotation, Set<String> exclusions) {
+    List<CustomStatement> customStatements = new ArrayList<>();
+    customStatements.add(annotation.annotationStatement());
 
     annotation.elements().stream()
         .map(element -> DependenciesFunctions.getInstanceDependencies(element.value(), exclusions))
-        .forEach(customTypes::addAll);
-    return customTypes;
+        .forEach(customStatements::addAll);
+    return customStatements;
   }
 
-  private static List<CustomType> getTypeReferenceDependencies(
-      TypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  private static List<CustomStatement> getTypeReferenceDependencies(
+      Type type, boolean includeRelations, Set<String> exclusions
   ) {
-    if (typeReference.isPrimitive()) {
+    if (type.isPrimitive()) {
       return List.of();
     } else {
-      return switch ((StatementTypes) typeReference.statementType()) {
-        case CustomTypeReference -> getCustomTypeReferenceDependencies(
-            typeReference.asCustomTypeReference().orElseThrow(), includeRelations, exclusions);
-        case NamedTypeReference -> getNamedTypeReferenceDependencies(
-            typeReference.asNamedTypeReference().orElseThrow(), includeRelations, exclusions);
-        case WildcardTypeReference -> getWildcardTypeReferenceDependencies(
-            typeReference.asWildcardTypeReference().orElseThrow(), includeRelations, exclusions);
-        case ArrayTypeReference -> getArrayTypeReferenceDependencies(
-            typeReference.asArrayTypeReference().orElseThrow(), includeRelations, exclusions);
-        default -> throw JavaStatementException.withMessage("Unsupported statement type {}", typeReference.statementType());
+      return switch ((StatementTypes) type.statementType()) {
+        case CustomType -> getCustomTypeReferenceDependencies(
+            type.asCustomType().orElseThrow(), includeRelations, exclusions);
+        case NamedType -> getNamedTypeReferenceDependencies(
+            type.asNamedType().orElseThrow(), includeRelations, exclusions);
+        case WildcardType -> getWildcardTypeReferenceDependencies(
+            type.asWildcardType().orElseThrow(), includeRelations, exclusions);
+        case ArrayType -> getArrayTypeReferenceDependencies(
+            type.asArrayType().orElseThrow(), includeRelations, exclusions);
+        default -> throw JavaStatementException.withMessage("Unsupported statement type {}", type.statementType());
       };
     }
   }
 
-  private static List<CustomType> getCustomTypeReferenceDependencies(
-      CustomTypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  private static List<CustomStatement> getCustomTypeReferenceDependencies(
+      CustomType typeReference, boolean includeRelations, Set<String> exclusions
   ) {
-    List<CustomType> customTypes = getCustomTypeDependencies(typeReference.targetType(), includeRelations, exclusions);
-    List<CustomType> allCustomTypes = new ArrayList<>(customTypes);
+    List<CustomStatement> customStatements = getCustomTypeDependencies(typeReference.targetType(), includeRelations, exclusions);
+    List<CustomStatement> allCustomStatements = new ArrayList<>(customStatements);
     typeReference.typeArguments().stream()
         .map(ref -> getTypeReferenceDependencies(ref, includeRelations, exclusions))
-        .forEach(allCustomTypes::addAll);
-    return allCustomTypes;
+        .forEach(allCustomStatements::addAll);
+    return allCustomStatements;
   }
 
-  private static List<CustomType> getNamedTypeReferenceDependencies(
-      NamedTypeReference typeReference, boolean includeParentsAndTypeParams, Set<String> exclusions
+  private static List<CustomStatement> getNamedTypeReferenceDependencies(
+      NamedType typeReference, boolean includeParentsAndTypeParams, Set<String> exclusions
   ) {
     return typeReference.extendedBounds().stream()
         .map(ref -> getTypeReferenceDependencies(ref, includeParentsAndTypeParams, exclusions))
@@ -153,10 +153,10 @@ public interface DependenciesFunctions {
         .toList();
   }
 
-  private static List<CustomType> getWildcardTypeReferenceDependencies(
-      WildcardTypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  private static List<CustomStatement> getWildcardTypeReferenceDependencies(
+      WildcardType typeReference, boolean includeRelations, Set<String> exclusions
   ) {
-    List<CustomType> relatedClasses = new ArrayList<>();
+    List<CustomStatement> relatedClasses = new ArrayList<>();
     typeReference.extendedBound()
         .map(ref -> getTypeReferenceDependencies(ref, includeRelations, exclusions))
         .ifPresent(relatedClasses::addAll);
@@ -166,14 +166,14 @@ public interface DependenciesFunctions {
     return relatedClasses;
   }
 
-  private static List<CustomType> getArrayTypeReferenceDependencies(
-      ArrayTypeReference typeReference, boolean includeRelations, Set<String> exclusions
+  private static List<CustomStatement> getArrayTypeReferenceDependencies(
+      ArrayType typeReference, boolean includeRelations, Set<String> exclusions
   ) {
     if (typeReference.elementType().isPrimitive()) {
       return List.of();
     }
     return getTypeReferenceDependencies(
-        typeReference.elementType().asNonPrimitiveTypeReference().orElseThrow(IllegalStateException::new),
+        typeReference.elementType().asNonPrimitiveType().orElseThrow(IllegalStateException::new),
         includeRelations,
         exclusions
     );

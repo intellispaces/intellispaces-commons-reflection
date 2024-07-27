@@ -7,9 +7,9 @@ import tech.intellispaces.framework.commons.datahandle.HandleFunctions;
 import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.Sessions;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;
@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Tests for {@link ClassStatement}.
  */
-public class ClassTest extends AbstractCustomTypeTest {
+public class ClassTest extends AbstractCustomStatementTest {
 
   @Test
   public void testEmptyClass() {
@@ -33,11 +33,11 @@ public class ClassTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("classes/EmptyClass.java");
 
     // When
-    CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
+    CustomStatement customStatementStatement = JavaStatements.customTypeStatement(typeElement);
 
     // Then
-    assertThat(customTypeStatement).isInstanceOf(ClassStatement.class);
-    ClassStatement classStatement = customTypeStatement.asClass().orElse(null);
+    assertThat(customStatementStatement).isInstanceOf(ClassStatement.class);
+    ClassStatement classStatement = customStatementStatement.asClass().orElse(null);
     assertThat(classStatement).isNotNull();
 
     assertThat(classStatement.isNested()).isFalse();
@@ -71,11 +71,11 @@ public class ClassTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("classes/AbstractClass.java");
 
     // When
-    CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
+    CustomStatement customStatementStatement = JavaStatements.customTypeStatement(typeElement);
 
     // Then
-    assertThat(customTypeStatement).isInstanceOf(ClassStatement.class);
-    ClassStatement classStatement = customTypeStatement.asClass().orElse(null);
+    assertThat(customStatementStatement).isInstanceOf(ClassStatement.class);
+    ClassStatement classStatement = customStatementStatement.asClass().orElse(null);
     assertThat(classStatement).isNotNull();
 
     assertThat(classStatement.isAbstract()).isTrue();
@@ -419,7 +419,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("classes/GenericClassWithOneTypeParameter.java");
 
     // When
-    CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
+    CustomType typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
     assertThat(typeReference.actualDeclaration()).isEqualTo("GenericClassWithOneTypeParameter");
@@ -443,8 +443,8 @@ public class ClassTest extends AbstractCustomTypeTest {
       assertThat(method.name()).isEqualTo("process");
       assertThat(method.params()).hasSize(1);
       assertThat(method.params().get(0).name()).isEqualTo("arg");
-      assertThat(method.params().get(0).type().asNamedTypeReference().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
-      assertThat(method.returnType().orElseThrow().asNamedTypeReference().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
+      assertThat(method.params().get(0).type().asNamedType().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
+      assertThat(method.returnType().orElseThrow().asNamedType().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
     });
   }
 
@@ -454,7 +454,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("classes/GenericClassWithMultipleTypeParameters.java");
 
     // When
-    CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
+    CustomType typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
     assertThat(typeReference.actualDeclaration()).isEqualTo("GenericClassWithMultipleTypeParameters");
@@ -477,7 +477,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(classStatement.typeParameters().get(1), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T2");
       assertThat(typeParam.extendedBounds()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asNamedTypeReference().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
+      assertThat(typeParam.extendedBounds().get(0).asNamedType().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
       assertThat(typeParam.actualDeclaration()).isEqualTo("T2");
       assertThat(typeParam.formalFullDeclaration()).isEqualTo("T2 extends T1");
       assertThat(typeParam.formalBriefDeclaration()).isEqualTo("T2");
@@ -485,7 +485,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(classStatement.typeParameters().get(2), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T3");
       assertThat(typeParam.extendedBounds()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Number.class.getCanonicalName());
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(Number.class.getCanonicalName());
       assertThat(typeParam.actualDeclaration()).isEqualTo("T3");
       assertThat(typeParam.formalFullDeclaration()).isEqualTo("T3 extends Number");
       assertThat(typeParam.formalBriefDeclaration()).isEqualTo("T3");
@@ -494,8 +494,8 @@ public class ClassTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(classStatement.typeParameters().get(3), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T4");
       assertThat(typeParam.extendedBounds()).hasSize(2);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(AutoCloseable.class.getCanonicalName());
-      assertThat(typeParam.extendedBounds().get(1).asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(DataInput.class.getCanonicalName());
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(AutoCloseable.class.getCanonicalName());
+      assertThat(typeParam.extendedBounds().get(1).asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(DataInput.class.getCanonicalName());
       assertThat(typeParam.actualDeclaration()).isEqualTo("T4");
       assertThat(typeParam.formalFullDeclaration()).isEqualTo("T4 extends AutoCloseable & DataInput");
       assertThat(typeParam.formalBriefDeclaration()).isEqualTo("T4");
@@ -507,12 +507,12 @@ public class ClassTest extends AbstractCustomTypeTest {
       assertThat(method.params()).hasSize(2);
 
       assertThat(method.params().get(0).name()).isEqualTo("arg1");
-      assertThat(method.params().get(0).type().asNamedTypeReference().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
+      assertThat(method.params().get(0).type().asNamedType().orElseThrow()).isSameAs(classStatement.typeParameters().get(0));
 
       assertThat(method.params().get(1).name()).isEqualTo("arg2");
-      assertThat(method.params().get(1).type().asNamedTypeReference().orElseThrow()).isSameAs(classStatement.typeParameters().get(2));
+      assertThat(method.params().get(1).type().asNamedType().orElseThrow()).isSameAs(classStatement.typeParameters().get(2));
 
-      assertThat(method.returnType().orElseThrow().asNamedTypeReference().orElseThrow()).isSameAs(classStatement.typeParameters().get(1));
+      assertThat(method.returnType().orElseThrow().asNamedType().orElseThrow()).isSameAs(classStatement.typeParameters().get(1));
     });
 
     assertThat(classStatement.dependencyTypenames()).containsExactlyInAnyOrder(
@@ -527,7 +527,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("classes/GenericClassWithCyclicTypeDependencyCase1.java");
 
     // When
-    CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
+    CustomType typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
     assertThat(typeReference.actualDeclaration()).isEqualTo("GenericClassWithCyclicTypeDependencyCase1");
@@ -541,10 +541,10 @@ public class ClassTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(classStatement.typeParameters().get(0), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T");
       assertThat(typeParam.extendedBounds()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(classStatement);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().typeArguments()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().typeArguments().get(0)
-          .asNamedTypeReference().orElseThrow().name()).isEqualTo("T");
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType()).isSameAs(classStatement);
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments()).hasSize(1);
+      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments().get(0)
+          .asNamedType().orElseThrow().name()).isEqualTo("T");
     });
   }
 
@@ -554,7 +554,7 @@ public class ClassTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("classes/GenericClassWithCyclicTypeDependencyCase2.java");
 
     // When
-    CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
+    CustomType typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
     assertThat(typeReference.actualDeclaration()).isEqualTo("ClassA");
@@ -570,14 +570,14 @@ public class ClassTest extends AbstractCustomTypeTest {
     HandleFunctions.handle(classAStatement.typeParameters().get(0), classATypeParam -> {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
-      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
+      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispaces.framework.javastatements.samples.GenericClassWithCyclicTypeDependencyCase2.ClassB");
         assertThat(classBExtendedBound.className()).isEqualTo("tech.intellispaces.framework.javastatements.samples.GenericClassWithCyclicTypeDependencyCase2$ClassB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().name()).isEqualTo("T2");
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedTypeReference().orElseThrow().extendedBounds().get(0)
-            .asCustomTypeReference().orElseThrow().targetType()).isSameAs(classAStatement);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().name()).isEqualTo("T2");
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().extendedBounds()).hasSize(1);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().extendedBounds().get(0)
+            .asCustomType().orElseThrow().targetType()).isSameAs(classAStatement);
       });
     });
   }

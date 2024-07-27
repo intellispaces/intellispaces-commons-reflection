@@ -1,6 +1,6 @@
 package tech.intellispaces.framework.javastatements.statement.instance;
 
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ public interface ArrayInstance extends Instance {
   /**
    * Element type.
    */
-  TypeReference elementType();
+  Type elementType();
 
   /**
    * Elements.

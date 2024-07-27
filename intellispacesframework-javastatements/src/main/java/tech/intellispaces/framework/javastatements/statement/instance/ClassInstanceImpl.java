@@ -2,12 +2,12 @@ package tech.intellispaces.framework.javastatements.statement.instance;
 
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 
 class ClassInstanceImpl implements ClassInstance {
-  private final CustomType type;
+  private final CustomStatement type;
 
-  ClassInstanceImpl(CustomType type) {
+  ClassInstanceImpl(CustomStatement type) {
     this.type = type;
   }
 
@@ -17,7 +17,7 @@ class ClassInstanceImpl implements ClassInstance {
   }
 
   @Override
-  public CustomType type() {
+  public CustomStatement type() {
     return type;
   }
 }

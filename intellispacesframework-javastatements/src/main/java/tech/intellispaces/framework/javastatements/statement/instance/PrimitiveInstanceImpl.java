@@ -2,13 +2,13 @@ package tech.intellispaces.framework.javastatements.statement.instance;
 
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.PrimitiveType;
 
 class PrimitiveInstanceImpl implements PrimitiveInstance {
   private final Object value;
-  private final PrimitiveTypeReference type;
+  private final PrimitiveType type;
 
-  PrimitiveInstanceImpl(Object value, PrimitiveTypeReference type) {
+  PrimitiveInstanceImpl(Object value, PrimitiveType type) {
     this.value = value;
     this.type = type;
   }
@@ -24,7 +24,7 @@ class PrimitiveInstanceImpl implements PrimitiveInstance {
   }
 
   @Override
-  public PrimitiveTypeReference type() {
+  public PrimitiveType type() {
     return type;
   }
 }

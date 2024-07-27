@@ -1,24 +1,24 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ClassStatement extends CustomType {
+public interface ClassStatement extends CustomStatement {
 
   List<MethodStatement> constructors();
 
   /**
    * Extended class references.
    */
-  Optional<CustomTypeReference> extendedClass();
+  Optional<CustomType> extendedClass();
 
   /**
    * Implemented interface references.
    */
-  List<CustomTypeReference> implementedInterfaces();
+  List<CustomType> implementedInterfaces();
 
   @Override
   default Optional<ClassStatement> asClass() {
@@ -28,7 +28,7 @@ public interface ClassStatement extends CustomType {
   /**
    * Connected custom type.
    */
-  default CustomType asCustomType() {
+  default CustomStatement asCustomType() {
     return this;
   }
 }

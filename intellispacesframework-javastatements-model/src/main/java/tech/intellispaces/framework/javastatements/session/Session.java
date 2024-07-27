@@ -1,15 +1,15 @@
 package tech.intellispaces.framework.javastatements.session;
 
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 
 /**
  * Parsing session.
  */
 public interface Session {
 
-  CustomType getType(String typeName);
+  CustomStatement getType(String typeName);
 
-  void putType(String typeName, CustomType customType);
+  void putType(String typeName, CustomStatement customStatement);
 
   void clear();
 }

@@ -9,11 +9,11 @@ import tech.intellispaces.framework.javastatements.session.Session;
 import tech.intellispaces.framework.javastatements.session.Sessions;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.framework.javastatements.statement.reference.PrimitiveTypeReferences;
+import tech.intellispaces.framework.javastatements.statement.type.PrimitiveTypeReferences;
 import tech.intellispaces.framework.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;
@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Tests for {@link AnnotationStatement}.
  */
-public class AnnotationTest extends AbstractCustomTypeTest {
+public class AnnotationTest extends AbstractCustomStatementTest {
 
   @Test
   public void testEmptyAnnotation() {
@@ -35,11 +35,11 @@ public class AnnotationTest extends AbstractCustomTypeTest {
     TypeElement typeElement = getTestElement("annotations/EmptyAnnotation.java");
 
     // When
-    CustomType customTypeStatement = JavaStatements.customTypeStatement(typeElement);
+    CustomStatement customStatementStatement = JavaStatements.customTypeStatement(typeElement);
 
     // Then
-    assertThat(customTypeStatement).isInstanceOf(AnnotationStatement.class);
-    AnnotationStatement annotationStatement = customTypeStatement.asAnnotation().orElse(null);
+    assertThat(customStatementStatement).isInstanceOf(AnnotationStatement.class);
+    AnnotationStatement annotationStatement = customStatementStatement.asAnnotation().orElse(null);
     assertThat(annotationStatement).isNotNull();
 
     assertThat(annotationStatement.isAbstract()).isTrue();
@@ -68,7 +68,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithByteElement() {
     testAnnotationWithElement("AnnotationWithByteElement", "byteElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Byte);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Byte);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -76,7 +76,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithByteDefaultElement() {
     testAnnotationWithElement("AnnotationWithByteDefaultElement", "byteElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Byte);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Byte);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Byte);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo((byte) 1);
       assertThat(elementMethod.params()).isEmpty();
@@ -86,7 +86,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithShortElement() {
     testAnnotationWithElement("AnnotationWithShortElement", "shortElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Short);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Short);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -94,7 +94,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithShortDefaultElement() {
     testAnnotationWithElement("AnnotationWithShortDefaultElement", "shortElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Short);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Short);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Short);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo((short) 1);
       assertThat(elementMethod.params()).isEmpty();
@@ -104,7 +104,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithIntElement() {
     testAnnotationWithElement("AnnotationWithIntElement", "intElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -112,7 +112,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithIntDefaultElement() {
     testAnnotationWithElement("AnnotationWithIntDefaultElement", "intElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Integer);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo(1);
       assertThat(elementMethod.params()).isEmpty();
@@ -122,7 +122,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithLongElement() {
     testAnnotationWithElement("AnnotationWithLongElement", "longElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Long);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Long);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -130,7 +130,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithLongDefaultElement() {
     testAnnotationWithElement("AnnotationWithLongDefaultElement", "longElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Long);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Long);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Long);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo(1L);
       assertThat(elementMethod.params()).isEmpty();
@@ -140,7 +140,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithFloatElement() {
     testAnnotationWithElement("AnnotationWithFloatElement", "floatElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Float);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Float);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -148,7 +148,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithFloatDefaultElement() {
     testAnnotationWithElement("AnnotationWithFloatDefaultElement", "floatElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Float);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Float);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Float);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo(1.0f);
       assertThat(elementMethod.params()).isEmpty();
@@ -158,7 +158,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithDoubleElement() {
     testAnnotationWithElement("AnnotationWithDoubleElement", "doubleElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Double);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Double);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -166,7 +166,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithDoubleDefaultElement() {
     testAnnotationWithElement("AnnotationWithDoubleDefaultElement", "doubleElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Double);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Double);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Double);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo(1.0);
       assertThat(elementMethod.params()).isEmpty();
@@ -176,7 +176,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithCharElement() {
     testAnnotationWithElement("AnnotationWithCharElement", "charElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Char);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Char);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -184,7 +184,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithCharDefaultElement() {
     testAnnotationWithElement("AnnotationWithCharDefaultElement", "charElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Char);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Char);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Char);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo('a');
       assertThat(elementMethod.params()).isEmpty();
@@ -194,7 +194,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithBooleanElement() {
     testAnnotationWithElement("AnnotationWithBooleanElement", "booleanElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Boolean);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Boolean);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -202,7 +202,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithBooleanDefaultElement() {
     testAnnotationWithElement("AnnotationWithBooleanDefaultElement", "booleanElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Boolean);
+      assertThat(elementMethod.returnType().orElseThrow().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Boolean);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveTypeReferences.Boolean);
       assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo(true);
       assertThat(elementMethod.params()).isEmpty();
@@ -212,7 +212,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithStringElement() {
     testAnnotationWithElement("AnnotationWithStringElement", "stringElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(
+      assertThat(elementMethod.returnType().orElseThrow().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(
           String.class.getCanonicalName());
       assertThat(elementMethod.params()).isEmpty();
     });
@@ -221,9 +221,9 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithStringDefaultElement() {
     testAnnotationWithElement("AnnotationWithStringDefaultElement", "stringElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(
+      assertThat(elementMethod.returnType().orElseThrow().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(
           String.class.getCanonicalName());
-      assertThat(elementMethod.returnType().orElseThrow().asCustomTypeReference().orElseThrow().typeArguments()).isEmpty();
+      assertThat(elementMethod.returnType().orElseThrow().asCustomType().orElseThrow().typeArguments()).isEmpty();
       assertThat(elementMethod.defaultValue().orElseThrow().asString().orElseThrow().value()).isEqualTo("abc");
       assertThat(elementMethod.params()).isEmpty();
     });
@@ -233,7 +233,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfIntElement() {
     testAnnotationWithElement("AnnotationWithArrayOfIntElement", "arrayOfIntElement", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow().elementType().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
+          .asArrayType().orElseThrow().elementType().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -242,9 +242,9 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfIntDefaultElement() {
     testAnnotationWithElement("AnnotationWithArrayOfIntDefaultElement", "arrayOfIntElementDefault", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow().elementType().asPrimitiveTypeReference().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
+          .asArrayType().orElseThrow().elementType().asPrimitiveType().orElseThrow()).isSameAs(PrimitiveTypeReferences.Integer);
       assertThat(elementMethod.defaultValue().orElseThrow()
-          .asArray().orElseThrow().elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Integer.class.getCanonicalName());
+          .asArray().orElseThrow().elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(Integer.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
           .elements().stream()
@@ -257,7 +257,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithArrayOfStringElement() {
     testAnnotationWithElement("AnnotationWithArrayOfStringElement", "arrayOfStringElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asArrayTypeReference().orElseThrow().elementType().asCustomTypeReference().orElseThrow()
+      assertThat(elementMethod.returnType().orElseThrow().asArrayType().orElseThrow().elementType().asCustomType().orElseThrow()
           .targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
       assertThat(elementMethod.params()).isEmpty();
     });
@@ -267,11 +267,11 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfStringDefaultElement() {
     testAnnotationWithElement("AnnotationWithArrayOfStringDefaultElement", "arrayOfStringElementDefault", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
+          .asArrayType().orElseThrow()
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
           .elements().stream()
@@ -285,8 +285,8 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfEnumElement() {
     testAnnotationWithElement("AnnotationWithArrayOfEnumElement", "arrayOfEnumElement", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
+          .asArrayType().orElseThrow()
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -295,11 +295,11 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfEnumDefaultElement() {
     testAnnotationWithElement("AnnotationWithArrayOfEnumDefaultElement", "arrayOfEnumElementDefault", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
+          .asArrayType().orElseThrow()
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
           .elements().stream()
@@ -313,8 +313,8 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfClassElement() {
     testAnnotationWithElement("AnnotationWithArrayOfClassElement", "arrayOfClassElement", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Class.class.getCanonicalName());
+          .asArrayType().orElseThrow()
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(Class.class.getCanonicalName());
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -323,11 +323,11 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfClassDefaultElement() {
     testAnnotationWithElement("AnnotationWithArrayOfClassDefaultElement", "arrayOfClassElementDefault", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Class.class.getCanonicalName());
+          .asArrayType().orElseThrow()
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(Class.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Class.class.getCanonicalName());
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(Class.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
           .elements().stream()
@@ -341,8 +341,8 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfAnnotationElement() {
     testAnnotationWithElement("AnnotationWithArrayOfAnnotationElement", "arrayOfAnnotationElement", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
+          .asArrayType().orElseThrow()
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -351,11 +351,11 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   public void testAnnotationWithArrayOfAnnotationDefaultElement() {
     testAnnotationWithElement("AnnotationWithArrayOfAnnotationDefaultElement", "arrayOfAnnotationElementDefault", elementMethod -> {
       assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayTypeReference().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
+          .asArrayType().orElseThrow()
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
-          .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
+          .elementType().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
       HandleFunctions.handle(elementMethod.defaultValue().orElseThrow().asArray().orElseThrow().elements(), elements -> {
         assertThat(elements).hasSize(1);
         assertThat(elements.get(0).asAnnotation().orElseThrow().annotationStatement().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
@@ -369,7 +369,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithEnumElement() {
     testAnnotationWithElement("AnnotationWithEnumElement", "enumElement", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
+      assertThat(elementMethod.returnType().orElseThrow().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
       assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -377,7 +377,7 @@ public class AnnotationTest extends AbstractCustomTypeTest {
   @Test
   public void testAnnotationWithEnumDefaultElement() {
     testAnnotationWithElement("AnnotationWithEnumDefaultElement", "enumElementDefault", elementMethod -> {
-      assertThat(elementMethod.returnType().orElseThrow().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
+      assertThat(elementMethod.returnType().orElseThrow().asCustomType().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
       assertThat(elementMethod.defaultValue().orElseThrow().asEnum().orElseThrow().name()).isEqualTo(TestEnum.Value2.name());
       assertThat(elementMethod.params()).isEmpty();
     });

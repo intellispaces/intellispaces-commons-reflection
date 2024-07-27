@@ -7,10 +7,10 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
 import tech.intellispaces.framework.javastatements.statement.instance.InstanceFunctions;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -63,12 +63,12 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
   }
 
   @Override
-  public List<NamedTypeReference> typeParameters() {
+  public List<NamedType> typeParameters() {
     throw new RuntimeException("Not implemented yet");
   }
 
   @Override
-  public Optional<TypeReference> returnType() {
+  public Optional<Type> returnType() {
     Class<?> returnClass = method.getReturnType();
     if ("void".equals(returnClass.getName())) {
       return Optional.empty();
@@ -89,15 +89,15 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
   }
 
   @Override
-  public List<TypeReference> parameterTypes() {
+  public List<Type> parameterTypes() {
     throw new RuntimeException("Not implemented yet");
   }
 
   @Override
-  public List<ExceptionCompatibleTypeReference> exceptions() {
+  public List<ExceptionCompatibleType> exceptions() {
     return Arrays.stream(method.getExceptionTypes())
         .map(JavaStatements::customTypeReference)
-        .map(t -> (ExceptionCompatibleTypeReference) t)
+        .map(t -> (ExceptionCompatibleType) t)
         .toList();
   }
 
@@ -122,7 +122,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
   }
 
   @Override
-  public MethodSignature specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+  public MethodSignature specify(Map<String, NonPrimitiveType> typeMapping) {
     return new MethodSignatureImpl(
         name(),
         isAbstract(),
@@ -133,7 +133,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
         returnType().map(t -> t.specify(typeMapping)).orElse(null),
         defaultValue().orElse(null),
         params().stream().map(p -> p.specify(typeMapping)).toList(),
-        exceptions().stream().map(e -> (ExceptionCompatibleTypeReference) e.specify(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ExceptionCompatibleType) e.specify(typeMapping)).toList(),
         annotations()
     );
   }

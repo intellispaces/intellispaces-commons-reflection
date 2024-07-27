@@ -5,10 +5,10 @@ import tech.intellispaces.framework.javastatements.statement.StatementTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationFunctions;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -23,11 +23,11 @@ class MethodSignatureImpl implements MethodSignature {
   private final boolean isPublic;
   private final boolean isDefault;
   private final boolean isStatic;
-  private final List<NamedTypeReference> typeParameters;
-  private final TypeReference returnType;
+  private final List<NamedType> typeParameters;
+  private final Type returnType;
   private final Instance defaultValue;
   private final List<MethodParam> params;
-  private final List<ExceptionCompatibleTypeReference> exceptions;
+  private final List<ExceptionCompatibleType> exceptions;
   private final List<AnnotationInstance> annotations;
   private final Map<String, AnnotationInstance> annotationMap;
 
@@ -37,11 +37,11 @@ class MethodSignatureImpl implements MethodSignature {
       boolean isPublic,
       boolean isDefault,
       boolean isStatic,
-      List<NamedTypeReference> typeParameters,
-      TypeReference returnType,
+      List<NamedType> typeParameters,
+      Type returnType,
       Instance defaultValue,
       List<MethodParam> params,
-      List<ExceptionCompatibleTypeReference> exceptions,
+      List<ExceptionCompatibleType> exceptions,
       List<AnnotationInstance> annotations
   ) {
     this.name = name;
@@ -89,12 +89,12 @@ class MethodSignatureImpl implements MethodSignature {
   }
 
   @Override
-  public List<NamedTypeReference> typeParameters() {
+  public List<NamedType> typeParameters() {
     return typeParameters;
   }
 
   @Override
-  public Optional<TypeReference> returnType() {
+  public Optional<Type> returnType() {
     return Optional.ofNullable(returnType);
   }
 
@@ -109,14 +109,14 @@ class MethodSignatureImpl implements MethodSignature {
   }
 
   @Override
-  public List<TypeReference> parameterTypes() {
+  public List<Type> parameterTypes() {
     return params().stream()
         .map(MethodParam::type)
         .toList();
   }
 
   @Override
-  public List<ExceptionCompatibleTypeReference> exceptions() {
+  public List<ExceptionCompatibleType> exceptions() {
     return exceptions;
   }
 
@@ -142,7 +142,7 @@ class MethodSignatureImpl implements MethodSignature {
   }
 
   @Override
-  public MethodSignature specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+  public MethodSignature specify(Map<String, NonPrimitiveType> typeMapping) {
     return new MethodSignatureImpl(
         name(),
         isAbstract(),
@@ -153,7 +153,7 @@ class MethodSignatureImpl implements MethodSignature {
         returnType().map(t -> t.specify(typeMapping)).orElse(null),
         defaultValue().orElse(null),
         params().stream().map(p -> p.specify(typeMapping)).toList(),
-        exceptions().stream().map(e -> (ExceptionCompatibleTypeReference) e.specify(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ExceptionCompatibleType) e.specify(typeMapping)).toList(),
         annotations()
     );
   }

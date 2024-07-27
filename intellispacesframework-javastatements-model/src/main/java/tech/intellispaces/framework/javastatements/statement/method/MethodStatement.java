@@ -1,13 +1,13 @@
 package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.AnnotatedStatement;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -19,7 +19,7 @@ public interface MethodStatement extends AnnotatedStatement {
   /**
    * Method owner.
    */
-  CustomType owner();
+  CustomStatement owner();
 
   /**
    * Method signature.
@@ -31,12 +31,12 @@ public interface MethodStatement extends AnnotatedStatement {
    */
   List<MethodStatement> overrideMethods();
 
-  MethodStatement specify(Map<String, NonPrimitiveTypeReference> typeMapping);
+  MethodStatement specify(Map<String, NonPrimitiveType> typeMapping);
 
   /**
    * Declared type parameters.
    */
-  default List<NamedTypeReference> typeParameters() {
+  default List<NamedType> typeParameters() {
     return signature().typeParameters();
   }
 
@@ -50,7 +50,7 @@ public interface MethodStatement extends AnnotatedStatement {
   /**
    * Method returned type.
    */
-  default Optional<TypeReference> returnType() {
+  default Optional<Type> returnType() {
     return signature().returnType();
   }
 
@@ -61,14 +61,14 @@ public interface MethodStatement extends AnnotatedStatement {
     return signature().params();
   }
 
-  default List<TypeReference> parameterTypes() {
+  default List<Type> parameterTypes() {
     return signature().parameterTypes();
   }
 
   /**
    * Method exceptions.
    */
-  default List<ExceptionCompatibleTypeReference> exceptions() {
+  default List<ExceptionCompatibleType> exceptions() {
     return signature().exceptions();
   }
 

@@ -1,0 +1,65 @@
+package tech.intellispaces.framework.javastatements.statement.type;
+
+import tech.intellispaces.framework.javastatements.statement.StatementType;
+import tech.intellispaces.framework.javastatements.statement.StatementTypes;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomTypes;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
+/**
+ * Adapter of {@link Class} to {@link CustomType}.
+ */
+class CustomTypeBasedOnClass extends AbstractType implements CustomType {
+  private final Class<?> aClass;
+  private CustomStatement targetType;
+
+  CustomTypeBasedOnClass(Class<?> aClass) {
+    this.aClass = aClass;
+  }
+
+  @Override
+  public StatementType statementType() {
+    return StatementTypes.CustomType;
+  }
+
+  @Override
+  public CustomStatement targetType() {
+    if (targetType == null) {
+      targetType = CustomTypes.of(aClass);
+    }
+    return targetType;
+  }
+
+  @Override
+  public List<NonPrimitiveType> typeArguments() {
+    return List.of();
+  }
+
+  @Override
+  public CustomStatement effectiveTargetType() {
+    return targetType;
+  }
+
+  @Override
+  public Map<String, NonPrimitiveType> typeArgumentMapping() {
+    return Map.of();
+  }
+
+  @Override
+  public Type specify(Map<String, NonPrimitiveType> typeMapping) {
+    return this;
+  }
+
+  @Override
+  public String typeArgumentsDeclaration() {
+    return "";
+  }
+
+  @Override
+  public String typeArgumentsDeclaration(Function<String, String> simpleNameMapper) {
+    return "";
+  }
+}

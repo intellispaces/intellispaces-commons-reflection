@@ -1,7 +1,7 @@
 package tech.intellispaces.framework.javastatements.context;
 
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,12 +18,12 @@ public class TypeContextBuilder {
     return this;
   }
 
-  public TypeContextBuilder addTypeParam(String typeParamName, NamedTypeReference type) {
+  public TypeContextBuilder addTypeParam(String typeParamName, NamedType type) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, null));
     return this;
   }
 
-  public TypeContextBuilder addTypeParams(List<NamedTypeReference> typeParams) {
+  public TypeContextBuilder addTypeParams(List<NamedType> typeParams) {
     typeParams.forEach(typeParam ->
         this.map.put(typeParam.name(), new ContextTypeParameterImpl(typeParam, null))
     );
@@ -31,7 +31,7 @@ public class TypeContextBuilder {
   }
 
   public TypeContextBuilder addTypeParam(
-      String typeParamName, NamedTypeReference type, NonPrimitiveTypeReference actualType
+      String typeParamName, NamedType type, NonPrimitiveType actualType
   ) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, actualType));
     return this;

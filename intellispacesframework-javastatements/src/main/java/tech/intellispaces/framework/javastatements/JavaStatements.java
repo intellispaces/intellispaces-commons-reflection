@@ -8,7 +8,7 @@ import tech.intellispaces.framework.javastatements.statement.custom.AnnotationSt
 import tech.intellispaces.framework.javastatements.statement.custom.AnnotationStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.ClassStatements;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.CustomTypes;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.EnumStatements;
@@ -16,8 +16,8 @@ import tech.intellispaces.framework.javastatements.statement.custom.InterfaceSta
 import tech.intellispaces.framework.javastatements.statement.custom.InterfaceStatements;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatement;
 import tech.intellispaces.framework.javastatements.statement.custom.RecordStatements;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReferences;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
+import tech.intellispaces.framework.javastatements.statement.type.CustomTypeReferences;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -32,15 +32,15 @@ public interface JavaStatements {
     return Statements.of(element);
   }
 
-  static CustomType customTypeStatement(Class<?> aClass) {
+  static CustomStatement customTypeStatement(Class<?> aClass) {
     return CustomTypes.of(aClass);
   }
 
-  static CustomType customTypeStatement(TypeElement typeElement) {
+  static CustomStatement customTypeStatement(TypeElement typeElement) {
     return CustomTypes.of(typeElement, Sessions.get());
   }
 
-  static CustomType customTypeStatement(TypeElement typeElement, Session session) {
+  static CustomStatement customTypeStatement(TypeElement typeElement, Session session) {
     return CustomTypes.of(typeElement, session);
   }
 
@@ -84,23 +84,23 @@ public interface JavaStatements {
     return AnnotationStatements.of(typeElement, session);
   }
 
-  static CustomTypeReference customTypeReference(Class<?> aClass) {
+  static CustomType customTypeReference(Class<?> aClass) {
     return CustomTypeReferences.of(aClass);
   }
 
-  static CustomTypeReference customTypeReference(TypeElement typeElement) {
+  static CustomType customTypeReference(TypeElement typeElement) {
     return CustomTypeReferences.of(typeElement, Sessions.get());
   }
 
-  static CustomTypeReference customTypeReference(TypeElement typeElement, Session session) {
+  static CustomType customTypeReference(TypeElement typeElement, Session session) {
     return CustomTypeReferences.of(typeElement, session);
   }
 
-  static CustomTypeReference customTypeReference(DeclaredType declaredType) {
+  static CustomType customTypeReference(DeclaredType declaredType) {
     return CustomTypeReferences.of(declaredType, Sessions.get());
   }
 
-  static CustomTypeReference customTypeReference(DeclaredType declaredType, Session session) {
+  static CustomType customTypeReference(DeclaredType declaredType, Session session) {
     return CustomTypeReferences.of(declaredType, session);
   }
 }

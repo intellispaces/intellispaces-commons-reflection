@@ -1,16 +1,16 @@
 package tech.intellispaces.framework.javastatements.statement.custom;
 
-import tech.intellispaces.framework.javastatements.statement.reference.CustomTypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.CustomType;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface RecordStatement extends CustomType {
+public interface RecordStatement extends CustomStatement {
 
   /**
    * Implemented interfaces.
    */
-  List<CustomTypeReference> implementedInterfaces();
+  List<CustomType> implementedInterfaces();
 
   @Override
   default Optional<RecordStatement> asRecord() {
@@ -20,7 +20,7 @@ public interface RecordStatement extends CustomType {
   /**
    * Related custom type.
    */
-  default CustomType asCustomType() {
+  default CustomStatement asCustomType() {
     return this;
   }
 }

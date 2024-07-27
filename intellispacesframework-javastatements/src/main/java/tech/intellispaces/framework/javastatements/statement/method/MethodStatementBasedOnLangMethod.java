@@ -4,8 +4,8 @@ import tech.intellispaces.framework.commons.action.Actions;
 import tech.intellispaces.framework.commons.action.Getter;
 import tech.intellispaces.framework.javastatements.statement.StatementType;
 import tech.intellispaces.framework.javastatements.statement.StatementTypes;
-import tech.intellispaces.framework.javastatements.statement.custom.CustomType;
-import tech.intellispaces.framework.javastatements.statement.reference.NonPrimitiveTypeReference;
+import tech.intellispaces.framework.javastatements.statement.custom.CustomStatement;
+import tech.intellispaces.framework.javastatements.statement.type.NonPrimitiveType;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -29,7 +29,7 @@ class MethodStatementBasedOnLangMethod implements MethodStatement {
   }
 
   @Override
-  public CustomType owner() {
+  public CustomStatement owner() {
     throw new RuntimeException("Not implemented");
   }
 
@@ -44,7 +44,7 @@ class MethodStatementBasedOnLangMethod implements MethodStatement {
   }
 
   @Override
-  public MethodStatement specify(Map<String, NonPrimitiveTypeReference> typeMapping) {
+  public MethodStatement specify(Map<String, NonPrimitiveType> typeMapping) {
     return new MethodStatementImpl(owner(), signature().specify(typeMapping));
   }
 }

@@ -2,9 +2,9 @@ package tech.intellispaces.framework.javastatements.statement.method;
 
 import tech.intellispaces.framework.javastatements.statement.instance.AnnotationInstance;
 import tech.intellispaces.framework.javastatements.statement.instance.Instance;
-import tech.intellispaces.framework.javastatements.statement.reference.ExceptionCompatibleTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.NamedTypeReference;
-import tech.intellispaces.framework.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.framework.javastatements.statement.type.ExceptionCompatibleType;
+import tech.intellispaces.framework.javastatements.statement.type.NamedType;
+import tech.intellispaces.framework.javastatements.statement.type.Type;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,11 +15,11 @@ public final class MethodSignatureBuilder {
   private boolean isPublic = true;
   private boolean isDefault = false;
   private boolean isStatic = false;
-  private List<NamedTypeReference> typeParameters = List.of();
-  private TypeReference returnType = null;
+  private List<NamedType> typeParameters = List.of();
+  private Type returnType = null;
   private Instance defaultValue = null;
   private List<MethodParam> params = List.of();
-  private List<ExceptionCompatibleTypeReference> exceptions = List.of();
+  private List<ExceptionCompatibleType> exceptions = List.of();
   private List<AnnotationInstance> annotations = List.of();
 
   MethodSignatureBuilder() {}
@@ -49,12 +49,12 @@ public final class MethodSignatureBuilder {
     return this;
   }
 
-  public MethodSignatureBuilder typeParameters(List<NamedTypeReference> typeParameters) {
+  public MethodSignatureBuilder typeParameters(List<NamedType> typeParameters) {
     this.typeParameters = typeParameters;
     return this;
   }
 
-  public MethodSignatureBuilder returnType(TypeReference returnType) {
+  public MethodSignatureBuilder returnType(Type returnType) {
     this.returnType = returnType;
     return this;
   }
@@ -69,7 +69,7 @@ public final class MethodSignatureBuilder {
     return this;
   }
 
-  public MethodSignatureBuilder exceptions(List<ExceptionCompatibleTypeReference> exceptions) {
+  public MethodSignatureBuilder exceptions(List<ExceptionCompatibleType> exceptions) {
     this.exceptions = exceptions;
     return this;
   }
