@@ -19,13 +19,13 @@ abstract class AbstractCustomType extends AbstractType implements CustomType {
   }
 
   @Override
-  public CustomStatement effectiveTargetType() {
+  public CustomStatement effectiveStatement() {
     Map<String, NonPrimitiveType> typeMapping = typeArgumentMapping();
-    CustomStatement targetType = targetType();
-    if (targetType.statementType() == StatementTypes.Class) {
-      return ClassStatements.effectiveOf((ClassStatement) targetType, typeMapping);
-    } else if (targetType.statementType() == StatementTypes.Interface) {
-      return InterfaceStatements.effectiveOf((InterfaceStatement) targetType, typeMapping);
+    CustomStatement statement = statement();
+    if (statement.statementType() == StatementTypes.Class) {
+      return ClassStatements.effectiveOf((ClassStatement) statement, typeMapping);
+    } else if (statement.statementType() == StatementTypes.Interface) {
+      return InterfaceStatements.effectiveOf((InterfaceStatement) statement, typeMapping);
     } else {
       throw UnexpectedViolationException.withMessage("Not implemented yet");
     }
@@ -38,6 +38,6 @@ abstract class AbstractCustomType extends AbstractType implements CustomType {
     for (NonPrimitiveType curTypeArgument : curTypeArguments) {
       newTypeArguments.add((NonPrimitiveType) curTypeArgument.specify(typeMapping));
     }
-    return new CustomTypeImpl(targetType(), newTypeArguments);
+    return new CustomTypeImpl(statement(), newTypeArguments);
   }
 }

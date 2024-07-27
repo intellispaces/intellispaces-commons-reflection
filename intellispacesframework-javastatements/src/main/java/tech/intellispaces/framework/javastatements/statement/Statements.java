@@ -13,7 +13,7 @@ public interface Statements {
 
   static Statement of(Element element) {
     if (element instanceof TypeElement typeElement) {
-      return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
+      return TypeElementFunctions.asCustomStatement(typeElement, Sessions.get());
     } else if (element instanceof ExecutableElement executableElement) {
       return MethodFunctions.getMethod(executableElement, Sessions.get());
     } else {

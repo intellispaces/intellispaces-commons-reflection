@@ -15,7 +15,7 @@ public interface EnumStatements {
   }
 
   static EnumStatement of(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return TypeElementFunctions.asCustomTypeStatement(
+    return TypeElementFunctions.asCustomStatement(
         typeElement,
         ElementKind.ENUM,
         EnumStatements::create,

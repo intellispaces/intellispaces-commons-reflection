@@ -14,7 +14,7 @@ import java.util.function.Function;
  */
 class CustomTypeBasedOnClass extends AbstractType implements CustomType {
   private final Class<?> aClass;
-  private CustomStatement targetType;
+  private CustomStatement statement;
 
   CustomTypeBasedOnClass(Class<?> aClass) {
     this.aClass = aClass;
@@ -26,11 +26,11 @@ class CustomTypeBasedOnClass extends AbstractType implements CustomType {
   }
 
   @Override
-  public CustomStatement targetType() {
-    if (targetType == null) {
-      targetType = CustomTypes.of(aClass);
+  public CustomStatement statement() {
+    if (statement == null) {
+      statement = CustomTypes.of(aClass);
     }
-    return targetType;
+    return statement;
   }
 
   @Override
@@ -39,8 +39,8 @@ class CustomTypeBasedOnClass extends AbstractType implements CustomType {
   }
 
   @Override
-  public CustomStatement effectiveTargetType() {
-    return targetType;
+  public CustomStatement effectiveStatement() {
+    return statement;
   }
 
   @Override

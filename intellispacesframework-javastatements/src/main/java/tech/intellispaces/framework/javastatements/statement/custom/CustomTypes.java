@@ -9,11 +9,11 @@ import javax.lang.model.element.TypeElement;
 public interface CustomTypes {
 
   static CustomStatement of(TypeElement typeElement) {
-    return TypeElementFunctions.asCustomTypeStatement(typeElement, Sessions.get());
+    return TypeElementFunctions.asCustomStatement(typeElement, Sessions.get());
   }
 
   static CustomStatement of(TypeElement typeElement, Session session) {
-    return TypeElementFunctions.asCustomTypeStatement(typeElement, session);
+    return TypeElementFunctions.asCustomStatement(typeElement, session);
   }
 
   static CustomStatement of(Class<?> aClass) {

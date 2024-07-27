@@ -19,27 +19,27 @@ public interface NamedType extends NonPrimitiveType, TypeBound, ExceptionCompati
   Statement owner();
 
   @Override
-  default boolean isArrayType() {
+  default boolean isArray() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustom() {
     return false;
   }
 
   @Override
-  default boolean isNamedType() {
+  default boolean isNamed() {
     return true;
   }
 
   @Override
-  default boolean isWildcardType() {
+  default boolean isWildcard() {
     return false;
   }
 
   @Override
-  default Optional<NamedType> asNamedType() {
+  default Optional<NamedType> asNamed() {
     return Optional.of(this);
   }
 }

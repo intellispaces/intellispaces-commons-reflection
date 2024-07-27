@@ -15,7 +15,7 @@ public interface AnnotationStatements {
   }
 
   static AnnotationStatement of(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return TypeElementFunctions.asCustomTypeStatement(
+    return TypeElementFunctions.asCustomStatement(
         typeElement,
         ElementKind.ANNOTATION_TYPE,
         AnnotationStatements::create,

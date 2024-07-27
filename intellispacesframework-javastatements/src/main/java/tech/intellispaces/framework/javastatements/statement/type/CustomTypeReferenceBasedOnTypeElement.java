@@ -22,7 +22,7 @@ class CustomTypeReferenceBasedOnTypeElement extends AbstractCustomType {
 
   CustomTypeReferenceBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super();
-    this.targetTypeGetter = Actions.cachedLazyGetter(TypeElementFunctions::asCustomTypeStatement, typeElement, session);
+    this.targetTypeGetter = Actions.cachedLazyGetter(TypeElementFunctions::asCustomStatement, typeElement, session);
   }
 
   @Override
@@ -31,7 +31,7 @@ class CustomTypeReferenceBasedOnTypeElement extends AbstractCustomType {
   }
 
   @Override
-  public CustomStatement targetType() {
+  public CustomStatement statement() {
     return targetTypeGetter.get();
   }
 

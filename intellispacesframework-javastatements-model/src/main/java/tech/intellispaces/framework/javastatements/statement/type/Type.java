@@ -15,74 +15,74 @@ public interface Type extends Statement {
 
   boolean isPrimitive();
 
-  boolean isArrayType();
+  boolean isArray();
 
-  boolean isCustomType();
+  boolean isCustom();
 
-  boolean isNamedType();
+  boolean isNamed();
 
-  boolean isWildcardType();
+  boolean isWildcard();
 
   /**
    * Related primitive type.
    */
-  default Optional<PrimitiveType> asPrimitiveType() {
+  default Optional<PrimitiveType> asPrimitive() {
     return Optional.empty();
   }
 
-  default PrimitiveType asPrimitiveTypeConfidently() {
-    return asPrimitiveType().orElseThrow();
+  default PrimitiveType asPrimitiveConfidently() {
+    return asPrimitive().orElseThrow();
   }
 
   /**
    * Related non-primitive type.
    */
-  default Optional<NonPrimitiveType> asNonPrimitiveType() {
+  default Optional<NonPrimitiveType> asNonPrimitive() {
     return Optional.empty();
   }
 
   /**
    * Related array type.
    */
-  default Optional<ArrayType> asArrayType() {
+  default Optional<ArrayType> asArray() {
     return Optional.empty();
   }
 
-  default ArrayType asArrayTypeConfidently() {
-    return asArrayType().orElseThrow();
+  default ArrayType asArrayConfidently() {
+    return asArray().orElseThrow();
   }
 
   /**
    * Related named type.
    */
-  default Optional<NamedType> asNamedType() {
+  default Optional<NamedType> asNamed() {
     return Optional.empty();
   }
 
-  default NamedType asNamedTypeConfidently() {
-    return asNamedType().orElseThrow();
+  default NamedType asNamedConfidently() {
+    return asNamed().orElseThrow();
   }
 
   /**
    * Related wildcard type.
    */
-  default Optional<WildcardType> asWildcardType() {
+  default Optional<WildcardType> asWildcard() {
     return Optional.empty();
   }
 
-  default WildcardType asWildcardTypeConfidently() {
-    return asWildcardType().orElseThrow();
+  default WildcardType asWildcardConfidently() {
+    return asWildcard().orElseThrow();
   }
 
   /**
    * Related custom type.
    */
-  default Optional<CustomType> asCustomType() {
+  default Optional<CustomType> asCustom() {
     return Optional.empty();
   }
 
-  default CustomType asCustomTypeConfidently() {
-    return asCustomType().orElseThrow();
+  default CustomType asCustomConfidently() {
+    return asCustom().orElseThrow();
   }
 
   Type specify(Map<String, NonPrimitiveType> typeMapping);

@@ -18,27 +18,27 @@ public interface WildcardType extends NonPrimitiveType {
   Optional<TypeBound> superBound();
 
   @Override
-  default boolean isArrayType() {
+  default boolean isArray() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustom() {
     return false;
   }
 
   @Override
-  default boolean isNamedType() {
+  default boolean isNamed() {
     return false;
   }
 
   @Override
-  default boolean isWildcardType() {
+  default boolean isWildcard() {
     return true;
   }
 
   @Override
-  default Optional<WildcardType> asWildcardType() {
+  default Optional<WildcardType> asWildcard() {
     return Optional.of(this);
   }
 }

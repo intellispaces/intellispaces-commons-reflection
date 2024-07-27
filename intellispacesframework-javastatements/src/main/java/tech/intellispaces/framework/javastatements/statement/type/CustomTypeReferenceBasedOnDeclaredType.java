@@ -19,7 +19,7 @@ import java.util.function.Function;
  * Adapter od {@link DeclaredType} to {@link CustomType}.
  */
 class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomType {
-  private final Getter<CustomStatement> targetTypeGetter;
+  private final Getter<CustomStatement> satementGetter;
   private final Getter<List<NonPrimitiveType>> typeArgumentsGetter;
   private final Getter<Map<String, NonPrimitiveType>> typeArgumentMappingsGetter;
   private final Getter<String> typeArgumentsDeclarationGetter;
@@ -27,7 +27,7 @@ class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomType {
   CustomTypeReferenceBasedOnDeclaredType(DeclaredType declaredType, TypeContext typeContext, Session session) {
     super();
     TypeElement typeElement = (TypeElement) declaredType.asElement();
-    this.targetTypeGetter = Actions.cachedLazyGetter(TypeElementFunctions::asCustomTypeStatement, typeElement, session);
+    this.satementGetter = Actions.cachedLazyGetter(TypeElementFunctions::asCustomStatement, typeElement, session);
     this.typeArgumentsGetter = Actions.cachedLazyGetter(TypeElementFunctions::getTypeArguments, declaredType, typeContext, session);
     this.typeArgumentMappingsGetter = Actions.cachedLazyGetter(TypeFunctions::getTypeArgumentMapping, this);
     this.typeArgumentsDeclarationGetter = Actions.cachedLazyGetter(TypeFunctions::getTypeArgumentsDeclaration, this);
@@ -39,8 +39,8 @@ class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomType {
   }
 
   @Override
-  public CustomStatement targetType() {
-    return targetTypeGetter.get();
+  public CustomStatement statement() {
+    return satementGetter.get();
   }
 
   @Override

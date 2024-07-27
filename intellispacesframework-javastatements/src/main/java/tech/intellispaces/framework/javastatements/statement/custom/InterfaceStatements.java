@@ -21,7 +21,7 @@ public interface InterfaceStatements {
   }
 
   static InterfaceStatement of(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return TypeElementFunctions.asCustomTypeStatement(
+    return TypeElementFunctions.asCustomStatement(
         typeElement,
         ElementKind.INTERFACE,
         InterfaceStatements::create,

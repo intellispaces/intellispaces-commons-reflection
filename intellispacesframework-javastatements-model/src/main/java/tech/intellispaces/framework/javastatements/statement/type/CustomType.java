@@ -13,16 +13,16 @@ import java.util.function.Function;
 public interface CustomType extends NonPrimitiveType, TypeBound, ExceptionCompatibleType {
 
   /**
-   * Target type.
+   * Custom statement.
    */
-  CustomStatement targetType();
+  CustomStatement statement();
 
   /**
    * Actual arguments of type parameters.
    */
   List<NonPrimitiveType> typeArguments();
 
-  CustomStatement effectiveTargetType();
+  CustomStatement effectiveStatement();
 
   Map<String, NonPrimitiveType> typeArgumentMapping();
 
@@ -31,27 +31,27 @@ public interface CustomType extends NonPrimitiveType, TypeBound, ExceptionCompat
   String typeArgumentsDeclaration(Function<String, String> simpleNameMapper);
 
   @Override
-  default boolean isArrayType() {
+  default boolean isArray() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustom() {
     return true;
   }
 
   @Override
-  default boolean isNamedType() {
+  default boolean isNamed() {
     return false;
   }
 
   @Override
-  default boolean isWildcardType() {
+  default boolean isWildcard() {
     return false;
   }
 
   @Override
-  default Optional<CustomType> asCustomType() {
+  default Optional<CustomType> asCustom() {
     return Optional.of(this);
   }
 }

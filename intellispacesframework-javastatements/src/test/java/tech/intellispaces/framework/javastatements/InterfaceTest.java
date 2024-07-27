@@ -100,21 +100,21 @@ public class InterfaceTest extends AbstractCustomStatementTest {
 
     assertThat(interfaceStatement.extendedInterfaces()).hasSize(2);
     HandleFunctions.handle(interfaceStatement.extendedInterfaces().get(0), extendedInterface -> {
-      assertThat(extendedInterface.targetType().canonicalName()).isEqualTo(interface1Name);
+      assertThat(extendedInterface.statement().canonicalName()).isEqualTo(interface1Name);
       assertThat(extendedInterface.typeArguments()).isEmpty();
     });
     HandleFunctions.handle(interfaceStatement.extendedInterfaces().get(1), extendedInterface -> {
-      assertThat(extendedInterface.targetType().canonicalName()).isEqualTo(interface2Name);
+      assertThat(extendedInterface.statement().canonicalName()).isEqualTo(interface2Name);
       assertThat(extendedInterface.typeArguments()).isEmpty();
     });
 
     assertThat(interfaceStatement.parentTypes()).hasSize(2);
     HandleFunctions.handle(interfaceStatement.parentTypes().get(0), parentType -> {
-      assertThat(parentType.targetType().canonicalName()).isEqualTo(interface1Name);
+      assertThat(parentType.statement().canonicalName()).isEqualTo(interface1Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
     HandleFunctions.handle(interfaceStatement.parentTypes().get(1), parentType -> {
-      assertThat(parentType.targetType().canonicalName()).isEqualTo(interface2Name);
+      assertThat(parentType.statement().canonicalName()).isEqualTo(interface2Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
 
@@ -338,20 +338,20 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     assertThat(typeReference.actualDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1");
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1<T extends GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1<T>");
-    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
-    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
+    assertThat(typeReference.statement().typeParametersFullDeclaration()).isEqualTo("<T extends GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.statement().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
-    Assertions.assertThat(typeReference.targetType().asInterface()).isPresent();
-    InterfaceStatement interfaceStatement = typeReference.targetType().asInterface().orElseThrow();
+    Assertions.assertThat(typeReference.statement().asInterface()).isPresent();
+    InterfaceStatement interfaceStatement = typeReference.statement().asInterface().orElseThrow();
 
     assertThat(interfaceStatement.typeParameters()).hasSize(1);
     HandleFunctions.handle(interfaceStatement.typeParameters().get(0), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T");
       assertThat(typeParam.extendedBounds()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType()).isSameAs(interfaceStatement);
-      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments().get(0)
-          .asNamedType().orElseThrow().name()).isEqualTo("T");
+      assertThat(typeParam.extendedBounds().get(0).asCustom().orElseThrow().statement()).isSameAs(interfaceStatement);
+      assertThat(typeParam.extendedBounds().get(0).asCustom().orElseThrow().typeArguments()).hasSize(1);
+      assertThat(typeParam.extendedBounds().get(0).asCustom().orElseThrow().typeArguments().get(0)
+          .asNamed().orElseThrow().name()).isEqualTo("T");
     });
   }
 
@@ -367,24 +367,24 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     assertThat(typeReference.actualDeclaration()).isEqualTo("InterfaceA");
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("InterfaceA<T1 extends InterfaceB<?>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("InterfaceA<T1>");
-    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends InterfaceB<?>>");
-    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
+    assertThat(typeReference.statement().typeParametersFullDeclaration()).isEqualTo("<T1 extends InterfaceB<?>>");
+    assertThat(typeReference.statement().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
-    Assertions.assertThat(typeReference.targetType().asInterface()).isPresent();
-    InterfaceStatement interfaceStatement = typeReference.targetType().asInterface().orElseThrow();
+    Assertions.assertThat(typeReference.statement().asInterface()).isPresent();
+    InterfaceStatement interfaceStatement = typeReference.statement().asInterface().orElseThrow();
 
     assertThat(interfaceStatement.typeParameters()).hasSize(1);
     HandleFunctions.handle(interfaceStatement.typeParameters().get(0), classATypeParam -> {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
-      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomType().orElseThrow().targetType(), classBExtendedBound -> {
+      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustom().orElseThrow().statement(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispaces.framework.javastatements.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB");
         assertThat(classBExtendedBound.className()).isEqualTo("tech.intellispaces.framework.javastatements.samples.GenericInterfaceWithCyclicTypeDependencyCase2$InterfaceB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().name()).isEqualTo("T2");
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().extendedBounds()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamedType().orElseThrow().extendedBounds().get(0)
-            .asCustomType().orElseThrow().targetType()).isSameAs(interfaceStatement);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamed().orElseThrow().name()).isEqualTo("T2");
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamed().orElseThrow().extendedBounds()).hasSize(1);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamed().orElseThrow().extendedBounds().get(0)
+            .asCustom().orElseThrow().statement()).isSameAs(interfaceStatement);
       });
     });
   }

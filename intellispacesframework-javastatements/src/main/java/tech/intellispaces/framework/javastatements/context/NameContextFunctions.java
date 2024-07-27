@@ -29,8 +29,8 @@ public interface NameContextFunctions {
 
         NonPrimitiveType actualTypeReference = argumentIterator.next();
         actualType = actualTypeReference;
-        if (actualTypeReference.asNamedType().isPresent()) {
-          Optional<NonPrimitiveType> parentActualTypeReference = parentNamespace.get(actualTypeReference.asNamedType().orElseThrow().name())
+        if (actualTypeReference.asNamed().isPresent()) {
+          Optional<NonPrimitiveType> parentActualTypeReference = parentNamespace.get(actualTypeReference.asNamed().orElseThrow().name())
               .map(ContextTypeParameter::actualType);
           if (parentActualTypeReference.isPresent()) {
             actualType = parentActualTypeReference.get();

@@ -68,13 +68,13 @@ public interface InstanceFunctions {
       // Enum value
       VariableElement variableElement = (VariableElement) value;
       Type type = TypeElementFunctions.getTypeReference(variableElement.asType(), session);
-      EnumStatement enumStatement = type.asCustomType().orElseThrow().targetType().asEnum().orElseThrow();
+      EnumStatement enumStatement = type.asCustom().orElseThrow().statement().asEnum().orElseThrow();
       return EnumInstances.of(enumStatement, variableElement.getSimpleName().toString());
     } else if (value instanceof DeclaredType) {
       // Class value
       DeclaredType declaredType = (DeclaredType) value;
       CustomType typeReference = TypeElementFunctions.getTypeReference(declaredType, session);
-      return ClassInstances.of(typeReference.targetType());
+      return ClassInstances.of(typeReference.statement());
     } else if (value instanceof AnnotationMirror) {
       // Annotation value
       AnnotationMirror annotationMirror = (AnnotationMirror) value;

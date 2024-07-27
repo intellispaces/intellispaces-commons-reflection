@@ -11,14 +11,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 class CustomTypeImpl extends AbstractCustomType {
-  private final CustomStatement targetType;
+  private final CustomStatement statement;
   private final List<NonPrimitiveType> typeArguments;
   private final Getter<Map<String, NonPrimitiveType>> typeArgumentMappingsGetter;
   private final Getter<String> typeArgumentsDeclarationGetter;
 
-  CustomTypeImpl(CustomStatement targetType, List<NonPrimitiveType> typeArguments) {
+  CustomTypeImpl(CustomStatement statement, List<NonPrimitiveType> typeArguments) {
     super();
-    this.targetType = targetType;
+    this.statement = statement;
     this.typeArguments = typeArguments;
     this.typeArgumentMappingsGetter = Actions.cachedLazyGetter(TypeFunctions::getTypeArgumentMapping, this);
     this.typeArgumentsDeclarationGetter = Actions.cachedLazyGetter(TypeFunctions::getTypeArgumentsDeclaration, this);
@@ -30,8 +30,8 @@ class CustomTypeImpl extends AbstractCustomType {
   }
 
   @Override
-  public CustomStatement targetType() {
-    return targetType;
+  public CustomStatement statement() {
+    return statement;
   }
 
   @Override

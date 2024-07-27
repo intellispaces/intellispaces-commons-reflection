@@ -22,27 +22,27 @@ public interface PrimitiveType extends Type {
   }
 
   @Override
-  default boolean isArrayType() {
+  default boolean isArray() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustom() {
     return false;
   }
 
   @Override
-  default boolean isNamedType() {
+  default boolean isNamed() {
     return false;
   }
 
   @Override
-  default boolean isWildcardType() {
+  default boolean isWildcard() {
     return false;
   }
 
   @Override
-  default Optional<PrimitiveType> asPrimitiveType() {
+  default Optional<PrimitiveType> asPrimitive() {
     return Optional.of(this);
   }
 

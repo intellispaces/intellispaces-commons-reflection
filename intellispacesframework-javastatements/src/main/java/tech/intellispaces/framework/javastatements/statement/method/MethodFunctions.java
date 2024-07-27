@@ -115,8 +115,8 @@ public interface MethodFunctions {
       }
     }
     for (CustomType parent : type.parentTypes()) {
-      if (parent.isCustomType()) {
-        overrideMethods.addAll(getOverrideMethods(parent.asCustomTypeConfidently().targetType(), method, true));
+      if (parent.isCustom()) {
+        overrideMethods.addAll(getOverrideMethods(parent.asCustomConfidently().statement(), method, true));
       }
     }
     return overrideMethods;

@@ -121,13 +121,13 @@ public interface DependenciesFunctions {
     } else {
       return switch ((StatementTypes) type.statementType()) {
         case CustomType -> getCustomTypeReferenceDependencies(
-            type.asCustomType().orElseThrow(), includeRelations, exclusions);
+            type.asCustom().orElseThrow(), includeRelations, exclusions);
         case NamedType -> getNamedTypeReferenceDependencies(
-            type.asNamedType().orElseThrow(), includeRelations, exclusions);
+            type.asNamed().orElseThrow(), includeRelations, exclusions);
         case WildcardType -> getWildcardTypeReferenceDependencies(
-            type.asWildcardType().orElseThrow(), includeRelations, exclusions);
+            type.asWildcard().orElseThrow(), includeRelations, exclusions);
         case ArrayType -> getArrayTypeReferenceDependencies(
-            type.asArrayType().orElseThrow(), includeRelations, exclusions);
+            type.asArray().orElseThrow(), includeRelations, exclusions);
         default -> throw JavaStatementException.withMessage("Unsupported statement type {}", type.statementType());
       };
     }
@@ -136,7 +136,7 @@ public interface DependenciesFunctions {
   private static List<CustomStatement> getCustomTypeReferenceDependencies(
       CustomType typeReference, boolean includeRelations, Set<String> exclusions
   ) {
-    List<CustomStatement> customStatements = getCustomTypeDependencies(typeReference.targetType(), includeRelations, exclusions);
+    List<CustomStatement> customStatements = getCustomTypeDependencies(typeReference.statement(), includeRelations, exclusions);
     List<CustomStatement> allCustomStatements = new ArrayList<>(customStatements);
     typeReference.typeArguments().stream()
         .map(ref -> getTypeReferenceDependencies(ref, includeRelations, exclusions))
@@ -173,7 +173,7 @@ public interface DependenciesFunctions {
       return List.of();
     }
     return getTypeReferenceDependencies(
-        typeReference.elementType().asNonPrimitiveType().orElseThrow(IllegalStateException::new),
+        typeReference.elementType().asNonPrimitive().orElseThrow(IllegalStateException::new),
         includeRelations,
         exclusions
     );

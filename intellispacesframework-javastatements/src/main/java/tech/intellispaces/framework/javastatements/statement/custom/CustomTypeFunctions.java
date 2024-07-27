@@ -32,7 +32,7 @@ public interface CustomTypeFunctions {
 
   static Optional<CustomType> getExtendedClass(CustomStatement statement) {
     return statement.parentTypes().stream()
-        .filter(ref -> StatementTypes.Class.equals(ref.targetType().statementType()))
+        .filter(ref -> StatementTypes.Class.equals(ref.statement().statementType()))
         .reduce((ref1, ref2) -> {
           throw JavaStatementException.withMessage("Multiple extended classes: {}, {}", ref1, ref2);
         });
@@ -40,7 +40,7 @@ public interface CustomTypeFunctions {
 
   static List<CustomType> getImplementedInterfaces(CustomStatement statement) {
     return statement.parentTypes().stream()
-        .filter(t -> StatementTypes.Interface.equals(t.targetType().statementType()))
+        .filter(t -> StatementTypes.Interface.equals(t.statement().statementType()))
         .toList();
   }
 
@@ -103,7 +103,7 @@ public interface CustomTypeFunctions {
   private static void extractMethods(
       CustomType customTypeReference, List<MethodStatement> allMethods, TypeContext typeContext
   ) {
-    CustomStatement customStatement = customTypeReference.targetType();
+    CustomStatement customStatement = customTypeReference.statement();
     TypeContext actualNameContext = NameContextFunctions.getActualNameContext(
         typeContext, customStatement.typeParameters(), customTypeReference.typeArguments()
     );
@@ -152,8 +152,8 @@ public interface CustomTypeFunctions {
   }
 
   private static Type getActualTypeReference(Type type, TypeContext typeContext) {
-    if (type.asNamedType().isPresent())  {
-      NamedType namedTypeReference = type.asNamedType().orElseThrow();
+    if (type.asNamed().isPresent())  {
+      NamedType namedTypeReference = type.asNamed().orElseThrow();
       Optional<NonPrimitiveType> actualType = typeContext
           .get(namedTypeReference.name())
           .map(ContextTypeParameter::actualType);
@@ -182,7 +182,7 @@ public interface CustomTypeFunctions {
 
   static List<CustomStatement> allParents(CustomStatement customStatement) {
     List<CustomStatement> curParents = customStatement.parentTypes().stream()
-        .map(CustomType::targetType)
+        .map(CustomType::statement)
         .toList();
     List<CustomStatement> parents = new ArrayList<>(curParents);
     curParents.forEach(p -> populateParents(p, parents));
@@ -191,7 +191,7 @@ public interface CustomTypeFunctions {
 
   private static void populateParents(CustomStatement customStatement, List<CustomStatement> parents) {
     var curParents = customStatement.parentTypes().stream()
-        .map(CustomType::targetType)
+        .map(CustomType::statement)
         .toList();
     parents.addAll(curParents);
     curParents.forEach(p -> populateParents(p, parents));
@@ -199,12 +199,12 @@ public interface CustomTypeFunctions {
 
   static boolean hasParent(CustomStatement customStatement, String parentCanonicalName) {
     for (CustomType parent : customStatement.parentTypes()) {
-      if (parentCanonicalName.equals(parent.targetType().canonicalName())) {
+      if (parentCanonicalName.equals(parent.statement().canonicalName())) {
         return true;
       }
     }
     for (CustomType parent : customStatement.parentTypes()) {
-      if (parent.targetType().hasParent(parentCanonicalName)) {
+      if (parent.statement().hasParent(parentCanonicalName)) {
         return true;
       }
     }

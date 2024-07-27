@@ -17,25 +17,25 @@ import java.util.stream.Collectors;
 public interface TypeFunctions {
 
   static Optional<Type> narrowestOf(Type typeReference1, Type typeReference2) {
-    if (typeReference1.asPrimitiveType().isPresent() && typeReference2.asPrimitiveType().isPresent()) {
-      String typename1 = typeReference1.asPrimitiveType().orElseThrow().typename();
-      String typename2 = typeReference2.asPrimitiveType().orElseThrow().typename();
+    if (typeReference1.asPrimitive().isPresent() && typeReference2.asPrimitive().isPresent()) {
+      String typename1 = typeReference1.asPrimitive().orElseThrow().typename();
+      String typename2 = typeReference2.asPrimitive().orElseThrow().typename();
       if (typename1.equals(typename2)) {
         return Optional.of(typeReference1);
       } else {
         return Optional.empty();
       }
-    } else if (typeReference1.asNamedType().isPresent() && typeReference2.asNamedType().isPresent()) {
-      NamedType type1 = typeReference1.asNamedType().orElseThrow();
-      NamedType type2 = typeReference2.asNamedType().orElseThrow();
+    } else if (typeReference1.asNamed().isPresent() && typeReference2.asNamed().isPresent()) {
+      NamedType type1 = typeReference1.asNamed().orElseThrow();
+      NamedType type2 = typeReference2.asNamed().orElseThrow();
       if (type1.name().equals(type2.name())) {
         return Optional.of(typeReference1);
       } else {
         return Optional.empty();
       }
-    } else if (typeReference1.asCustomType().isPresent() && typeReference2.asCustomType().isPresent()) {
-      CustomStatement type1 = typeReference1.asCustomType().orElseThrow().targetType();
-      CustomStatement type2 = typeReference2.asCustomType().orElseThrow().targetType();
+    } else if (typeReference1.asCustom().isPresent() && typeReference2.asCustom().isPresent()) {
+      CustomStatement type1 = typeReference1.asCustom().orElseThrow().statement();
+      CustomStatement type2 = typeReference2.asCustom().orElseThrow().statement();
       if (allTypes(type1).contains(type2.canonicalName())) {
         return Optional.of(typeReference1);
       } else if (allTypes(type2).contains(type1.canonicalName())) {
@@ -43,9 +43,9 @@ public interface TypeFunctions {
       } else {
         return Optional.empty();
       }
-    } else if (typeReference1.asNamedType().isPresent() && typeReference2.asCustomType().isPresent()) {
+    } else if (typeReference1.asNamed().isPresent() && typeReference2.asCustom().isPresent()) {
       return Optional.of(typeReference2);
-    } else if (typeReference1.asCustomType().isPresent() && typeReference2.asNamedType().isPresent()) {
+    } else if (typeReference1.asCustom().isPresent() && typeReference2.asNamed().isPresent()) {
       return Optional.of(typeReference1);
     } else {
       return Optional.empty();
@@ -79,16 +79,16 @@ public interface TypeFunctions {
 
   static boolean isEqualTypes(Type type1, Type type2) {
     if (type1.isPrimitive() && type2.isPrimitive()) {
-      PrimitiveType primitiveTypeReference1 = type1.asPrimitiveTypeConfidently();
-      PrimitiveType primitiveTypeReference2 = type2.asPrimitiveTypeConfidently();
+      PrimitiveType primitiveTypeReference1 = type1.asPrimitiveConfidently();
+      PrimitiveType primitiveTypeReference2 = type2.asPrimitiveConfidently();
       return isEqualPrimitiveTypeReferences(primitiveTypeReference1, primitiveTypeReference2);
-    } else if (type1.isCustomType() && type2.isCustomType()) {
-      CustomType customTypeReference1 = type1.asCustomTypeConfidently();
-      CustomType customTypeReference2 = type2.asCustomTypeConfidently();
+    } else if (type1.isCustom() && type2.isCustom()) {
+      CustomType customTypeReference1 = type1.asCustomConfidently();
+      CustomType customTypeReference2 = type2.asCustomConfidently();
       return isEqualCustomTypeReferences(customTypeReference1, customTypeReference2);
-    } else if (type1.isNamedType() && type2.isNamedType()) {
-      NamedType namedTypeReference1 = type1.asNamedTypeConfidently();
-      NamedType namedTypeReference2 = type2.asNamedTypeConfidently();
+    } else if (type1.isNamed() && type2.isNamed()) {
+      NamedType namedTypeReference1 = type1.asNamedConfidently();
+      NamedType namedTypeReference2 = type2.asNamedConfidently();
       return isEqualNamedTypeReferences(namedTypeReference1, namedTypeReference2);
     } else {
       return false;
@@ -104,8 +104,8 @@ public interface TypeFunctions {
   private static boolean isEqualCustomTypeReferences(
       CustomType typeReference1, CustomType typeReference2
   ) {
-    return typeReference1.targetType().canonicalName().equals(
-        typeReference2.targetType().canonicalName()
+    return typeReference1.statement().canonicalName().equals(
+        typeReference2.statement().canonicalName()
     );
   }
 
@@ -127,12 +127,12 @@ public interface TypeFunctions {
 
   static boolean isEquivalentTypes(Type type1, Type type2) {
     if (type1.isPrimitive() && type2.isPrimitive()) {
-      PrimitiveType primitiveType1 = type1.asPrimitiveTypeConfidently();
-      PrimitiveType primitiveType2 = type2.asPrimitiveTypeConfidently();
+      PrimitiveType primitiveType1 = type1.asPrimitiveConfidently();
+      PrimitiveType primitiveType2 = type2.asPrimitiveConfidently();
       return primitiveType1.typename().equals(primitiveType2.typename());
-    } else if (type1.isCustomType() && type2.isCustomType()) {
-      CustomStatement customStatement1 = type1.asCustomTypeConfidently().targetType();
-      CustomStatement customStatement2 = type2.asCustomTypeConfidently().targetType();
+    } else if (type1.isCustom() && type2.isCustom()) {
+      CustomStatement customStatement1 = type1.asCustomConfidently().statement();
+      CustomStatement customStatement2 = type2.asCustomConfidently().statement();
       return customStatement1.canonicalName().equals(customStatement2.canonicalName());
     } else {
       throw UnexpectedViolationException.withMessage("Not implemented");
@@ -172,19 +172,19 @@ public interface TypeFunctions {
   private static String getActualTypeDeclaration(
       Type type, boolean blind, Function<String, String> simpleNameMapper
   ) {
-    if (type.asPrimitiveType().isPresent()) {
-      return type.asPrimitiveType().get().typename();
-    } else if (type.asArrayType().isPresent()) {
-      Type elementType = type.asArrayType().get().elementType();
+    if (type.asPrimitive().isPresent()) {
+      return type.asPrimitive().get().typename();
+    } else if (type.asArray().isPresent()) {
+      Type elementType = type.asArray().get().elementType();
       return getActualTypeDeclaration(elementType, blind) + "[]";
-    } else if (type.asCustomType().isPresent()) {
-      CustomStatement customStatement = type.asCustomType().get().targetType();
+    } else if (type.asCustom().isPresent()) {
+      CustomStatement customStatement = type.asCustom().get().statement();
       String simpleName = simpleNameMapper.apply(customStatement.canonicalName());
-      return simpleName + getTypeArgumentsDeclaration(type.asCustomType().get(), blind, simpleNameMapper);
-    } else if (type.asNamedType().isPresent()) {
-      return getNamedTypeReferenceDeclaration(type.asNamedType().get(), blind, false);
-    } else if (type.asWildcardType().isPresent()) {
-      return getWildcardDeclaration(type.asWildcardType().get(), blind, true);
+      return simpleName + getTypeArgumentsDeclaration(type.asCustom().get(), blind, simpleNameMapper);
+    } else if (type.asNamed().isPresent()) {
+      return getNamedTypeReferenceDeclaration(type.asNamed().get(), blind, false);
+    } else if (type.asWildcard().isPresent()) {
+      return getWildcardDeclaration(type.asWildcard().get(), blind, true);
     } else {
       throw JavaStatementException.withMessage("Unsupported type {}", type.statementType().typename());
     }
@@ -199,18 +199,18 @@ public interface TypeFunctions {
   }
 
   static String getFormalTypeReferenceDeclaration(Type type, boolean fullDeclaration) {
-    if (type.asPrimitiveType().isPresent()) {
-      return type.asPrimitiveType().get().typename();
-    } else if (type.asArrayType().isPresent()) {
-      Type elementType = type.asArrayType().get().elementType();
+    if (type.asPrimitive().isPresent()) {
+      return type.asPrimitive().get().typename();
+    } else if (type.asArray().isPresent()) {
+      Type elementType = type.asArray().get().elementType();
       return getFormalTypeReferenceDeclaration(elementType, fullDeclaration) + "[]";
-    } else if (type.asCustomType().isPresent()) {
-      CustomStatement customStatement = type.asCustomType().get().targetType();
+    } else if (type.asCustom().isPresent()) {
+      CustomStatement customStatement = type.asCustom().get().statement();
       return customStatement.simpleName() + CustomTypeFunctions.getTypeParametersDeclaration(customStatement, fullDeclaration);
-    } else if (type.asNamedType().isPresent()) {
-      return getNamedTypeReferenceDeclaration(type.asNamedType().get(), false, fullDeclaration);
-    } else if (type.asWildcardType().isPresent()) {
-      return getWildcardDeclaration(type.asWildcardType().get(), false, fullDeclaration);
+    } else if (type.asNamed().isPresent()) {
+      return getNamedTypeReferenceDeclaration(type.asNamed().get(), false, fullDeclaration);
+    } else if (type.asWildcard().isPresent()) {
+      return getWildcardDeclaration(type.asWildcard().get(), false, fullDeclaration);
     } else {
       throw JavaStatementException.withMessage("Unsupported type {}", type.statementType().typename());
     }
@@ -278,7 +278,7 @@ public interface TypeFunctions {
 
   static Map<String, NonPrimitiveType> getTypeArgumentMapping(CustomType customTypeReference) {
     List<NonPrimitiveType> typeArguments = customTypeReference.typeArguments();
-    List<NamedType> typeParams = customTypeReference.targetType().typeParameters();
+    List<NamedType> typeParams = customTypeReference.statement().typeParameters();
     if (typeArguments.isEmpty() && typeParams.isEmpty()) {
       return Map.of();
     }
@@ -290,7 +290,7 @@ public interface TypeFunctions {
 
     Map<String, NonPrimitiveType> mapping = new HashMap<>();
     Iterator<NonPrimitiveType> typeArgumentIterator = customTypeReference.typeArguments().iterator();
-    Iterator<NamedType> typeParamIterator = customTypeReference.targetType().typeParameters().iterator();
+    Iterator<NamedType> typeParamIterator = customTypeReference.statement().typeParameters().iterator();
     while (typeArgumentIterator.hasNext()) {
       NonPrimitiveType typeArgument = typeArgumentIterator.next();
       NamedType typeParam = typeParamIterator.next();

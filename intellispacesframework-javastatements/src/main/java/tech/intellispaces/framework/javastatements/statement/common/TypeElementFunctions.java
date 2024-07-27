@@ -114,7 +114,7 @@ public interface TypeElementFunctions {
         .get();
     return parentTypeMirrors.stream()
         .map(parent -> CustomTypeReferences.of((DeclaredType) parent, newTypeContext, session))
-        .filter(ref -> !Object.class.getName().equals(ref.targetType().canonicalName()))
+        .filter(ref -> !Object.class.getName().equals(ref.statement().canonicalName()))
         .toList();
   }
 
@@ -219,7 +219,7 @@ public interface TypeElementFunctions {
   }
 
   static CustomStatement getCustomTypeStatement(DeclaredType declaredType, Session session) {
-    return getTypeReference(declaredType, session).targetType();
+    return getTypeReference(declaredType, session).statement();
   }
 
   static boolean isCustomType(TypeElement typeElement) {
@@ -232,9 +232,9 @@ public interface TypeElementFunctions {
 
   static Class<?> getClass(Type type) {
     if (StatementTypes.PrimitiveType.equals(type.statementType())) {
-      return type.asPrimitiveType().orElseThrow().wrapperClass();
+      return type.asPrimitive().orElseThrow().wrapperClass();
     } else if (StatementTypes.CustomType.equals(type.statementType())) {
-      return getClass(type.asCustomType().orElseThrow().targetType().canonicalName());
+      return getClass(type.asCustom().orElseThrow().statement().canonicalName());
     } else {
       throw JavaStatementException.withMessage("Unsupported type {}", type.statementType().typename());
     }
@@ -295,7 +295,7 @@ public interface TypeElementFunctions {
     } else if (bound.getKind() == TypeKind.DECLARED) {
       DeclaredType declaredType = (DeclaredType) bound;
       CustomType customTypeReference = CustomTypeReferences.of(declaredType, typeContext, session);
-      if (!Object.class.getName().equals(customTypeReference.targetType().canonicalName())) {
+      if (!Object.class.getName().equals(customTypeReference.statement().canonicalName())) {
         boundTypeReference = customTypeReference;
       }
     } else if (TypeKind.ARRAY == bound.getKind()) {
@@ -306,11 +306,11 @@ public interface TypeElementFunctions {
     return Optional.ofNullable(boundTypeReference);
   }
 
-  static CustomStatement asCustomTypeStatement(TypeElement typeElement, Session session) {
-    return asCustomTypeStatement(typeElement, TypeContexts.empty(), session);
+  static CustomStatement asCustomStatement(TypeElement typeElement, Session session) {
+    return asCustomStatement(typeElement, TypeContexts.empty(), session);
   }
 
-  static CustomStatement asCustomTypeStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
+  static CustomStatement asCustomStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
     if (typeElement.getKind() == ElementKind.CLASS) {
       return ClassStatements.of(typeElement, typeContext, session);
     } else if (typeElement.getKind() == ElementKind.INTERFACE) {
@@ -328,7 +328,7 @@ public interface TypeElementFunctions {
   }
 
   @SuppressWarnings("unchecked")
-  static <T extends CustomStatement> T asCustomTypeStatement(
+  static <T extends CustomStatement> T asCustomStatement(
       TypeElement typeElement,
       ElementKind expectedElementKind,
       TriFunction<TypeElement, TypeContext, Session, T> factory,

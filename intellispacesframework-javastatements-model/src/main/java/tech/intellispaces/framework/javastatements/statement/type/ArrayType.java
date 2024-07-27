@@ -13,27 +13,27 @@ public interface ArrayType extends NonPrimitiveType, TypeBound {
   Type elementType();
 
   @Override
-  default boolean isArrayType() {
+  default boolean isArray() {
     return true;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustom() {
     return false;
   }
 
   @Override
-  default boolean isNamedType() {
+  default boolean isNamed() {
     return false;
   }
 
   @Override
-  default boolean isWildcardType() {
+  default boolean isWildcard() {
     return false;
   }
 
   @Override
-  default Optional<ArrayType> asArrayType() {
+  default Optional<ArrayType> asArray() {
     return Optional.of(this);
   }
 }

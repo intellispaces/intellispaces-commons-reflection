@@ -13,7 +13,7 @@ public interface NonPrimitiveType extends Type {
   }
 
   @Override
-  default Optional<NonPrimitiveType> asNonPrimitiveType() {
+  default Optional<NonPrimitiveType> asNonPrimitive() {
     return Optional.of(this);
   }
 }

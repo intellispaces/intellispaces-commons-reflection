@@ -21,7 +21,7 @@ public interface ClassStatements {
   }
 
   static ClassStatement of(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return TypeElementFunctions.asCustomTypeStatement(
+    return TypeElementFunctions.asCustomStatement(
         typeElement,
         ElementKind.CLASS,
         ClassStatements::create,

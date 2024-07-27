@@ -17,7 +17,7 @@ public interface RecordStatements {
   static RecordStatement of(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return TypeElementFunctions.asCustomTypeStatement(
+    return TypeElementFunctions.asCustomStatement(
         typeElement,
         ElementKind.RECORD,
         RecordStatements::create,
