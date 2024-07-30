@@ -8,7 +8,7 @@ import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.context.TypeContexts;
 import tech.intellispaces.javastatements.customtype.CustomType;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
@@ -70,7 +70,7 @@ class MethodStatementBasedOnExecutableElement implements MethodStatement {
   }
 
   @Override
-  public MethodStatement specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public MethodStatement specify(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodStatementImpl(owner(), signature().specify(typeMapping));
   }
 }

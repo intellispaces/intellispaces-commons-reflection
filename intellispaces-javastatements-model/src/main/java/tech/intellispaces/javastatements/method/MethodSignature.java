@@ -3,8 +3,8 @@ package tech.intellispaces.javastatements.method;
 import tech.intellispaces.javastatements.AnnotatedStatement;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
-import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
+import tech.intellispaces.javastatements.reference.ThrowableReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public interface MethodSignature extends AnnotatedStatement {
   /**
    * Method exceptions.
    */
-  List<ThrowableTypeReference> exceptions();
+  List<ThrowableReference> exceptions();
 
   boolean isAbstract();
 
@@ -62,5 +62,5 @@ public interface MethodSignature extends AnnotatedStatement {
    */
   boolean isStatic();
 
-  MethodSignature specify(Map<String, NotPrimitiveTypeReference> typeMapping);
+  MethodSignature specify(Map<String, NotPrimitiveReference> typeMapping);
 }

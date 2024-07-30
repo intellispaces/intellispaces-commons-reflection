@@ -2,6 +2,7 @@ package tech.intellispaces.javastatements.reference;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
+import tech.intellispaces.commons.type.TypeFunctions;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
@@ -17,12 +18,12 @@ import java.util.function.Function;
 /**
  * Adapter of {@link TypeElement} to {@link CustomTypeReference}.
  */
-class CustomTypeReferenceBasedOnTypeElementReference extends AbstractCustomTypeReference {
-  private final Getter<CustomType> baseTypeGetter;
+class CustomTypeReferenceBasedOnTypeElement extends AbstractCustomTypeReference {
+  private final Getter<CustomType> targetTypeGetter;
 
-  CustomTypeReferenceBasedOnTypeElementReference(TypeElement typeElement, TypeContext typeContext, Session session) {
+  CustomTypeReferenceBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super();
-    this.baseTypeGetter = Actions.cachedLazyGetter(JavaModelFunctions::asCustomStatement, typeElement, session);
+    this.targetTypeGetter = Actions.cachedLazyGetter(JavaModelFunctions::asCustomStatement, typeElement, session);
   }
 
   @Override
@@ -31,17 +32,22 @@ class CustomTypeReferenceBasedOnTypeElementReference extends AbstractCustomTypeR
   }
 
   @Override
-  public CustomType customType() {
-    return baseTypeGetter.get();
+  public CustomType targetType() {
+    return targetTypeGetter.get();
   }
 
   @Override
-  public List<NotPrimitiveTypeReference> typeArguments() {
+  public Class<?> targetClass() {
+    return TypeFunctions.getClass(targetType().canonicalName()).orElseThrow();
+  }
+
+  @Override
+  public List<NotPrimitiveReference> typeArguments() {
     return List.of();
   }
 
   @Override
-  public Map<String, NotPrimitiveTypeReference> typeArgumentMapping() {
+  public Map<String, NotPrimitiveReference> typeArgumentMapping() {
     return Map.of();
   }
 

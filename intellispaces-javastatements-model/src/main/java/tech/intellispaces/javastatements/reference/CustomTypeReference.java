@@ -10,38 +10,43 @@ import java.util.function.Function;
 /**
  * The custom type reference.
  */
-public interface CustomTypeReference extends NotPrimitiveTypeReference, TypeReferenceBound, ThrowableTypeReference {
+public interface CustomTypeReference extends NotPrimitiveReference, ReferenceBound, ThrowableReference {
 
   /**
-   * Base type.
+   * Target base type.
    */
-  CustomType customType();
+  CustomType targetType();
+
+  /**
+   * Target base class.
+   */
+  Class<?> targetClass();
 
   /**
    * Actual arguments of type parameters.
    */
-  List<NotPrimitiveTypeReference> typeArguments();
+  List<NotPrimitiveReference> typeArguments();
 
   CustomType effectiveStatement();
 
-  Map<String, NotPrimitiveTypeReference> typeArgumentMapping();
+  Map<String, NotPrimitiveReference> typeArgumentMapping();
 
   String typeArgumentsDeclaration();
 
   String typeArgumentsDeclaration(Function<String, String> simpleNameMapper);
 
   @Override
-  default boolean isArray() {
+  default boolean isArrayReference() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustomTypeReference() {
     return true;
   }
 
   @Override
-  default boolean isNamed() {
+  default boolean isNamedReference() {
     return false;
   }
 
@@ -51,7 +56,7 @@ public interface CustomTypeReference extends NotPrimitiveTypeReference, TypeRefe
   }
 
   @Override
-  default Optional<CustomTypeReference> asCustomType() {
+  default Optional<CustomTypeReference> asCustomTypeReference() {
     return Optional.of(this);
   }
 }

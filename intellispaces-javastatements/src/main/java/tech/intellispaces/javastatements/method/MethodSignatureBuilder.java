@@ -3,7 +3,7 @@ package tech.intellispaces.javastatements.method;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
+import tech.intellispaces.javastatements.reference.ThrowableReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public final class MethodSignatureBuilder {
   private TypeReference returnTypeReference = null;
   private Instance defaultValue = null;
   private List<MethodParam> params = List.of();
-  private List<ThrowableTypeReference> exceptions = List.of();
+  private List<ThrowableReference> exceptions = List.of();
   private List<AnnotationInstance> annotations = List.of();
 
   MethodSignatureBuilder() {}
@@ -69,7 +69,7 @@ public final class MethodSignatureBuilder {
     return this;
   }
 
-  public MethodSignatureBuilder exceptions(List<ThrowableTypeReference> exceptions) {
+  public MethodSignatureBuilder exceptions(List<ThrowableReference> exceptions) {
     this.exceptions = exceptions;
     return this;
   }

@@ -20,8 +20,8 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
 
   @Override
   public CustomType effectiveStatement() {
-    Map<String, NotPrimitiveTypeReference> typeMapping = typeArgumentMapping();
-    CustomType type = customType();
+    Map<String, NotPrimitiveReference> typeMapping = typeArgumentMapping();
+    CustomType type = targetType();
     if (type.statementType() == StatementTypes.Class) {
       return ClassStatements.effectiveOf((ClassType) type, typeMapping);
     } else if (type.statementType() == StatementTypes.Interface) {
@@ -32,12 +32,12 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
-    List<NotPrimitiveTypeReference> curTypeArguments = typeArguments();
-    List<NotPrimitiveTypeReference> newTypeArguments = new ArrayList<>();
-    for (NotPrimitiveTypeReference curTypeArgument : curTypeArguments) {
-      newTypeArguments.add((NotPrimitiveTypeReference) curTypeArgument.specify(typeMapping));
+  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+    List<NotPrimitiveReference> curTypeArguments = typeArguments();
+    List<NotPrimitiveReference> newTypeArguments = new ArrayList<>();
+    for (NotPrimitiveReference curTypeArgument : curTypeArguments) {
+      newTypeArguments.add((NotPrimitiveReference) curTypeArgument.specify(typeMapping));
     }
-    return new CustomTypeReferenceImpl(customType(), newTypeArguments);
+    return new CustomTypeReferenceImpl(targetType(), newTypeArguments);
   }
 }

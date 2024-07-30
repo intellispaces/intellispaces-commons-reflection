@@ -2,6 +2,7 @@ package tech.intellispaces.javastatements.reference;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
+import tech.intellispaces.commons.type.TypeFunctions;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
@@ -18,16 +19,16 @@ import java.util.function.Function;
 /**
  * Adapter od {@link DeclaredType} to {@link CustomTypeReference}.
  */
-class CustomTypeReferenceBasedOnDeclaredTypeReference extends AbstractCustomTypeReference {
-  private final Getter<CustomType> baseTypeGetter;
-  private final Getter<List<NotPrimitiveTypeReference>> typeArgumentsGetter;
-  private final Getter<Map<String, NotPrimitiveTypeReference>> typeArgumentMappingsGetter;
+class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomTypeReference {
+  private final Getter<CustomType> targetTypeGetter;
+  private final Getter<List<NotPrimitiveReference>> typeArgumentsGetter;
+  private final Getter<Map<String, NotPrimitiveReference>> typeArgumentMappingsGetter;
   private final Getter<String> typeArgumentsDeclarationGetter;
 
-  CustomTypeReferenceBasedOnDeclaredTypeReference(DeclaredType declaredType, TypeContext typeContext, Session session) {
+  CustomTypeReferenceBasedOnDeclaredType(DeclaredType declaredType, TypeContext typeContext, Session session) {
     super();
     TypeElement typeElement = (TypeElement) declaredType.asElement();
-    this.baseTypeGetter = Actions.cachedLazyGetter(JavaModelFunctions::asCustomStatement, typeElement, session);
+    this.targetTypeGetter = Actions.cachedLazyGetter(JavaModelFunctions::asCustomStatement, typeElement, session);
     this.typeArgumentsGetter = Actions.cachedLazyGetter(JavaModelFunctions::getTypeArguments, declaredType, typeContext, session);
     this.typeArgumentMappingsGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentMapping, this);
     this.typeArgumentsDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
@@ -39,17 +40,22 @@ class CustomTypeReferenceBasedOnDeclaredTypeReference extends AbstractCustomType
   }
 
   @Override
-  public CustomType customType() {
-    return baseTypeGetter.get();
+  public CustomType targetType() {
+    return targetTypeGetter.get();
   }
 
   @Override
-  public List<NotPrimitiveTypeReference> typeArguments() {
+  public Class<?> targetClass() {
+    return TypeFunctions.getClass(targetType().canonicalName()).orElseThrow();
+  }
+
+  @Override
+  public List<NotPrimitiveReference> typeArguments() {
     return typeArgumentsGetter.get();
   }
 
   @Override
-  public Map<String, NotPrimitiveTypeReference> typeArgumentMapping() {
+  public Map<String, NotPrimitiveReference> typeArgumentMapping() {
     return typeArgumentMappingsGetter.get();
   }
 

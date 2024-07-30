@@ -5,8 +5,8 @@ import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
-import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
+import tech.intellispaces.javastatements.reference.ThrowableReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
@@ -31,7 +31,7 @@ public interface MethodStatement extends AnnotatedStatement {
    */
   List<MethodStatement> overrideMethods();
 
-  MethodStatement specify(Map<String, NotPrimitiveTypeReference> typeMapping);
+  MethodStatement specify(Map<String, NotPrimitiveReference> typeMapping);
 
   /**
    * Declared type parameters.
@@ -68,7 +68,7 @@ public interface MethodStatement extends AnnotatedStatement {
   /**
    * Method exceptions.
    */
-  default List<ThrowableTypeReference> exceptions() {
+  default List<ThrowableReference> exceptions() {
     return signature().exceptions();
   }
 

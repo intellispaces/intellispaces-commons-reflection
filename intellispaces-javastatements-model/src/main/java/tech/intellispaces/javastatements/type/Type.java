@@ -12,6 +12,11 @@ public interface Type<T> {
   TypeReference baseType();
 
   /**
+   * Base class.
+   */
+  Class<?> baseClass();
+
+  /**
    * Type qualifiers (optional).
    */
   List<TypeReference> qualifiers();

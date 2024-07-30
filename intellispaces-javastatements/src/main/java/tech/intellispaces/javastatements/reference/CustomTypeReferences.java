@@ -12,7 +12,7 @@ import java.util.List;
 public interface CustomTypeReferences {
 
   static CustomTypeReference of(Class<?> aClass) {
-    return new CustomTypeBasedOnClassReference(aClass);
+    return new CustomTypeReferenceBasedOnClass(aClass);
   }
 
   static CustomTypeReference of(TypeElement typeElement, Session session) {
@@ -20,7 +20,7 @@ public interface CustomTypeReferences {
   }
 
   static CustomTypeReference of(TypeElement typeElement, TypeContext typeContext, Session session) {
-    return new CustomTypeReferenceBasedOnTypeElementReference(typeElement, typeContext, session);
+    return new CustomTypeReferenceBasedOnTypeElement(typeElement, typeContext, session);
   }
 
   static CustomTypeReference of(DeclaredType declaredType, Session session) {
@@ -28,14 +28,14 @@ public interface CustomTypeReferences {
   }
 
   static CustomTypeReference of(DeclaredType declaredType, TypeContext typeContext, Session session) {
-    return new CustomTypeReferenceBasedOnDeclaredTypeReference(declaredType, typeContext, session);
+    return new CustomTypeReferenceBasedOnDeclaredType(declaredType, typeContext, session);
   }
 
   static CustomTypeReference of(CustomType targetType) {
     return of(targetType, List.of());
   }
 
-  static CustomTypeReference of(CustomType customType, List<NotPrimitiveTypeReference> typeArguments) {
+  static CustomTypeReference of(CustomType customType, List<NotPrimitiveReference> typeArguments) {
     return new CustomTypeReferenceImpl(customType, typeArguments);
   }
 }

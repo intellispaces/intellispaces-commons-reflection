@@ -14,11 +14,11 @@ import java.util.Optional;
 /**
  * Adapter of {@link javax.lang.model.type.WildcardType} to {@link WildcardReference}.
  */
-class WildcardTypeReferenceBasedOnWildcardReference extends AbstractTypeReference implements WildcardReference {
-  private final Getter<Optional<TypeReferenceBound>> extendedBoundGetter;
-  private final Getter<Optional<TypeReferenceBound>> superBoundGetter;
+class WildcardReferenceBasedOnWildcardType extends AbstractTypeReference implements WildcardReference {
+  private final Getter<Optional<ReferenceBound>> extendedBoundGetter;
+  private final Getter<Optional<ReferenceBound>> superBoundGetter;
 
-  WildcardTypeReferenceBasedOnWildcardReference(javax.lang.model.type.WildcardType wildcardType, TypeContext typeContext, Session session) {
+  WildcardReferenceBasedOnWildcardType(javax.lang.model.type.WildcardType wildcardType, TypeContext typeContext, Session session) {
     super();
     this.extendedBoundGetter = Actions.cachedLazyGetter(JavaModelFunctions::getExtendedBound, wildcardType, typeContext, session);
     this.superBoundGetter = Actions.cachedLazyGetter(JavaModelFunctions::getSuperBound, wildcardType, typeContext, session);
@@ -30,24 +30,24 @@ class WildcardTypeReferenceBasedOnWildcardReference extends AbstractTypeReferenc
   }
 
   @Override
-  public Optional<TypeReferenceBound> extendedBound() {
+  public Optional<ReferenceBound> extendedBound() {
     return extendedBoundGetter.get();
   }
 
   @Override
-  public Optional<TypeReferenceBound> superBound() {
+  public Optional<ReferenceBound> superBound() {
     return superBoundGetter.get();
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
-    TypeReferenceBound extendedBound = extendedBound().orElse(null);
+  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+    ReferenceBound extendedBound = extendedBound().orElse(null);
     if (extendedBound != null) {
-      extendedBound = (TypeReferenceBound) extendedBound.specify(typeMapping);
+      extendedBound = (ReferenceBound) extendedBound.specify(typeMapping);
     }
-    TypeReferenceBound superBound = superBound().orElse(null);
+    ReferenceBound superBound = superBound().orElse(null);
     if (superBound != null) {
-      superBound = (TypeReferenceBound) superBound.specify(typeMapping);
+      superBound = (ReferenceBound) superBound.specify(typeMapping);
     }
     return new WildcardReferenceImpl(extendedBound, superBound);
   }

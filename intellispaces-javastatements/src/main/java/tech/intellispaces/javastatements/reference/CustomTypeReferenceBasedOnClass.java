@@ -12,12 +12,12 @@ import java.util.function.Function;
 /**
  * Adapter of {@link Class} to {@link CustomTypeReference}.
  */
-class CustomTypeBasedOnClassReference extends AbstractTypeReference implements CustomTypeReference {
-  private final Class<?> aClass;
+class CustomTypeReferenceBasedOnClass extends AbstractTypeReference implements CustomTypeReference {
+  private final Class<?> baseClass;
   private CustomType baseType;
 
-  CustomTypeBasedOnClassReference(Class<?> aClass) {
-    this.aClass = aClass;
+  CustomTypeReferenceBasedOnClass(Class<?> baseClass) {
+    this.baseClass = baseClass;
   }
 
   @Override
@@ -26,15 +26,20 @@ class CustomTypeBasedOnClassReference extends AbstractTypeReference implements C
   }
 
   @Override
-  public CustomType customType() {
+  public CustomType targetType() {
     if (baseType == null) {
-      baseType = CustomTypes.of(aClass);
+      baseType = CustomTypes.of(baseClass);
     }
     return baseType;
   }
 
   @Override
-  public List<NotPrimitiveTypeReference> typeArguments() {
+  public Class<?> targetClass() {
+    return baseClass;
+  }
+
+  @Override
+  public List<NotPrimitiveReference> typeArguments() {
     return List.of();
   }
 
@@ -44,12 +49,12 @@ class CustomTypeBasedOnClassReference extends AbstractTypeReference implements C
   }
 
   @Override
-  public Map<String, NotPrimitiveTypeReference> typeArgumentMapping() {
+  public Map<String, NotPrimitiveReference> typeArgumentMapping() {
     return Map.of();
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
     return this;
   }
 

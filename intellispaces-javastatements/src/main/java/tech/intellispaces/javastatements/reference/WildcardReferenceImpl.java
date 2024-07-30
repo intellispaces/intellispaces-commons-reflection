@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Optional;
 
 class WildcardReferenceImpl extends AbstractTypeReference implements WildcardReference {
-  private final TypeReferenceBound extendedBound;
-  private final TypeReferenceBound superBound;
+  private final ReferenceBound extendedBound;
+  private final ReferenceBound superBound;
 
-  WildcardReferenceImpl(TypeReferenceBound extendedBound, TypeReferenceBound superBound) {
+  WildcardReferenceImpl(ReferenceBound extendedBound, ReferenceBound superBound) {
     super();
     this.extendedBound = extendedBound;
     this.superBound = superBound;
@@ -22,24 +22,24 @@ class WildcardReferenceImpl extends AbstractTypeReference implements WildcardRef
   }
 
   @Override
-  public Optional<TypeReferenceBound> extendedBound() {
+  public Optional<ReferenceBound> extendedBound() {
     return Optional.ofNullable(extendedBound);
   }
 
   @Override
-  public Optional<TypeReferenceBound> superBound() {
+  public Optional<ReferenceBound> superBound() {
     return Optional.ofNullable(superBound);
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
-    TypeReferenceBound extendedBound = extendedBound().orElse(null);
+  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+    ReferenceBound extendedBound = extendedBound().orElse(null);
     if (extendedBound != null) {
-      extendedBound = (TypeReferenceBound) extendedBound.specify(typeMapping);
+      extendedBound = (ReferenceBound) extendedBound.specify(typeMapping);
     }
-    TypeReferenceBound superBound = superBound().orElse(null);
+    ReferenceBound superBound = superBound().orElse(null);
     if (superBound != null) {
-      superBound = (TypeReferenceBound) superBound.specify(typeMapping);
+      superBound = (ReferenceBound) superBound.specify(typeMapping);
     }
     return new WildcardReferenceImpl(extendedBound, superBound);
   }

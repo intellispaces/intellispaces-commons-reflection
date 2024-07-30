@@ -8,8 +8,8 @@ import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.instance.InstanceFunctions;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
-import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
+import tech.intellispaces.javastatements.reference.ThrowableReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
@@ -94,10 +94,10 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
   }
 
   @Override
-  public List<ThrowableTypeReference> exceptions() {
+  public List<ThrowableReference> exceptions() {
     return Arrays.stream(method.getExceptionTypes())
         .map(JavaStatements::customTypeReference)
-        .map(t -> (ThrowableTypeReference) t)
+        .map(t -> (ThrowableReference) t)
         .toList();
   }
 
@@ -122,7 +122,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
   }
 
   @Override
-  public MethodSignature specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public MethodSignature specify(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodSignatureImpl(
         name(),
         isAbstract(),
@@ -133,7 +133,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
         returnType().map(t -> t.specify(typeMapping)).orElse(null),
         defaultValue().orElse(null),
         params().stream().map(p -> p.specify(typeMapping)).toList(),
-        exceptions().stream().map(e -> (ThrowableTypeReference) e.specify(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ThrowableReference) e.specify(typeMapping)).toList(),
         annotations()
     );
   }

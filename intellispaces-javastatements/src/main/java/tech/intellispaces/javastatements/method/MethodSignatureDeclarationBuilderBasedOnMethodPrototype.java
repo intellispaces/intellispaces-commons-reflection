@@ -131,7 +131,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Function<String, String> canonicalToSimpleNameMapper
   ) {
     String exceptions = prototype.exceptions().stream()
-        .map(e -> e.asCustomType().orElseThrow().customType())
+        .map(e -> e.asCustomTypeReference().orElseThrow().targetType())
         .peek(e -> importConsumer.accept(e.canonicalName()))
         .map(e -> canonicalToSimpleNameMapper.apply(e.canonicalName()))
         .collect(Collectors.joining(", "));

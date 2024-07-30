@@ -8,6 +8,6 @@ public interface WildcardTypes {
   static WildcardReference of(
       javax.lang.model.type.WildcardType wildcardType, TypeContext typeContext, Session session
   ) {
-    return new WildcardTypeReferenceBasedOnWildcardReference(wildcardType, typeContext, session);
+    return new WildcardReferenceBasedOnWildcardType(wildcardType, typeContext, session);
   }
 }

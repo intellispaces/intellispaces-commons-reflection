@@ -17,22 +17,22 @@ public interface PrimitiveReference extends TypeReference {
   Class<?> wrapperClass();
 
   @Override
-  default boolean isPrimitive() {
+  default boolean isPrimitiveReference() {
     return true;
   }
 
   @Override
-  default boolean isArray() {
+  default boolean isArrayReference() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustomTypeReference() {
     return false;
   }
 
   @Override
-  default boolean isNamed() {
+  default boolean isNamedReference() {
     return false;
   }
 
@@ -42,12 +42,12 @@ public interface PrimitiveReference extends TypeReference {
   }
 
   @Override
-  default Optional<PrimitiveReference> asPrimitive() {
+  default Optional<PrimitiveReference> asPrimitiveReference() {
     return Optional.of(this);
   }
 
   @Override
-  default TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  default TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
     return this;
   }
 

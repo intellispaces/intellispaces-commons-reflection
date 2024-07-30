@@ -5,30 +5,30 @@ import java.util.Optional;
 /**
  * The wildcard type reference.
  */
-public interface WildcardReference extends NotPrimitiveTypeReference {
+public interface WildcardReference extends NotPrimitiveReference {
 
   /**
    * Extended bound.
    */
-  Optional<TypeReferenceBound> extendedBound();
+  Optional<ReferenceBound> extendedBound();
 
   /**
    * Super bound.
    */
-  Optional<TypeReferenceBound> superBound();
+  Optional<ReferenceBound> superBound();
 
   @Override
-  default boolean isArray() {
+  default boolean isArrayReference() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustomTypeReference() {
     return false;
   }
 
   @Override
-  default boolean isNamed() {
+  default boolean isNamedReference() {
     return false;
   }
 

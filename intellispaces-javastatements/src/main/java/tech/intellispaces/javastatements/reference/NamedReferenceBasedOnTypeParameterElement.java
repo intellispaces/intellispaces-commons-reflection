@@ -18,12 +18,12 @@ import java.util.Map;
 /**
  * Adapter of {@link TypeParameterElement} to {@link NamedReference}.
  */
-class NamedTypeReferenceBasedOnParameterElementReference extends AbstractTypeReference implements NamedReference {
+class NamedReferenceBasedOnTypeParameterElement extends AbstractTypeReference implements NamedReference {
   private final String name;
   private final Getter<Statement> ownerGetter;
-  private final Getter<List<TypeReferenceBound>> extendedBoundsGetter;
+  private final Getter<List<ReferenceBound>> extendedBoundsGetter;
 
-  NamedTypeReferenceBasedOnParameterElementReference(
+  NamedReferenceBasedOnTypeParameterElement(
       TypeParameterElement typeParameter, TypeContext typeContext, Session session
   ) {
     super();
@@ -49,20 +49,20 @@ class NamedTypeReferenceBasedOnParameterElementReference extends AbstractTypeRef
   }
 
   @Override
-  public List<TypeReferenceBound> extendedBounds() {
+  public List<ReferenceBound> extendedBounds() {
     return extendedBoundsGetter.get();
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
     TypeReference specifiedReference = typeMapping.get(name);
     if (specifiedReference != null) {
       return specifiedReference;
     }
-    List<TypeReferenceBound> curExtendedBounds = extendedBounds();
-    List<TypeReferenceBound> newExtendedBounds = new ArrayList<>();
-    for (TypeReferenceBound curExtendedBound : curExtendedBounds) {
-      newExtendedBounds.add((TypeReferenceBound) curExtendedBound.specify(typeMapping));
+    List<ReferenceBound> curExtendedBounds = extendedBounds();
+    List<ReferenceBound> newExtendedBounds = new ArrayList<>();
+    for (ReferenceBound curExtendedBound : curExtendedBounds) {
+      newExtendedBounds.add((ReferenceBound) curExtendedBound.specify(typeMapping));
     }
     return new NamedReferenceImpl(name, owner(), newExtendedBounds);
   }

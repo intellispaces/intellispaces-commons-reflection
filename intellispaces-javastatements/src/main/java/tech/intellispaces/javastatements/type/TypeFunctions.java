@@ -8,9 +8,9 @@ import tech.intellispaces.javastatements.reference.TypeReference;
 public interface TypeFunctions {
 
   static <T> Type<T> get(TypeReference typeReference) {
-    if (typeReference.isCustomType()) {
-      CustomTypeReference ctr = typeReference.asCustomTypeConfidently();
-      return new TypeImpl<>(CustomTypeReferences.of(ctr.customType()), ctr.typeArguments());
+    if (typeReference.isCustomTypeReference()) {
+      CustomTypeReference ctr = typeReference.asCustomTypeReferenceConfidently();
+      return new TypeImpl<>(CustomTypeReferences.of(ctr.targetType()), ctr.typeArguments());
     }
     throw UnexpectedViolationException.withMessage("Unsupported reference type: {}",
         typeReference.statementType().typename());

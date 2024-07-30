@@ -2,7 +2,7 @@ package tech.intellispaces.javastatements.context;
 
 import tech.intellispaces.commons.datahandle.HandleFunctions;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +49,7 @@ class TypeContextImpl implements TypeContext, TypeContextBlank {
 
   @Override
   public TypeContextBlank addTypeParam(
-      String typeParamName, NamedReference type, NotPrimitiveTypeReference value
+      String typeParamName, NamedReference type, NotPrimitiveReference value
   ) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, value));
     return this;

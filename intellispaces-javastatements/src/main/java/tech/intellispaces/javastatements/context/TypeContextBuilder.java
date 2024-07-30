@@ -1,7 +1,7 @@
 package tech.intellispaces.javastatements.context;
 
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +31,7 @@ public class TypeContextBuilder {
   }
 
   public TypeContextBuilder addTypeParam(
-      String typeParamName, NamedReference type, NotPrimitiveTypeReference actualType
+      String typeParamName, NamedReference type, NotPrimitiveReference actualType
   ) {
     this.map.put(typeParamName, new ContextTypeParameterImpl(type, actualType));
     return this;

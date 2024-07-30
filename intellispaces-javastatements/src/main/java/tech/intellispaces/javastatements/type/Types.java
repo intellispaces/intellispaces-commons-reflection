@@ -16,7 +16,7 @@ public interface Types {
   ) {
     return new TypeImpl<>(
         CustomTypeReferences.of(baseClass), List.of(
-          CustomTypeReferences.of(qualifierClass)
+            CustomTypeReferences.of(qualifierClass)
         )
     );
   }
@@ -28,8 +28,8 @@ public interface Types {
   ) {
     return new TypeImpl<>(
         CustomTypeReferences.of(baseClass), List.of(
-          CustomTypeReferences.of(qualifierClass1),
-          CustomTypeReferences.of(qualifierClass2)
+            CustomTypeReferences.of(qualifierClass1),
+            CustomTypeReferences.of(qualifierClass2)
       )
     );
   }
@@ -42,9 +42,9 @@ public interface Types {
   ) {
     return new TypeImpl<>(
         CustomTypeReferences.of(baseClass), List.of(
-          CustomTypeReferences.of(qualifierClass1),
-          CustomTypeReferences.of(qualifierClass2),
-          CustomTypeReferences.of(qualifierClass3)
+            CustomTypeReferences.of(qualifierClass1),
+            CustomTypeReferences.of(qualifierClass2),
+            CustomTypeReferences.of(qualifierClass3)
       )
     );
   }

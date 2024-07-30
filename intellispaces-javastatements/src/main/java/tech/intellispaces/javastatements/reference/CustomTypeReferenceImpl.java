@@ -2,6 +2,7 @@ package tech.intellispaces.javastatements.reference;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
+import tech.intellispaces.commons.type.TypeFunctions;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.customtype.CustomType;
@@ -11,14 +12,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
-  private final CustomType baseType;
-  private final List<NotPrimitiveTypeReference> typeArguments;
-  private final Getter<Map<String, NotPrimitiveTypeReference>> typeArgumentMappingsGetter;
+  private final CustomType targetType;
+  private final List<NotPrimitiveReference> typeArguments;
+  private final Getter<Map<String, NotPrimitiveReference>> typeArgumentMappingsGetter;
   private final Getter<String> typeArgumentsDeclarationGetter;
 
-  CustomTypeReferenceImpl(CustomType baseType, List<NotPrimitiveTypeReference> typeArguments) {
+  CustomTypeReferenceImpl(CustomType targetType, List<NotPrimitiveReference> typeArguments) {
     super();
-    this.baseType = baseType;
+    this.targetType = targetType;
     this.typeArguments = typeArguments;
     this.typeArgumentMappingsGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentMapping, this);
     this.typeArgumentsDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
@@ -30,17 +31,22 @@ class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
   }
 
   @Override
-  public CustomType customType() {
-    return baseType;
+  public CustomType targetType() {
+    return targetType;
   }
 
   @Override
-  public List<NotPrimitiveTypeReference> typeArguments() {
+  public Class<?> targetClass() {
+    return TypeFunctions.getClass(targetType.canonicalName()).orElseThrow();
+  }
+
+  @Override
+  public List<NotPrimitiveReference> typeArguments() {
     return typeArguments;
   }
 
   @Override
-  public Map<String, NotPrimitiveTypeReference> typeArgumentMapping() {
+  public Map<String, NotPrimitiveReference> typeArgumentMapping() {
     return typeArgumentMappingsGetter.get();
   }
 

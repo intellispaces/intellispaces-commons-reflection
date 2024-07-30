@@ -68,12 +68,12 @@ public interface InstanceFunctions {
     } else if (value instanceof VariableElement variableElement) {
       // Enum value
       TypeReference typeReference = JavaModelFunctions.getTypeReference(variableElement.asType(), session);
-      EnumType enumStatement = typeReference.asCustomType().orElseThrow().customType().asEnum().orElseThrow();
+      EnumType enumStatement = typeReference.asCustomTypeReference().orElseThrow().targetType().asEnum().orElseThrow();
       return EnumInstances.of(enumStatement, variableElement.getSimpleName().toString());
     } else if (value instanceof DeclaredType declaredType) {
       // Class value
       CustomTypeReference typeReference = JavaModelFunctions.getTypeReference(declaredType, session);
-      return ClassInstances.of(typeReference.customType());
+      return ClassInstances.of(typeReference.targetType());
     } else if (value instanceof AnnotationMirror annotationMirror) {
       // Annotation value
       return getAnnotationInstance(annotationMirror, session);

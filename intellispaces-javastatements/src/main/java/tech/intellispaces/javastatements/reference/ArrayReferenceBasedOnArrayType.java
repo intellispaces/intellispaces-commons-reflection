@@ -13,10 +13,10 @@ import java.util.Map;
 /**
  * Adapter of {@link javax.lang.model.type.ArrayType} to {@link ArrayReference}.
  */
-class ArrayTypeReferenceBasedOnArrayReference extends AbstractTypeReference implements ArrayReference {
+class ArrayReferenceBasedOnArrayType extends AbstractTypeReference implements ArrayReference {
   private final Getter<TypeReference> elementTypeGetter;
 
-  ArrayTypeReferenceBasedOnArrayReference(
+  ArrayReferenceBasedOnArrayType(
       javax.lang.model.type.ArrayType arrayType, TypeContext typeContext, Session session
   ) {
     super();
@@ -35,7 +35,7 @@ class ArrayTypeReferenceBasedOnArrayReference extends AbstractTypeReference impl
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
     TypeReference elementTypeReference = elementType().specify(typeMapping);
     return new ArrayReferenceImpl(elementTypeReference);
   }

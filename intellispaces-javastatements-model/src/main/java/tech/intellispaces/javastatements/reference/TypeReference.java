@@ -13,54 +13,54 @@ import java.util.function.Function;
  */
 public interface TypeReference extends Statement {
 
-  boolean isPrimitive();
+  boolean isPrimitiveReference();
 
-  boolean isArray();
+  boolean isArrayReference();
 
-  boolean isCustomType();
+  boolean isCustomTypeReference();
 
-  boolean isNamed();
+  boolean isNamedReference();
 
   boolean isWildcard();
 
   /**
    * Related primitive type.
    */
-  default Optional<PrimitiveReference> asPrimitive() {
+  default Optional<PrimitiveReference> asPrimitiveReference() {
     return Optional.empty();
   }
 
-  default PrimitiveReference asPrimitiveConfidently() {
-    return asPrimitive().orElseThrow();
+  default PrimitiveReference asPrimitiveReferenceConfidently() {
+    return asPrimitiveReference().orElseThrow();
   }
 
   /**
    * Related non-primitive type.
    */
-  default Optional<NotPrimitiveTypeReference> asNotPrimitive() {
+  default Optional<NotPrimitiveReference> asNotPrimitiveReference() {
     return Optional.empty();
   }
 
   /**
    * Related array type.
    */
-  default Optional<ArrayReference> asArray() {
+  default Optional<ArrayReference> asArrayReference() {
     return Optional.empty();
   }
 
-  default ArrayReference asArrayConfidently() {
-    return asArray().orElseThrow();
+  default ArrayReference asArrayReferenceConfidently() {
+    return asArrayReference().orElseThrow();
   }
 
   /**
    * Related named type.
    */
-  default Optional<NamedReference> asNamed() {
+  default Optional<NamedReference> asNamedReference() {
     return Optional.empty();
   }
 
-  default NamedReference asNamedConfidently() {
-    return asNamed().orElseThrow();
+  default NamedReference asNamedReferenceConfidently() {
+    return asNamedReference().orElseThrow();
   }
 
   /**
@@ -77,15 +77,15 @@ public interface TypeReference extends Statement {
   /**
    * Related custom type.
    */
-  default Optional<CustomTypeReference> asCustomType() {
+  default Optional<CustomTypeReference> asCustomTypeReference() {
     return Optional.empty();
   }
 
-  default CustomTypeReference asCustomTypeConfidently() {
-    return asCustomType().orElseThrow();
+  default CustomTypeReference asCustomTypeReferenceConfidently() {
+    return asCustomTypeReference().orElseThrow();
   }
 
-  TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping);
+  TypeReference specify(Map<String, NotPrimitiveReference> typeMapping);
 
   Collection<CustomType> dependencies();
 

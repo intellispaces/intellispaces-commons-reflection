@@ -11,6 +11,6 @@ public interface ArrayTypeReferences {
   }
 
   static ArrayReference of(javax.lang.model.type.ArrayType arrayType, TypeContext typeContext, Session session) {
-    return new ArrayTypeReferenceBasedOnArrayReference(arrayType, typeContext, session);
+    return new ArrayReferenceBasedOnArrayType(arrayType, typeContext, session);
   }
 }

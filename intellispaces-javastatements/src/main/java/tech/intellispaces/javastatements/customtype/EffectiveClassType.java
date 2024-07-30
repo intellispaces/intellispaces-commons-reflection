@@ -6,7 +6,7 @@ import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.method.MethodStatement;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ class EffectiveClassType extends AbstractEffectiveCustomType implements ClassTyp
   private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
 
   EffectiveClassType(
-      ClassType classStatement, Map<String, NotPrimitiveTypeReference> typeMapping
+      ClassType classStatement, Map<String, NotPrimitiveReference> typeMapping
   ) {
     super(classStatement, typeMapping);
     this.extendedClassGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);

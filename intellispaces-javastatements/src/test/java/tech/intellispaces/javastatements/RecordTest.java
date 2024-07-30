@@ -48,7 +48,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     assertThat(recordStatement.implementedInterfaces()).isEmpty();
 
     assertThat(recordStatement.parentTypes()).hasSize(1);
-    assertThat(recordStatement.parentTypes().get(0).customType().canonicalName()).isEqualTo(Record.class.getCanonicalName());
+    assertThat(recordStatement.parentTypes().get(0).targetType().canonicalName()).isEqualTo(Record.class.getCanonicalName());
 
     assertThat(recordStatement.declaredMethods()).hasSize(3);
     assertThat(recordStatement.declaredMethods().stream()
@@ -92,25 +92,25 @@ public class RecordTest extends AbstractCustomStatementTest {
 
     assertThat(recordStatement.implementedInterfaces()).hasSize(2);
     HandleFunctions.handle(recordStatement.implementedInterfaces().get(0), implInterface -> {
-      assertThat(implInterface.customType().canonicalName()).isEqualTo(interface1Name);
+      assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
     HandleFunctions.handle(recordStatement.implementedInterfaces().get(1), implInterface -> {
-      assertThat(implInterface.customType().canonicalName()).isEqualTo(interface2Name);
+      assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
 
     assertThat(recordStatement.parentTypes()).hasSize(3);
     HandleFunctions.handle(recordStatement.parentTypes().get(0), parentType -> {
-      assertThat(parentType.customType().canonicalName()).isEqualTo(Record.class.getCanonicalName());
+      assertThat(parentType.targetType().canonicalName()).isEqualTo(Record.class.getCanonicalName());
       assertThat(parentType.typeArguments()).isEmpty();
     });
     HandleFunctions.handle(recordStatement.parentTypes().get(1), parentType -> {
-      assertThat(parentType.customType().canonicalName()).isEqualTo(interface1Name);
+      assertThat(parentType.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
     HandleFunctions.handle(recordStatement.parentTypes().get(2), parentType -> {
-      assertThat(parentType.customType().canonicalName()).isEqualTo(interface2Name);
+      assertThat(parentType.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
 
@@ -358,20 +358,20 @@ public class RecordTest extends AbstractCustomStatementTest {
     assertThat(typeReference.actualDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1");
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T>");
-    assertThat(typeReference.customType().typeParametersFullDeclaration()).isEqualTo("<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
-    assertThat(typeReference.customType().typeParametersBriefDeclaration()).isEqualTo("<T>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
-    Assertions.assertThat(typeReference.customType().asRecord()).isPresent();
-    RecordType recordStatement = typeReference.customType().asRecord().orElseThrow();
+    Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();
+    RecordType recordStatement = typeReference.targetType().asRecord().orElseThrow();
 
     assertThat(recordStatement.typeParameters()).hasSize(1);
     HandleFunctions.handle(recordStatement.typeParameters().get(0), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T");
       assertThat(typeParam.extendedBounds()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().customType()).isSameAs(recordStatement);
-      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments()).hasSize(1);
-      assertThat(typeParam.extendedBounds().get(0).asCustomType().orElseThrow().typeArguments().get(0)
-          .asNamed().orElseThrow().name()).isEqualTo("T");
+      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(recordStatement);
+      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().typeArguments()).hasSize(1);
+      assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().typeArguments().get(0)
+          .asNamedReference().orElseThrow().name()).isEqualTo("T");
     });
   }
 
@@ -387,24 +387,24 @@ public class RecordTest extends AbstractCustomStatementTest {
     assertThat(typeReference.actualDeclaration()).isEqualTo("RecordA");
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("RecordA<T1 extends RecordB<?>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("RecordA<T1>");
-    assertThat(typeReference.customType().typeParametersFullDeclaration()).isEqualTo("<T1 extends RecordB<?>>");
-    assertThat(typeReference.customType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends RecordB<?>>");
+    assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
-    Assertions.assertThat(typeReference.customType().asRecord()).isPresent();
-    RecordType recordStatement = typeReference.customType().asRecord().orElseThrow();
+    Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();
+    RecordType recordStatement = typeReference.targetType().asRecord().orElseThrow();
 
     assertThat(recordStatement.typeParameters()).hasSize(1);
     HandleFunctions.handle(recordStatement.typeParameters().get(0), classATypeParam -> {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
-      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomType().orElseThrow().customType(), classBExtendedBound -> {
+      HandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("tech.intellispaces.javastatements.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB");
         assertThat(classBExtendedBound.className()).isEqualTo("tech.intellispaces.javastatements.samples.GenericRecordWithCyclicTypeDependencyCase2$RecordB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamed().orElseThrow().name()).isEqualTo("T2");
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamed().orElseThrow().extendedBounds()).hasSize(1);
-        assertThat(classBExtendedBound.typeParameters().get(0).asNamed().orElseThrow().extendedBounds().get(0)
-            .asCustomType().orElseThrow().customType()).isSameAs(recordStatement);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedReference().orElseThrow().name()).isEqualTo("T2");
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedReference().orElseThrow().extendedBounds()).hasSize(1);
+        assertThat(classBExtendedBound.typeParameters().get(0).asNamedReference().orElseThrow().extendedBounds().get(0)
+            .asCustomTypeReference().orElseThrow().targetType()).isSameAs(recordStatement);
       });
     });
   }
@@ -427,7 +427,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     assertThat(recordStatement.typeParameters()).isEmpty();
     assertThat(recordStatement.implementedInterfaces()).isEmpty();
     assertThat(recordStatement.parentTypes()).hasSize(1);
-    assertThat(recordStatement.parentTypes().get(0).asCustomType().orElseThrow().customType().canonicalName()).isEqualTo(Record.class.getCanonicalName());
+    assertThat(recordStatement.parentTypes().get(0).asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Record.class.getCanonicalName());
 
     assertThat(recordStatement.declaredMethods().stream()
         .map(MethodStatement::name)

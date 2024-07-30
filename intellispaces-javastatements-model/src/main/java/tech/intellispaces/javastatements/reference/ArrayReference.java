@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * The array type reference.
  */
-public interface ArrayReference extends NotPrimitiveTypeReference, TypeReferenceBound {
+public interface ArrayReference extends NotPrimitiveReference, ReferenceBound {
 
   /**
    * Elements type.
@@ -13,17 +13,17 @@ public interface ArrayReference extends NotPrimitiveTypeReference, TypeReference
   TypeReference elementType();
 
   @Override
-  default boolean isArray() {
+  default boolean isArrayReference() {
     return true;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustomTypeReference() {
     return false;
   }
 
   @Override
-  default boolean isNamed() {
+  default boolean isNamedReference() {
     return false;
   }
 
@@ -33,7 +33,7 @@ public interface ArrayReference extends NotPrimitiveTypeReference, TypeReference
   }
 
   @Override
-  default Optional<ArrayReference> asArray() {
+  default Optional<ArrayReference> asArrayReference() {
     return Optional.of(this);
   }
 }

@@ -6,8 +6,8 @@ import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
-import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
+import tech.intellispaces.javastatements.reference.ThrowableReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
@@ -27,7 +27,7 @@ class MethodSignatureImpl implements MethodSignature {
   private final TypeReference returnTypeReference;
   private final Instance defaultValue;
   private final List<MethodParam> params;
-  private final List<ThrowableTypeReference> exceptions;
+  private final List<ThrowableReference> exceptions;
   private final List<AnnotationInstance> annotations;
   private final Map<String, AnnotationInstance> annotationMap;
 
@@ -41,7 +41,7 @@ class MethodSignatureImpl implements MethodSignature {
       TypeReference returnTypeReference,
       Instance defaultValue,
       List<MethodParam> params,
-      List<ThrowableTypeReference> exceptions,
+      List<ThrowableReference> exceptions,
       List<AnnotationInstance> annotations
   ) {
     this.name = name;
@@ -116,7 +116,7 @@ class MethodSignatureImpl implements MethodSignature {
   }
 
   @Override
-  public List<ThrowableTypeReference> exceptions() {
+  public List<ThrowableReference> exceptions() {
     return exceptions;
   }
 
@@ -142,7 +142,7 @@ class MethodSignatureImpl implements MethodSignature {
   }
 
   @Override
-  public MethodSignature specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public MethodSignature specify(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodSignatureImpl(
         name(),
         isAbstract(),
@@ -153,7 +153,7 @@ class MethodSignatureImpl implements MethodSignature {
         returnType().map(t -> t.specify(typeMapping)).orElse(null),
         defaultValue().orElse(null),
         params().stream().map(p -> p.specify(typeMapping)).toList(),
-        exceptions().stream().map(e -> (ThrowableTypeReference) e.specify(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ThrowableReference) e.specify(typeMapping)).toList(),
         annotations()
     );
   }

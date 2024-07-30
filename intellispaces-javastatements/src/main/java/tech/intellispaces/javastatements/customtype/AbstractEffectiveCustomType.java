@@ -7,7 +7,7 @@ import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.method.MethodStatement;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 
@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 
 abstract class AbstractEffectiveCustomType implements CustomType {
   protected final CustomType actualType;
-  protected final Map<String, NotPrimitiveTypeReference> typeMapping;
+  protected final Map<String, NotPrimitiveReference> typeMapping;
   private final Getter<Collection<CustomType>> dependenciesGetter;
   private final Getter<Collection<String>> dependencyTypesGetter;
 
-  AbstractEffectiveCustomType(CustomType actualType, Map<String, NotPrimitiveTypeReference> typeMapping) {
+  AbstractEffectiveCustomType(CustomType actualType, Map<String, NotPrimitiveReference> typeMapping) {
     this.actualType = actualType;
     this.typeMapping = typeMapping;
     this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);

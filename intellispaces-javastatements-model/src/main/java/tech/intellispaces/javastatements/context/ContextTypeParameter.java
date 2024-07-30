@@ -1,11 +1,11 @@
 package tech.intellispaces.javastatements.context;
 
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 
 public interface ContextTypeParameter {
 
   NamedReference namedType();
 
-  NotPrimitiveTypeReference actualType();
+  NotPrimitiveReference actualType();
 }

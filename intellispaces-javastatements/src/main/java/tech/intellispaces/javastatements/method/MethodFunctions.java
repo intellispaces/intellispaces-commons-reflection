@@ -8,7 +8,7 @@ import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.instance.InstanceFunctions;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
-import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
+import tech.intellispaces.javastatements.reference.ThrowableReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 import tech.intellispaces.javastatements.session.Session;
@@ -91,11 +91,11 @@ public interface MethodFunctions {
         .toList();
   }
 
-  static List<ThrowableTypeReference> getMethodExceptions(
+  static List<ThrowableReference> getMethodExceptions(
       ExecutableElement executableElement, TypeContext typeContext, Session session
   ) {
     return executableElement.getThrownTypes().stream()
-        .map(type -> (ThrowableTypeReference) JavaModelFunctions.getTypeReference(type, typeContext, session))
+        .map(type -> (ThrowableReference) JavaModelFunctions.getTypeReference(type, typeContext, session))
         .collect(Collectors.toList());
   }
 
@@ -115,8 +115,8 @@ public interface MethodFunctions {
       }
     }
     for (CustomTypeReference parent : type.parentTypes()) {
-      if (parent.isCustomType()) {
-        overrideMethods.addAll(getOverrideMethods(parent.asCustomTypeConfidently().customType(), method, true));
+      if (parent.isCustomTypeReference()) {
+        overrideMethods.addAll(getOverrideMethods(parent.asCustomTypeReferenceConfidently().targetType(), method, true));
       }
     }
     return overrideMethods;

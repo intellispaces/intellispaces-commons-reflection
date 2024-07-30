@@ -13,8 +13,8 @@ import tech.intellispaces.javastatements.method.MethodStatement;
 import tech.intellispaces.javastatements.method.MethodStatements;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
-import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
+import tech.intellispaces.javastatements.reference.ThrowableReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 import tech.intellispaces.javastatements.session.Session;
@@ -32,7 +32,7 @@ public interface CustomTypeFunctions {
 
   static Optional<CustomTypeReference> getExtendedClass(CustomType statement) {
     return statement.parentTypes().stream()
-        .filter(ref -> StatementTypes.Class.equals(ref.customType().statementType()))
+        .filter(ref -> StatementTypes.Class.equals(ref.targetType().statementType()))
         .reduce((ref1, ref2) -> {
           throw JavaStatementException.withMessage("Multiple extended classes: {}, {}", ref1, ref2);
         });
@@ -40,7 +40,7 @@ public interface CustomTypeFunctions {
 
   static List<CustomTypeReference> getImplementedInterfaces(CustomType statement) {
     return statement.parentTypes().stream()
-        .filter(t -> StatementTypes.Interface.equals(t.customType().statementType()))
+        .filter(t -> StatementTypes.Interface.equals(t.targetType().statementType()))
         .toList();
   }
 
@@ -87,7 +87,7 @@ public interface CustomTypeFunctions {
             .toList()
         )
         .exceptions(originMethodSignature.exceptions().stream()
-            .map(e -> (ThrowableTypeReference) getActualTypeReference(e, typeContext))
+            .map(e -> (ThrowableReference) getActualTypeReference(e, typeContext))
             .toList()
         )
         .get();
@@ -103,7 +103,7 @@ public interface CustomTypeFunctions {
   private static void extractMethods(
       CustomTypeReference customTypeReference, List<MethodStatement> allMethods, TypeContext typeContext
   ) {
-    CustomType customType = customTypeReference.customType();
+    CustomType customType = customTypeReference.targetType();
     TypeContext actualNameContext = NameContextFunctions.getActualNameContext(
         typeContext, customType.typeParameters(), customTypeReference.typeArguments()
     );
@@ -152,9 +152,9 @@ public interface CustomTypeFunctions {
   }
 
   private static TypeReference getActualTypeReference(TypeReference typeReference, TypeContext typeContext) {
-    if (typeReference.asNamed().isPresent())  {
-      NamedReference namedReference = typeReference.asNamed().orElseThrow();
-      Optional<NotPrimitiveTypeReference> actualType = typeContext
+    if (typeReference.asNamedReference().isPresent())  {
+      NamedReference namedReference = typeReference.asNamedReference().orElseThrow();
+      Optional<NotPrimitiveReference> actualType = typeContext
           .get(namedReference.name())
           .map(ContextTypeParameter::actualType);
       if (actualType.isPresent()) {
@@ -182,7 +182,7 @@ public interface CustomTypeFunctions {
 
   static List<CustomType> allParents(CustomType customType) {
     List<CustomType> curParents = customType.parentTypes().stream()
-        .map(CustomTypeReference::customType)
+        .map(CustomTypeReference::targetType)
         .toList();
     List<CustomType> parents = new ArrayList<>(curParents);
     curParents.forEach(p -> populateParents(p, parents));
@@ -191,7 +191,7 @@ public interface CustomTypeFunctions {
 
   private static void populateParents(CustomType customType, List<CustomType> parents) {
     var curParents = customType.parentTypes().stream()
-        .map(CustomTypeReference::customType)
+        .map(CustomTypeReference::targetType)
         .toList();
     parents.addAll(curParents);
     curParents.forEach(p -> populateParents(p, parents));
@@ -199,12 +199,12 @@ public interface CustomTypeFunctions {
 
   static boolean hasParent(CustomType customType, String parentCanonicalName) {
     for (CustomTypeReference parent : customType.parentTypes()) {
-      if (parentCanonicalName.equals(parent.customType().canonicalName())) {
+      if (parentCanonicalName.equals(parent.targetType().canonicalName())) {
         return true;
       }
     }
     for (CustomTypeReference parent : customType.parentTypes()) {
-      if (parent.customType().hasParent(parentCanonicalName)) {
+      if (parent.targetType().hasParent(parentCanonicalName)) {
         return true;
       }
     }

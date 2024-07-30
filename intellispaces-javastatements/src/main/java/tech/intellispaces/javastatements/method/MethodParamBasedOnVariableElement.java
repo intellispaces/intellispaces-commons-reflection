@@ -8,7 +8,7 @@ import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.session.Session;
 
@@ -68,7 +68,7 @@ class MethodParamBasedOnVariableElement implements MethodParam {
   }
 
   @Override
-  public MethodParam specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public MethodParam specify(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodParamImpl(
         name(),
         type().specify(typeMapping),

@@ -10,26 +10,26 @@ import java.util.Optional;
  *
  * <p>By default, named type is referred to {@link java.lang.Object}.
  */
-public interface NamedReference extends NotPrimitiveTypeReference, TypeReferenceBound, ThrowableTypeReference {
+public interface NamedReference extends NotPrimitiveReference, ReferenceBound, ThrowableReference {
 
   String name();
 
-  List<TypeReferenceBound> extendedBounds();
+  List<ReferenceBound> extendedBounds();
 
   Statement owner();
 
   @Override
-  default boolean isArray() {
+  default boolean isArrayReference() {
     return false;
   }
 
   @Override
-  default boolean isCustomType() {
+  default boolean isCustomTypeReference() {
     return false;
   }
 
   @Override
-  default boolean isNamed() {
+  default boolean isNamedReference() {
     return true;
   }
 
@@ -39,7 +39,7 @@ public interface NamedReference extends NotPrimitiveTypeReference, TypeReference
   }
 
   @Override
-  default Optional<NamedReference> asNamed() {
+  default Optional<NamedReference> asNamedReference() {
     return Optional.of(this);
   }
 }

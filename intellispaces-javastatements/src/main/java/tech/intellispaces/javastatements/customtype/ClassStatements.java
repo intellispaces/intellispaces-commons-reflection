@@ -3,7 +3,7 @@ package tech.intellispaces.javastatements.customtype;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.context.TypeContexts;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ElementKind;
@@ -31,7 +31,7 @@ public interface ClassStatements {
   }
 
   static ClassType effectiveOf(
-      ClassType classStatement, Map<String, NotPrimitiveTypeReference> typeMapping
+      ClassType classStatement, Map<String, NotPrimitiveReference> typeMapping
   ) {
     return new EffectiveClassType(classStatement, typeMapping);
   }

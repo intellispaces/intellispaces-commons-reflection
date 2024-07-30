@@ -24,7 +24,7 @@ class ArrayReferenceImpl extends AbstractTypeReference implements ArrayReference
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
     TypeReference elementTypeReference = elementType().specify(typeMapping);
     return new ArrayReferenceImpl(elementTypeReference);
   }

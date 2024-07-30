@@ -24,10 +24,10 @@ import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.CustomTypeReferences;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NamedTypes;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.reference.PrimitiveReferences;
 import tech.intellispaces.javastatements.reference.TypeReference;
-import tech.intellispaces.javastatements.reference.TypeReferenceBound;
+import tech.intellispaces.javastatements.reference.ReferenceBound;
 import tech.intellispaces.javastatements.reference.WildcardTypes;
 import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.session.Sessions;
@@ -117,7 +117,7 @@ public interface JavaModelFunctions {
         .get();
     return parentTypeMirrors.stream()
         .map(parent -> CustomTypeReferences.of((DeclaredType) parent, newTypeContext, session))
-        .filter(ref -> !Object.class.getName().equals(ref.customType().canonicalName()))
+        .filter(ref -> !Object.class.getName().equals(ref.targetType().canonicalName()))
         .toList();
   }
 
@@ -143,14 +143,14 @@ public interface JavaModelFunctions {
     return NamedTypes.of(typeParameter, typeContext, session);
   }
 
-  static List<NotPrimitiveTypeReference> getTypeArguments(
+  static List<NotPrimitiveReference> getTypeArguments(
       DeclaredType declaredType, TypeContext typeContext, Session session
   ) {
-    List<NotPrimitiveTypeReference> typeArguments = new ArrayList<>();
+    List<NotPrimitiveReference> typeArguments = new ArrayList<>();
     for (TypeMirror typeArgumentsMirror : declaredType.getTypeArguments()) {
       TypeReference typeReferenceArgumentsReference = getTypeReference(typeArgumentsMirror, typeContext, session);
-      if (typeReferenceArgumentsReference instanceof NotPrimitiveTypeReference) {
-        typeArguments.add((NotPrimitiveTypeReference) typeReferenceArgumentsReference);
+      if (typeReferenceArgumentsReference instanceof NotPrimitiveReference) {
+        typeArguments.add((NotPrimitiveReference) typeReferenceArgumentsReference);
       } else {
         throw JavaStatementException.withMessage("Invalid type kind");
       }
@@ -222,7 +222,7 @@ public interface JavaModelFunctions {
   }
 
   static CustomType getCustomTypeStatement(DeclaredType declaredType, Session session) {
-    return getTypeReference(declaredType, session).customType();
+    return getTypeReference(declaredType, session).targetType();
   }
 
   static boolean isCustomType(TypeElement typeElement) {
@@ -233,17 +233,17 @@ public interface JavaModelFunctions {
         typeElement.getKind() == ElementKind.ANNOTATION_TYPE;
   }
 
-  static List<TypeReferenceBound> getExtendedBounds(
+  static List<ReferenceBound> getExtendedBounds(
       TypeParameterElement typeParameter, TypeContext typeContext, Session session
   ) {
-    List<TypeReferenceBound> bounds = new ArrayList<>(typeParameter.getBounds().size());
+    List<ReferenceBound> bounds = new ArrayList<>(typeParameter.getBounds().size());
     for (TypeMirror bound : typeParameter.getBounds()) {
       getBound(bound, typeContext, session).ifPresent(bounds::add);
     }
     return bounds;
   }
 
-  static Optional<TypeReferenceBound> getExtendedBound(
+  static Optional<ReferenceBound> getExtendedBound(
       WildcardType wildcardType, TypeContext typeContext, Session session
   ) {
     if (wildcardType.getExtendsBound() == null) {
@@ -252,7 +252,7 @@ public interface JavaModelFunctions {
     return getBound(wildcardType.getExtendsBound(), typeContext, session);
   }
 
-  static Optional<TypeReferenceBound> getSuperBound(
+  static Optional<ReferenceBound> getSuperBound(
       WildcardType wildcardType, TypeContext typeContext, Session session
   ) {
     if (wildcardType.getSuperBound() == null) {
@@ -261,10 +261,10 @@ public interface JavaModelFunctions {
     return getBound(wildcardType.getSuperBound(), typeContext, session);
   }
 
-  private static Optional<TypeReferenceBound> getBound(
+  private static Optional<ReferenceBound> getBound(
       TypeMirror bound, TypeContext typeContext, Session session
   ) {
-    TypeReferenceBound boundTypeReference = null;
+    ReferenceBound boundTypeReference = null;
     if (bound.getKind() == TypeKind.TYPEVAR) {
       TypeVariable typeVariable = (TypeVariable) bound;
       String typeParamName = typeVariable.asElement().getSimpleName().toString();
@@ -278,7 +278,7 @@ public interface JavaModelFunctions {
     } else if (bound.getKind() == TypeKind.DECLARED) {
       DeclaredType declaredType = (DeclaredType) bound;
       CustomTypeReference customTypeReference = CustomTypeReferences.of(declaredType, typeContext, session);
-      if (!Object.class.getName().equals(customTypeReference.customType().canonicalName())) {
+      if (!Object.class.getName().equals(customTypeReference.targetType().canonicalName())) {
         boundTypeReference = customTypeReference;
       }
     } else if (TypeKind.ARRAY == bound.getKind()) {

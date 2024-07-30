@@ -5,7 +5,7 @@ import tech.intellispaces.actions.Getter;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.customtype.CustomType;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -44,7 +44,7 @@ class MethodStatementBasedOnLangMethod implements MethodStatement {
   }
 
   @Override
-  public MethodStatement specify(Map<String, NotPrimitiveTypeReference> typeMapping) {
+  public MethodStatement specify(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodStatementImpl(owner(), signature().specify(typeMapping));
   }
 }

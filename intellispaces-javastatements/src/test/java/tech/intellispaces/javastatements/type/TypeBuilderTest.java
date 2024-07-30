@@ -16,7 +16,7 @@ public class TypeBuilderTest {
     Type<String> type = new TypeBuilder<String>() {}.get();
 
     // Then
-    Assertions.assertThat(type.baseType().asCustomTypeConfidently().customType().canonicalName()).isEqualTo(String.class.getCanonicalName());
+    Assertions.assertThat(type.baseType().asCustomTypeReferenceConfidently().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
     Assertions.assertThat(type.qualifiers()).isEmpty();
   }
 
@@ -26,8 +26,8 @@ public class TypeBuilderTest {
     Type<List<String>> type = new TypeBuilder<List<String>>() {}.get();
 
     // Then
-    Assertions.assertThat(type.baseType().asCustomTypeConfidently().customType().canonicalName()).isEqualTo(List.class.getCanonicalName());
+    Assertions.assertThat(type.baseType().asCustomTypeReferenceConfidently().targetType().canonicalName()).isEqualTo(List.class.getCanonicalName());
     Assertions.assertThat(type.qualifiers()).hasSize(1);
-    Assertions.assertThat(type.qualifiers().get(0).asCustomTypeConfidently().customType().canonicalName()).isEqualTo(String.class.getCanonicalName());
+    Assertions.assertThat(type.qualifiers().get(0).asCustomTypeReferenceConfidently().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
   }
 }

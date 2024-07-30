@@ -46,7 +46,7 @@ public class EnumTest extends AbstractCustomStatementTest {
     assertThat(enumStatement.implementedInterfaces()).isEmpty();
 
     assertThat(enumStatement.parentTypes()).hasSize(1);
-    assertThat(enumStatement.parentTypes().get(0).customType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
+    assertThat(enumStatement.parentTypes().get(0).targetType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
 
     assertThat(enumStatement.declaredMethods()).hasSize(2);
     assertThat(enumStatement.declaredMethods().stream()
@@ -90,26 +90,26 @@ public class EnumTest extends AbstractCustomStatementTest {
 
     assertThat(enumStatement.implementedInterfaces()).hasSize(2);
     HandleFunctions.handle(enumStatement.implementedInterfaces().get(0), implInterface -> {
-      assertThat(implInterface.customType().canonicalName()).isEqualTo(interface1Name);
+      assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
     HandleFunctions.handle(enumStatement.implementedInterfaces().get(1), implInterface -> {
-      assertThat(implInterface.customType().canonicalName()).isEqualTo(interface2Name);
+      assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
 
     assertThat(enumStatement.parentTypes()).hasSize(3);
     HandleFunctions.handle(enumStatement.parentTypes().get(0), parentType -> {
-      assertThat(parentType.customType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
+      assertThat(parentType.targetType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
       assertThat(parentType.typeArguments()).hasSize(1);
-      assertThat(parentType.typeArguments().get(0).asCustomType().orElseThrow().customType()).isSameAs(enumStatement);
+      assertThat(parentType.typeArguments().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(enumStatement);
     });
     HandleFunctions.handle(enumStatement.parentTypes().get(1), parentType -> {
-      assertThat(parentType.customType().canonicalName()).isEqualTo(interface1Name);
+      assertThat(parentType.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
     HandleFunctions.handle(enumStatement.parentTypes().get(2), parentType -> {
-      assertThat(parentType.customType().canonicalName()).isEqualTo(interface2Name);
+      assertThat(parentType.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
 
@@ -368,7 +368,7 @@ public class EnumTest extends AbstractCustomStatementTest {
     assertThat(enumStatement.implementedInterfaces()).isEmpty();
 
     assertThat(enumStatement.parentTypes()).hasSize(1);
-    assertThat(enumStatement.parentTypes().get(0).customType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
+    assertThat(enumStatement.parentTypes().get(0).targetType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
 
     assertThat(enumStatement.declaredMethods().stream()
         .map(MethodStatement::name)
