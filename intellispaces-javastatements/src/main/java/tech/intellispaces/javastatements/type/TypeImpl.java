@@ -23,7 +23,7 @@ class TypeImpl<T> implements Type<T> {
   @Override
   public Class<?> baseClass() {
     if (baseType.isCustomTypeReference()) {
-      return baseType.asCustomTypeReferenceConfidently().targetClass();
+      return baseType.asCustomTypeReferenceOrElseThrow().targetClass();
     }
     throw UnexpectedViolationException.withMessage("Not implemented");
   }

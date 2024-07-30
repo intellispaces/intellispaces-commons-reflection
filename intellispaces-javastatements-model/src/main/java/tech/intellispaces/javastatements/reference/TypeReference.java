@@ -30,7 +30,7 @@ public interface TypeReference extends Statement {
     return Optional.empty();
   }
 
-  default PrimitiveReference asPrimitiveReferenceConfidently() {
+  default PrimitiveReference asPrimitiveReferenceOrElseThrow() {
     return asPrimitiveReference().orElseThrow();
   }
 
@@ -48,7 +48,7 @@ public interface TypeReference extends Statement {
     return Optional.empty();
   }
 
-  default ArrayReference asArrayReferenceConfidently() {
+  default ArrayReference asArrayReferenceOrElseThrow() {
     return asArrayReference().orElseThrow();
   }
 
@@ -59,7 +59,7 @@ public interface TypeReference extends Statement {
     return Optional.empty();
   }
 
-  default NamedReference asNamedReferenceConfidently() {
+  default NamedReference asNamedReferenceOrElseThrow() {
     return asNamedReference().orElseThrow();
   }
 
@@ -70,7 +70,7 @@ public interface TypeReference extends Statement {
     return Optional.empty();
   }
 
-  default WildcardReference asWildcardConfidently() {
+  default WildcardReference asWildcardOrElseThrow() {
     return asWildcard().orElseThrow();
   }
 
@@ -81,7 +81,7 @@ public interface TypeReference extends Statement {
     return Optional.empty();
   }
 
-  default CustomTypeReference asCustomTypeReferenceConfidently() {
+  default CustomTypeReference asCustomTypeReferenceOrElseThrow() {
     return asCustomTypeReference().orElseThrow();
   }
 

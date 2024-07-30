@@ -9,7 +9,7 @@ public interface TypeFunctions {
 
   static <T> Type<T> get(TypeReference typeReference) {
     if (typeReference.isCustomTypeReference()) {
-      CustomTypeReference ctr = typeReference.asCustomTypeReferenceConfidently();
+      CustomTypeReference ctr = typeReference.asCustomTypeReferenceOrElseThrow();
       return new TypeImpl<>(CustomTypeReferences.of(ctr.targetType()), ctr.typeArguments());
     }
     throw UnexpectedViolationException.withMessage("Unsupported reference type: {}",

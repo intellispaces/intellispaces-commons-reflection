@@ -116,7 +116,7 @@ public interface MethodFunctions {
     }
     for (CustomTypeReference parent : type.parentTypes()) {
       if (parent.isCustomTypeReference()) {
-        overrideMethods.addAll(getOverrideMethods(parent.asCustomTypeReferenceConfidently().targetType(), method, true));
+        overrideMethods.addAll(getOverrideMethods(parent.asCustomTypeReferenceOrElseThrow().targetType(), method, true));
       }
     }
     return overrideMethods;

@@ -102,16 +102,16 @@ public interface TypeReferenceFunctions {
 
   static boolean isEqualTypes(TypeReference typeReference1, TypeReference typeReference2) {
     if (typeReference1.isPrimitiveReference() && typeReference2.isPrimitiveReference()) {
-      PrimitiveReference primitiveReference1 = typeReference1.asPrimitiveReferenceConfidently();
-      PrimitiveReference primitiveReference2 = typeReference2.asPrimitiveReferenceConfidently();
+      PrimitiveReference primitiveReference1 = typeReference1.asPrimitiveReferenceOrElseThrow();
+      PrimitiveReference primitiveReference2 = typeReference2.asPrimitiveReferenceOrElseThrow();
       return isEqualPrimitiveTypeReferences(primitiveReference1, primitiveReference2);
     } else if (typeReference1.isCustomTypeReference() && typeReference2.isCustomTypeReference()) {
-      CustomTypeReference customTypeReference1 = typeReference1.asCustomTypeReferenceConfidently();
-      CustomTypeReference customTypeReference2 = typeReference2.asCustomTypeReferenceConfidently();
+      CustomTypeReference customTypeReference1 = typeReference1.asCustomTypeReferenceOrElseThrow();
+      CustomTypeReference customTypeReference2 = typeReference2.asCustomTypeReferenceOrElseThrow();
       return isEqualCustomTypeReferences(customTypeReference1, customTypeReference2);
     } else if (typeReference1.isNamedReference() && typeReference2.isNamedReference()) {
-      NamedReference namedReference1 = typeReference1.asNamedReferenceConfidently();
-      NamedReference namedReference2 = typeReference2.asNamedReferenceConfidently();
+      NamedReference namedReference1 = typeReference1.asNamedReferenceOrElseThrow();
+      NamedReference namedReference2 = typeReference2.asNamedReferenceOrElseThrow();
       return isEqualNamedTypeReferences(namedReference1, namedReference2);
     } else {
       return false;
@@ -150,12 +150,12 @@ public interface TypeReferenceFunctions {
 
   static boolean isEquivalentTypes(TypeReference typeReference1, TypeReference typeReference2) {
     if (typeReference1.isPrimitiveReference() && typeReference2.isPrimitiveReference()) {
-      PrimitiveReference primitiveType1 = typeReference1.asPrimitiveReferenceConfidently();
-      PrimitiveReference primitiveType2 = typeReference2.asPrimitiveReferenceConfidently();
+      PrimitiveReference primitiveType1 = typeReference1.asPrimitiveReferenceOrElseThrow();
+      PrimitiveReference primitiveType2 = typeReference2.asPrimitiveReferenceOrElseThrow();
       return primitiveType1.typename().equals(primitiveType2.typename());
     } else if (typeReference1.isCustomTypeReference() && typeReference2.isCustomTypeReference()) {
-      CustomType customType1 = typeReference1.asCustomTypeReferenceConfidently().targetType();
-      CustomType customType2 = typeReference2.asCustomTypeReferenceConfidently().targetType();
+      CustomType customType1 = typeReference1.asCustomTypeReferenceOrElseThrow().targetType();
+      CustomType customType2 = typeReference2.asCustomTypeReferenceOrElseThrow().targetType();
       return customType1.canonicalName().equals(customType2.canonicalName());
     } else {
       throw UnexpectedViolationException.withMessage("Not implemented");
