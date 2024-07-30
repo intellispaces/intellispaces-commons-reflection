@@ -1,7 +1,7 @@
 package tech.intellispaces.javastatements.type;
 
-import tech.intellispaces.javastatements.statement.reference.TypeReferences;
-import tech.intellispaces.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.javastatements.reference.TypeReferences;
+import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.lang.reflect.ParameterizedType;
 

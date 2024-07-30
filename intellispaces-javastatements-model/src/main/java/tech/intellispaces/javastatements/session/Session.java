@@ -1,6 +1,6 @@
 package tech.intellispaces.javastatements.session;
 
-import tech.intellispaces.javastatements.statement.customtype.CustomType;
+import tech.intellispaces.javastatements.customtype.CustomType;
 
 /**
  * Parsing session.

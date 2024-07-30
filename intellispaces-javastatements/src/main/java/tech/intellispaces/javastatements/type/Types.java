@@ -1,6 +1,6 @@
 package tech.intellispaces.javastatements.type;
 
-import tech.intellispaces.javastatements.statement.reference.CustomTypeReferences;
+import tech.intellispaces.javastatements.reference.CustomTypeReferences;
 
 import java.util.List;
 

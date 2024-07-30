@@ -6,10 +6,10 @@ import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.datahandle.HandleFunctions;
 import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.session.Sessions;
-import tech.intellispaces.javastatements.statement.method.MethodStatement;
-import tech.intellispaces.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.javastatements.statement.customtype.ClassType;
-import tech.intellispaces.javastatements.statement.customtype.CustomType;
+import tech.intellispaces.javastatements.method.MethodStatement;
+import tech.intellispaces.javastatements.reference.CustomTypeReference;
+import tech.intellispaces.javastatements.customtype.ClassType;
+import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;

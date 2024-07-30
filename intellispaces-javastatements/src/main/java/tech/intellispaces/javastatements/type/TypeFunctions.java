@@ -1,9 +1,9 @@
 package tech.intellispaces.javastatements.type;
 
 import tech.intellispaces.commons.exception.UnexpectedViolationException;
-import tech.intellispaces.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.javastatements.statement.reference.CustomTypeReferences;
-import tech.intellispaces.javastatements.statement.reference.TypeReference;
+import tech.intellispaces.javastatements.reference.CustomTypeReference;
+import tech.intellispaces.javastatements.reference.CustomTypeReferences;
+import tech.intellispaces.javastatements.reference.TypeReference;
 
 public interface TypeFunctions {
 

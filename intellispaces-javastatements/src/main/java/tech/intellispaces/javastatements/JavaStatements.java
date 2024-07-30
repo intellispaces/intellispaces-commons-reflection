@@ -1,23 +1,22 @@
 package tech.intellispaces.javastatements;
 
+import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.session.Sessions;
-import tech.intellispaces.javastatements.statement.Statement;
-import tech.intellispaces.javastatements.statement.Statements;
-import tech.intellispaces.javastatements.statement.reference.CustomTypeReference;
-import tech.intellispaces.javastatements.statement.reference.CustomTypeReferences;
-import tech.intellispaces.javastatements.statement.customtype.AnnotationStatements;
-import tech.intellispaces.javastatements.statement.customtype.AnnotationType;
-import tech.intellispaces.javastatements.statement.customtype.ClassStatements;
-import tech.intellispaces.javastatements.statement.customtype.ClassType;
-import tech.intellispaces.javastatements.statement.customtype.CustomType;
-import tech.intellispaces.javastatements.statement.customtype.CustomTypes;
-import tech.intellispaces.javastatements.statement.customtype.EnumStatements;
-import tech.intellispaces.javastatements.statement.customtype.EnumType;
-import tech.intellispaces.javastatements.statement.customtype.InterfaceStatements;
-import tech.intellispaces.javastatements.statement.customtype.InterfaceType;
-import tech.intellispaces.javastatements.statement.customtype.RecordStatements;
-import tech.intellispaces.javastatements.statement.customtype.RecordType;
+import tech.intellispaces.javastatements.reference.CustomTypeReference;
+import tech.intellispaces.javastatements.reference.CustomTypeReferences;
+import tech.intellispaces.javastatements.customtype.AnnotationStatements;
+import tech.intellispaces.javastatements.customtype.AnnotationType;
+import tech.intellispaces.javastatements.customtype.ClassStatements;
+import tech.intellispaces.javastatements.customtype.ClassType;
+import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.customtype.CustomTypes;
+import tech.intellispaces.javastatements.customtype.EnumStatements;
+import tech.intellispaces.javastatements.customtype.EnumType;
+import tech.intellispaces.javastatements.customtype.InterfaceStatements;
+import tech.intellispaces.javastatements.customtype.InterfaceType;
+import tech.intellispaces.javastatements.customtype.RecordStatements;
+import tech.intellispaces.javastatements.customtype.RecordType;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -29,7 +28,7 @@ import javax.lang.model.type.DeclaredType;
 public interface JavaStatements {
 
   static Statement statement(Element element) {
-    return Statements.of(element);
+    return JavaModelFunctions.of(element);
   }
 
   static CustomType customTypeStatement(Class<?> aClass) {
