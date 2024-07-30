@@ -1,11 +1,10 @@
 package tech.intellispaces.javastatements.customtype;
 
+import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.context.ContextTypeParameter;
 import tech.intellispaces.javastatements.context.NameContextFunctions;
 import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.exception.JavaStatementException;
-import tech.intellispaces.javastatements.session.Session;
-import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.method.MethodParam;
 import tech.intellispaces.javastatements.method.MethodParams;
 import tech.intellispaces.javastatements.method.MethodSignature;
@@ -16,8 +15,9 @@ import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
 import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
-import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 import tech.intellispaces.javastatements.reference.TypeReference;
+import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
+import tech.intellispaces.javastatements.session.Session;
 
 import java.util.ArrayList;
 import java.util.Iterator;

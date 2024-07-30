@@ -3,12 +3,12 @@ package tech.intellispaces.javastatements.reference;
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
 import tech.intellispaces.javastatements.JavaStatements;
-import tech.intellispaces.javastatements.context.TypeContext;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.Statement;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
+import tech.intellispaces.javastatements.context.TypeContext;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.TypeParameterElement;
 import java.util.ArrayList;

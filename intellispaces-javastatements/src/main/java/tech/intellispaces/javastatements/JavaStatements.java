@@ -1,10 +1,6 @@
 package tech.intellispaces.javastatements;
 
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
-import tech.intellispaces.javastatements.session.Session;
-import tech.intellispaces.javastatements.session.Sessions;
-import tech.intellispaces.javastatements.reference.CustomTypeReference;
-import tech.intellispaces.javastatements.reference.CustomTypeReferences;
 import tech.intellispaces.javastatements.customtype.AnnotationStatements;
 import tech.intellispaces.javastatements.customtype.AnnotationType;
 import tech.intellispaces.javastatements.customtype.ClassStatements;
@@ -17,6 +13,10 @@ import tech.intellispaces.javastatements.customtype.InterfaceStatements;
 import tech.intellispaces.javastatements.customtype.InterfaceType;
 import tech.intellispaces.javastatements.customtype.RecordStatements;
 import tech.intellispaces.javastatements.customtype.RecordType;
+import tech.intellispaces.javastatements.reference.CustomTypeReference;
+import tech.intellispaces.javastatements.reference.CustomTypeReferences;
+import tech.intellispaces.javastatements.session.Session;
+import tech.intellispaces.javastatements.session.Sessions;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;

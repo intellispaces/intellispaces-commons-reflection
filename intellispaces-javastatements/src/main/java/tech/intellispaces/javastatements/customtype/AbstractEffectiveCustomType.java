@@ -8,8 +8,8 @@ import tech.intellispaces.javastatements.method.MethodStatement;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
-import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 import tech.intellispaces.javastatements.reference.TypeReference;
+import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;

@@ -2,12 +2,12 @@ package tech.intellispaces.javastatements.reference;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
-import tech.intellispaces.javastatements.context.TypeContext;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
+import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;

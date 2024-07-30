@@ -2,12 +2,12 @@ package tech.intellispaces.javastatements.instance;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
 import tech.intellispaces.javastatements.customtype.AnnotationStatements;
 import tech.intellispaces.javastatements.customtype.AnnotationType;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.TypeElement;

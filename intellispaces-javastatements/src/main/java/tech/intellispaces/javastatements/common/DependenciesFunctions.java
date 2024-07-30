@@ -1,7 +1,8 @@
 package tech.intellispaces.javastatements.common;
 
-import tech.intellispaces.javastatements.exception.JavaStatementException;
 import tech.intellispaces.javastatements.StatementTypes;
+import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.exception.JavaStatementException;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.method.MethodParam;
@@ -11,7 +12,6 @@ import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.reference.WildcardReference;
-import tech.intellispaces.javastatements.customtype.CustomType;
 
 import java.util.ArrayList;
 import java.util.Collection;

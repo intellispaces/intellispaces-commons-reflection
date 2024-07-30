@@ -1,13 +1,13 @@
 package tech.intellispaces.javastatements.method;
 
 import tech.intellispaces.javastatements.AnnotatedStatement;
+import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
 import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
-import tech.intellispaces.javastatements.customtype.CustomType;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

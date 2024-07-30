@@ -1,8 +1,8 @@
 package tech.intellispaces.javastatements.method;
 
 import tech.intellispaces.javastatements.context.TypeContext;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
 

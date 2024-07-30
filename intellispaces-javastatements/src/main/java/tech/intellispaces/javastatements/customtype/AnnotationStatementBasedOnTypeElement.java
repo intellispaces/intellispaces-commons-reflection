@@ -1,9 +1,9 @@
 package tech.intellispaces.javastatements.customtype;
 
-import tech.intellispaces.javastatements.context.TypeContext;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
+import tech.intellispaces.javastatements.context.TypeContext;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.TypeElement;
 

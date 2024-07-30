@@ -1,14 +1,14 @@
 package tech.intellispaces.javastatements.customtype;
 
-import tech.intellispaces.javastatements.exception.JavaStatementException;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.AnnotatedStatement;
+import tech.intellispaces.javastatements.exception.JavaStatementException;
 import tech.intellispaces.javastatements.instance.AnnotationElement;
 import tech.intellispaces.javastatements.instance.AnnotationElements;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.instance.InstanceFunctions;
 import tech.intellispaces.javastatements.method.MethodFunctions;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;

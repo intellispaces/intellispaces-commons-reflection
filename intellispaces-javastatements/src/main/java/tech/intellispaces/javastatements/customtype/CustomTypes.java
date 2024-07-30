@@ -1,8 +1,8 @@
 package tech.intellispaces.javastatements.customtype;
 
+import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.session.Sessions;
-import tech.intellispaces.javastatements.common.JavaModelFunctions;
 
 import javax.lang.model.element.TypeElement;
 

@@ -4,8 +4,8 @@ import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
 import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
 
 import java.util.List;
 import java.util.Map;

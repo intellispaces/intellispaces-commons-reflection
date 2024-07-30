@@ -2,18 +2,18 @@ package tech.intellispaces.javastatements;
 
 import org.junit.jupiter.api.Test;
 import tech.intellispaces.commons.datahandle.HandleFunctions;
+import tech.intellispaces.javastatements.customtype.AnnotationType;
+import tech.intellispaces.javastatements.customtype.ClassType;
+import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.customtype.InterfaceType;
+import tech.intellispaces.javastatements.instance.AnnotationInstance;
+import tech.intellispaces.javastatements.method.MethodStatement;
+import tech.intellispaces.javastatements.reference.PrimitiveReferences;
 import tech.intellispaces.javastatements.samples.AnnotationWithElementsView;
 import tech.intellispaces.javastatements.samples.TestAnnotation;
 import tech.intellispaces.javastatements.samples.TestEnum;
 import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.session.Sessions;
-import tech.intellispaces.javastatements.instance.AnnotationInstance;
-import tech.intellispaces.javastatements.method.MethodStatement;
-import tech.intellispaces.javastatements.reference.PrimitiveReferences;
-import tech.intellispaces.javastatements.customtype.AnnotationType;
-import tech.intellispaces.javastatements.customtype.ClassType;
-import tech.intellispaces.javastatements.customtype.CustomType;
-import tech.intellispaces.javastatements.customtype.InterfaceType;
 import tech.intellispaces.javastatements.support.TesteeType;
 
 import javax.lang.model.element.TypeElement;

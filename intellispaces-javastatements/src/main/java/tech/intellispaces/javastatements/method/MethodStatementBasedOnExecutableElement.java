@@ -3,13 +3,13 @@ package tech.intellispaces.javastatements.method;
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
 import tech.intellispaces.javastatements.JavaStatements;
-import tech.intellispaces.javastatements.context.TypeContext;
-import tech.intellispaces.javastatements.context.TypeContexts;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
-import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.context.TypeContext;
+import tech.intellispaces.javastatements.context.TypeContexts;
 import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;

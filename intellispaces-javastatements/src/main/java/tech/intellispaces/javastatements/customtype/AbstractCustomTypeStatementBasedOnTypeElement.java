@@ -2,18 +2,18 @@ package tech.intellispaces.javastatements.customtype;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
+import tech.intellispaces.javastatements.common.DependenciesFunctions;
+import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.context.TypeContextBuilder;
 import tech.intellispaces.javastatements.context.TypeContexts;
-import tech.intellispaces.javastatements.session.Session;
-import tech.intellispaces.javastatements.common.DependenciesFunctions;
-import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.method.MethodStatement;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 import tech.intellispaces.javastatements.reference.TypeReference;
+import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;

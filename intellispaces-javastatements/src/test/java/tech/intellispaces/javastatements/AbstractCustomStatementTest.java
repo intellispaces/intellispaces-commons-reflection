@@ -6,12 +6,12 @@ import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
 import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.datahandle.HandleFunctions;
-import tech.intellispaces.javastatements.samples.TestEnum;
-import tech.intellispaces.javastatements.samples.TestRecord;
+import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.method.MethodStatement;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.PrimitiveReferences;
-import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.samples.TestEnum;
+import tech.intellispaces.javastatements.samples.TestRecord;
 import tech.intellispaces.javastatements.support.TesteeTypeAnnotationProcessor;
 
 import javax.lang.model.element.TypeElement;

@@ -2,9 +2,9 @@ package tech.intellispaces.javastatements.reference;
 
 import tech.intellispaces.commons.exception.UnexpectedViolationException;
 import tech.intellispaces.javastatements.StatementTypes;
-import tech.intellispaces.javastatements.exception.JavaStatementException;
 import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.customtype.CustomTypeFunctions;
+import tech.intellispaces.javastatements.exception.JavaStatementException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

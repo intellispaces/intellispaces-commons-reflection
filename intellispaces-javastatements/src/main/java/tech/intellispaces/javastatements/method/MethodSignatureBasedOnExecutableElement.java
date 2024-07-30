@@ -2,20 +2,20 @@ package tech.intellispaces.javastatements.method;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
-import tech.intellispaces.javastatements.context.TypeContext;
-import tech.intellispaces.javastatements.context.TypeContextBuilder;
-import tech.intellispaces.javastatements.context.TypeContexts;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
+import tech.intellispaces.javastatements.context.TypeContext;
+import tech.intellispaces.javastatements.context.TypeContextBuilder;
+import tech.intellispaces.javastatements.context.TypeContexts;
+import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NotPrimitiveTypeReference;
 import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
-import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;

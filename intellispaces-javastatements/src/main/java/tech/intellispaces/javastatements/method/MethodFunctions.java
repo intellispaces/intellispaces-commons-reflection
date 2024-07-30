@@ -1,17 +1,17 @@
 package tech.intellispaces.javastatements.method;
 
 import tech.intellispaces.javastatements.JavaStatements;
-import tech.intellispaces.javastatements.context.TypeContext;
-import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
+import tech.intellispaces.javastatements.context.TypeContext;
+import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.instance.InstanceFunctions;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.ThrowableTypeReference;
-import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
 import tech.intellispaces.javastatements.reference.TypeReference;
-import tech.intellispaces.javastatements.customtype.CustomType;
+import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
+import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.TypeKind;
