@@ -6,26 +6,33 @@ import tech.intellispaces.javastatements.reference.TypeReference;
 import java.util.List;
 
 class TypeImpl<T> implements Type<T> {
-  private final TypeReference baseType;
+  private final TypeReference base;
   private final List<TypeReference> qualifiers;
 
+  TypeImpl(TypeReference base, List<TypeReference> qualifiers) {
+    this.base = base;
+    this.qualifiers = qualifiers;
+  }
+
+  @Override
+  public TypeReference typeReference() {
+    return null;
+  }
+
+  @Override
+  public TypeReference base() {
+    return base;
+  }
+
+  @Override
   @SuppressWarnings("unchecked")
-  public TypeImpl(TypeReference baseType, List<? extends TypeReference> qualifiers) {
-    this.baseType = baseType;
-    this.qualifiers = (List<TypeReference>) qualifiers;
-  }
-
-  @Override
-  public TypeReference baseType() {
-    return baseType;
-  }
-
-  @Override
-  public Class<?> baseClass() {
-    if (baseType.isCustomTypeReference()) {
-      return baseType.asCustomTypeReferenceOrElseThrow().targetClass();
+  public Class<T> baseClass() {
+    if (base.isCustomTypeReference()) {
+      return (Class<T>) base.asCustomTypeReferenceOrElseThrow().targetClass();
+    } else {
+      throw UnexpectedViolationException.withMessage("Unsupported reference type: {}",
+          base.statementType().typename());
     }
-    throw UnexpectedViolationException.withMessage("Not implemented");
   }
 
   @Override

@@ -13,7 +13,7 @@ public abstract class TypeBuilder<T> {
     ParameterizedType parameterizedType = (ParameterizedType) reflectType;
     java.lang.reflect.Type[] typeArguments = parameterizedType.getActualTypeArguments();
     TypeReference typeReference = TypeReferences.of(typeArguments[0]);
-    this.type = TypeFunctions.get(typeReference);
+    this.type = Types.get(typeReference);
   }
 
   public Type<T> get() {

@@ -6,18 +6,20 @@ import java.util.List;
 
 public interface Type<T> {
 
+  TypeReference typeReference();
+
   /**
-   * Base type.
+   * Base type reference.
    */
-  TypeReference baseType();
+  TypeReference base();
 
   /**
    * Base class.
    */
-  Class<?> baseClass();
+  Class<T> baseClass();
 
   /**
-   * Type qualifiers (optional).
+   * Type qualifier references (optional).
    */
   List<TypeReference> qualifiers();
 }
