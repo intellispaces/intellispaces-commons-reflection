@@ -14,7 +14,7 @@ public interface NameContextFunctions {
       List<NamedReference> typeParams,
       List<NotPrimitiveReference> typeArguments
   ) {
-    TypeContextBuilder contextBuilder = TypeContexts.build();
+    var builder = TypeContexts.build();
     NamedReference type;
     NotPrimitiveReference actualType;
     if (!typeParams.isEmpty() && typeParams.size() == typeArguments.size()) {
@@ -39,9 +39,9 @@ public interface NameContextFunctions {
             actualType = parentActualTypeReference.get();
           }
         }
-        contextBuilder.addTypeParam(namedReference.name(), type, actualType);
+        builder.addTypeParam(namedReference.name(), type, actualType);
       }
     }
-    return contextBuilder.get();
+    return builder.get();
   }
 }

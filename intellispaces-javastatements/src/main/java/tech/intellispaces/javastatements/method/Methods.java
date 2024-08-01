@@ -6,15 +6,15 @@ import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
 
-public interface MethodStatements {
+public interface Methods {
+
+  static MethodStatement get(CustomType owner, MethodSignature signature) {
+    return new MethodStatementImpl(owner, signature);
+  }
 
   static MethodStatement of(
       ExecutableElement executableElement, CustomType owner, TypeContext typeContext, Session session
   ) {
     return new MethodStatementBasedOnExecutableElement(executableElement, owner, typeContext, session);
-  }
-
-  static MethodStatement build(CustomType owner, MethodSignature signature) {
-    return new MethodStatementImpl(owner, signature);
   }
 }

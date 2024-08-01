@@ -3,7 +3,7 @@ package tech.intellispaces.javastatements.instance;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
-import tech.intellispaces.javastatements.customtype.ClassStatements;
+import tech.intellispaces.javastatements.customtype.Classes;
 import tech.intellispaces.javastatements.customtype.EnumType;
 import tech.intellispaces.javastatements.exception.JavaStatementException;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
@@ -92,22 +92,22 @@ public interface InstanceFunctions {
 
   private static TypeReference arrayItemsType(List<Instance> values) {
     if (values.isEmpty()) {
-      return CustomTypeReferences.of(ClassStatements.of(Object.class));
+      return CustomTypeReferences.get(Classes.of(Object.class));
     }
 
     Instance value = values.get(0);
     if (StatementTypes.PrimitiveInstance.equals(value.statementType())) {
       PrimitiveReference primitiveType = value.asPrimitive().orElseThrow().type();
       final Class<?> wrapperClass = primitiveType.wrapperClass();
-      return CustomTypeReferences.of(ClassStatements.of(wrapperClass));
+      return CustomTypeReferences.get(Classes.of(wrapperClass));
     } else if (StatementTypes.StringInstance.equals(value.statementType())) {
-      return CustomTypeReferences.of(ClassStatements.of(String.class));
+      return CustomTypeReferences.get(Classes.of(String.class));
     } else if (StatementTypes.ClassInstance.equals(value.statementType())) {
-      return CustomTypeReferences.of(ClassStatements.of(Class.class));
+      return CustomTypeReferences.get(Classes.of(Class.class));
     } else if (StatementTypes.EnumInstance.equals(value.statementType())) {
-      return CustomTypeReferences.of(value.asEnum().orElseThrow().type());
+      return CustomTypeReferences.get(value.asEnum().orElseThrow().type());
     } else if (StatementTypes.AnnotationInstance.equals(value.statementType())) {
-      return CustomTypeReferences.of(value.asAnnotation().orElseThrow().annotationStatement());
+      return CustomTypeReferences.get(value.asAnnotation().orElseThrow().annotationStatement());
     } else {
       throw JavaStatementException.withMessage("Unsupported array element type in annotation element: " + value.statementType().typename());
     }

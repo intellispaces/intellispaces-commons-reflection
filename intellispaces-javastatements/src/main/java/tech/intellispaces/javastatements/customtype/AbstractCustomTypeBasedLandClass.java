@@ -116,7 +116,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   }
 
   @Override
-  public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypeReferences) {
+  public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes) {
     throw new UnsupportedOperationException("Not implemented yet");
   }
 
@@ -131,7 +131,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   }
 
   @Override
-  public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypeReferences) {
+  public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes) {
     throw new UnsupportedOperationException("Not implemented yet");
   }
 

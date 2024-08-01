@@ -12,14 +12,14 @@ public interface TypeReferences {
 
   static TypeReference of(java.lang.reflect.Type type) {
     if (type instanceof Class<?>) {
-      return CustomTypeReferences.of((Class<?>) type);
+      return CustomTypeReferences.get((Class<?>) type);
     } else if (type instanceof ParameterizedType pt) {
       CustomType baseType = TypeReferences.of(pt.getRawType()).asCustomTypeReferenceOrElseThrow().targetType();
       List<NotPrimitiveReference> qualifiers = new ArrayList<>();
       ArraysFunctions.foreach(pt.getActualTypeArguments(), t -> {
         qualifiers.add((NotPrimitiveReference) TypeReferences.of(t));
       });
-      return CustomTypeReferences.of(baseType, qualifiers);
+      return CustomTypeReferences.get(baseType, qualifiers);
     }
     throw UnexpectedViolationException.withMessage("Unsupported type");
   }

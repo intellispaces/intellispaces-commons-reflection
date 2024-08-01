@@ -10,8 +10,9 @@ import tech.intellispaces.javastatements.method.MethodParams;
 import tech.intellispaces.javastatements.method.MethodSignature;
 import tech.intellispaces.javastatements.method.MethodSignatures;
 import tech.intellispaces.javastatements.method.MethodStatement;
-import tech.intellispaces.javastatements.method.MethodStatements;
+import tech.intellispaces.javastatements.method.Methods;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
+import tech.intellispaces.javastatements.reference.CustomTypeReferences;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.reference.ThrowableReference;
@@ -49,12 +50,12 @@ public interface CustomTypeFunctions {
     customType.declaredMethods().stream()
         .map(method -> getEffectiveMethod(method, typeContext))
         .forEach(actualMethods::add);
-    inheritedMethods(customType, actualMethods, typeContext);
+    addInheritedMethods(customType, actualMethods, typeContext);
     return actualMethods;
   }
 
   private static MethodStatement getEffectiveMethod(MethodStatement originMethod, TypeContext typeContext) {
-    return MethodStatements.build(
+    return Methods.get(
         originMethod.owner(),
         getEffectiveMethodSignature(originMethod.signature(), typeContext)
     );
@@ -93,33 +94,32 @@ public interface CustomTypeFunctions {
         .get();
   }
 
-  private static void inheritedMethods(
-      CustomType customType, List<MethodStatement> allMethods, TypeContext typeContext
+  private static void addInheritedMethods(
+      CustomType customType, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
-    customType.parentTypes().forEach(parent ->
-        extractMethods(parent, allMethods, typeContext));
+    customType.parentTypes().forEach(parent -> extractParentMethods(parent, actualMethods, typeContext));
   }
 
-  private static void extractMethods(
-      CustomTypeReference customTypeReference, List<MethodStatement> allMethods, TypeContext typeContext
+  private static void extractParentMethods(
+      CustomTypeReference parentReference, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
-    CustomType customType = customTypeReference.targetType();
+    CustomType parentType = parentReference.targetType();
     TypeContext actualNameContext = NameContextFunctions.getActualNameContext(
-        typeContext, customType.typeParameters(), customTypeReference.typeArguments()
+        typeContext, parentType.typeParameters(), parentReference.typeArguments()
     );
-    customType.declaredMethods().forEach(
-        method -> addMethod(method, allMethods, actualNameContext)
+    parentType.declaredMethods().forEach(
+        method -> addMethod(method, actualMethods, actualNameContext)
     );
-    inheritedMethods(customType, allMethods, actualNameContext);
+    addInheritedMethods(parentType, actualMethods, actualNameContext);
   }
 
   private static void addMethod(
-      MethodStatement addedMethod, List<MethodStatement> allMethods, TypeContext typeContext
+      MethodStatement addedMethod, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
     MethodStatement effectiveAddedMethod = getEffectiveMethod(addedMethod, typeContext);
     MethodSignature effectiveAddedSignature = effectiveAddedMethod.signature();
     int index = 0;
-    for (MethodStatement method : allMethods) {
+    for (MethodStatement method : actualMethods) {
       MethodSignature methodSignature = method.signature();
       if (effectiveAddedSignature.name().equals(methodSignature.name())) {
         if (isSameParams(effectiveAddedSignature, methodSignature)) {
@@ -140,7 +140,7 @@ public interface CustomTypeFunctions {
               && AnnotationFunctions.hasAnnotation(effectiveAddedMethod.signature(), Override.class)
           ) {
             // Replace override method
-            allMethods.set(index, effectiveAddedMethod);
+            actualMethods.set(index, effectiveAddedMethod);
           }
           // Ignore override method
           return;
@@ -148,18 +148,25 @@ public interface CustomTypeFunctions {
       }
       index++;
     }
-    allMethods.add(effectiveAddedMethod);
+    actualMethods.add(effectiveAddedMethod);
   }
 
   private static TypeReference getActualTypeReference(TypeReference typeReference, TypeContext typeContext) {
-    if (typeReference.asNamedReference().isPresent())  {
-      NamedReference namedReference = typeReference.asNamedReference().orElseThrow();
+    if (typeReference.isNamedReference())  {
+      NamedReference namedReference = typeReference.asNamedReferenceOrElseThrow();
       Optional<NotPrimitiveReference> actualType = typeContext
           .get(namedReference.name())
           .map(ContextTypeParameter::actualType);
       if (actualType.isPresent()) {
         return actualType.get();
       }
+    } else if (typeReference.isCustomTypeReference())  {
+      CustomTypeReference customTypeReference = typeReference.asCustomTypeReferenceOrElseThrow();
+      CustomType baseType = customTypeReference.targetType();
+      List<NotPrimitiveReference> actualTypeArguments = customTypeReference.typeArguments().stream()
+          .map(arg -> (NotPrimitiveReference) getActualTypeReference(arg, typeContext))
+          .toList();
+      return CustomTypeReferences.get(baseType, actualTypeArguments);
     }
     return typeReference;
   }

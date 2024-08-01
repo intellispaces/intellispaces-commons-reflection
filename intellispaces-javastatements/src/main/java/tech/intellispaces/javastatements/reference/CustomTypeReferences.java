@@ -11,31 +11,31 @@ import java.util.List;
 
 public interface CustomTypeReferences {
 
-  static CustomTypeReference of(Class<?> aClass) {
+  static CustomTypeReference get(CustomType targetType) {
+    return get(targetType, List.of());
+  }
+
+  static CustomTypeReference get(CustomType customType, List<NotPrimitiveReference> typeArguments) {
+    return new CustomTypeReferenceImpl(customType, typeArguments);
+  }
+
+  static CustomTypeReference get(Class<?> aClass) {
     return new CustomTypeReferenceBasedOnClass(aClass);
   }
 
-  static CustomTypeReference of(TypeElement typeElement, Session session) {
-    return of(typeElement, TypeContexts.empty(), session);
+  static CustomTypeReference get(TypeElement typeElement, Session session) {
+    return get(typeElement, TypeContexts.empty(), session);
   }
 
-  static CustomTypeReference of(TypeElement typeElement, TypeContext typeContext, Session session) {
+  static CustomTypeReference get(TypeElement typeElement, TypeContext typeContext, Session session) {
     return new CustomTypeReferenceBasedOnTypeElement(typeElement, typeContext, session);
   }
 
-  static CustomTypeReference of(DeclaredType declaredType, Session session) {
-    return of(declaredType, TypeContexts.empty(), session);
+  static CustomTypeReference get(DeclaredType declaredType, Session session) {
+    return get(declaredType, TypeContexts.empty(), session);
   }
 
-  static CustomTypeReference of(DeclaredType declaredType, TypeContext typeContext, Session session) {
+  static CustomTypeReference get(DeclaredType declaredType, TypeContext typeContext, Session session) {
     return new CustomTypeReferenceBasedOnDeclaredType(declaredType, typeContext, session);
-  }
-
-  static CustomTypeReference of(CustomType targetType) {
-    return of(targetType, List.of());
-  }
-
-  static CustomTypeReference of(CustomType customType, List<NotPrimitiveReference> typeArguments) {
-    return new CustomTypeReferenceImpl(customType, typeArguments);
   }
 }

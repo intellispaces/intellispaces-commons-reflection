@@ -8,7 +8,7 @@ import tech.intellispaces.javastatements.session.Session;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 
-public interface RecordStatements {
+public interface Records {
 
   static RecordType of(TypeElement typeElement, Session session) {
     return of(typeElement, TypeContexts.empty(), session);
@@ -20,7 +20,7 @@ public interface RecordStatements {
     return JavaModelFunctions.asCustomStatement(
         typeElement,
         ElementKind.RECORD,
-        RecordStatements::create,
+        Records::create,
         typeContext,
         session
     );

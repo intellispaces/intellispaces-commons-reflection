@@ -8,7 +8,7 @@ import tech.intellispaces.javastatements.session.Session;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 
-public interface EnumStatements {
+public interface Enums {
 
   static EnumType of(TypeElement typeElement, Session session) {
     return of(typeElement, TypeContexts.empty(), session);
@@ -18,7 +18,7 @@ public interface EnumStatements {
     return JavaModelFunctions.asCustomStatement(
         typeElement,
         ElementKind.ENUM,
-        EnumStatements::create,
+        Enums::create,
         typeContext,
         session
     );

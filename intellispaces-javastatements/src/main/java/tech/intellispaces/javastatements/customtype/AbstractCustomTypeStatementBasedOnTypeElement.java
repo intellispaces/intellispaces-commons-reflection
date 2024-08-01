@@ -163,11 +163,11 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   }
 
   @Override
-  public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypeReferences) {
+  public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes) {
     return declaredMethods().stream()
         .filter(m -> name.equals(m.name()))
-        .filter(m -> m.params().size() == parameterTypeReferences.size())
-        .filter(m -> TypeReferenceFunctions.isEqualTypes(m.parameterTypes(), parameterTypeReferences))
+        .filter(m -> m.params().size() == parameterTypes.size())
+        .filter(m -> TypeReferenceFunctions.isEqualTypes(m.parameterTypes(), parameterTypes))
         .findFirst();
   }
 
@@ -184,11 +184,11 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   }
 
   @Override
-  public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypeReferences) {
+  public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes) {
     return actualMethods().stream()
         .filter(m -> name.equals(m.name()))
-        .filter(m -> m.params().size() == parameterTypeReferences.size())
-        .filter(m -> TypeReferenceFunctions.isEqualTypes(m.parameterTypes(), parameterTypeReferences))
+        .filter(m -> m.params().size() == parameterTypes.size())
+        .filter(m -> TypeReferenceFunctions.isEqualTypes(m.parameterTypes(), parameterTypes))
         .findFirst();
   }
 

@@ -10,7 +10,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import java.util.Map;
 
-public interface ClassStatements {
+public interface Classes {
 
   static ClassType of(Class<?> aClass) {
     return new ClassTypeBasedOnLangClass(aClass);
@@ -24,7 +24,7 @@ public interface ClassStatements {
     return JavaModelFunctions.asCustomStatement(
         typeElement,
         ElementKind.CLASS,
-        ClassStatements::create,
+        Classes::create,
         typeContext,
         session
     );

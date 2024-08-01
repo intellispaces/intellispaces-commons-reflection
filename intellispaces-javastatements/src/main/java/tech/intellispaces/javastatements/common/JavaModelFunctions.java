@@ -9,16 +9,16 @@ import tech.intellispaces.javastatements.context.TypeContextBlank;
 import tech.intellispaces.javastatements.context.TypeContexts;
 import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
 import tech.intellispaces.javastatements.customtype.AnnotationStatements;
-import tech.intellispaces.javastatements.customtype.ClassStatements;
+import tech.intellispaces.javastatements.customtype.Classes;
 import tech.intellispaces.javastatements.customtype.CustomType;
-import tech.intellispaces.javastatements.customtype.EnumStatements;
-import tech.intellispaces.javastatements.customtype.InterfaceStatements;
-import tech.intellispaces.javastatements.customtype.RecordStatements;
+import tech.intellispaces.javastatements.customtype.Enums;
+import tech.intellispaces.javastatements.customtype.Interfaces;
+import tech.intellispaces.javastatements.customtype.Records;
 import tech.intellispaces.javastatements.exception.JavaStatementException;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.method.MethodFunctions;
 import tech.intellispaces.javastatements.method.MethodStatement;
-import tech.intellispaces.javastatements.method.MethodStatements;
+import tech.intellispaces.javastatements.method.Methods;
 import tech.intellispaces.javastatements.reference.ArrayTypeReferences;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.CustomTypeReferences;
@@ -26,8 +26,8 @@ import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NamedTypes;
 import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.reference.PrimitiveReferences;
-import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.reference.ReferenceBound;
+import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.reference.WildcardTypes;
 import tech.intellispaces.javastatements.session.Session;
 import tech.intellispaces.javastatements.session.Sessions;
@@ -116,7 +116,7 @@ public interface JavaModelFunctions {
         .addTypeParams(thisTypeParams)
         .get();
     return parentTypeMirrors.stream()
-        .map(parent -> CustomTypeReferences.of((DeclaredType) parent, newTypeContext, session))
+        .map(parent -> CustomTypeReferences.get((DeclaredType) parent, newTypeContext, session))
         .filter(ref -> !Object.class.getName().equals(ref.targetType().canonicalName()))
         .toList();
   }
@@ -168,7 +168,7 @@ public interface JavaModelFunctions {
     return typeElement.getEnclosedElements().stream()
         .filter(element -> element.getKind() == ElementKind.CONSTRUCTOR)
         .map(element -> (ExecutableElement) element)
-        .map(element -> MethodStatements.of(element, methodOwner, typeContext, session))
+        .map(element -> Methods.of(element, methodOwner, typeContext, session))
         .toList();
   }
 
@@ -178,7 +178,7 @@ public interface JavaModelFunctions {
     return typeElement.getEnclosedElements().stream()
         .filter(element -> element.getKind() == ElementKind.METHOD)
         .map(element -> (ExecutableElement) element)
-        .map(element -> MethodStatements.of(element, methodOwner, typeContext, session))
+        .map(element -> Methods.of(element, methodOwner, typeContext, session))
         .toList();
   }
 
@@ -187,7 +187,7 @@ public interface JavaModelFunctions {
   }
 
   static CustomTypeReference getTypeReference(DeclaredType declaredType, TypeContext typeContext, Session session) {
-    return CustomTypeReferences.of(declaredType, typeContext, session);
+    return CustomTypeReferences.get(declaredType, typeContext, session);
   }
 
   static TypeReference getTypeReference(TypeVariable typeVariable, TypeContext typeContext) {
@@ -277,7 +277,7 @@ public interface JavaModelFunctions {
       boundTypeReference = namedReference;
     } else if (bound.getKind() == TypeKind.DECLARED) {
       DeclaredType declaredType = (DeclaredType) bound;
-      CustomTypeReference customTypeReference = CustomTypeReferences.of(declaredType, typeContext, session);
+      CustomTypeReference customTypeReference = CustomTypeReferences.get(declaredType, typeContext, session);
       if (!Object.class.getName().equals(customTypeReference.targetType().canonicalName())) {
         boundTypeReference = customTypeReference;
       }
@@ -295,13 +295,13 @@ public interface JavaModelFunctions {
 
   static CustomType asCustomStatement(TypeElement typeElement, TypeContext typeContext, Session session) {
     if (typeElement.getKind() == ElementKind.CLASS) {
-      return ClassStatements.of(typeElement, typeContext, session);
+      return Classes.of(typeElement, typeContext, session);
     } else if (typeElement.getKind() == ElementKind.INTERFACE) {
-      return InterfaceStatements.of(typeElement, typeContext, session);
+      return Interfaces.of(typeElement, typeContext, session);
     } else if (typeElement.getKind() == ElementKind.RECORD) {
-      return RecordStatements.of(typeElement, typeContext, session);
+      return Records.of(typeElement, typeContext, session);
     } else if (typeElement.getKind() == ElementKind.ENUM) {
-      return EnumStatements.of(typeElement, typeContext, session);
+      return Enums.of(typeElement, typeContext, session);
     } else if (typeElement.getKind() == ElementKind.ANNOTATION_TYPE) {
       return AnnotationStatements.of(typeElement, typeContext, session);
     } else {

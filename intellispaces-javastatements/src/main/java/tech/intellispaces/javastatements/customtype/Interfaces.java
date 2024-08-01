@@ -10,7 +10,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import java.util.Map;
 
-public interface InterfaceStatements {
+public interface Interfaces {
 
   static InterfaceType of(Class<?> aClass) {
     return new InterfaceTypeBasedOnLangClass(aClass);
@@ -24,21 +24,25 @@ public interface InterfaceStatements {
     return JavaModelFunctions.asCustomStatement(
         typeElement,
         ElementKind.INTERFACE,
-        InterfaceStatements::create,
+        Interfaces::create,
         typeContext,
         session
     );
-  }
-
-  static InterfaceType effectiveOf(
-      InterfaceType actualType, Map<String, NotPrimitiveReference> typeMapping
-  ) {
-    return new EffectiveInterfaceType(actualType, typeMapping);
   }
 
   private static InterfaceType create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
     return new InterfaceStatementBasedOnTypeElement(typeElement, typeContext, session);
+  }
+
+  static InterfaceBuilderBasedOnPrototype build(InterfaceType prototype) {
+    return new InterfaceBuilderBasedOnPrototype(prototype);
+  }
+
+  static InterfaceType effectiveOf(
+      InterfaceType actualType, Map<String, NotPrimitiveReference> typeMapping
+  ) {
+    return new EffectiveInterfaceType(actualType, typeMapping);
   }
 }

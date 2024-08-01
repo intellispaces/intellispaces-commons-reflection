@@ -3,16 +3,16 @@ package tech.intellispaces.javastatements;
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.customtype.AnnotationStatements;
 import tech.intellispaces.javastatements.customtype.AnnotationType;
-import tech.intellispaces.javastatements.customtype.ClassStatements;
 import tech.intellispaces.javastatements.customtype.ClassType;
+import tech.intellispaces.javastatements.customtype.Classes;
 import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.customtype.CustomTypes;
-import tech.intellispaces.javastatements.customtype.EnumStatements;
 import tech.intellispaces.javastatements.customtype.EnumType;
-import tech.intellispaces.javastatements.customtype.InterfaceStatements;
+import tech.intellispaces.javastatements.customtype.Enums;
 import tech.intellispaces.javastatements.customtype.InterfaceType;
-import tech.intellispaces.javastatements.customtype.RecordStatements;
+import tech.intellispaces.javastatements.customtype.Interfaces;
 import tech.intellispaces.javastatements.customtype.RecordType;
+import tech.intellispaces.javastatements.customtype.Records;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.CustomTypeReferences;
 import tech.intellispaces.javastatements.session.Session;
@@ -44,35 +44,35 @@ public interface JavaStatements {
   }
 
   static ClassType classStatement(TypeElement typeElement) {
-    return ClassStatements.of(typeElement, Sessions.get());
+    return Classes.of(typeElement, Sessions.get());
   }
 
   static ClassType classStatement(TypeElement typeElement, Session session) {
-    return ClassStatements.of(typeElement, session);
+    return Classes.of(typeElement, session);
   }
 
   static InterfaceType interfaceStatement(TypeElement typeElement) {
-    return InterfaceStatements.of(typeElement, Sessions.get());
+    return Interfaces.of(typeElement, Sessions.get());
   }
 
   static InterfaceType interfaceStatement(TypeElement typeElement, Session session) {
-    return InterfaceStatements.of(typeElement, session);
+    return Interfaces.of(typeElement, session);
   }
 
   static RecordType recordStatement(TypeElement typeElement) {
-    return RecordStatements.of(typeElement, Sessions.get());
+    return Records.of(typeElement, Sessions.get());
   }
 
   static RecordType recordStatement(TypeElement typeElement, Session session) {
-    return RecordStatements.of(typeElement, session);
+    return Records.of(typeElement, session);
   }
 
   static EnumType enumStatement(TypeElement typeElement) {
-    return EnumStatements.of(typeElement, Sessions.get());
+    return Enums.of(typeElement, Sessions.get());
   }
 
   static EnumType enumStatement(TypeElement typeElement, Session session) {
-    return EnumStatements.of(typeElement, session);
+    return Enums.of(typeElement, session);
   }
 
   static AnnotationType annotationStatement(TypeElement typeElement) {
@@ -84,22 +84,22 @@ public interface JavaStatements {
   }
 
   static CustomTypeReference customTypeReference(Class<?> aClass) {
-    return CustomTypeReferences.of(aClass);
+    return CustomTypeReferences.get(aClass);
   }
 
   static CustomTypeReference customTypeReference(TypeElement typeElement) {
-    return CustomTypeReferences.of(typeElement, Sessions.get());
+    return CustomTypeReferences.get(typeElement, Sessions.get());
   }
 
   static CustomTypeReference customTypeReference(TypeElement typeElement, Session session) {
-    return CustomTypeReferences.of(typeElement, session);
+    return CustomTypeReferences.get(typeElement, session);
   }
 
   static CustomTypeReference customTypeReference(DeclaredType declaredType) {
-    return CustomTypeReferences.of(declaredType, Sessions.get());
+    return CustomTypeReferences.get(declaredType, Sessions.get());
   }
 
   static CustomTypeReference customTypeReference(DeclaredType declaredType, Session session) {
-    return CustomTypeReferences.of(declaredType, session);
+    return CustomTypeReferences.get(declaredType, session);
   }
 }

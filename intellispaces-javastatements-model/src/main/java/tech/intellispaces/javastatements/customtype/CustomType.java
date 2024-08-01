@@ -81,7 +81,7 @@ public interface CustomType extends AnnotatedStatement {
 
   List<MethodStatement> declaredMethodsWithName(String name);
 
-  Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypeReferences);
+  Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes);
 
   /**
    * Actual methods.
@@ -90,13 +90,20 @@ public interface CustomType extends AnnotatedStatement {
 
   List<MethodStatement> actualMethodsWithName(String name);
 
-  Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypeReferences);
+  Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes);
 
   /**
    * Related class.
    */
   default Optional<ClassType> asClass() {
     return Optional.empty();
+  }
+
+  /**
+   * Related class.
+   */
+  default ClassType asClassOrElseThrow() {
+    return asClass().orElseThrow();
   }
 
   /**
@@ -107,10 +114,24 @@ public interface CustomType extends AnnotatedStatement {
   }
 
   /**
+   * Related interface.
+   */
+  default InterfaceType asInterfaceOrElseThrow() {
+    return asInterface().orElseThrow();
+  }
+
+  /**
    * Related record.
    */
   default Optional<RecordType> asRecord() {
     return Optional.empty();
+  }
+
+  /**
+   * Related record.
+   */
+  default RecordType asRecordOrElseThrow() {
+    return asRecord().orElseThrow();
   }
 
   /**
@@ -121,10 +142,24 @@ public interface CustomType extends AnnotatedStatement {
   }
 
   /**
+   * Related enum.
+   */
+  default EnumType asEnumOrElseThrow() {
+    return asEnum().orElseThrow();
+  }
+
+  /**
    * Related annotation.
    */
   default Optional<AnnotationType> asAnnotation() {
     return Optional.empty();
+  }
+
+  /**
+   * Related annotation.
+   */
+  default AnnotationType asAnnotationOrElseThrow() {
+    return asAnnotation().orElseThrow();
   }
 
   Collection<CustomType> dependencies();

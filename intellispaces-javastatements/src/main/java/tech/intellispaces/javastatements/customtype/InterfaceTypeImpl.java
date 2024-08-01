@@ -2,106 +2,152 @@ package tech.intellispaces.javastatements.customtype;
 
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.Getter;
+import tech.intellispaces.commons.type.TypeFunctions;
+import tech.intellispaces.javastatements.StatementType;
+import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.common.DependenciesFunctions;
+import tech.intellispaces.javastatements.context.TypeContexts;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.method.MethodStatement;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
-import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 import tech.intellispaces.javastatements.reference.TypeReferenceFunctions;
+import tech.intellispaces.javastatements.session.Sessions;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-abstract class AbstractEffectiveCustomType implements CustomType {
-  protected final CustomType actualType;
-  protected final Map<String, NotPrimitiveReference> typeMapping;
+class InterfaceTypeImpl implements InterfaceType {
+  private String canonicalName;
+  private List<AnnotationInstance> annotations;
+  private List<NamedReference> typeParameters;
+  private List<CustomTypeReference> parentTypes;
+  private List<MethodStatement> declaredMethods;
+  private final Getter<String> typeParametersFullDeclarationGetter;
+  private final Getter<String> typeParametersBriefDeclarationGetter;
+  private final Getter<List<MethodStatement>> actualMethodsGetter;
   private final Getter<Collection<CustomType>> dependenciesGetter;
   private final Getter<Collection<String>> dependencyTypesGetter;
 
-  AbstractEffectiveCustomType(CustomType actualType, Map<String, NotPrimitiveReference> typeMapping) {
-    this.actualType = actualType;
-    this.typeMapping = typeMapping;
+  InterfaceTypeImpl() {
+    this.typeParametersFullDeclarationGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
+    this.typeParametersBriefDeclarationGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
+    this.actualMethodsGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get());
     this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);
-    this.dependencyTypesGetter = Actions.cachedLazyGetter(AbstractEffectiveCustomType::collectDependencyTypenames, this);
+    this.dependencyTypesGetter = Actions.cachedLazyGetter(InterfaceTypeImpl::collectDependencyTypenames, this);
+  }
+
+  InterfaceTypeImpl(
+      String canonicalName,
+      List<AnnotationInstance> annotations,
+      List<NamedReference> typeParameters,
+      List<CustomTypeReference> parentTypes,
+      List<MethodStatement> declaredMethods
+  ) {
+    this();
+    this.canonicalName = canonicalName;
+    this.annotations = annotations;
+    this.typeParameters = typeParameters;
+    this.parentTypes = parentTypes;
+    this.declaredMethods = declaredMethods;
+  }
+
+  void setCanonicalName(String canonicalName) {
+    this.canonicalName = canonicalName;
+  }
+
+  void setAnnotations(List<AnnotationInstance> annotations) {
+    this.annotations = annotations;
+  }
+
+  void setTypeParameters(List<NamedReference> typeParameters) {
+    this.typeParameters = typeParameters;
+  }
+
+  void setParentTypes(List<CustomTypeReference> parentTypes) {
+    this.parentTypes = parentTypes;
+  }
+
+  void setDeclaredMethods(List<MethodStatement> declaredMethods) {
+    this.declaredMethods = declaredMethods;
   }
 
   @Override
-  public List<AnnotationInstance> annotations() {
-    return actualType.annotations();
-  }
-
-  @Override
-  public Optional<AnnotationInstance> selectAnnotation(String annotationClass) {
-    return actualType.selectAnnotation(annotationClass);
-  }
-
-  @Override
-  public <A extends Annotation> Optional<A> selectAnnotation(Class<A> annotationClass) {
-    return actualType.selectAnnotation(annotationClass);
-  }
-
-  @Override
-  public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
-    return actualType.hasAnnotation(annotationClass);
+  public StatementType statementType() {
+    return StatementTypes.Interface;
   }
 
   @Override
   public boolean isAbstract() {
-    return actualType.isAbstract();
+    return true;
   }
-
   @Override
   public String canonicalName() {
-    return actualType.canonicalName();
+    return canonicalName;
   }
 
   @Override
   public String className() {
-    return actualType.className();
+    return canonicalName;
   }
 
   @Override
   public String simpleName() {
-    return actualType.simpleName();
+    return TypeFunctions.getSimpleName(canonicalName());
   }
 
   @Override
   public String packageName() {
-    return actualType.packageName();
+    return TypeFunctions.getPackageName(canonicalName());
   }
 
   @Override
   public boolean isNested() {
-    return actualType.isNested();
+    return false;
+  }
+
+  @Override
+  public List<AnnotationInstance> annotations() {
+    return annotations;
+  }
+
+  @Override
+  public Optional<AnnotationInstance> selectAnnotation(String annotationClass) {
+    return AnnotationFunctions.selectAnnotation(this, annotationClass);
+  }
+
+  @Override
+  public <A extends Annotation> Optional<A> selectAnnotation(Class<A> annotationClass) {
+    return AnnotationFunctions.selectAnnotation(this, annotationClass);
+  }
+
+  @Override
+  public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
+    return AnnotationFunctions.hasAnnotation(this, annotationClass);
   }
 
   @Override
   public List<NamedReference> typeParameters() {
-    return actualType.typeParameters();
+    return typeParameters;
   }
 
   @Override
   public String typeParametersFullDeclaration() {
-    return actualType.typeParametersFullDeclaration();
+    return typeParametersFullDeclarationGetter.get();
   }
 
   @Override
   public String typeParametersBriefDeclaration() {
-    return actualType.typeParametersBriefDeclaration();
+    return typeParametersBriefDeclarationGetter.get();
   }
 
   @Override
   public List<CustomTypeReference> parentTypes() {
-    List<CustomTypeReference> actualParentTypes = actualType.parentTypes();
-    return actualParentTypes.stream()
-        .map(p -> (CustomTypeReference) p.specify(typeMapping))
-        .toList();
+    return parentTypes;
   }
 
   @Override
@@ -121,10 +167,7 @@ abstract class AbstractEffectiveCustomType implements CustomType {
 
   @Override
   public List<MethodStatement> declaredMethods() {
-    List<MethodStatement> actualMethods = actualType.declaredMethods();
-    return actualMethods.stream()
-        .map(m -> m.specify(typeMapping))
-        .toList();
+    return declaredMethods;
   }
 
   @Override
@@ -145,10 +188,7 @@ abstract class AbstractEffectiveCustomType implements CustomType {
 
   @Override
   public List<MethodStatement> actualMethods() {
-    List<MethodStatement> actualMethods = actualType.actualMethods();
-    return actualMethods.stream()
-        .map(m -> m.specify(typeMapping))
-        .toList();
+    return actualMethodsGetter.get();
   }
 
   @Override
