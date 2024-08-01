@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   private final MethodStatement prototype;
   private String methodName;
+  private String returnTypeString;
+  private TypeReference returnTypeReference;
   private boolean includeMethodTypeParams;
   private boolean includeOwnerTypeParams ;
   private List<String> additionalParams;
@@ -29,6 +31,16 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
 
   public MethodSignatureDeclarationBuilderBasedOnMethodPrototype methodName(String name) {
     this.methodName = name;
+    return this;
+  }
+
+  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype returnType(String returnType) {
+    this.returnTypeString = returnType;
+    return this;
+  }
+
+  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype returnType(TypeReference returnType) {
+    this.returnTypeReference = returnType;
     return this;
   }
 
@@ -99,9 +111,16 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Consumer<String> importConsumer,
       Function<String, String> canonicalToSimpleNameMapper
   ) {
-    TypeReference returnTypeReference = prototype.returnType().orElseThrow();
-    returnTypeReference.dependencyTypenames().forEach(importConsumer);
-    sb.append(returnTypeReference.actualDeclaration(canonicalToSimpleNameMapper));
+    if (returnTypeString != null) {
+      sb.append(returnTypeString);
+    } else if (returnTypeReference != null) {
+      returnTypeReference.dependencyTypenames().forEach(importConsumer);
+      sb.append(returnTypeReference.actualDeclaration(canonicalToSimpleNameMapper));
+    } else {
+      TypeReference returnTypeReference = prototype.returnType().orElseThrow();
+      returnTypeReference.dependencyTypenames().forEach(importConsumer);
+      sb.append(returnTypeReference.actualDeclaration(canonicalToSimpleNameMapper));
+    }
   }
 
   private void appendMethodParams(
