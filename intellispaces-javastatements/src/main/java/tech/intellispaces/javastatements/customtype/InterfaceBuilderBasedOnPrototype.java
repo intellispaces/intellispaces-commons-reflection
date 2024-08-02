@@ -32,13 +32,18 @@ public class InterfaceBuilderBasedOnPrototype {
     return this;
   }
 
+  public InterfaceBuilderBasedOnPrototype addDeclaredMethod(CustomType owner, MethodSignature signature) {
+    declaredMethods.add(Methods.get(owner, signature));
+    return this;
+  }
+
   public InterfaceBuilderBasedOnPrototype addDeclaredMethod(MethodSignature signature) {
-    declaredMethods.add(Methods.get(resultInterface, signature));
+    addDeclaredMethod(resultInterface, signature);
     return this;
   }
 
   public InterfaceBuilderBasedOnPrototype addDeclaredMethod(MethodStatement method) {
-    addDeclaredMethod(method.signature());
+    addDeclaredMethod(method.owner(), method.signature());
     return this;
   }
 
