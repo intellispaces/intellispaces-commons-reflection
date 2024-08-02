@@ -8,18 +8,18 @@ import tech.intellispaces.javastatements.session.Session;
 import javax.lang.model.element.TypeElement;
 
 /**
- * Adapter of {@link TypeElement} to {@link AnnotationType}.
+ * Adapter of {@link TypeElement} to {@link InterfaceType}.
  */
-class AnnotationStatementBasedOnTypeElement
+class InterfaceBasedOnTypeElement
     extends AbstractCustomTypeStatementBasedOnTypeElement
-    implements AnnotationType
+    implements InterfaceType
 {
-  AnnotationStatementBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
+  InterfaceBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super(typeElement, typeContext, session);
   }
 
   @Override
   public StatementType statementType() {
-    return StatementTypes.Annotation;
+    return StatementTypes.Interface;
   }
 }

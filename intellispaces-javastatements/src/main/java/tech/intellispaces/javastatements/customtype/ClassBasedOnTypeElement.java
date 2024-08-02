@@ -17,12 +17,12 @@ import java.util.Optional;
 /**
  * Adapter of {@link TypeElement} to {@link ClassType}.
  */
-class ClassStatementBasedOnTypeElement extends AbstractCustomTypeStatementBasedOnTypeElement implements ClassType {
+class ClassBasedOnTypeElement extends AbstractCustomTypeStatementBasedOnTypeElement implements ClassType {
   private final Getter<List<MethodStatement>> constructorGetter;
   private final Getter<Optional<CustomTypeReference>> extendedClassGetter;
   private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
 
-  ClassStatementBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
+  ClassBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super(typeElement, typeContext, session);
     this.constructorGetter = Actions.cachedLazyGetter(JavaModelFunctions::getConstructors, typeElement, this, customTypeContext(), session);
     this.extendedClassGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);

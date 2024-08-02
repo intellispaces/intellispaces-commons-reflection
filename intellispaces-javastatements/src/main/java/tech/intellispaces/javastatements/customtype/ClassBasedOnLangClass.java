@@ -12,9 +12,9 @@ import java.util.Optional;
 /**
  * Adapter of {@link Class} to {@link ClassType}.
  */
-class ClassTypeBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements ClassType {
+class ClassBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements ClassType {
 
-  ClassTypeBasedOnLangClass(Class<?> aClass) {
+  ClassBasedOnLangClass(Class<?> aClass) {
     super(aClass);
   }
 

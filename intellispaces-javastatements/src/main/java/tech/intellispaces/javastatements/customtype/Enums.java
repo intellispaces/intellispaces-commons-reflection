@@ -27,6 +27,6 @@ public interface Enums {
   private static EnumType create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return new EnumStatementBasedOnTypeElement(typeElement, typeContext, session);
+    return new EnumBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

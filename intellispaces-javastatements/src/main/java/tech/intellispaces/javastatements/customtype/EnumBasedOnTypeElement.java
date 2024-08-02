@@ -12,22 +12,25 @@ import javax.lang.model.element.TypeElement;
 import java.util.List;
 
 /**
- * Adapter of {@link TypeElement} to {@link RecordType}.
+ * Adapter of {@link TypeElement} to {@link EnumType}.
  */
-class RecordStatementBasedOnTypeElement
+class EnumBasedOnTypeElement
     extends AbstractCustomTypeStatementBasedOnTypeElement
-    implements RecordType
+    implements EnumType
 {
   private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
 
-  RecordStatementBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
+  EnumBasedOnTypeElement(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
     super(typeElement, typeContext, session);
-    this.implementedInterfacesGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getImplementedInterfaces, this);
+    this.implementedInterfacesGetter = Actions.cachedLazyGetter(
+        CustomTypeFunctions::getImplementedInterfaces, this);
   }
 
   @Override
   public StatementType statementType() {
-    return StatementTypes.Record;
+    return StatementTypes.Enum;
   }
 
   @Override

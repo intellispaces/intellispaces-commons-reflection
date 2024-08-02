@@ -29,6 +29,6 @@ public interface Records {
   private static RecordType create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return new RecordStatementBasedOnTypeElement(typeElement, typeContext, session);
+    return new RecordBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

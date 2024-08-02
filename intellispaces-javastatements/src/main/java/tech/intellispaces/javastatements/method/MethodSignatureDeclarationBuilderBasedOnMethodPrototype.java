@@ -20,6 +20,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   private boolean includeMethodTypeParams;
   private boolean includeOwnerTypeParams ;
   private List<String> additionalParams;
+  private Function<TypeReference, TypeReference> paramsMapper;
 
   MethodSignatureDeclarationBuilderBasedOnMethodPrototype(MethodStatement prototype) {
     this.prototype = prototype;
@@ -65,6 +66,13 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       this.additionalParams = new ArrayList<>();
     }
     this.additionalParams.addAll(additionalParam);
+    return this;
+  }
+
+  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype paramsMapper(
+      Function<TypeReference, TypeReference> paramsMapper
+  ) {
+    this.paramsMapper = paramsMapper;
     return this;
   }
 
@@ -137,8 +145,9 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
     }
     for (MethodParam param : prototype.params()) {
       commaAppender.execute();
-      param.type().dependencyTypenames().forEach(importConsumer);
-      sb.append(param.type().actualDeclaration(canonicalToSimpleNameMapper));
+      TypeReference paramType = paramsMapper != null ? paramsMapper.apply(param.type()) : param.type();
+      paramType.dependencyTypenames().forEach(importConsumer);
+      sb.append(paramType.actualDeclaration(canonicalToSimpleNameMapper));
       sb.append(" ");
       sb.append(param.name());
     }

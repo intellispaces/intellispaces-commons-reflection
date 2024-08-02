@@ -27,6 +27,6 @@ public interface AnnotationStatements {
   private static AnnotationType create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return new AnnotationStatementBasedOnTypeElement(typeElement, typeContext, session);
+    return new AnnotationBasedOnTypeElement(typeElement, typeContext, session);
   }
 }

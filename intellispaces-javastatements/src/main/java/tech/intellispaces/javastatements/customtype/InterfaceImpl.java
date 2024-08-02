@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-class InterfaceTypeImpl implements InterfaceType {
+class InterfaceImpl implements InterfaceType {
   private String canonicalName;
   private List<AnnotationInstance> annotations;
   private List<NamedReference> typeParameters;
@@ -33,15 +33,15 @@ class InterfaceTypeImpl implements InterfaceType {
   private final Getter<Collection<CustomType>> dependenciesGetter;
   private final Getter<Collection<String>> dependencyTypesGetter;
 
-  InterfaceTypeImpl() {
+  InterfaceImpl() {
     this.typeParametersFullDeclarationGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
     this.typeParametersBriefDeclarationGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
     this.actualMethodsGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get());
     this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);
-    this.dependencyTypesGetter = Actions.cachedLazyGetter(InterfaceTypeImpl::collectDependencyTypenames, this);
+    this.dependencyTypesGetter = Actions.cachedLazyGetter(InterfaceImpl::collectDependencyTypenames, this);
   }
 
-  InterfaceTypeImpl(
+  InterfaceImpl(
       String canonicalName,
       List<AnnotationInstance> annotations,
       List<NamedReference> typeParameters,

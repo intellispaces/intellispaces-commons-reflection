@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InterfaceBuilderBasedOnPrototype {
-  private final String canonicalName;
+  private String canonicalName;
   private List<AnnotationInstance> annotations;
   private List<NamedReference> typeParameters;
   private List<CustomTypeReference> extendedInterfaces;
   private List<MethodStatement> declaredMethods;
-  private InterfaceTypeImpl resultInterface;
+  private InterfaceImpl resultInterface;
 
   InterfaceBuilderBasedOnPrototype(InterfaceType prototype) {
-    this.resultInterface = new InterfaceTypeImpl();
+    this.resultInterface = new InterfaceImpl();
     this.canonicalName = prototype.canonicalName();
     this.annotations = new ArrayList<>(prototype.annotations());
     this.typeParameters = new ArrayList<>(prototype.typeParameters());
@@ -27,7 +27,12 @@ public class InterfaceBuilderBasedOnPrototype {
     this.declaredMethods = new ArrayList<>(prototype.declaredMethods());
   }
 
-  public InterfaceBuilderBasedOnPrototype setExtendedInterfaces(List<CustomTypeReference> extendedInterfaces) {
+  public InterfaceBuilderBasedOnPrototype canonicalName(String canonicalName) {
+    this.canonicalName = canonicalName;
+    return this;
+  }
+
+  public InterfaceBuilderBasedOnPrototype extendedInterfaces(List<CustomTypeReference> extendedInterfaces) {
     this.extendedInterfaces = extendedInterfaces;
     return this;
   }

@@ -13,7 +13,7 @@ import java.util.Map;
 public interface Interfaces {
 
   static InterfaceType of(Class<?> aClass) {
-    return new InterfaceTypeBasedOnLangClass(aClass);
+    return new InterfaceBasedOnLangClass(aClass);
   }
 
   static InterfaceType of(TypeElement typeElement, Session session) {
@@ -33,7 +33,7 @@ public interface Interfaces {
   private static InterfaceType create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return new InterfaceStatementBasedOnTypeElement(typeElement, typeContext, session);
+    return new InterfaceBasedOnTypeElement(typeElement, typeContext, session);
   }
 
   static InterfaceBuilderBasedOnPrototype build(InterfaceType prototype) {

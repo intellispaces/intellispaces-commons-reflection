@@ -13,7 +13,7 @@ import java.util.Map;
 public interface Classes {
 
   static ClassType of(Class<?> aClass) {
-    return new ClassTypeBasedOnLangClass(aClass);
+    return new ClassBasedOnLangClass(aClass);
   }
 
   static ClassType of(TypeElement typeElement, Session session) {
@@ -39,6 +39,6 @@ public interface Classes {
   private static ClassType create(
       TypeElement typeElement, TypeContext typeContext, Session session
   ) {
-    return new ClassStatementBasedOnTypeElement(typeElement, typeContext, session);
+    return new ClassBasedOnTypeElement(typeElement, typeContext, session);
   }
 }
