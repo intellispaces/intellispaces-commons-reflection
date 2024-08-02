@@ -20,7 +20,8 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   private boolean includeMethodTypeParams;
   private boolean includeOwnerTypeParams ;
   private List<String> additionalParams;
-  private Function<TypeReference, TypeReference> paramsMapper;
+  private Function<TypeReference, TypeReference> paramMapper;
+  private Function<TypeReference, String> paramDeclarationMapper;
 
   MethodSignatureDeclarationBuilderBasedOnMethodPrototype(MethodStatement prototype) {
     this.prototype = prototype;
@@ -69,10 +70,17 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
     return this;
   }
 
-  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype paramsMapper(
-      Function<TypeReference, TypeReference> paramsMapper
+  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype paramMapper(
+      Function<TypeReference, TypeReference> paramMapper
   ) {
-    this.paramsMapper = paramsMapper;
+    this.paramMapper = paramMapper;
+    return this;
+  }
+
+  public MethodSignatureDeclarationBuilderBasedOnMethodPrototype paramDeclarationMapper(
+      Function<TypeReference, String> paramDeclarationMapper
+  ) {
+    this.paramDeclarationMapper = paramDeclarationMapper;
     return this;
   }
 
@@ -145,9 +153,16 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
     }
     for (MethodParam param : prototype.params()) {
       commaAppender.execute();
-      TypeReference paramType = paramsMapper != null ? paramsMapper.apply(param.type()) : param.type();
-      paramType.dependencyTypenames().forEach(importConsumer);
-      sb.append(paramType.actualDeclaration(canonicalToSimpleNameMapper));
+      if (paramDeclarationMapper != null) {
+        sb.append(paramDeclarationMapper.apply(param.type()));
+      } else if (paramMapper != null) {
+        TypeReference paramType = paramMapper.apply(param.type());
+        paramType.dependencyTypenames().forEach(importConsumer);
+        sb.append(paramType.actualDeclaration(canonicalToSimpleNameMapper));
+      } else {
+        param.type().dependencyTypenames().forEach(importConsumer);
+        sb.append(param.type().actualDeclaration(canonicalToSimpleNameMapper));
+      }
       sb.append(" ");
       sb.append(param.name());
     }
