@@ -27,7 +27,7 @@ public interface CustomTypeReference extends NotPrimitiveReference, ReferenceBou
    */
   List<NotPrimitiveReference> typeArguments();
 
-  CustomType effectiveStatement();
+  CustomType effectiveTargetType();
 
   Map<String, NotPrimitiveReference> typeArgumentMapping();
 

@@ -19,7 +19,7 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
   }
 
   @Override
-  public CustomType effectiveStatement() {
+  public CustomType effectiveTargetType() {
     Map<String, NotPrimitiveReference> typeMapping = typeArgumentMapping();
     CustomType type = targetType();
     if (type.statementType() == StatementTypes.Class) {

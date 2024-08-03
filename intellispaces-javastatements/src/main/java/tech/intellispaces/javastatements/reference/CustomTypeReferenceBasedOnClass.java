@@ -44,7 +44,7 @@ class CustomTypeReferenceBasedOnClass extends AbstractTypeReference implements C
   }
 
   @Override
-  public CustomType effectiveStatement() {
+  public CustomType effectiveTargetType() {
     return baseType;
   }
 
