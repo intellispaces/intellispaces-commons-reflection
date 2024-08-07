@@ -1,7 +1,7 @@
 package tech.intellispaces.javastatements.customtype;
 
 import tech.intellispaces.actions.Actions;
-import tech.intellispaces.actions.Getter;
+import tech.intellispaces.actions.getter.Getter;
 import tech.intellispaces.javastatements.common.DependenciesFunctions;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.method.MethodStatement;

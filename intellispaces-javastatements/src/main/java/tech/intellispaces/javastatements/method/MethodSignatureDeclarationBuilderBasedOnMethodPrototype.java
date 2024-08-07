@@ -1,6 +1,6 @@
 package tech.intellispaces.javastatements.method;
 
-import tech.intellispaces.actions.Executor;
+import tech.intellispaces.actions.executor.Executor;
 import tech.intellispaces.actions.string.StringActions;
 import tech.intellispaces.commons.function.Consumers;
 import tech.intellispaces.javastatements.reference.NamedReference;

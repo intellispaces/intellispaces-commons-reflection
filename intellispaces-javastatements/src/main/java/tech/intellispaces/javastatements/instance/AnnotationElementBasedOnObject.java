@@ -1,7 +1,7 @@
 package tech.intellispaces.javastatements.instance;
 
 import tech.intellispaces.actions.Actions;
-import tech.intellispaces.actions.Getter;
+import tech.intellispaces.actions.getter.Getter;
 import tech.intellispaces.javastatements.session.Session;
 
 /**

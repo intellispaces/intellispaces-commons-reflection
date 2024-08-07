@@ -1,7 +1,7 @@
 package tech.intellispaces.javastatements.reference;
 
 import tech.intellispaces.actions.Actions;
-import tech.intellispaces.actions.Getter;
+import tech.intellispaces.actions.getter.Getter;
 import tech.intellispaces.commons.type.TypeFunctions;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
