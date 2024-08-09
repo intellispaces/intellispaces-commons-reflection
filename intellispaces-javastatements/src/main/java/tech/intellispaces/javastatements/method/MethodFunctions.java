@@ -41,10 +41,6 @@ public interface MethodFunctions {
     return new MethodSignatureBasedOnExecutableElement(executableElement, typeContext, session);
   }
 
-  static MethodSignature getMethodSignature(Method method) {
-    return new MethodSignatureBasedOnLangMethod(method);
-  }
-
   static MethodParam getMethodParam(Parameter parameter) {
     List<AnnotationInstance> annotations = Arrays.stream(parameter.getAnnotations())
         .map(InstanceFunctions::getAnnotationInstance)
@@ -97,6 +93,15 @@ public interface MethodFunctions {
     return executableElement.getThrownTypes().stream()
         .map(type -> (ThrowableReference) JavaModelFunctions.getTypeReference(type, typeContext, session))
         .collect(Collectors.toList());
+  }
+
+  static Optional<MethodStatement> getOverrideMethod(CustomType type, MethodStatement method) {
+    for (MethodStatement declaredMethod : type.declaredMethods()) {
+      if (isEquivalentMethods(declaredMethod, method)) {
+        return Optional.of(declaredMethod);
+      }
+    }
+    return Optional.empty();
   }
 
   static List<MethodStatement> getOverrideMethods(MethodStatement method) {

@@ -8,8 +8,8 @@ import java.lang.reflect.Method;
 
 public interface MethodSignatures {
 
-  static MethodSignature of(Method method) {
-    return MethodFunctions.getMethodSignature(method);
+  static MethodSignature get(Method method) {
+    return new MethodSignatureBasedOnLangMethod(method);
   }
 
   static MethodSignature of(

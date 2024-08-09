@@ -19,7 +19,7 @@ class MethodStatementBasedOnLangMethod implements MethodStatement {
   private final Getter<List<MethodStatement>> overrideMethodsGetter;
 
   MethodStatementBasedOnLangMethod(Method method) {
-    this.signatureGetter = Actions.cachedLazyGetter(MethodSignatures::of, method);
+    this.signatureGetter = Actions.cachedLazyGetter(MethodSignatures::get, method);
     this.overrideMethodsGetter = Actions.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
   }
 
