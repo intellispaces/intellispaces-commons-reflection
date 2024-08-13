@@ -154,8 +154,4 @@ public interface InstanceFunctions {
   static AnnotationInstance getAnnotationInstance(AnnotationMirror annotationMirror, Session session) {
     return new AnnotationInstanceBasedOnAnnotationMirror(annotationMirror, session);
   }
-
-  static AnnotationInstance getAnnotationInstance(Annotation annotation) {
-    return new AnnotationInstanceBasedOnLangAnnotation(annotation);
-  }
 }

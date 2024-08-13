@@ -5,8 +5,8 @@ import tech.intellispaces.actions.getter.Getter;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
-import tech.intellispaces.javastatements.customtype.AnnotationStatements;
 import tech.intellispaces.javastatements.customtype.AnnotationType;
+import tech.intellispaces.javastatements.customtype.Annotations;
 import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.AnnotationMirror;
@@ -27,7 +27,7 @@ class AnnotationInstanceBasedOnAnnotationMirror implements AnnotationInstance {
 
   AnnotationInstanceBasedOnAnnotationMirror(AnnotationMirror annotationMirror, Session session) {
     this.annotationStatementGetter = Actions.cachedLazyGetter(annMirror ->
-        AnnotationStatements.of((TypeElement) annMirror.getAnnotationType().asElement(), session), annotationMirror);
+        Annotations.of((TypeElement) annMirror.getAnnotationType().asElement(), session), annotationMirror);
     this.elementsGetter = Actions.cachedLazyGetter(annMirror ->
         AnnotationFunctions.getAnnotationElements(annMirror, session).stream()
             .collect(Collectors.toMap(AnnotationElement::name, Function.identity())), annotationMirror

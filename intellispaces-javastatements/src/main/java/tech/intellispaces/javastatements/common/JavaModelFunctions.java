@@ -8,7 +8,7 @@ import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.context.TypeContextBlank;
 import tech.intellispaces.javastatements.context.TypeContexts;
 import tech.intellispaces.javastatements.customtype.AnnotationFunctions;
-import tech.intellispaces.javastatements.customtype.AnnotationStatements;
+import tech.intellispaces.javastatements.customtype.Annotations;
 import tech.intellispaces.javastatements.customtype.Classes;
 import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.customtype.Enums;
@@ -303,7 +303,7 @@ public interface JavaModelFunctions {
     } else if (typeElement.getKind() == ElementKind.ENUM) {
       return Enums.of(typeElement, typeContext, session);
     } else if (typeElement.getKind() == ElementKind.ANNOTATION_TYPE) {
-      return AnnotationStatements.of(typeElement, typeContext, session);
+      return Annotations.of(typeElement, typeContext, session);
     } else {
       throw JavaStatementException.withMessage("Type element of kind can't be represented as custom type statement {}",
           typeElement.getKind());

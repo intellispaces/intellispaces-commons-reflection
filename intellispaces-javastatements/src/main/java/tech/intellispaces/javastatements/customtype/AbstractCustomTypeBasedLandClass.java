@@ -3,11 +3,13 @@ package tech.intellispaces.javastatements.customtype;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
 import tech.intellispaces.javastatements.method.MethodFunctions;
 import tech.intellispaces.javastatements.method.MethodStatement;
+import tech.intellispaces.javastatements.method.Methods;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -95,7 +97,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public <A extends Annotation> Optional<A> selectAnnotation(Class<A> annotationClass) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    return Optional.ofNullable(aClass.getAnnotation(annotationClass));
   }
 
   @Override
@@ -117,7 +119,15 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    var paramClasses = (Class<?>[]) parameterTypes.stream()
+        .map(r -> r.asCustomTypeReferenceOrElseThrow().targetClass())
+        .toArray();
+    try {
+      Method method = aClass.getDeclaredMethod(name, paramClasses);
+      return Optional.of(Methods.of(method));
+    } catch (NoSuchMethodException e) {
+      return Optional.empty();
+    }
   }
 
   @Override

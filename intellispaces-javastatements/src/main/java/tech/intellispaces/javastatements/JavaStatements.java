@@ -1,8 +1,8 @@
 package tech.intellispaces.javastatements;
 
 import tech.intellispaces.javastatements.common.JavaModelFunctions;
-import tech.intellispaces.javastatements.customtype.AnnotationStatements;
 import tech.intellispaces.javastatements.customtype.AnnotationType;
+import tech.intellispaces.javastatements.customtype.Annotations;
 import tech.intellispaces.javastatements.customtype.ClassType;
 import tech.intellispaces.javastatements.customtype.Classes;
 import tech.intellispaces.javastatements.customtype.CustomType;
@@ -76,11 +76,11 @@ public interface JavaStatements {
   }
 
   static AnnotationType annotationStatement(TypeElement typeElement) {
-    return AnnotationStatements.of(typeElement, Sessions.get());
+    return Annotations.of(typeElement, Sessions.get());
   }
 
   static AnnotationType annotationStatement(TypeElement typeElement, Session session) {
-    return AnnotationStatements.of(typeElement, session);
+    return Annotations.of(typeElement, session);
   }
 
   static CustomTypeReference customTypeReference(Class<?> aClass) {

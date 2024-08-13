@@ -3,6 +3,7 @@ package tech.intellispaces.javastatements.instance;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.customtype.AnnotationType;
+import tech.intellispaces.javastatements.customtype.Annotations;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
@@ -25,7 +26,7 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
 
   @Override
   public AnnotationType annotationStatement() {
-    throw new RuntimeException("Not implemented yet");
+    return Annotations.of(annotation.annotationType());
   }
 
   @Override

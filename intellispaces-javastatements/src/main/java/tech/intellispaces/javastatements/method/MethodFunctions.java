@@ -5,6 +5,7 @@ import tech.intellispaces.javastatements.common.JavaModelFunctions;
 import tech.intellispaces.javastatements.context.TypeContext;
 import tech.intellispaces.javastatements.customtype.CustomType;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
+import tech.intellispaces.javastatements.instance.AnnotationInstances;
 import tech.intellispaces.javastatements.instance.Instance;
 import tech.intellispaces.javastatements.instance.InstanceFunctions;
 import tech.intellispaces.javastatements.reference.CustomTypeReference;
@@ -43,7 +44,7 @@ public interface MethodFunctions {
 
   static MethodParam getMethodParam(Parameter parameter) {
     List<AnnotationInstance> annotations = Arrays.stream(parameter.getAnnotations())
-        .map(InstanceFunctions::getAnnotationInstance)
+        .map(AnnotationInstances::of)
         .toList();
     return MethodParams.build()
         .name(parameter.getName())

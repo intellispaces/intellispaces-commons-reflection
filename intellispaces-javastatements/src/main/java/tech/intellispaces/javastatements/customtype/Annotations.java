@@ -7,8 +7,13 @@ import tech.intellispaces.javastatements.session.Session;
 
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
+import java.lang.annotation.Annotation;
 
-public interface AnnotationStatements {
+public interface Annotations {
+
+  static AnnotationType of(Class<? extends Annotation> annotationClass) {
+    return new AnnotationBasedOnLangAnnotation(annotationClass);
+  }
 
   static AnnotationType of(TypeElement typeElement, Session session) {
     return of(typeElement, TypeContexts.empty(), session);
@@ -18,7 +23,7 @@ public interface AnnotationStatements {
     return JavaModelFunctions.asCustomStatement(
         typeElement,
         ElementKind.ANNOTATION_TYPE,
-        AnnotationStatements::create,
+        Annotations::create,
         typeContext,
         session
     );

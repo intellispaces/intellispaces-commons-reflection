@@ -5,8 +5,8 @@ import tech.intellispaces.javastatements.JavaStatements;
 import tech.intellispaces.javastatements.StatementType;
 import tech.intellispaces.javastatements.StatementTypes;
 import tech.intellispaces.javastatements.instance.AnnotationInstance;
+import tech.intellispaces.javastatements.instance.AnnotationInstances;
 import tech.intellispaces.javastatements.instance.Instance;
-import tech.intellispaces.javastatements.instance.InstanceFunctions;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.NotPrimitiveReference;
 import tech.intellispaces.javastatements.reference.ThrowableReference;
@@ -31,14 +31,16 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public List<AnnotationInstance> annotations() {
-    throw new RuntimeException("Not implemented yet");
+    return Arrays.stream(method.getAnnotations())
+        .map(AnnotationInstances::of)
+        .toList();
   }
 
   @Override
   public Optional<AnnotationInstance> selectAnnotation(String annotationClass) {
     return Arrays.stream(method.getAnnotations())
         .filter(a -> annotationClass.equals(a.annotationType().getCanonicalName()))
-        .map(InstanceFunctions::getAnnotationInstance)
+        .map(AnnotationInstances::of)
         .findAny();
   }
 
