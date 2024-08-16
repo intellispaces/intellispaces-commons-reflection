@@ -1,7 +1,7 @@
 package tech.intellispaces.javastatements.method;
 
 import tech.intellispaces.actions.common.string.StringActions;
-import tech.intellispaces.actions.executor.Executor;
+import tech.intellispaces.actions.processor.Processor1;
 import tech.intellispaces.commons.function.Consumers;
 import tech.intellispaces.javastatements.reference.NamedReference;
 import tech.intellispaces.javastatements.reference.TypeReference;
@@ -110,13 +110,14 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   }
 
   private void appendTypeParams(StringBuilder sb) {
-    Executor commaAppender = StringActions.commaAppender(sb);
-    commaAppender.execute();
+    Processor1<StringBuilder> commaAppender = StringActions.commaAppender();
     for (NamedReference typeParam : prototype.typeParameters()) {
+      commaAppender.process(sb);
       sb.append(typeParam.formalFullDeclaration());
     }
     if (includeOwnerTypeParams) {
       for (NamedReference typeParam : prototype.owner().typeParameters()) {
+        commaAppender.process(sb);
         sb.append(typeParam.formalFullDeclaration());
       }
     }
@@ -144,15 +145,15 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Consumer<String> importConsumer,
       Function<String, String> canonicalToSimpleNameMapper
   ) {
-    Executor commaAppender = StringActions.commaAppender(sb);
+    Processor1<StringBuilder> commaAppender = StringActions.commaAppender();
     if (additionalParams != null) {
       for (String additionalParam : additionalParams) {
-        commaAppender.execute();
+        commaAppender.process(sb);
         sb.append(additionalParam);
       }
     }
     for (MethodParam param : prototype.params()) {
-      commaAppender.execute();
+      commaAppender.process(sb);
       if (paramDeclarationMapper != null) {
         sb.append(paramDeclarationMapper.apply(param.type()));
       } else if (paramMapper != null) {
