@@ -110,7 +110,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   }
 
   private void appendTypeParams(StringBuilder sb) {
-    Runner commaAppender = StringActions.commaAppender(sb);
+    Runner commaAppender = StringActions.skippingFirstTimeCommaAppender(sb);
     for (NamedReference typeParam : prototype.typeParameters()) {
       commaAppender.run();
       sb.append(typeParam.formalFullDeclaration());
@@ -145,7 +145,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Consumer<String> importConsumer,
       Function<String, String> canonicalToSimpleNameMapper
   ) {
-    Runner commaAppender = StringActions.commaAppender(sb);
+    Runner commaAppender = StringActions.skippingFirstTimeCommaAppender(sb);
     if (additionalParams != null) {
       for (String additionalParam : additionalParams) {
         commaAppender.run();
