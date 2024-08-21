@@ -12,14 +12,14 @@ public interface Types {
   }
 
   static <R extends B, B> Type<R> of(Class<B> baseClass) {
-    return new TypeImpl<>(CustomTypeReferences.get(baseClass), List.of());
+    return new ReferenceBasedType<>(CustomTypeReferences.get(baseClass), List.of());
   }
 
   static <R extends B, B, Q> Type<R> of(
       Class<B> baseClass,
       Class<Q> qualifierClass
   ) {
-    return new TypeImpl<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
             CustomTypeReferences.get(qualifierClass)
         )
@@ -31,7 +31,7 @@ public interface Types {
       Class<Q1> qualifierClass1,
       Class<Q2> qualifierClass2
   ) {
-    return new TypeImpl<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
             CustomTypeReferences.get(qualifierClass1),
             CustomTypeReferences.get(qualifierClass2)
@@ -45,7 +45,7 @@ public interface Types {
       Class<Q2> qualifierClass2,
       Class<Q3> qualifierClass3
   ) {
-    return new TypeImpl<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
             CustomTypeReferences.get(qualifierClass1),
             CustomTypeReferences.get(qualifierClass2),
@@ -58,7 +58,7 @@ public interface Types {
       Class<B> baseClass,
       Type<Q> qualifierType
   ) {
-    return new TypeImpl<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(qualifierType.typeReference())
     );
   }
@@ -68,7 +68,7 @@ public interface Types {
       Type<Q1> qualifierType1,
       Type<Q2> qualifierType2
   ) {
-    return new TypeImpl<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
         qualifierType1.typeReference(),
         qualifierType2.typeReference()
@@ -82,7 +82,7 @@ public interface Types {
       Type<Q2> qualifierType2,
       Type<Q3> qualifierType3
   ) {
-    return new TypeImpl<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
         qualifierType1.typeReference(),
         qualifierType2.typeReference(),

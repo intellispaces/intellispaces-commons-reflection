@@ -5,11 +5,11 @@ import tech.intellispaces.javastatements.reference.TypeReference;
 
 import java.util.List;
 
-class TypeImpl<T> implements Type<T> {
+class ReferenceBasedType<T> implements Type<T> {
   private final TypeReference base;
   private final List<TypeReference> qualifiers;
 
-  TypeImpl(TypeReference base, List<TypeReference> qualifiers) {
+  ReferenceBasedType(TypeReference base, List<TypeReference> qualifiers) {
     this.base = base;
     this.qualifiers = qualifiers;
   }
