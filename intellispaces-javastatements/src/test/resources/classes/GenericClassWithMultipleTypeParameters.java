@@ -1,4 +1,4 @@
-import tech.intellispaces.javastatements.support.TesteeType;
+import intellispaces.javastatements.support.TesteeType;
 
 import java.io.DataInput;
 

@@ -1,6 +1,6 @@
-package tech.intellispaces.javastatements.samples;
+package intellispaces.javastatements.samples;
 
-import tech.intellispaces.javastatements.support.TesteeType;
+import intellispaces.javastatements.support.TesteeType;
 
 @TesteeType
 public class ClassWithDoubleGetter {
