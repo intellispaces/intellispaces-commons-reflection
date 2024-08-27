@@ -17,17 +17,56 @@ import javax.lang.model.element.ExecutableElement;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 /**
  * Annotation related functions.
  */
 public interface AnnotationFunctions {
+
+  static <A extends Annotation> List<A> allAnnotationsOf(CustomType type, Class<A> annotationClass) {
+    return allAnnotationsOf(type, annotationClass.getCanonicalName()).stream()
+        .map(a -> AnnotationFunctions.asAnnotation(a, annotationClass))
+        .toList();
+  }
+
+  static List<AnnotationInstance> allAnnotationsOf(CustomType type, String annotationCanonicalName) {
+    List<AnnotationInstance> result = new ArrayList<>();
+    addAnnotations(type, annotationCanonicalName, result, new HashSet<>());
+    return result;
+  }
+
+  private static void addAnnotations(
+      CustomType type, String annotationCanonicalName, List<AnnotationInstance> result, Set<String> history
+  ) {
+    if (history.contains(type.canonicalName())) {
+      return;
+    }
+    history.add(type.canonicalName());
+
+    for (AnnotationInstance a : type.annotations()) {
+      if (annotationCanonicalName.equals(a.annotationStatement().canonicalName())) {
+        result.add(a);
+      }
+    }
+
+    for (AnnotationInstance a : type.annotations()) {
+      addAnnotations(
+        a.annotationStatement().asCustomType(),
+        annotationCanonicalName,
+        result,
+        history
+      );
+    }
+  }
 
   static List<AnnotationInstance> getAnnotations(
       List<? extends AnnotationMirror> annotationMirrors, Session session
