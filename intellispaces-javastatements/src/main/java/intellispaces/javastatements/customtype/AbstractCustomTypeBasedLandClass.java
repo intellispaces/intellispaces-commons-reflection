@@ -10,6 +10,7 @@ import intellispaces.javastatements.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -52,6 +53,10 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<NamedReference> typeParameters() {
+    TypeVariable<? extends Class<?>>[] params = aClass.getTypeParameters();
+    if (params.length == 0) {
+      return List.of();
+    }
     throw new UnsupportedOperationException("Not implemented yet");
   }
 
