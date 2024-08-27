@@ -1,7 +1,5 @@
 package intellispaces.javastatements;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import intellispaces.commons.collection.CollectionFunctions;
 import intellispaces.commons.datahandle.HandleFunctions;
 import intellispaces.javastatements.customtype.ClassType;
@@ -11,6 +9,8 @@ import intellispaces.javastatements.reference.CustomTypeReference;
 import intellispaces.javastatements.session.Session;
 import intellispaces.javastatements.session.Sessions;
 import intellispaces.javastatements.support.TesteeType;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.lang.model.element.TypeElement;
 import java.io.DataInput;

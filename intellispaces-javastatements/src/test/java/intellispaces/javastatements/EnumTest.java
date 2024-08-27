@@ -1,6 +1,5 @@
 package intellispaces.javastatements;
 
-import org.junit.jupiter.api.Test;
 import intellispaces.commons.collection.CollectionFunctions;
 import intellispaces.commons.datahandle.HandleFunctions;
 import intellispaces.javastatements.customtype.CustomType;
@@ -9,6 +8,7 @@ import intellispaces.javastatements.method.MethodStatement;
 import intellispaces.javastatements.session.Session;
 import intellispaces.javastatements.session.Sessions;
 import intellispaces.javastatements.support.TesteeType;
+import org.junit.jupiter.api.Test;
 
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;

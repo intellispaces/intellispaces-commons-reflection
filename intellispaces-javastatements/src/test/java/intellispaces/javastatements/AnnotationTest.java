@@ -1,6 +1,5 @@
 package intellispaces.javastatements;
 
-import org.junit.jupiter.api.Test;
 import intellispaces.commons.datahandle.HandleFunctions;
 import intellispaces.javastatements.customtype.AnnotationType;
 import intellispaces.javastatements.customtype.ClassType;
@@ -15,6 +14,7 @@ import intellispaces.javastatements.samples.TestEnum;
 import intellispaces.javastatements.session.Session;
 import intellispaces.javastatements.session.Sessions;
 import intellispaces.javastatements.support.TesteeType;
+import org.junit.jupiter.api.Test;
 
 import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;

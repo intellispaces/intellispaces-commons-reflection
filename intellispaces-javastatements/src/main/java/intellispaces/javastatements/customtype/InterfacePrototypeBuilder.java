@@ -10,7 +10,7 @@ import intellispaces.javastatements.reference.NamedReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InterfaceBuilderBasedOnPrototype {
+public class InterfacePrototypeBuilder {
   private String canonicalName;
   private List<AnnotationInstance> annotations;
   private List<NamedReference> typeParameters;
@@ -18,7 +18,7 @@ public class InterfaceBuilderBasedOnPrototype {
   private List<MethodStatement> declaredMethods;
   private InterfaceImpl resultInterface;
 
-  InterfaceBuilderBasedOnPrototype(InterfaceType prototype) {
+  InterfacePrototypeBuilder(InterfaceType prototype) {
     this.resultInterface = new InterfaceImpl();
     this.canonicalName = prototype.canonicalName();
     this.annotations = new ArrayList<>(prototype.annotations());
@@ -27,27 +27,27 @@ public class InterfaceBuilderBasedOnPrototype {
     this.declaredMethods = new ArrayList<>(prototype.declaredMethods());
   }
 
-  public InterfaceBuilderBasedOnPrototype canonicalName(String canonicalName) {
+  public InterfacePrototypeBuilder canonicalName(String canonicalName) {
     this.canonicalName = canonicalName;
     return this;
   }
 
-  public InterfaceBuilderBasedOnPrototype extendedInterfaces(List<CustomTypeReference> extendedInterfaces) {
+  public InterfacePrototypeBuilder extendedInterfaces(List<CustomTypeReference> extendedInterfaces) {
     this.extendedInterfaces = extendedInterfaces;
     return this;
   }
 
-  public InterfaceBuilderBasedOnPrototype addDeclaredMethod(CustomType owner, MethodSignature signature) {
+  public InterfacePrototypeBuilder addDeclaredMethod(CustomType owner, MethodSignature signature) {
     declaredMethods.add(Methods.get(owner, signature));
     return this;
   }
 
-  public InterfaceBuilderBasedOnPrototype addDeclaredMethod(MethodSignature signature) {
+  public InterfacePrototypeBuilder addDeclaredMethod(MethodSignature signature) {
     addDeclaredMethod(resultInterface, signature);
     return this;
   }
 
-  public InterfaceBuilderBasedOnPrototype addDeclaredMethod(MethodStatement method) {
+  public InterfacePrototypeBuilder addDeclaredMethod(MethodStatement method) {
     addDeclaredMethod(method.owner(), method.signature());
     return this;
   }

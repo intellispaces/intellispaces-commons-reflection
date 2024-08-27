@@ -1,8 +1,5 @@
 package intellispaces.javastatements.samples;
 
-import intellispaces.javastatements.samples.AnnotationWithElementsView;
-import intellispaces.javastatements.samples.TestAnnotation;
-import intellispaces.javastatements.samples.TestEnum;
 import intellispaces.javastatements.support.TesteeType;
 
 public interface AnnotatedClass {

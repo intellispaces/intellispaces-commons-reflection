@@ -36,8 +36,8 @@ public interface Interfaces {
     return new InterfaceBasedOnTypeElement(typeElement, typeContext, session);
   }
 
-  static InterfaceBuilderBasedOnPrototype build(InterfaceType prototype) {
-    return new InterfaceBuilderBasedOnPrototype(prototype);
+  static InterfacePrototypeBuilder build(InterfaceType prototype) {
+    return new InterfacePrototypeBuilder(prototype);
   }
 
   static InterfaceType effectiveOf(
