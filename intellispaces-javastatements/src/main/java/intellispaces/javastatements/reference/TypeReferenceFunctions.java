@@ -157,6 +157,11 @@ public interface TypeReferenceFunctions {
       CustomType customType1 = typeReference1.asCustomTypeReferenceOrElseThrow().targetType();
       CustomType customType2 = typeReference2.asCustomTypeReferenceOrElseThrow().targetType();
       return customType1.canonicalName().equals(customType2.canonicalName());
+    } else if (
+        (typeReference1.isPrimitiveReference() && typeReference2.isCustomTypeReference()) ||
+            (typeReference1.isCustomTypeReference() && typeReference2.isPrimitiveReference())
+    ) {
+      return false;
     } else {
       throw UnexpectedViolationException.withMessage("Not implemented");
     }

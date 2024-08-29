@@ -134,9 +134,13 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       returnTypeReference.dependencyTypenames().forEach(importConsumer);
       sb.append(returnTypeReference.actualDeclaration(canonicalToSimpleNameMapper));
     } else {
-      TypeReference returnTypeReference = prototype.returnType().orElseThrow();
-      returnTypeReference.dependencyTypenames().forEach(importConsumer);
-      sb.append(returnTypeReference.actualDeclaration(canonicalToSimpleNameMapper));
+      if (prototype.returnType().isEmpty()) {
+        sb.append("void");
+      } else {
+        TypeReference returnTypeReference = prototype.returnType().orElseThrow();
+        returnTypeReference.dependencyTypenames().forEach(importConsumer);
+        sb.append(returnTypeReference.actualDeclaration(canonicalToSimpleNameMapper));
+      }
     }
   }
 
