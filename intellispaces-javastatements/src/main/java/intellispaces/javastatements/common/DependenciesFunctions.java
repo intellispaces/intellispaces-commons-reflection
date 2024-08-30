@@ -130,7 +130,7 @@ public interface DependenciesFunctions {
             typeReference.asWildcard().orElseThrow(), includeRelations, exclusions);
         case ArrayReference -> getArrayTypeReferenceDependencies(
             typeReference.asArrayReference().orElseThrow(), includeRelations, exclusions);
-        default -> throw JavaStatementException.withMessage("Unsupported statement type {}", typeReference.statementType());
+        default -> throw JavaStatementException.withMessage("Unsupported statement type {0}", typeReference.statementType());
       };
     }
   }

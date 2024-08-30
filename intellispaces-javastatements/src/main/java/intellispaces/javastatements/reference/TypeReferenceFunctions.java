@@ -23,7 +23,7 @@ public interface TypeReferenceFunctions {
     } else if (StatementTypes.CustomReference.equals(typeReference.statementType())) {
       return getClass(typeReference.asCustomTypeReference().orElseThrow().targetType().canonicalName());
     } else {
-      throw JavaStatementException.withMessage("Unsupported type {}", typeReference.statementType().typename());
+      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
     }
   }
 
@@ -214,7 +214,7 @@ public interface TypeReferenceFunctions {
     } else if (typeReference.asWildcard().isPresent()) {
       return getWildcardDeclaration(typeReference.asWildcard().get(), blind, true);
     } else {
-      throw JavaStatementException.withMessage("Unsupported type {}", typeReference.statementType().typename());
+      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
     }
   }
 
@@ -240,7 +240,7 @@ public interface TypeReferenceFunctions {
     } else if (typeReference.asWildcard().isPresent()) {
       return getWildcardDeclaration(typeReference.asWildcard().get(), false, fullDeclaration);
     } else {
-      throw JavaStatementException.withMessage("Unsupported type {}", typeReference.statementType().typename());
+      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
     }
   }
 
@@ -315,8 +315,8 @@ public interface TypeReferenceFunctions {
       return Map.of();
     }
     if (typeArguments.size() != typeParams.size()) {
-      throw UnexpectedViolationException.withMessage("Number of type arguments {} does not match with " +
-          "number of type parameters {}. See type {}",
+      throw UnexpectedViolationException.withMessage("Number of type arguments {0} does not match with " +
+          "number of type parameters {1}. See type {2}",
           typeArguments.size(), typeParams.size(), customTypeReference.formalFullDeclaration());
     }
 

@@ -35,7 +35,7 @@ public interface CustomTypeFunctions {
     return statement.parentTypes().stream()
         .filter(ref -> StatementTypes.Class.equals(ref.targetType().statementType()))
         .reduce((ref1, ref2) -> {
-          throw JavaStatementException.withMessage("Multiple extended classes: {}, {}", ref1, ref2);
+          throw JavaStatementException.withMessage("Multiple extended classes: {0}, {1}", ref1, ref2);
         });
   }
 
@@ -133,7 +133,7 @@ public interface CustomTypeFunctions {
               methodReturnTypeReference, effectiveAddedMethodReturnTypeReference
           );
           if (narrowType.isEmpty()) {
-            throw JavaStatementException.withMessage("Incompatible types: {} and {} of method {}",
+            throw JavaStatementException.withMessage("Incompatible types: {0} and {1} of method {2}",
                 methodReturnTypeReference, effectiveAddedMethodReturnTypeReference, methodSignature.name());
           }
           if (narrowType.get() == effectiveAddedMethodReturnTypeReference

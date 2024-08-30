@@ -110,7 +110,7 @@ public interface AnnotationFunctions {
       AnnotationInstance instance, Class<A> annotationClass
   ) {
     if (!annotationClass.getCanonicalName().equals(instance.annotationStatement().canonicalName())) {
-      throw JavaStatementException.withMessage("Illegal annotation class. Expected {}. Actual {}",
+      throw JavaStatementException.withMessage("Illegal annotation class. Expected {0}. Actual {1}",
           annotationClass.getCanonicalName(), instance.annotationStatement().canonicalName());
     }
     return (A) Proxy.newProxyInstance(
@@ -125,7 +125,7 @@ public interface AnnotationFunctions {
             }
             return result;
           } else {
-            throw JavaStatementException.withMessage("Unsupported method {}", method.getName());
+            throw JavaStatementException.withMessage("Unsupported method {0}", method.getName());
           }
         }
     );

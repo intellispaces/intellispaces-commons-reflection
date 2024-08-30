@@ -23,7 +23,7 @@ class TypeBaseOnReferenceImpl<T> implements Type<T> {
     if (reference.isCustomTypeReference()) {
       return CustomTypeReferences.get(reference.asCustomTypeReferenceOrElseThrow().targetType());
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {}",
+      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
           reference.statementType().typename());
     }
   }
@@ -34,7 +34,7 @@ class TypeBaseOnReferenceImpl<T> implements Type<T> {
     if (reference.isCustomTypeReference()) {
       return (Class<T>) reference.asCustomTypeReferenceOrElseThrow().targetClass();
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {}",
+      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
           reference.statementType().typename());
     }
   }
@@ -45,7 +45,7 @@ class TypeBaseOnReferenceImpl<T> implements Type<T> {
     if (reference.isCustomTypeReference()) {
       return (List) reference.asCustomTypeReferenceOrElseThrow().typeArguments();
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {}",
+      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
           reference.statementType().typename());
     }
   }

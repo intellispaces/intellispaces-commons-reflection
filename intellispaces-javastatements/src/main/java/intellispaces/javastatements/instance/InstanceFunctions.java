@@ -40,7 +40,7 @@ public interface InstanceFunctions {
     } else if (StatementTypes.AnnotationInstance.equals(instance.statementType())) {
       return asAnnotation((AnnotationInstance) instance);
     } else {
-      throw JavaStatementException.withMessage("Unsupported instance type {}", instance.getClass().getName());
+      throw JavaStatementException.withMessage("Unsupported instance type {0}", instance.getClass().getName());
     }
   }
 
@@ -85,7 +85,7 @@ public interface InstanceFunctions {
           .toList();
       instance = ArrayInstances.of(arrayItemsType(values), values);
     } else {
-      throw JavaStatementException.withMessage("Unsupported object class {}", value.getClass().getCanonicalName());
+      throw JavaStatementException.withMessage("Unsupported object class {0}", value.getClass().getCanonicalName());
     }
     return instance;
   }
@@ -121,7 +121,7 @@ public interface InstanceFunctions {
           instance.name()
       );
     } catch (ClassNotFoundException e) {
-      throw JavaStatementException.withCauseAndMessage(e, "Class by name {} is not found", instance.type().canonicalName());
+      throw JavaStatementException.withCauseAndMessage(e, "Class by name {0} is not found", instance.type().canonicalName());
     }
   }
 
@@ -129,7 +129,7 @@ public interface InstanceFunctions {
     try {
       return Class.forName(instance.type().canonicalName());
     } catch (ClassNotFoundException e) {
-      throw JavaStatementException.withCauseAndMessage(e, "Class by name {} is not found", instance.type().canonicalName());
+      throw JavaStatementException.withCauseAndMessage(e, "Class by name {0} is not found", instance.type().canonicalName());
     }
   }
 
@@ -146,7 +146,7 @@ public interface InstanceFunctions {
     String annotationClassName = instance.annotationStatement().canonicalName();
     Class<?> annotationClass = TypeReferenceFunctions.getClass(annotationClassName);
     if (!Annotation.class.isAssignableFrom(annotationClass)) {
-      throw JavaStatementException.withMessage("Class {} does not extend {}", annotationClassName, Annotation.class.getName());
+      throw JavaStatementException.withMessage("Class {0} does not extend {1}", annotationClassName, Annotation.class.getName());
     }
     return AnnotationFunctions.asAnnotation(instance, (Class<Annotation>) annotationClass);
   }

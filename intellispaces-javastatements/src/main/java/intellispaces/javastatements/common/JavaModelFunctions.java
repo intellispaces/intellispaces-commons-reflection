@@ -196,7 +196,7 @@ public interface JavaModelFunctions {
     if (namedTypeReference.isPresent()) {
       return namedTypeReference.get().namedType();
     }
-    throw JavaStatementException.withMessage("Unknown type: {}", typeParamName);
+    throw JavaStatementException.withMessage("Unknown type: {0}", typeParamName);
   }
 
   static TypeReference getTypeReference(TypeMirror typeMirror, Session session) {
@@ -217,7 +217,7 @@ public interface JavaModelFunctions {
       case TYPEVAR -> getTypeReference((TypeVariable) typeMirror, typeContext);
       case WILDCARD -> WildcardTypes.of((WildcardType) typeMirror, typeContext, session);
       case ARRAY -> ArrayTypeReferences.of((ArrayType) typeMirror, typeContext, session);
-      default -> throw JavaStatementException.withMessage("Unsupported type mirror kind {}", typeMirror.getKind());
+      default -> throw JavaStatementException.withMessage("Unsupported type mirror kind {0}", typeMirror.getKind());
     };
   }
 
@@ -272,7 +272,7 @@ public interface JavaModelFunctions {
           .map(ContextTypeParameter::namedType)
           .orElse(null);
       if (namedReference == null) {
-        throw JavaStatementException.withMessage("Type variable named {} is not found", typeParamName);
+        throw JavaStatementException.withMessage("Type variable named {0} is not found", typeParamName);
       }
       boundTypeReference = namedReference;
     } else if (bound.getKind() == TypeKind.DECLARED) {
@@ -284,7 +284,7 @@ public interface JavaModelFunctions {
     } else if (TypeKind.ARRAY == bound.getKind()) {
       boundTypeReference = ArrayTypeReferences.of((ArrayType) bound, typeContext, session);
     } else {
-      throw JavaStatementException.withMessage("Unsupported type parameter kind {}", bound.getKind());
+      throw JavaStatementException.withMessage("Unsupported type parameter kind {0}", bound.getKind());
     }
     return Optional.ofNullable(boundTypeReference);
   }
@@ -305,7 +305,7 @@ public interface JavaModelFunctions {
     } else if (typeElement.getKind() == ElementKind.ANNOTATION_TYPE) {
       return Annotations.of(typeElement, typeContext, session);
     } else {
-      throw JavaStatementException.withMessage("Type element of kind can't be represented as custom type statement {}",
+      throw JavaStatementException.withMessage("Type element of kind can't be represented as custom type statement {0}",
           typeElement.getKind());
     }
   }
@@ -319,7 +319,7 @@ public interface JavaModelFunctions {
       Session session
   ) {
     if (typeElement.getKind() != expectedElementKind) {
-      throw JavaStatementException.withMessage("Expected type element of the kind {} but actual is {}",
+      throw JavaStatementException.withMessage("Expected type element of the kind {0} but actual is {1}",
           expectedElementKind, typeElement.getKind());
     }
 
@@ -338,7 +338,7 @@ public interface JavaModelFunctions {
     } else if (element instanceof ExecutableElement executableElement) {
       return MethodFunctions.getMethod(executableElement, Sessions.get());
     } else {
-      throw UnexpectedViolationException.withMessage("Not supported element kind - {}", element.getKind());
+      throw UnexpectedViolationException.withMessage("Not supported element kind - {0}", element.getKind());
     }
   }
 }

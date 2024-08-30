@@ -30,7 +30,7 @@ class ReferenceBasedType<T> implements Type<T> {
     if (base.isCustomTypeReference()) {
       return (Class<T>) base.asCustomTypeReferenceOrElseThrow().targetClass();
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {}",
+      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
           base.statementType().typename());
     }
   }
