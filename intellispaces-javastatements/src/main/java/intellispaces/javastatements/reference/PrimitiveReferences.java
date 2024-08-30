@@ -45,18 +45,29 @@ public enum PrimitiveReferences implements PrimitiveReference {
     return wrapperClass;
   }
 
+
+  @Override
+  public String simpleDeclaration() {
+    return typename;
+  }
+
+  @Override
+  public String simpleDeclaration(Function<String, String> nameMapper) {
+    return typename;
+  }
+
   @Override
   public String actualDeclaration() {
     return typename;
   }
 
   @Override
-  public String actualDeclaration(Function<String, String> simpleNameMapper) {
+  public String actualDeclaration(Function<String, String> nameMapper) {
     return typename;
   }
 
   @Override
-  public String actualBlindDeclaration(Function<String, String> simpleNameMapper) {
+  public String actualBlindDeclaration(Function<String, String> nameMapper) {
     return typename;
   }
 

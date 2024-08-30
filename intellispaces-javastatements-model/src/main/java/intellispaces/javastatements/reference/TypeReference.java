@@ -91,6 +91,10 @@ public interface TypeReference extends Statement {
 
   Collection<String> dependencyTypenames();
 
+  String simpleDeclaration();
+
+  String simpleDeclaration(Function<String, String> nameMapper);
+
   /**
    * Actual type declaration.
    */
@@ -99,9 +103,9 @@ public interface TypeReference extends Statement {
   /**
    * Actual type declaration.
    */
-  String actualDeclaration(Function<String, String> simpleNameMapper);
+  String actualDeclaration(Function<String, String> nameMapper);
 
-  String actualBlindDeclaration(Function<String, String> simpleNameMapper);
+  String actualBlindDeclaration(Function<String, String> nameMapper);
 
   /**
    * Formal full type declaration.

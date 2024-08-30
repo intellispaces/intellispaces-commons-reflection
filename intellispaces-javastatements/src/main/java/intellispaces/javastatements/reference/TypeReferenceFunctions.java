@@ -194,6 +194,30 @@ public interface TypeReferenceFunctions {
     return getActualTypeDeclaration(typeReference, blind, intellispaces.commons.type.TypeFunctions::getSimpleName);
   }
 
+  static String getSimpleTypeDeclaration(TypeReference typeReference) {
+    return getSimpleTypeDeclaration(typeReference, intellispaces.commons.type.TypeFunctions::getSimpleName);
+  }
+
+  static String getSimpleTypeDeclaration(
+      TypeReference typeReference, Function<String, String> nameMapper
+  ) {
+    if (typeReference.asPrimitiveReference().isPresent()) {
+      return typeReference.asPrimitiveReference().get().typename();
+    } else if (typeReference.asArrayReference().isPresent()) {
+      TypeReference elementTypeReference = typeReference.asArrayReference().get().elementType();
+      return getSimpleTypeDeclaration(elementTypeReference) + "[]";
+    } else if (typeReference.asCustomTypeReference().isPresent()) {
+      CustomType customType = typeReference.asCustomTypeReference().get().targetType();
+      return nameMapper.apply(customType.canonicalName());
+    } else if (typeReference.asNamedReference().isPresent()) {
+      return typeReference.asNamedReferenceOrElseThrow().name();
+    } else if (typeReference.asWildcard().isPresent()) {
+      return "?";
+    } else {
+      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
+    }
+  }
+
   /**
    * Returns actual type declaration.
    */
