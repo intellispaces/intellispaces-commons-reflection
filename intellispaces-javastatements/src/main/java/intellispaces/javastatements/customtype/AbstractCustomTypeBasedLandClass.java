@@ -1,16 +1,19 @@
 package intellispaces.javastatements.customtype;
 
+import intellispaces.commons.collection.ArraysFunctions;
 import intellispaces.javastatements.instance.AnnotationInstance;
 import intellispaces.javastatements.method.MethodFunctions;
 import intellispaces.javastatements.method.MethodStatement;
 import intellispaces.javastatements.method.Methods;
 import intellispaces.javastatements.reference.CustomTypeReference;
+import intellispaces.javastatements.reference.CustomTypeReferences;
 import intellispaces.javastatements.reference.NamedReference;
 import intellispaces.javastatements.reference.TypeReference;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -72,7 +75,12 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<CustomTypeReference> parentTypes() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    List<CustomTypeReference> parents = new ArrayList<>();
+    if (aClass.getSuperclass() != null) {
+      parents.add(CustomTypeReferences.get(aClass.getSuperclass()));
+    }
+    ArraysFunctions.foreach(aClass.getInterfaces(), i -> parents.add(CustomTypeReferences.get(i)));
+    return parents;
   }
 
   @Override
