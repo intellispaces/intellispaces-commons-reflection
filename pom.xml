@@ -25,12 +25,17 @@
             </dependency>
             <dependency>
                 <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-commons</artifactId>
+                <artifactId>intellispaces-common-utils</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-actions-common</artifactId>
+                <artifactId>intellispaces-common-utils-model</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>intellispaces</groupId>
+                <artifactId>intellispaces-common-util-actions</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>

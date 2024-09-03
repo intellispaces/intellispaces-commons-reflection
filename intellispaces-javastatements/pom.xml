@@ -35,11 +35,11 @@
         </dependency>
         <dependency>
             <groupId>intellispaces</groupId>
-            <artifactId>intellispaces-commons</artifactId>
+            <artifactId>intellispaces-common-utils</artifactId>
         </dependency>
         <dependency>
             <groupId>intellispaces</groupId>
-            <artifactId>intellispaces-actions-common</artifactId>
+            <artifactId>intellispaces-common-util-actions</artifactId>
         </dependency>
 
         <!-- Logging -->
