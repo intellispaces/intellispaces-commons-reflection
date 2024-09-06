@@ -2,40 +2,40 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>intellispaces</groupId>
+        <groupId>intellispaces-common</groupId>
         <artifactId>intellispaces-parent-pom</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>intellispaces-javastatements-parent</artifactId>
+    <artifactId>intellispaces-javastatement-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-javastatements-model</module>
-        <module>intellispaces-javastatements</module>
+        <module>intellispaces-javastatement-model</module>
+        <module>intellispaces-javastatement</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <!-- Intellispaces -->
             <dependency>
-                <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-javastatements-model</artifactId>
+                <groupId>intellispaces-common</groupId>
+                <artifactId>intellispaces-javastatement-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-common-utils</artifactId>
+                <groupId>intellispaces-common</groupId>
+                <artifactId>intellispaces-base</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-common-utils-model</artifactId>
+                <groupId>intellispaces-common</groupId>
+                <artifactId>intellispaces-base-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>intellispaces</groupId>
-                <artifactId>intellispaces-common-util-actions</artifactId>
+                <groupId>intellispaces-common</groupId>
+                <artifactId>intellispaces-base-action</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
