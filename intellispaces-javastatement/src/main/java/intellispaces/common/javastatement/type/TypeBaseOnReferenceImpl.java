@@ -19,9 +19,20 @@ class TypeBaseOnReferenceImpl<T> implements Type<T> {
   }
 
   @Override
-  public TypeReference base() {
+  public TypeReference baseTypeReference() {
     if (reference.isCustomTypeReference()) {
       return CustomTypeReferences.get(reference.asCustomTypeReferenceOrElseThrow().targetType());
+    } else {
+      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
+          reference.statementType().typename());
+    }
+  }
+
+  @Override
+  @SuppressWarnings("unchecked, rawtypes")
+  public List<TypeReference> qualifierTypeReferences() {
+    if (reference.isCustomTypeReference()) {
+      return (List) reference.asCustomTypeReferenceOrElseThrow().typeArguments();
     } else {
       throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
           reference.statementType().typename());
@@ -35,18 +46,20 @@ class TypeBaseOnReferenceImpl<T> implements Type<T> {
       return (Class<T>) reference.asCustomTypeReferenceOrElseThrow().targetClass();
     } else {
       throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
-          reference.statementType().typename());
+        reference.statementType().typename());
     }
   }
 
   @Override
   @SuppressWarnings("unchecked, rawtypes")
-  public List<TypeReference> qualifiers() {
+  public List<intellispaces.common.base.type.Type<?>> qualifierTypes() {
     if (reference.isCustomTypeReference()) {
-      return (List) reference.asCustomTypeReferenceOrElseThrow().typeArguments();
+      return (List) reference.asCustomTypeReferenceOrElseThrow().typeArguments().stream()
+        .map(TypeBaseOnReferenceImpl::new)
+        .toList();
     } else {
       throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
-          reference.statementType().typename());
+        reference.statementType().typename());
     }
   }
 }

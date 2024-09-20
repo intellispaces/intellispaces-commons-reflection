@@ -11,15 +11,10 @@ public interface Type<T> extends intellispaces.common.base.type.Type<T> {
   /**
    * Base type reference.
    */
-  TypeReference base();
+  TypeReference baseTypeReference();
 
   /**
-   * Base class.
+   * Type qualifier references.
    */
-  Class<T> baseClass();
-
-  /**
-   * Type qualifier references (optional).
-   */
-  List<TypeReference> qualifiers();
+  List<TypeReference> qualifierTypeReferences();
 }

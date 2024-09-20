@@ -20,8 +20,13 @@ class ReferenceBasedType<T> implements Type<T> {
   }
 
   @Override
-  public TypeReference base() {
+  public TypeReference baseTypeReference() {
     return base;
+  }
+
+  @Override
+  public List<TypeReference> qualifierTypeReferences() {
+    return qualifiers;
   }
 
   @Override
@@ -31,12 +36,15 @@ class ReferenceBasedType<T> implements Type<T> {
       return (Class<T>) base.asCustomTypeReferenceOrElseThrow().targetClass();
     } else {
       throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
-          base.statementType().typename());
+        base.statementType().typename());
     }
   }
 
   @Override
-  public List<TypeReference> qualifiers() {
-    return qualifiers;
+  @SuppressWarnings("unchecked, rawtypes")
+  public List<intellispaces.common.base.type.Type<?>> qualifierTypes() {
+    return (List) qualifiers.stream()
+      .map(TypeBaseOnReferenceImpl::new)
+      .toList();
   }
 }

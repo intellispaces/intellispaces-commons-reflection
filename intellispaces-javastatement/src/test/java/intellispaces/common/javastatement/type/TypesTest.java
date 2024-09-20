@@ -23,9 +23,9 @@ public class TypesTest {
     assertThat(integerType.baseClass()).isSameAs(Integer.class);
     assertThat(objectType.baseClass()).isSameAs(Object.class);
 
-    assertThat(stringType.base().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(String.class.getCanonicalName());
-    assertThat(integerType.base().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(Integer.class.getCanonicalName());
-    assertThat(objectType.base().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(Object.class.getCanonicalName());
+    assertThat(stringType.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(String.class.getCanonicalName());
+    assertThat(integerType.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(Integer.class.getCanonicalName());
+    assertThat(objectType.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(Object.class.getCanonicalName());
   }
 
   @Test
@@ -36,8 +36,8 @@ public class TypesTest {
     // Then
     assertThat(listType.baseClass()).isSameAs(List.class);
 
-    assertThat(listType.base().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(List.class.getCanonicalName());
-    assertThat(listType.qualifiers()).hasSize(1);
-    assertThat(listType.qualifiers().get(0).asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(Integer.class.getCanonicalName());
+    assertThat(listType.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(List.class.getCanonicalName());
+    assertThat(listType.qualifierTypeReferences()).hasSize(1);
+    assertThat(listType.qualifierTypeReferences().get(0).asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(Integer.class.getCanonicalName());
   }
 }
