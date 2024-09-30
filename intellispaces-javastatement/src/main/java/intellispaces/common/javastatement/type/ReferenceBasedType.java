@@ -1,11 +1,12 @@
 package intellispaces.common.javastatement.type;
 
 import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.type.AbstractType;
 import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.util.List;
 
-class ReferenceBasedType<T> implements Type<T> {
+class ReferenceBasedType<T> extends AbstractType<T> implements Type<T> {
   private final TypeReference base;
   private final List<TypeReference> qualifiers;
 
@@ -16,7 +17,10 @@ class ReferenceBasedType<T> implements Type<T> {
 
   @Override
   public TypeReference typeReference() {
-    return null;
+    if (qualifiers.isEmpty()) {
+      return base;
+    }
+    throw new RuntimeException("Not implemented");
   }
 
   @Override

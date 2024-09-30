@@ -1,12 +1,13 @@
 package intellispaces.common.javastatement.type;
 
 import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.type.AbstractType;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
 
 import java.util.List;
 
-class TypeBaseOnReferenceImpl<T> implements Type<T> {
+class TypeBaseOnReferenceImpl<T> extends AbstractType<T> implements Type<T> {
   private final TypeReference reference;
 
   TypeBaseOnReferenceImpl(TypeReference reference) {
