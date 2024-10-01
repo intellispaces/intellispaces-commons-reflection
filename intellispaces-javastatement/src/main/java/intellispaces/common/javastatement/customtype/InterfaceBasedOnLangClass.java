@@ -21,4 +21,9 @@ class InterfaceBasedOnLangClass extends AbstractCustomTypeBasedLandClass impleme
   public boolean isAbstract() {
     return true;
   }
+
+  @Override
+  public boolean isFinal() {
+    return false;
+  }
 }

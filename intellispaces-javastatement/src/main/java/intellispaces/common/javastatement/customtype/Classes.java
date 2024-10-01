@@ -1,9 +1,9 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.javastatement.context.TypeContext;
-import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
+import intellispaces.common.javastatement.context.TypeContext;
 import intellispaces.common.javastatement.context.TypeContexts;
+import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.session.Session;
 
 import javax.lang.model.element.ElementKind;

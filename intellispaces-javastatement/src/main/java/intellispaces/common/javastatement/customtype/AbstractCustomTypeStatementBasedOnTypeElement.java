@@ -2,6 +2,7 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
+import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
 import intellispaces.common.javastatement.context.TypeContextBuilder;
@@ -12,7 +13,6 @@ import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferenceFunctions;
-import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.session.Session;
 
 import javax.lang.model.element.Element;
@@ -67,6 +67,11 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   @Override
   public boolean isAbstract() {
     return intellispaces.common.base.type.TypeFunctions.isAbstractElement(typeElement);
+  }
+
+  @Override
+  public boolean isFinal() {
+    return intellispaces.common.base.type.TypeFunctions.isFinalElement(typeElement);
   }
 
   @Override

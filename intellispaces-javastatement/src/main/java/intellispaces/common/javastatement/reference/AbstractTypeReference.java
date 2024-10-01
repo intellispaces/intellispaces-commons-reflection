@@ -2,8 +2,8 @@ package intellispaces.common.javastatement.reference;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
-import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
+import intellispaces.common.javastatement.customtype.CustomType;
 
 import java.util.Collection;
 import java.util.function.Function;

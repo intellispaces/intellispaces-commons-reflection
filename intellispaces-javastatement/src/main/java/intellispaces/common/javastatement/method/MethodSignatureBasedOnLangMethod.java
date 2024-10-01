@@ -1,15 +1,15 @@
 package intellispaces.common.javastatement.method;
 
+import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
-import intellispaces.common.javastatement.reference.NotPrimitiveReference;
-import intellispaces.common.javastatement.reference.ThrowableReference;
-import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.AnnotationInstances;
 import intellispaces.common.javastatement.instance.Instance;
 import intellispaces.common.javastatement.reference.NamedReference;
+import intellispaces.common.javastatement.reference.NotPrimitiveReference;
+import intellispaces.common.javastatement.reference.ThrowableReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.lang.annotation.Annotation;

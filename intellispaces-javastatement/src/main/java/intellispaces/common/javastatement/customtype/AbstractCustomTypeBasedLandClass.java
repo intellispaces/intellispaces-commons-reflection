@@ -1,11 +1,11 @@
 package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.base.collection.ArraysFunctions;
-import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.method.MethodFunctions;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.method.Methods;
+import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;

@@ -1,10 +1,10 @@
 package intellispaces.common.javastatement.customtype;
 
+import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
-import intellispaces.common.javastatement.reference.CustomTypeReference;
-import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.common.javastatement.reference.CustomTypeReference;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +26,11 @@ class ClassBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements 
   @Override
   public boolean isAbstract() {
     return TypeFunctions.isAbstractClass(aClass);
+  }
+
+  @Override
+  public boolean isFinal() {
+    return TypeFunctions.isFinalClass(aClass);
   }
 
   @Override

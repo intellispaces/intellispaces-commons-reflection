@@ -22,4 +22,9 @@ class AnnotationBasedOnLangAnnotation extends AbstractCustomTypeBasedLandClass i
   public boolean isAbstract() {
     return false;
   }
+
+  @Override
+  public boolean isFinal() {
+    return true;
+  }
 }

@@ -1,10 +1,10 @@
 package intellispaces.common.javastatement.method;
 
 import intellispaces.common.javastatement.AnnotatedStatement;
-import intellispaces.common.javastatement.reference.NotPrimitiveReference;
-import intellispaces.common.javastatement.reference.ThrowableReference;
 import intellispaces.common.javastatement.instance.Instance;
 import intellispaces.common.javastatement.reference.NamedReference;
+import intellispaces.common.javastatement.reference.NotPrimitiveReference;
+import intellispaces.common.javastatement.reference.ThrowableReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.util.List;

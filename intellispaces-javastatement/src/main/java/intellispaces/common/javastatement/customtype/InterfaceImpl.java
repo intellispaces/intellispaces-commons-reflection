@@ -2,14 +2,14 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
+import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
-import intellispaces.common.javastatement.reference.CustomTypeReference;
-import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferenceFunctions;
@@ -85,6 +85,12 @@ class InterfaceImpl implements InterfaceType {
   public boolean isAbstract() {
     return true;
   }
+
+  @Override
+  public boolean isFinal() {
+    return false;
+  }
+
   @Override
   public String canonicalName() {
     return canonicalName;

@@ -2,8 +2,8 @@ package intellispaces.common.javastatement.instance;
 
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
-import intellispaces.common.javastatement.customtype.Annotations;
 import intellispaces.common.javastatement.customtype.AnnotationType;
+import intellispaces.common.javastatement.customtype.Annotations;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;

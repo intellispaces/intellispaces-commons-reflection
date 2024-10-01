@@ -1,10 +1,10 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.javastatement.reference.TypeReference;
-import intellispaces.common.base.text.TextActions;
 import intellispaces.common.action.runner.Runner;
 import intellispaces.common.base.function.Consumers;
+import intellispaces.common.base.text.TextActions;
 import intellispaces.common.javastatement.reference.NamedReference;
+import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.util.ArrayList;
 import java.util.List;

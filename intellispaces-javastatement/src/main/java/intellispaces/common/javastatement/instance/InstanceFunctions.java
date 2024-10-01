@@ -1,17 +1,17 @@
 package intellispaces.common.javastatement.instance;
 
 import intellispaces.common.javastatement.StatementTypes;
+import intellispaces.common.javastatement.common.JavaModelFunctions;
+import intellispaces.common.javastatement.customtype.AnnotationFunctions;
 import intellispaces.common.javastatement.customtype.Classes;
+import intellispaces.common.javastatement.customtype.EnumType;
 import intellispaces.common.javastatement.exception.JavaStatementException;
 import intellispaces.common.javastatement.reference.CustomTypeReference;
+import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.reference.PrimitiveReference;
 import intellispaces.common.javastatement.reference.PrimitiveReferences;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferenceFunctions;
-import intellispaces.common.javastatement.common.JavaModelFunctions;
-import intellispaces.common.javastatement.customtype.AnnotationFunctions;
-import intellispaces.common.javastatement.customtype.EnumType;
-import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.session.Session;
 
 import javax.lang.model.element.AnnotationMirror;

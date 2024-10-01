@@ -4,11 +4,11 @@ import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
+import intellispaces.common.javastatement.instance.Instance;
+import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.reference.ThrowableReference;
 import intellispaces.common.javastatement.reference.TypeReference;
-import intellispaces.common.javastatement.instance.Instance;
-import intellispaces.common.javastatement.reference.NamedReference;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

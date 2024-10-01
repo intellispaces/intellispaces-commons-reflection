@@ -4,9 +4,9 @@ import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
-import intellispaces.common.javastatement.customtype.Annotations;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
 import intellispaces.common.javastatement.customtype.AnnotationType;
+import intellispaces.common.javastatement.customtype.Annotations;
 import intellispaces.common.javastatement.session.Session;
 
 import javax.lang.model.element.AnnotationMirror;

@@ -2,12 +2,12 @@ package intellispaces.common.javastatement;
 
 import intellispaces.common.base.collection.CollectionFunctions;
 import intellispaces.common.base.datahandle.HandleFunctions;
-import intellispaces.common.javastatement.support.TesteeType;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.EnumType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;
+import intellispaces.common.javastatement.support.TesteeType;
 import org.junit.jupiter.api.Test;
 
 import javax.lang.model.element.TypeElement;

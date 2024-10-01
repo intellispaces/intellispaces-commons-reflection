@@ -3,8 +3,8 @@ package intellispaces.common.javastatement.reference;
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
-import intellispaces.common.javastatement.exception.JavaStatementException;
 import intellispaces.common.javastatement.customtype.CustomTypeFunctions;
+import intellispaces.common.javastatement.exception.JavaStatementException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

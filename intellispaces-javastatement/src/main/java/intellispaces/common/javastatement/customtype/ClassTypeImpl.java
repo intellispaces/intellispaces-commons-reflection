@@ -2,6 +2,7 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
+import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
@@ -13,7 +14,6 @@ import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferenceFunctions;
 import intellispaces.common.javastatement.session.Sessions;
-import intellispaces.common.base.type.TypeFunctions;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 class ClassTypeImpl implements ClassType {
   private boolean nested;
   private boolean isAbstract;
+  private boolean isFinal;
   private String canonicalName;
   private List<AnnotationInstance> annotations;
   private List<NamedReference> typeParameters;
@@ -50,6 +51,7 @@ class ClassTypeImpl implements ClassType {
   ClassTypeImpl(
       boolean nested,
       boolean isAbstract,
+      boolean isFinal,
       String canonicalName,
       List<AnnotationInstance> annotations,
       List<NamedReference> typeParameters,
@@ -61,6 +63,7 @@ class ClassTypeImpl implements ClassType {
     this();
     this.nested = nested;
     this.isAbstract = isAbstract;
+    this.isFinal = isFinal;
     this.canonicalName = canonicalName;
     this.annotations = annotations;
     this.typeParameters = typeParameters;
@@ -78,6 +81,11 @@ class ClassTypeImpl implements ClassType {
   @Override
   public boolean isAbstract() {
     return isAbstract;
+  }
+
+  @Override
+  public boolean isFinal() {
+    return isFinal;
   }
 
   @Override

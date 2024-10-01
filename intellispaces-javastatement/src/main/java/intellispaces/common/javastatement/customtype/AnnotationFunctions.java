@@ -2,12 +2,12 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.javastatement.AnnotatedStatement;
 import intellispaces.common.javastatement.exception.JavaStatementException;
-import intellispaces.common.javastatement.instance.InstanceFunctions;
-import intellispaces.common.javastatement.method.MethodFunctions;
 import intellispaces.common.javastatement.instance.AnnotationElement;
 import intellispaces.common.javastatement.instance.AnnotationElements;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.Instance;
+import intellispaces.common.javastatement.instance.InstanceFunctions;
+import intellispaces.common.javastatement.method.MethodFunctions;
 import intellispaces.common.javastatement.session.Session;
 
 import javax.lang.model.element.AnnotationMirror;

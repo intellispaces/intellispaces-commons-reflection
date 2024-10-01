@@ -10,11 +10,11 @@ import intellispaces.common.javastatement.context.TypeContextBuilder;
 import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
+import intellispaces.common.javastatement.instance.Instance;
+import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.reference.ThrowableReference;
 import intellispaces.common.javastatement.reference.TypeReference;
-import intellispaces.common.javastatement.instance.Instance;
-import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.session.Session;
 
 import javax.lang.model.element.ExecutableElement;

@@ -11,9 +11,9 @@ import intellispaces.common.javastatement.reference.PrimitiveReferences;
 import intellispaces.common.javastatement.samples.AnnotationWithElementsView;
 import intellispaces.common.javastatement.samples.TestAnnotation;
 import intellispaces.common.javastatement.samples.TestEnum;
+import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;
 import intellispaces.common.javastatement.support.TesteeType;
-import intellispaces.common.javastatement.session.Session;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

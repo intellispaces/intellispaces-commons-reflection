@@ -2,12 +2,12 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
-import intellispaces.common.javastatement.reference.CustomTypeReference;
-import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.NamedReference;
+import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferenceFunctions;
 
@@ -54,6 +54,11 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   @Override
   public boolean isAbstract() {
     return actualType.isAbstract();
+  }
+
+  @Override
+  public boolean isFinal() {
+    return actualType.isFinal();
   }
 
   @Override

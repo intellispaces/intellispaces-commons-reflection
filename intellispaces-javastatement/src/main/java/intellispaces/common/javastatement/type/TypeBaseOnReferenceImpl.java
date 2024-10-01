@@ -2,8 +2,8 @@ package intellispaces.common.javastatement.type;
 
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.base.type.AbstractType;
-import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
+import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.util.List;
 

@@ -2,11 +2,11 @@ package intellispaces.common.javastatement.reference;
 
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.javastatement.StatementTypes;
-import intellispaces.common.javastatement.customtype.Classes;
-import intellispaces.common.javastatement.customtype.Interfaces;
 import intellispaces.common.javastatement.customtype.ClassType;
+import intellispaces.common.javastatement.customtype.Classes;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.InterfaceType;
+import intellispaces.common.javastatement.customtype.Interfaces;
 
 import java.util.ArrayList;
 import java.util.List;

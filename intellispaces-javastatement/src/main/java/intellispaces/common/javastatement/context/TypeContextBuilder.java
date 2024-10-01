@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.context;
 
-import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.reference.NamedReference;
+import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 
 import java.util.HashMap;
 import java.util.List;

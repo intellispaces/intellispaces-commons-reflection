@@ -1,8 +1,8 @@
 package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.javastatement.AnnotatedStatement;
-import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 
@@ -16,6 +16,8 @@ import java.util.Optional;
 public interface CustomType extends AnnotatedStatement {
 
   boolean isAbstract();
+
+  boolean isFinal();
 
   /**
    * Canonical class name.
