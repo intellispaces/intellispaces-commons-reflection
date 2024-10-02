@@ -8,6 +8,7 @@ import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -52,6 +53,8 @@ public interface CustomType extends AnnotatedStatement {
    * <p>Some types have not a type parameters.
    */
   List<NamedReference> typeParameters();
+
+  Map<String, NamedReference> typeParameterMap();
 
   /**
    * Full declaration of the type parameters.

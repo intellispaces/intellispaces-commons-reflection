@@ -17,7 +17,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Abstract adapter of {@link Class} to {@link CustomType}.
@@ -61,6 +64,11 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
       return List.of();
     }
     throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  @Override
+  public Map<String, NamedReference> typeParameterMap() {
+    return typeParameters().stream().collect(Collectors.toMap(NamedReference::name, Function.identity()));
   }
 
   @Override

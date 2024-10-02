@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 abstract class AbstractEffectiveCustomType implements CustomType {
@@ -89,6 +90,11 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   @Override
   public List<NamedReference> typeParameters() {
     return actualType.typeParameters();
+  }
+
+  @Override
+  public Map<String, NamedReference> typeParameterMap() {
+    return actualType.typeParameterMap();
   }
 
   @Override

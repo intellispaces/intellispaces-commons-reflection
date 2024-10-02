@@ -18,7 +18,9 @@ import intellispaces.common.javastatement.session.Sessions;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 class InterfaceImpl implements InterfaceType {
@@ -139,6 +141,11 @@ class InterfaceImpl implements InterfaceType {
   @Override
   public List<NamedReference> typeParameters() {
     return typeParameters;
+  }
+
+  @Override
+  public Map<String, NamedReference> typeParameterMap() {
+    return typeParameters().stream().collect(Collectors.toMap(NamedReference::name, Function.identity()));
   }
 
   @Override

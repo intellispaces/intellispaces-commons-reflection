@@ -3,6 +3,7 @@ package intellispaces.common.javastatement.customtype;
 import intellispaces.common.javastatement.reference.NamedReference;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -13,6 +14,11 @@ public interface AnnotationType extends CustomType {
   @Override
   default List<NamedReference> typeParameters() {
     return List.of();
+  }
+
+  @Override
+  default Map<String, NamedReference> typeParameterMap() {
+    return Map.of();
   }
 
   @Override

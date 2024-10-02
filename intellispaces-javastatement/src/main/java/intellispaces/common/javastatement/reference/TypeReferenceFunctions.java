@@ -127,9 +127,23 @@ public interface TypeReferenceFunctions {
   private static boolean isEqualCustomTypeReferences(
       CustomTypeReference typeReference1, CustomTypeReference typeReference2
   ) {
-    return typeReference1.targetType().canonicalName().equals(
-        typeReference2.targetType().canonicalName()
-    );
+    if (!typeReference1.targetType().canonicalName().equals(typeReference2.targetType().canonicalName())) {
+      return false;
+    }
+
+    Iterator<NotPrimitiveReference> typeReferenceArguments1 = typeReference1.typeArguments().iterator();
+    Iterator<NotPrimitiveReference> typeReferenceArguments2 = typeReference2.typeArguments().iterator();
+    while (typeReferenceArguments1.hasNext() && typeReferenceArguments2.hasNext()) {
+      NotPrimitiveReference typeReferenceArgument1 = typeReferenceArguments1.next();
+      NotPrimitiveReference typeReferenceArgument2 = typeReferenceArguments2.next();
+      if (!isEqualTypes(typeReferenceArgument1, typeReferenceArgument2)) {
+        return false;
+      }
+    }
+    if (typeReferenceArguments1.hasNext() || typeReferenceArguments2.hasNext()) {
+      return false;
+    }
+    return true;
   }
 
   static boolean isEqualNamedTypeReferences(

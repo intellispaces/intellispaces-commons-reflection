@@ -4,6 +4,7 @@ import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.NamedReference;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -19,6 +20,11 @@ public interface EnumType extends CustomType {
   @Override
   default List<NamedReference> typeParameters() {
     return List.of();
+  }
+
+  @Override
+  default Map<String, NamedReference> typeParameterMap() {
+    return Map.of();
   }
 
   @Override

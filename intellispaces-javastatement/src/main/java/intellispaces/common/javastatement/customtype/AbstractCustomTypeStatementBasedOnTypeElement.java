@@ -20,7 +20,9 @@ import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -103,6 +105,11 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   @Override
   public List<NamedReference> typeParameters() {
     return typeParams;
+  }
+
+  @Override
+  public Map<String, NamedReference> typeParameterMap() {
+    return typeParameters().stream().collect(Collectors.toMap(NamedReference::name, Function.identity()));
   }
 
   @Override
