@@ -15,5 +15,5 @@ public interface MethodParam extends AnnotatedStatement {
 
   TypeReference type();
 
-  MethodParam specify(Map<String, NotPrimitiveReference> typeMapping);
+  MethodParam effective(Map<String, NotPrimitiveReference> typeMapping);
 }

@@ -35,8 +35,8 @@ class ArrayReferenceBasedOnArrayType extends AbstractTypeReference implements Ar
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
-    TypeReference elementTypeReference = elementType().specify(typeMapping);
+  public TypeReference effective(Map<String, NotPrimitiveReference> typeMapping) {
+    TypeReference elementTypeReference = elementType().effective(typeMapping);
     return new ArrayReferenceImpl(elementTypeReference);
   }
 }

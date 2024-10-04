@@ -68,10 +68,10 @@ class MethodParamBasedOnVariableElement implements MethodParam {
   }
 
   @Override
-  public MethodParam specify(Map<String, NotPrimitiveReference> typeMapping) {
+  public MethodParam effective(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodParamImpl(
         name(),
-        type().specify(typeMapping),
+        type().effective(typeMapping),
         annotations()
     );
   }

@@ -32,11 +32,11 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+  public TypeReference effective(Map<String, NotPrimitiveReference> typeMapping) {
     List<NotPrimitiveReference> curTypeArguments = typeArguments();
     List<NotPrimitiveReference> newTypeArguments = new ArrayList<>();
     for (NotPrimitiveReference curTypeArgument : curTypeArguments) {
-      newTypeArguments.add((NotPrimitiveReference) curTypeArgument.specify(typeMapping));
+      newTypeArguments.add((NotPrimitiveReference) curTypeArgument.effective(typeMapping));
     }
     return new CustomTypeReferenceImpl(targetType(), newTypeArguments);
   }

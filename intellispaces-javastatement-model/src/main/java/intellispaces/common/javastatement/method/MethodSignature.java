@@ -62,5 +62,5 @@ public interface MethodSignature extends AnnotatedStatement {
    */
   boolean isStatic();
 
-  MethodSignature specify(Map<String, NotPrimitiveReference> typeMapping);
+  MethodSignature effective(Map<String, NotPrimitiveReference> typeMapping);
 }

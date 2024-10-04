@@ -40,14 +40,14 @@ class WildcardReferenceBasedOnWildcardType extends AbstractTypeReference impleme
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+  public TypeReference effective(Map<String, NotPrimitiveReference> typeMapping) {
     ReferenceBound extendedBound = extendedBound().orElse(null);
     if (extendedBound != null) {
-      extendedBound = (ReferenceBound) extendedBound.specify(typeMapping);
+      extendedBound = (ReferenceBound) extendedBound.effective(typeMapping);
     }
     ReferenceBound superBound = superBound().orElse(null);
     if (superBound != null) {
-      superBound = (ReferenceBound) superBound.specify(typeMapping);
+      superBound = (ReferenceBound) superBound.effective(typeMapping);
     }
     return new WildcardReferenceImpl(extendedBound, superBound);
   }

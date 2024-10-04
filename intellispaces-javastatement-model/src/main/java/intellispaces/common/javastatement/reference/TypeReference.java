@@ -85,7 +85,7 @@ public interface TypeReference extends Statement {
     return asCustomTypeReference().orElseThrow();
   }
 
-  TypeReference specify(Map<String, NotPrimitiveReference> typeMapping);
+  TypeReference effective(Map<String, NotPrimitiveReference> typeMapping);
 
   Collection<CustomType> dependencies();
 

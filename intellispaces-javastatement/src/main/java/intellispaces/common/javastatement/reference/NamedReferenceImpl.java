@@ -41,7 +41,7 @@ class NamedReferenceImpl extends AbstractTypeReference implements NamedReference
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+  public TypeReference effective(Map<String, NotPrimitiveReference> typeMapping) {
     TypeReference specifiedReference = typeMapping.get(name);
     if (specifiedReference != null) {
       return specifiedReference;
@@ -49,7 +49,7 @@ class NamedReferenceImpl extends AbstractTypeReference implements NamedReference
     List<ReferenceBound> curExtendedBounds = extendedBounds();
     List<ReferenceBound> newExtendedBounds = new ArrayList<>();
     for (ReferenceBound curExtendedBound : curExtendedBounds) {
-      newExtendedBounds.add((ReferenceBound) curExtendedBound.specify(typeMapping));
+      newExtendedBounds.add((ReferenceBound) curExtendedBound.effective(typeMapping));
     }
     return new NamedReferenceImpl(name, owner(), newExtendedBounds);
   }

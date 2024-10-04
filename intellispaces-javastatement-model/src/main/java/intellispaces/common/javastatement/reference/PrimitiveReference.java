@@ -47,7 +47,7 @@ public interface PrimitiveReference extends TypeReference {
   }
 
   @Override
-  default TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+  default TypeReference effective(Map<String, NotPrimitiveReference> typeMapping) {
     return this;
   }
 

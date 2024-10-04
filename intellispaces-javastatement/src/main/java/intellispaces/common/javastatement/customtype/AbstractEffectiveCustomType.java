@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 abstract class AbstractEffectiveCustomType implements CustomType {
@@ -111,7 +110,7 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   public List<CustomTypeReference> parentTypes() {
     List<CustomTypeReference> actualParentTypes = actualType.parentTypes();
     return actualParentTypes.stream()
-        .map(p -> (CustomTypeReference) p.specify(typeMapping))
+        .map(p -> (CustomTypeReference) p.effective(typeMapping))
         .toList();
   }
 
@@ -134,7 +133,7 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   public List<MethodStatement> declaredMethods() {
     List<MethodStatement> actualMethods = actualType.declaredMethods();
     return actualMethods.stream()
-        .map(m -> m.specify(typeMapping))
+        .map(m -> m.effective(typeMapping))
         .toList();
   }
 
@@ -158,7 +157,7 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   public List<MethodStatement> actualMethods() {
     List<MethodStatement> actualMethods = actualType.actualMethods();
     return actualMethods.stream()
-        .map(m -> m.specify(typeMapping))
+        .map(m -> m.effective(typeMapping))
         .toList();
   }
 

@@ -142,7 +142,7 @@ class MethodSignatureImpl implements MethodSignature {
   }
 
   @Override
-  public MethodSignature specify(Map<String, NotPrimitiveReference> typeMapping) {
+  public MethodSignature effective(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodSignatureImpl(
         name(),
         isAbstract(),
@@ -150,10 +150,10 @@ class MethodSignatureImpl implements MethodSignature {
         isDefault(),
         isStatic(),
         typeParameters(),
-        returnType().map(t -> t.specify(typeMapping)).orElse(null),
+        returnType().map(t -> t.effective(typeMapping)).orElse(null),
         defaultValue().orElse(null),
-        params().stream().map(p -> p.specify(typeMapping)).toList(),
-        exceptions().stream().map(e -> (ThrowableReference) e.specify(typeMapping)).toList(),
+        params().stream().map(p -> p.effective(typeMapping)).toList(),
+        exceptions().stream().map(e -> (ThrowableReference) e.effective(typeMapping)).toList(),
         annotations()
     );
   }

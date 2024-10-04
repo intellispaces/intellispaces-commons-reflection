@@ -54,7 +54,7 @@ class CustomTypeReferenceBasedOnClass extends AbstractTypeReference implements C
   }
 
   @Override
-  public TypeReference specify(Map<String, NotPrimitiveReference> typeMapping) {
+  public TypeReference effective(Map<String, NotPrimitiveReference> typeMapping) {
     return this;
   }
 

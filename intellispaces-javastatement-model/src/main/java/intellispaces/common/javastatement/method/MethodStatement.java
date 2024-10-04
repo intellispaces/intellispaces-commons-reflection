@@ -31,7 +31,7 @@ public interface MethodStatement extends AnnotatedStatement {
    */
   List<MethodStatement> overrideMethods();
 
-  MethodStatement specify(Map<String, NotPrimitiveReference> typeMapping);
+  MethodStatement effective(Map<String, NotPrimitiveReference> typeMapping);
 
   /**
    * Declared type parameters.

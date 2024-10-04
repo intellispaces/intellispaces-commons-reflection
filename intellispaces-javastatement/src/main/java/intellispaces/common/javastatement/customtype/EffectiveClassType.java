@@ -33,7 +33,7 @@ class EffectiveClassType extends AbstractEffectiveCustomType implements ClassTyp
   public List<MethodStatement> constructors() {
     List<MethodStatement> actualConstructors = ((ClassType) actualType).constructors();
     return actualConstructors.stream()
-        .map(c -> c.specify(typeMapping))
+        .map(c -> c.effective(typeMapping))
         .toList();
   }
 
