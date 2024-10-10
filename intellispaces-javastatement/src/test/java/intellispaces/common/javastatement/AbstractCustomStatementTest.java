@@ -5,7 +5,7 @@ import com.google.testing.compile.CompilationSubject;
 import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
 import intellispaces.common.base.collection.CollectionFunctions;
-import intellispaces.common.base.datahandle.HandleFunctions;
+import intellispaces.common.base.object.HandleFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.reference.NamedReference;

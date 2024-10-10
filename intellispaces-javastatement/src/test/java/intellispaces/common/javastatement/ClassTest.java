@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement;
 
 import intellispaces.common.base.collection.CollectionFunctions;
-import intellispaces.common.base.datahandle.HandleFunctions;
+import intellispaces.common.base.object.HandleFunctions;
 import intellispaces.common.javastatement.customtype.ClassType;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
