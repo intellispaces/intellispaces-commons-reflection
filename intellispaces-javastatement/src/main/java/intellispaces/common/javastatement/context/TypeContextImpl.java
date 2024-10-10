@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.context;
 
-import intellispaces.common.base.object.HandleFunctions;
+import intellispaces.common.base.object.ObjectHandleFunctions;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 
@@ -29,7 +29,7 @@ class TypeContextImpl implements TypeContext, TypeContextBlank {
 
   @Override
   public Optional<ContextTypeParameter> get(String typeParamName) {
-    return Optional.ofNullable(HandleFunctions.coalesce(
+    return Optional.ofNullable(ObjectHandleFunctions.coalesce(
         () -> parentContext.get(typeParamName).orElse(null),
         () -> map.get(typeParamName)
     ));
