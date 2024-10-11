@@ -56,7 +56,7 @@ public interface InstanceFunctions {
     } else if (value instanceof Short) {
       instance = PrimitiveInstances.of(value, PrimitiveReferences.Short);
     } else if (value instanceof Integer) {
-      instance = PrimitiveInstances.of(value, PrimitiveReferences.Integer);
+      instance = PrimitiveInstances.of(value, PrimitiveReferences.Int);
     } else if (value instanceof Long) {
       instance = PrimitiveInstances.of(value, PrimitiveReferences.Long);
     } else if (value instanceof Float) {

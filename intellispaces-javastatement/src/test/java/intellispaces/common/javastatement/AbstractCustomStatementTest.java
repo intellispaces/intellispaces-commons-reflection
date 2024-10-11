@@ -201,14 +201,14 @@ class AbstractCustomStatementTest {
 
   protected void validateIntGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isFalse();
-    assertThat(method.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
+    assertThat(method.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int");
     assertThat(method.params()).isEmpty();
   }
 
   protected void validateAbstractIntGetter(MethodStatement method) {
     assertThat(method.isAbstract()).isTrue();
-    assertThat(method.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
+    assertThat(method.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int");
     assertThat(method.params()).isEmpty();
   }
@@ -303,7 +303,7 @@ class AbstractCustomStatementTest {
     assertThat(method.isAbstract()).isFalse();
     assertThat(method.returnType().orElseThrow()
         .asArrayReference().orElseThrow()
-        .elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
+        .elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int[]");
     assertThat(method.params()).isEmpty();
   }
@@ -312,7 +312,7 @@ class AbstractCustomStatementTest {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asArrayReference().orElseThrow()
-        .elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
+        .elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
     assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("int[]");
     assertThat(method.params()).isEmpty();
   }

@@ -208,7 +208,7 @@ public interface JavaModelFunctions {
       case BOOLEAN -> PrimitiveReferences.Boolean;
       case BYTE -> PrimitiveReferences.Byte;
       case SHORT -> PrimitiveReferences.Short;
-      case INT -> PrimitiveReferences.Integer;
+      case INT -> PrimitiveReferences.Int;
       case LONG -> PrimitiveReferences.Long;
       case CHAR -> PrimitiveReferences.Char;
       case FLOAT -> PrimitiveReferences.Float;

@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.reference;
 
+import intellispaces.common.base.type.Primitive;
 import intellispaces.common.javastatement.customtype.CustomType;
 
 import java.util.Collection;
@@ -15,6 +16,8 @@ public interface PrimitiveReference extends TypeReference {
   String typename();
 
   Class<?> wrapperClass();
+
+  Primitive asPrimitive();
 
   @Override
   default boolean isPrimitiveReference() {

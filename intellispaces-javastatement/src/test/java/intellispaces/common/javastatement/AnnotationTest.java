@@ -105,7 +105,7 @@ public class AnnotationTest extends AbstractCustomStatementTest {
   @Test
   public void testAnnotationWithIntElement() {
     testAnnotationWithElement("AnnotationWithIntElement", "intElement", elementMethod -> {
-      Assertions.assertThat(elementMethod.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
+      Assertions.assertThat(elementMethod.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
       Assertions.assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -113,8 +113,8 @@ public class AnnotationTest extends AbstractCustomStatementTest {
   @Test
   public void testAnnotationWithIntDefaultElement() {
     testAnnotationWithElement("AnnotationWithIntDefaultElement", "intElementDefault", elementMethod -> {
-      Assertions.assertThat(elementMethod.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
-      Assertions.assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveReferences.Integer);
+      Assertions.assertThat(elementMethod.returnType().orElseThrow().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
+      Assertions.assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().type()).isSameAs(PrimitiveReferences.Int);
       Assertions.assertThat(elementMethod.defaultValue().orElseThrow().asPrimitive().orElseThrow().value()).isEqualTo(1);
       Assertions.assertThat(elementMethod.params()).isEmpty();
     });
@@ -234,7 +234,7 @@ public class AnnotationTest extends AbstractCustomStatementTest {
   public void testAnnotationWithArrayOfIntElement() {
     testAnnotationWithElement("AnnotationWithArrayOfIntElement", "arrayOfIntElement", elementMethod -> {
       Assertions.assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayReference().orElseThrow().elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
+          .asArrayReference().orElseThrow().elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
       Assertions.assertThat(elementMethod.params()).isEmpty();
     });
   }
@@ -243,7 +243,7 @@ public class AnnotationTest extends AbstractCustomStatementTest {
   public void testAnnotationWithArrayOfIntDefaultElement() {
     testAnnotationWithElement("AnnotationWithArrayOfIntDefaultElement", "arrayOfIntElementDefault", elementMethod -> {
       Assertions.assertThat(elementMethod.returnType().orElseThrow()
-          .asArrayReference().orElseThrow().elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Integer);
+          .asArrayReference().orElseThrow().elementType().asPrimitiveReference().orElseThrow()).isSameAs(PrimitiveReferences.Int);
       Assertions.assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow().elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Integer.class.getCanonicalName());
       Assertions.assertThat(elementMethod.defaultValue().orElseThrow()

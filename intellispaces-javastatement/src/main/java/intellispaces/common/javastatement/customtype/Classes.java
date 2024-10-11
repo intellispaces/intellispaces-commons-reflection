@@ -41,4 +41,8 @@ public interface Classes {
   ) {
     return new ClassBasedOnTypeElement(typeElement, typeContext, session);
   }
+
+  static ClassTypeBuilder build() {
+    return new ClassTypeBuilder();
+  }
 }

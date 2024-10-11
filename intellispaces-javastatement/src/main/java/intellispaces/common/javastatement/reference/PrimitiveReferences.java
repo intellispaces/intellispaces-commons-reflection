@@ -1,5 +1,7 @@
 package intellispaces.common.javastatement.reference;
 
+import intellispaces.common.base.type.Primitive;
+import intellispaces.common.base.type.Primitives;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 
@@ -7,28 +9,26 @@ import java.util.function.Function;
 
 public enum PrimitiveReferences implements PrimitiveReference {
 
-  Byte("byte", java.lang.Byte.class),
+  Byte(Primitives.Byte),
 
-  Short("short", java.lang.Short.class),
+  Short(Primitives.Short),
 
-  Integer("int", java.lang.Integer.class),
+  Int(Primitives.Int),
 
-  Long("long", java.lang.Long.class),
+  Long(Primitives.Long),
 
-  Float("float", java.lang.Float.class),
+  Float(Primitives.Float),
 
-  Double("double", java.lang.Double.class),
+  Double(Primitives.Double),
 
-  Char("char", Character.class),
+  Char(Primitives.Char),
 
-  Boolean("boolean", java.lang.Boolean.class);
+  Boolean(Primitives.Boolean);
 
-  private final String typename;
-  private final Class<?> wrapperClass;
+  private final Primitive primitive;
 
-  PrimitiveReferences(String typename, Class<?> wrapperClass) {
-    this.typename = typename;
-    this.wrapperClass = wrapperClass;
+  PrimitiveReferences(Primitive primitive) {
+    this.primitive = primitive;
   }
 
   @Override
@@ -37,48 +37,52 @@ public enum PrimitiveReferences implements PrimitiveReference {
   }
 
   public String typename() {
-    return typename;
+    return primitive.typename();
   }
 
   @Override
   public Class<?> wrapperClass() {
-    return wrapperClass;
+    return primitive.wrapperClass();
   }
 
+  @Override
+  public Primitive asPrimitive() {
+    return primitive;
+  }
 
   @Override
   public String simpleDeclaration() {
-    return typename;
+    return typename();
   }
 
   @Override
   public String simpleDeclaration(Function<String, String> nameMapper) {
-    return typename;
+    return typename();
   }
 
   @Override
   public String actualDeclaration() {
-    return typename;
+    return typename();
   }
 
   @Override
   public String actualDeclaration(Function<String, String> nameMapper) {
-    return typename;
+    return typename();
   }
 
   @Override
   public String actualBlindDeclaration(Function<String, String> nameMapper) {
-    return typename;
+    return typename();
   }
 
   @Override
   public String formalFullDeclaration() {
-    return typename;
+    return typename();
   }
 
   @Override
   public String formalBriefDeclaration() {
-    return typename;
+    return typename();
   }
 
   @Override
