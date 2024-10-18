@@ -8,6 +8,7 @@ import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.Instance;
 import intellispaces.common.javastatement.instance.InstanceFunctions;
 import intellispaces.common.javastatement.method.MethodFunctions;
+import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.session.Session;
 
 import javax.lang.model.element.AnnotationMirror;
@@ -31,6 +32,30 @@ import java.util.stream.IntStream;
  * Annotation related functions.
  */
 public interface AnnotationFunctions {
+
+  static <A extends Annotation> boolean isAssignableAnnotatedType(CustomType type, Class<A> annotationClass) {
+    return isAssignableAnnotatedType(type, annotationClass, new HashSet<>());
+  }
+
+  private static <A extends Annotation> boolean isAssignableAnnotatedType(
+      CustomType type, Class<A> annotationClass, Set<String> history
+  ) {
+    if (history.contains(type.canonicalName())) {
+      return false;
+    }
+    history.add(type.canonicalName());
+
+    if (type.selectAnnotation(annotationClass).isPresent()) {
+      return true;
+    }
+
+    for (CustomTypeReference parent : type.parentTypes()) {
+      if (isAssignableAnnotatedType(parent.targetType(), annotationClass, history)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   static <A extends Annotation> List<A> allAnnotationsOf(CustomType type, Class<A> annotationClass) {
     return allAnnotationsOf(type, annotationClass.getCanonicalName()).stream()
