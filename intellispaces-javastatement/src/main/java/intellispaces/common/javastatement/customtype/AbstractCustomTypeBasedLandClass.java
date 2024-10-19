@@ -140,9 +140,9 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public Optional<MethodStatement> declaredMethod(String name, List<TypeReference> parameterTypes) {
-    var paramClasses = (Class<?>[]) parameterTypes.stream()
+    var paramClasses = parameterTypes.stream()
         .map(r -> r.asCustomTypeReferenceOrElseThrow().targetClass())
-        .toArray();
+        .toArray(Class<?>[]::new);
     try {
       Method method = aClass.getDeclaredMethod(name, paramClasses);
       return Optional.of(Methods.of(method));
