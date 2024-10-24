@@ -28,7 +28,7 @@ import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.reference.PrimitiveReferences;
 import intellispaces.common.javastatement.reference.ReferenceBound;
 import intellispaces.common.javastatement.reference.TypeReference;
-import intellispaces.common.javastatement.reference.WildcardTypes;
+import intellispaces.common.javastatement.reference.Wildcards;
 import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;
 
@@ -215,7 +215,7 @@ public interface JavaModelFunctions {
       case DOUBLE -> PrimitiveReferences.Double;
       case DECLARED -> getTypeReference((DeclaredType) typeMirror, typeContext, session);
       case TYPEVAR -> getTypeReference((TypeVariable) typeMirror, typeContext);
-      case WILDCARD -> WildcardTypes.of((WildcardType) typeMirror, typeContext, session);
+      case WILDCARD -> Wildcards.of((WildcardType) typeMirror, typeContext, session);
       case ARRAY -> ArrayTypeReferences.of((ArrayType) typeMirror, typeContext, session);
       default -> throw JavaStatementException.withMessage("Unsupported type mirror kind {0}", typeMirror.getKind());
     };
