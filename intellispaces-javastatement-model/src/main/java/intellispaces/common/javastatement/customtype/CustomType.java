@@ -47,6 +47,8 @@ public interface CustomType extends AnnotatedStatement {
    */
   boolean isNested();
 
+  Optional<CustomType> enclosingType();
+
   /**
    * Declared type parameters.
    *

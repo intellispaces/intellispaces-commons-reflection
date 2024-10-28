@@ -87,6 +87,11 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   }
 
   @Override
+  public Optional<CustomType> enclosingType() {
+    return actualType.enclosingType();
+  }
+
+  @Override
   public List<NamedReference> typeParameters() {
     return actualType.typeParameters().stream()
         .map(p -> (NamedReference) p.effective(typeMapping))

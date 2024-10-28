@@ -58,6 +58,19 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   }
 
   @Override
+  public Optional<CustomType> enclosingType() {
+    Class<?> enclosingClass = aClass.getEnclosingClass();
+    if (enclosingClass == null) {
+      return Optional.empty();
+    }
+    if (enclosingClass.isInterface()) {
+      return Optional.of(Interfaces.of(enclosingClass));
+    } else {
+      return Optional.of(Classes.of(enclosingClass));
+    }
+  }
+
+  @Override
   public List<NamedReference> typeParameters() {
     TypeVariable<? extends Class<?>>[] params = aClass.getTypeParameters();
     if (params.length == 0) {

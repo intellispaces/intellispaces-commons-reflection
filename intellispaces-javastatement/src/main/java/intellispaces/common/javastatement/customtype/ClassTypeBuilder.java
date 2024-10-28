@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class ClassTypeBuilder {
-  private boolean nested = false;
   private boolean isAbstract = false;
   private boolean isFinal = false;
   private String canonicalName;
+  private CustomType enclosingType;
   private List<AnnotationInstance> annotations = new ArrayList<>();
   private List<NamedReference> typeParameters = new ArrayList<>();
   private CustomTypeReference extendedClass = null;
@@ -29,10 +29,10 @@ public class ClassTypeBuilder {
   public ClassType get() {
     validate();
     return new ClassTypeImpl(
-      nested,
       isAbstract,
       isFinal,
       canonicalName,
+      enclosingType,
       annotations,
       typeParameters,
       extendedClass,

@@ -25,10 +25,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 class ClassTypeImpl implements ClassType {
-  private boolean nested;
   private boolean isAbstract;
   private boolean isFinal;
   private String canonicalName;
+  private CustomType enclosingType;
   private List<AnnotationInstance> annotations;
   private List<NamedReference> typeParameters;
   private CustomTypeReference extendedClass;
@@ -51,10 +51,10 @@ class ClassTypeImpl implements ClassType {
   }
 
   ClassTypeImpl(
-      boolean nested,
       boolean isAbstract,
       boolean isFinal,
       String canonicalName,
+      CustomType enclosingType,
       List<AnnotationInstance> annotations,
       List<NamedReference> typeParameters,
       CustomTypeReference extendedClass,
@@ -63,10 +63,10 @@ class ClassTypeImpl implements ClassType {
       List<MethodStatement> declaredMethods
   ) {
     this();
-    this.nested = nested;
     this.isAbstract = isAbstract;
     this.isFinal = isFinal;
     this.canonicalName = canonicalName;
+    this.enclosingType = enclosingType;
     this.annotations = annotations;
     this.typeParameters = typeParameters;
     this.extendedClass = extendedClass;
@@ -77,7 +77,12 @@ class ClassTypeImpl implements ClassType {
 
   @Override
   public boolean isNested() {
-    return nested;
+    return enclosingType != null;
+  }
+
+  @Override
+  public Optional<CustomType> enclosingType() {
+    return Optional.ofNullable(enclosingType);
   }
 
   @Override

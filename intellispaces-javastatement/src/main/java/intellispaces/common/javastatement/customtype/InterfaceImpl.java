@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 class InterfaceImpl implements InterfaceType {
   private String canonicalName;
+  private CustomType enclosingType;
   private List<AnnotationInstance> annotations;
   private List<NamedReference> typeParameters;
   private List<CustomTypeReference> parentTypes;
@@ -45,6 +46,7 @@ class InterfaceImpl implements InterfaceType {
 
   InterfaceImpl(
       String canonicalName,
+      CustomType enclosingType,
       List<AnnotationInstance> annotations,
       List<NamedReference> typeParameters,
       List<CustomTypeReference> parentTypes,
@@ -52,6 +54,7 @@ class InterfaceImpl implements InterfaceType {
   ) {
     this();
     this.canonicalName = canonicalName;
+    this.enclosingType = enclosingType;
     this.annotations = annotations;
     this.typeParameters = typeParameters;
     this.parentTypes = parentTypes;
@@ -115,7 +118,12 @@ class InterfaceImpl implements InterfaceType {
 
   @Override
   public boolean isNested() {
-    return false;
+    return enclosingType != null;
+  }
+
+  @Override
+  public Optional<CustomType> enclosingType() {
+    return Optional.ofNullable(enclosingType);
   }
 
   @Override

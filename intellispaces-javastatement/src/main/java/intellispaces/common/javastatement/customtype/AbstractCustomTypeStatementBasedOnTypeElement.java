@@ -14,6 +14,7 @@ import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferenceFunctions;
 import intellispaces.common.javastatement.session.Session;
+import intellispaces.common.javastatement.session.Sessions;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -100,6 +101,17 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   public boolean isNested() {
     Element enclosingElement = typeElement.getEnclosingElement();
     return enclosingElement.getKind().isClass() || enclosingElement.getKind().isInterface();
+  }
+
+  @Override
+  public Optional<CustomType> enclosingType() {
+    Element enclosingElement = typeElement.getEnclosingElement();
+    if (enclosingElement.getKind().isClass()) {
+      return Optional.of(Classes.of((TypeElement) enclosingElement, Sessions.get()));
+    } else if (enclosingElement.getKind().isInterface()) {
+      return Optional.of(Interfaces.of((TypeElement) enclosingElement, Sessions.get()));
+    }
+    return Optional.empty();
   }
 
   @Override
