@@ -113,6 +113,14 @@ public interface TypeReferenceFunctions {
       NamedReference namedReference1 = typeReference1.asNamedReferenceOrElseThrow();
       NamedReference namedReference2 = typeReference2.asNamedReferenceOrElseThrow();
       return isEqualNamedTypeReferences(namedReference1, namedReference2);
+    } else if (typeReference1.isArrayReference() && typeReference2.isArrayReference()) {
+      ArrayReference arrayReference1 = typeReference1.asArrayReferenceOrElseThrow();
+      ArrayReference arrayReference2 = typeReference2.asArrayReferenceOrElseThrow();
+      return isEqualArrayTypeReferences(arrayReference1, arrayReference2);
+    } else if (typeReference1.isWildcard() && typeReference2.isWildcard()) {
+      WildcardReference wildcardReference1 = typeReference1.asWildcardOrElseThrow();
+      WildcardReference wildcardReference2 = typeReference2.asWildcardOrElseThrow();
+      return isEqualWildcardReferences(wildcardReference1, wildcardReference2);
     } else {
       return false;
     }
@@ -146,9 +154,7 @@ public interface TypeReferenceFunctions {
     return true;
   }
 
-  static boolean isEqualNamedTypeReferences(
-      NamedReference typeReference1, NamedReference typeReference2
-  ) {
+  static boolean isEqualNamedTypeReferences(NamedReference typeReference1, NamedReference typeReference2) {
     if (typeReference1.extendedBounds().size() != typeReference2.extendedBounds().size()) {
       return false;
     }
@@ -159,6 +165,34 @@ public interface TypeReferenceFunctions {
         return false;
       }
     }
+    return true;
+  }
+
+  static boolean isEqualArrayTypeReferences(ArrayReference typeReference1, ArrayReference typeReference2) {
+    return isEqualTypes(typeReference1.elementType(), typeReference2.elementType());
+  }
+
+  static boolean isEqualWildcardReferences(WildcardReference wildcardReference1, WildcardReference wildcardReference2) {
+    if (wildcardReference1.extendedBound().isPresent() && wildcardReference2.extendedBound().isPresent()) {
+      TypeReference extendedBound1 = wildcardReference1.extendedBound().get();
+      TypeReference extendedBound2 = wildcardReference1.extendedBound().get();
+      if (!isEqualTypes(extendedBound1, extendedBound2)) {
+        return false;
+      }
+    } else if (wildcardReference1.extendedBound().isPresent() || wildcardReference2.extendedBound().isPresent()) {
+      return false;
+    }
+
+    if (wildcardReference1.superBound().isPresent() && wildcardReference2.superBound().isPresent()) {
+      TypeReference superBound1 = wildcardReference1.superBound().get();
+      TypeReference superBound2 = wildcardReference1.superBound().get();
+      if (!isEqualTypes(superBound1, superBound2)) {
+        return false;
+      }
+    } else if (wildcardReference1.superBound().isPresent() || wildcardReference2.superBound().isPresent()) {
+      return false;
+    }
+
     return true;
   }
 
@@ -177,7 +211,9 @@ public interface TypeReferenceFunctions {
       return isEqualNamedTypeReferences(namedReference1, namedReference2);
     } else if (
         (typeReference1.isPrimitiveReference() && typeReference2.isCustomTypeReference()) ||
-            (typeReference1.isCustomTypeReference() && typeReference2.isPrimitiveReference())
+            (typeReference1.isCustomTypeReference() && typeReference2.isPrimitiveReference()) ||
+            (typeReference1.isNamedReference() && typeReference2.isCustomTypeReference()) ||
+            (typeReference1.isCustomTypeReference() && typeReference2.isNamedReference())
     ) {
       return false;
     } else {

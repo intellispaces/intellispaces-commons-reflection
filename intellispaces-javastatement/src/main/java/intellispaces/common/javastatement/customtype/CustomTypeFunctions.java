@@ -118,7 +118,6 @@ public interface CustomTypeFunctions {
   ) {
     MethodStatement effectiveAddedMethod = getEffectiveMethod(addedMethod, typeContext);
     MethodSignature effectiveAddedSignature = effectiveAddedMethod.signature();
-    int index = 0;
     for (MethodStatement method : actualMethods) {
       MethodSignature methodSignature = method.signature();
       if (effectiveAddedSignature.name().equals(methodSignature.name())) {
@@ -136,17 +135,9 @@ public interface CustomTypeFunctions {
             throw JavaStatementException.withMessage("Incompatible types: {0} and {1} of method {2}",
                 methodReturnTypeReference, effectiveAddedMethodReturnTypeReference, methodSignature.name());
           }
-          if (narrowType.get() == effectiveAddedMethodReturnTypeReference
-              && AnnotationFunctions.hasAnnotation(effectiveAddedMethod.signature(), Override.class)
-          ) {
-            // Replace override method
-            actualMethods.set(index, effectiveAddedMethod);
-          }
-          // Ignore override method
           return;
         }
       }
-      index++;
     }
     actualMethods.add(effectiveAddedMethod);
   }

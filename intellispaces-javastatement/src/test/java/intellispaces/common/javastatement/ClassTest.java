@@ -632,4 +632,132 @@ public class ClassTest extends AbstractCustomStatementTest {
 
     assertThat(session.getType(canonicalClassName)).isSameAs(classStatement);
   }
+
+  @Test
+  public void testClassInheritedFromGenericClassAndOneAbstractMethod() {
+    // Given
+    TypeElement typeElement = getTestElement("classes/ClassInheritedFromGenericClassAndOneAbstractMethod.java");
+    CustomType childClass = JavaStatements.customTypeStatement(typeElement);
+
+    // When
+    List<MethodStatement> declaredMethods = childClass.declaredMethods();
+    List<MethodStatement> actualMethods = childClass.actualMethods();
+
+    // Then
+    assertThat(declaredMethods).hasSize(1);
+    assertThat(declaredMethods.get(0).name()).isEqualTo("genericMethod");
+    assertThat(declaredMethods.get(0).isAbstract()).isFalse();
+    assertThat(declaredMethods.get(0).owner().canonicalName()).isEqualTo(
+        "intellispaces.common.javastatement.samples.ClassInheritedFromGenericClassAndOneAbstractMethod.ChildClass");
+
+    assertThat(actualMethods).hasSize(1);
+    assertThat(actualMethods.get(0).name()).isEqualTo("genericMethod");
+    assertThat(actualMethods.get(0).isAbstract()).isFalse();
+    assertThat(actualMethods.get(0).owner().canonicalName()).isEqualTo(
+        "intellispaces.common.javastatement.samples.ClassInheritedFromGenericClassAndOneAbstractMethod.ChildClass");
+  }
+
+  @Test
+  public void testClassImplementedInterfaceWithDefaultMethod1() {
+    // Given
+    TypeElement typeElement = getTestElement("classes/ClassImplementedInterfaceWithDefaultMethod1.java");
+    CustomType testeeClass = JavaStatements.customTypeStatement(typeElement);
+
+    // When
+    List<MethodStatement> declaredMethods = testeeClass.declaredMethods();
+    List<MethodStatement> actualMethods = testeeClass.actualMethods();
+
+    // Then
+    assertThat(declaredMethods).isEmpty();
+
+    assertThat(actualMethods).hasSize(1);
+    assertThat(actualMethods.get(0).name()).isEqualTo("method");
+    assertThat(actualMethods.get(0).isAbstract()).isFalse();
+    assertThat(actualMethods.get(0).owner().canonicalName()).isEqualTo(
+        "intellispaces.common.javastatement.samples.ClassImplementedInterfaceWithDefaultMethod1.Interface2");
+  }
+
+  @Test
+  public void testClassImplementedInterfaceWithGenericDefaultMethod1() {
+    // Given
+    TypeElement typeElement = getTestElement("classes/ClassImplementedInterfaceWithGenericDefaultMethod1.java");
+    CustomType testeeClass = JavaStatements.customTypeStatement(typeElement);
+
+    // When
+    List<MethodStatement> declaredMethods = testeeClass.declaredMethods();
+    List<MethodStatement> actualMethods = testeeClass.actualMethods();
+
+    // Then
+    assertThat(declaredMethods).isEmpty();
+
+    assertThat(actualMethods).hasSize(1);
+    assertThat(actualMethods.get(0).name()).isEqualTo("method");
+    assertThat(actualMethods.get(0).isAbstract()).isFalse();
+    assertThat(actualMethods.get(0).isDefault()).isTrue();
+    assertThat(actualMethods.get(0).owner().canonicalName()).isEqualTo(
+        "intellispaces.common.javastatement.samples.ClassImplementedInterfaceWithGenericDefaultMethod1.Interface2");
+  }
+
+  @Test
+  public void testClassImplementedInterfaceWithGenericDefaultMethod2() {
+    // Given
+    TypeElement typeElement = getTestElement("classes/ClassImplementedInterfaceWithGenericDefaultMethod2.java");
+    CustomType testeeClass = JavaStatements.customTypeStatement(typeElement);
+
+    // When
+    List<MethodStatement> declaredMethods = testeeClass.declaredMethods();
+    List<MethodStatement> actualMethods = testeeClass.actualMethods();
+
+    // Then
+    assertThat(declaredMethods).isEmpty();
+
+    assertThat(actualMethods).hasSize(1);
+    assertThat(actualMethods.get(0).name()).isEqualTo("method");
+    assertThat(actualMethods.get(0).isAbstract()).isFalse();
+    assertThat(actualMethods.get(0).isDefault()).isTrue();
+    assertThat(actualMethods.get(0).owner().canonicalName()).isEqualTo(
+        "intellispaces.common.javastatement.samples.ClassImplementedInterfaceWithGenericDefaultMethod2.Interface2");
+  }
+
+  @Test
+  public void testClassImplementedInterfaceWithGenericDefaultMethod3() {
+    // Given
+    TypeElement typeElement = getTestElement("classes/ClassImplementedInterfaceWithGenericDefaultMethod3.java");
+    CustomType testeeClass = JavaStatements.customTypeStatement(typeElement);
+
+    // When
+    List<MethodStatement> declaredMethods = testeeClass.declaredMethods();
+    List<MethodStatement> actualMethods = testeeClass.actualMethods();
+
+    // Then
+    assertThat(declaredMethods).isEmpty();
+
+    assertThat(actualMethods).hasSize(1);
+    assertThat(actualMethods.get(0).name()).isEqualTo("method");
+    assertThat(actualMethods.get(0).isAbstract()).isFalse();
+    assertThat(actualMethods.get(0).isDefault()).isTrue();
+    assertThat(actualMethods.get(0).owner().canonicalName()).isEqualTo(
+        "intellispaces.common.javastatement.samples.ClassImplementedInterfaceWithGenericDefaultMethod3.Interface2");
+  }
+
+  @Test
+  public void testClassImplementedInterfaceWithGenericDefaultMethod4() {
+    // Given
+    TypeElement typeElement = getTestElement("classes/ClassImplementedInterfaceWithGenericDefaultMethod4.java");
+    CustomType testeeClass = JavaStatements.customTypeStatement(typeElement);
+
+    // When
+    List<MethodStatement> declaredMethods = testeeClass.declaredMethods();
+    List<MethodStatement> actualMethods = testeeClass.actualMethods();
+
+    // Then
+    assertThat(declaredMethods).isEmpty();
+
+    assertThat(actualMethods).hasSize(1);
+    assertThat(actualMethods.get(0).name()).isEqualTo("method");
+    assertThat(actualMethods.get(0).isAbstract()).isFalse();
+    assertThat(actualMethods.get(0).isDefault()).isTrue();
+    assertThat(actualMethods.get(0).owner().canonicalName()).isEqualTo(
+        "intellispaces.common.javastatement.samples.ClassImplementedInterfaceWithGenericDefaultMethod4.Interface2");
+  }
 }
