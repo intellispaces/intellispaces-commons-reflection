@@ -49,7 +49,12 @@ class AnnotationInstanceBasedOnAnnotationMirror implements AnnotationInstance {
   }
 
   @Override
-  public Optional<Instance> elementValue(String elementName) {
+  public Optional<Instance> value() {
+    return valueOf("value");
+  }
+
+  @Override
+  public Optional<Instance> valueOf(String elementName) {
     return Optional.ofNullable(elementsGetter.get().get(elementName)).map(AnnotationElement::value);
   }
 

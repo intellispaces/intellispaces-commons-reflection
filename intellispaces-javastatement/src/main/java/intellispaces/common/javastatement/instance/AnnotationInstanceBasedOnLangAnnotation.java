@@ -39,7 +39,12 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
   }
 
   @Override
-  public Optional<Instance> elementValue(String elementName) {
+  public Optional<Instance> value() {
+    return valueOf("value");
+  }
+
+  @Override
+  public Optional<Instance> valueOf(String elementName) {
     Class<?> annotationClass = annotation.annotationType();
     try {
       Method method = annotationClass.getDeclaredMethod(elementName);

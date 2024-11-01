@@ -142,7 +142,7 @@ public interface AnnotationFunctions {
         AnnotationFunctions.class.getClassLoader(),
         new Class[] { annotationClass },
         (proxy, method, methodArgs) -> {
-          Optional<Instance> elementValue = instance.elementValue(method.getName());
+          Optional<Instance> elementValue = instance.valueOf(method.getName());
           if (elementValue.isPresent()) {
             Object result = InstanceFunctions.instanceToObject(elementValue.get());
             if (method.getReturnType().isArray()) {

@@ -360,8 +360,8 @@ public class AnnotationTest extends AbstractCustomStatementTest {
       ObjectHandleFunctions.handle(elementMethod.defaultValue().orElseThrow().asArray().orElseThrow().elements(), elements -> {
         Assertions.assertThat(elements).hasSize(1);
         Assertions.assertThat(elements.get(0).asAnnotation().orElseThrow().annotationStatement().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
-        Assertions.assertThat(elements.get(0).asAnnotation().orElseThrow().elementValue("value").orElseThrow().asString().orElseThrow().value()).isEqualTo("a");
-        Assertions.assertThat(elements.get(0).asAnnotation().orElseThrow().elementValue("otherValue").orElseThrow().asString().orElseThrow().value()).isEqualTo("defaultString");
+        Assertions.assertThat(elements.get(0).asAnnotation().orElseThrow().value().orElseThrow().asString().orElseThrow().value()).isEqualTo("a");
+        Assertions.assertThat(elements.get(0).asAnnotation().orElseThrow().valueOf("otherValue").orElseThrow().asString().orElseThrow().value()).isEqualTo("defaultString");
         Assertions.assertThat(elementMethod.params()).isEmpty();
       });
     });

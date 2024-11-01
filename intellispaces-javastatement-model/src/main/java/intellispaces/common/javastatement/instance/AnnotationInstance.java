@@ -26,7 +26,9 @@ public interface AnnotationInstance extends Instance {
    */
   Collection<AnnotationElement> elements();
 
-  Optional<Instance> elementValue(String elementName);
+  Optional<Instance> value();
+
+  Optional<Instance> valueOf(String elementName);
 
   <A extends Annotation> A asAnnotationOf(Class<A> aClass);
 }
