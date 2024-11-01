@@ -1,6 +1,9 @@
 package intellispaces.common.javastatement.customtype;
 
+import intellispaces.common.action.Actions;
+import intellispaces.common.action.getter.Getter;
 import intellispaces.common.base.collection.ArraysFunctions;
+import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.method.MethodFunctions;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -9,6 +12,7 @@ import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
+import intellispaces.common.javastatement.session.Sessions;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -27,9 +31,13 @@ import java.util.stream.Collectors;
  */
 abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   protected final Class<?> aClass;
+  private final Getter<List<MethodStatement>> actualMethodsGetter;
 
   AbstractCustomTypeBasedLandClass(Class<?> aClass) {
     this.aClass = aClass;
+    this.actualMethodsGetter = Actions.cachedLazyGetter(
+        CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get()
+    );
   }
 
   @Override
@@ -166,7 +174,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<MethodStatement> actualMethods() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    return actualMethodsGetter.get();
   }
 
   @Override

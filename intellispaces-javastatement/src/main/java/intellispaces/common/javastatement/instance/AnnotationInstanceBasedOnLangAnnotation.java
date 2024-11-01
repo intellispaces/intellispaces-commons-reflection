@@ -1,11 +1,15 @@
 package intellispaces.common.javastatement.instance;
 
+import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationType;
 import intellispaces.common.javastatement.customtype.Annotations;
+import intellispaces.common.javastatement.session.Sessions;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -36,7 +40,16 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
 
   @Override
   public Optional<Instance> elementValue(String elementName) {
-    throw new RuntimeException("Not implemented yet");
+    Class<?> annotationClass = annotation.annotationType();
+    try {
+      Method method = annotationClass.getDeclaredMethod(elementName);
+      return Optional.of(InstanceFunctions.objectToInstance(method.invoke(annotation), Sessions.get()));
+    } catch (NoSuchMethodException e) {
+      return Optional.empty();
+    } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+      throw UnexpectedViolationException.withMessage("Failed to invoke method ''{0}'' of the class {1}",
+          elementName, annotationClass.getCanonicalName());
+    }
   }
 
   @Override
