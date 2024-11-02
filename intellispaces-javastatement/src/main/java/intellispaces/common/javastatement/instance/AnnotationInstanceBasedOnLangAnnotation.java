@@ -35,7 +35,7 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
 
   @Override
   public Collection<AnnotationElement> elements() {
-    throw new RuntimeException("Not implemented yet");
+    throw new RuntimeException("Not implemented yet (8boSmQ)");
   }
 
   @Override
@@ -59,6 +59,6 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
 
   @Override
   public <A extends Annotation> A asAnnotationOf(Class<A> aClass) {
-    throw new RuntimeException("Not implemented yet");
+    throw new RuntimeException("Not implemented yet (iRc2Dw)");
   }
 }

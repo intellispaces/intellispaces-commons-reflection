@@ -23,4 +23,14 @@ public interface TypeReferences {
     }
     throw UnexpectedViolationException.withMessage("Unsupported type");
   }
+
+  static TypeReference of(Class<?> aClass) {
+    if (aClass.isPrimitive()) {
+      return PrimitiveReferences.get(aClass.getTypeName());
+    } else if (aClass.isArray()) {
+      return ArrayTypeReferences.of(aClass.componentType());
+    } else {
+      return CustomTypeReferences.get(aClass);
+    }
+  }
 }

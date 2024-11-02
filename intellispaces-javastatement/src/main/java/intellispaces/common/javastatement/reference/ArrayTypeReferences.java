@@ -6,6 +6,10 @@ import intellispaces.common.javastatement.session.Session;
 
 public interface ArrayTypeReferences {
 
+  static ArrayReference of(Class<?> elementClass) {
+    return new ArrayReferenceBasedOnElementClass(elementClass);
+  }
+
   static ArrayReference of(javax.lang.model.type.ArrayType arrayType, Session session) {
     return of(arrayType, TypeContexts.empty(), session);
   }

@@ -65,6 +65,8 @@ public interface InstanceFunctions {
       instance = PrimitiveInstances.of(value, PrimitiveReferences.Double);
     } else if (value instanceof String) {
       instance = StringInstances.of((String) value);
+    } else if (value instanceof Class<?>) {
+      instance = ClassInstances.of((Class<?>) value);
     } else if (value instanceof VariableElement variableElement) {
       // Enum value
       TypeReference typeReference = JavaModelFunctions.getTypeReference(variableElement.asType(), session);

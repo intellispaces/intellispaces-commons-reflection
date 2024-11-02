@@ -27,7 +27,7 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
     } else if (type.statementType() == StatementTypes.Interface) {
       return Interfaces.effectiveOf((InterfaceType) type, typeMapping);
     } else {
-      throw UnexpectedViolationException.withMessage("Not implemented yet");
+      throw UnexpectedViolationException.withMessage("Not implemented yet (s0rZVg)");
     }
   }
 

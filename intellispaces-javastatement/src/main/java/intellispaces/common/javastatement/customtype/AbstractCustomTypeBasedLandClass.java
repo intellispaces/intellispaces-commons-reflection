@@ -5,13 +5,17 @@ import intellispaces.common.action.getter.Getter;
 import intellispaces.common.base.collection.ArraysFunctions;
 import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
+import intellispaces.common.javastatement.instance.AnnotationInstances;
 import intellispaces.common.javastatement.method.MethodFunctions;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.method.Methods;
 import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.reference.NamedReference;
+import intellispaces.common.javastatement.reference.NamedReferences;
+import intellispaces.common.javastatement.reference.ReferenceBound;
 import intellispaces.common.javastatement.reference.TypeReference;
+import intellispaces.common.javastatement.reference.TypeReferences;
 import intellispaces.common.javastatement.session.Sessions;
 
 import java.lang.annotation.Annotation;
@@ -84,7 +88,18 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
     if (params.length == 0) {
       return List.of();
     }
-    throw new UnsupportedOperationException("Not implemented yet");
+
+    List<NamedReference> typeParameters = new ArrayList<>();
+    for (TypeVariable<? extends Class<?>> param : params) {
+      typeParameters.add(NamedReferences.get(
+          param.getName(),
+          this,
+          Arrays.stream(param.getBounds())
+              .map(b -> (ReferenceBound) TypeReferences.of(b))
+              .toList()
+      ));
+    }
+    return typeParameters;
   }
 
   @Override
@@ -94,12 +109,12 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public String typeParametersFullDeclaration() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (bb+wMg)");
   }
 
   @Override
   public String typeParametersBriefDeclaration() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (9od2BA)");
   }
 
   @Override
@@ -124,17 +139,32 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public boolean hasParent(String parentCanonicalName) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    for (CustomTypeReference parent : parentTypes()) {
+      if (parentCanonicalName.equals(parent.targetType().canonicalName())) {
+        return true;
+      }
+    }
+    for (CustomTypeReference parent : parentTypes()) {
+      if (parent.targetType().hasParent(parentCanonicalName)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
   public List<AnnotationInstance> annotations() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (55fafQ)");
   }
 
   @Override
   public Optional<AnnotationInstance> selectAnnotation(String annotationClass) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    for (Annotation a : aClass.getAnnotations()) {
+      if (a.annotationType().getCanonicalName().equals(annotationClass)) {
+        return Optional.of(AnnotationInstances.of(a));
+      }
+    }
+    return Optional.empty();
   }
 
   @Override
@@ -144,19 +174,20 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    return (aClass.getAnnotation(annotationClass) != null);
   }
 
   @Override
   public List<MethodStatement> declaredMethods() {
     return Arrays.stream(aClass.getDeclaredMethods())
+        .filter(m -> !m.isBridge())
         .map(MethodFunctions::getMethod)
         .toList();
   }
 
   @Override
   public List<MethodStatement> declaredMethodsWithName(String name) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (kFoOiQ)");
   }
 
   @Override
@@ -179,21 +210,21 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<MethodStatement> actualMethodsWithName(String name) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (v38ZbQ)");
   }
 
   @Override
   public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (EqL6XA)");
   }
 
   @Override
   public Collection<CustomType> dependencies() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (qT1OxQ)");
   }
 
   @Override
   public Collection<String> dependencyTypenames() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (tOOLKQ)");
   }
 }

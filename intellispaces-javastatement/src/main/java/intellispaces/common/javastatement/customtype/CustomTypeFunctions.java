@@ -97,19 +97,17 @@ public interface CustomTypeFunctions {
   private static void addInheritedMethods(
       CustomType customType, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
-    customType.parentTypes().forEach(parent -> extractParentMethods(parent, actualMethods, typeContext));
+    customType.parentTypes().forEach(parent -> addParentMethods(parent, actualMethods, typeContext));
   }
 
-  private static void extractParentMethods(
+  private static void addParentMethods(
       CustomTypeReference parentReference, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
     CustomType parentType = parentReference.targetType();
     TypeContext actualNameContext = NameContextFunctions.getActualNameContext(
         typeContext, parentType.typeParameters(), parentReference.typeArguments()
     );
-    parentType.declaredMethods().forEach(
-        method -> addMethod(method, actualMethods, actualNameContext)
-    );
+    parentType.declaredMethods().forEach(m -> addMethod(m, actualMethods, actualNameContext));
     addInheritedMethods(parentType, actualMethods, actualNameContext);
   }
 
@@ -128,6 +126,7 @@ public interface CustomTypeFunctions {
           }
           TypeReference methodReturnTypeReference = methodSignature.returnType().get();
           TypeReference effectiveAddedMethodReturnTypeReference = effectiveAddedSignature.returnType().get();
+
           Optional<TypeReference> narrowType = TypeReferenceFunctions.narrowestOf(
               methodReturnTypeReference, effectiveAddedMethodReturnTypeReference
           );

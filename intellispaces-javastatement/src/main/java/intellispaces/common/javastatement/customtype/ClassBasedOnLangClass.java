@@ -35,16 +35,16 @@ class ClassBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements 
 
   @Override
   public List<MethodStatement> constructors() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (r9BszQ)");
   }
 
   @Override
   public Optional<CustomTypeReference> extendedClass() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (1n/QHw)");
   }
 
   @Override
   public List<CustomTypeReference> implementedInterfaces() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    throw new UnsupportedOperationException("Not implemented yet (yHb2vQ)");
   }
 }

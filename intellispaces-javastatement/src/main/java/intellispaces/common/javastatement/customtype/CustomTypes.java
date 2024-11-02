@@ -20,11 +20,11 @@ public interface CustomTypes {
     if (aClass.isInterface()) {
       return Interfaces.of(aClass);
     } else if (aClass.isRecord()) {
-      throw new UnsupportedOperationException("Not implemented");
+      throw new UnsupportedOperationException("Not implemented yet (Fee42g)");
     } else if (aClass.isEnum()) {
-      throw new UnsupportedOperationException("Not implemented");
+      throw new UnsupportedOperationException("Not implemented (YTWBWA)");
     } else if (aClass.isAnnotation()) {
-      throw new UnsupportedOperationException("Not implemented");
+      throw new UnsupportedOperationException("Not implemented yet (TZCZ4g)");
     } else {
       return Classes.of(aClass);
     }

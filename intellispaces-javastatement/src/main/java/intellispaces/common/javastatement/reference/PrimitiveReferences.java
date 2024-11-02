@@ -1,13 +1,18 @@
 package intellispaces.common.javastatement.reference;
 
+import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.base.type.Primitive;
 import intellispaces.common.base.type.Primitives;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 public enum PrimitiveReferences implements PrimitiveReference {
+
+  Boolean(Primitives.Boolean),
 
   Byte(Primitives.Byte),
 
@@ -21,11 +26,17 @@ public enum PrimitiveReferences implements PrimitiveReference {
 
   Double(Primitives.Double),
 
-  Char(Primitives.Char),
-
-  Boolean(Primitives.Boolean);
+  Char(Primitives.Char);
 
   private final Primitive primitive;
+
+  public static PrimitiveReference get(String typename) {
+    PrimitiveReference primitive = CACHE.get(typename);
+    if (primitive == null) {
+      throw UnexpectedViolationException.withMessage("Not primitive: {}", typename);
+    }
+    return primitive;
+  }
 
   PrimitiveReferences(Primitive primitive) {
     this.primitive = primitive;
@@ -88,5 +99,17 @@ public enum PrimitiveReferences implements PrimitiveReference {
   @Override
   public String toString() {
     return actualDeclaration();
+  }
+
+  private static final Map<String, PrimitiveReference> CACHE = new HashMap<>();
+  static {
+    CACHE.put("boolean", Boolean);
+    CACHE.put("char", Char);
+    CACHE.put("byte", Byte);
+    CACHE.put("short", Short);
+    CACHE.put("long", Long);
+    CACHE.put("int", Int);
+    CACHE.put("float", Float);
+    CACHE.put("double", Double);
   }
 }

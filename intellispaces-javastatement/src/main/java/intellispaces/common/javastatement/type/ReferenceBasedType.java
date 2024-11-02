@@ -20,7 +20,7 @@ class ReferenceBasedType<T> extends AbstractType<T> implements Type<T> {
     if (qualifiers.isEmpty()) {
       return base;
     }
-    throw new RuntimeException("Not implemented");
+    throw new RuntimeException("Not implemented yet (BrAAig)");
   }
 
   @Override

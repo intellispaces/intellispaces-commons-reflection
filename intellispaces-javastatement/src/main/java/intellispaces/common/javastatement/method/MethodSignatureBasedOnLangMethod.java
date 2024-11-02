@@ -94,7 +94,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
     if ("void".equals(returnClass.getName())) {
       return Optional.empty();
     }
-    return Optional.of(JavaStatements.customTypeReference(returnClass));
+    return Optional.of(TypeReferences.of(returnClass));
   }
 
   @Override
