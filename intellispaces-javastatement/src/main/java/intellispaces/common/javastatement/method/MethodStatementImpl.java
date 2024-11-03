@@ -2,6 +2,7 @@ package intellispaces.common.javastatement.method;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
@@ -44,5 +45,10 @@ class MethodStatementImpl implements MethodStatement {
   @Override
   public MethodStatement effective(Map<String, NotPrimitiveReference> typeMapping) {
     return new MethodStatementImpl(owner(), signature().effective(typeMapping));
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("nyHkqQ");
   }
 }

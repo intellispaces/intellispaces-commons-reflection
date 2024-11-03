@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.instance;
 
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -35,7 +36,7 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
 
   @Override
   public Collection<AnnotationElement> elements() {
-    throw new RuntimeException("Not implemented yet (8boSmQ)");
+    throw NotImplementedException.withCode("8boSmQ");
   }
 
   @Override
@@ -59,6 +60,11 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
 
   @Override
   public <A extends Annotation> A asAnnotationOf(Class<A> aClass) {
-    throw new RuntimeException("Not implemented yet (iRc2Dw)");
+    throw NotImplementedException.withCode("iRc2Dw");
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("MNhIMQ");
   }
 }

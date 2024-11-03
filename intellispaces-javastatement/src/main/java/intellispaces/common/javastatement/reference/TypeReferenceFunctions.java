@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.reference;
 
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
@@ -217,7 +218,7 @@ public interface TypeReferenceFunctions {
     ) {
       return false;
     } else {
-      throw UnexpectedViolationException.withMessage("Not implemented yet (icwJwg)");
+      throw NotImplementedException.withCode("icwJwg");
     }
   }
 

@@ -2,6 +2,7 @@ package intellispaces.common.javastatement.reference;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 
@@ -75,5 +76,10 @@ abstract class AbstractTypeReference implements TypeReference {
   @Override
   public String formalBriefDeclaration() {
     return formalBriefDeclarationGetter.get();
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("GG8tDA");
   }
 }

@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.type;
 
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.base.type.AbstractType;
 import intellispaces.common.javastatement.reference.TypeReference;
@@ -20,7 +21,7 @@ class ReferenceBasedType<T> extends AbstractType<T> implements Type<T> {
     if (qualifiers.isEmpty()) {
       return base;
     }
-    throw new RuntimeException("Not implemented yet (BrAAig)");
+    throw NotImplementedException.withCode("BrAAig");
   }
 
   @Override

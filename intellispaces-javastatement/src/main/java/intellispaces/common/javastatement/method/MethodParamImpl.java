@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.method;
 
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
@@ -71,5 +72,10 @@ class MethodParamImpl implements MethodParam {
         type().effective(typeMapping),
         annotations()
     );
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("AN08nQ");
   }
 }

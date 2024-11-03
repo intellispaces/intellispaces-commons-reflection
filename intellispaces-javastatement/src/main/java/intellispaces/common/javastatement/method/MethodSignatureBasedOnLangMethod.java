@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.method;
 
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.StatementType;
@@ -163,5 +164,10 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
         exceptions().stream().map(e -> (ThrowableReference) e.effective(typeMapping)).toList(),
         annotations()
     );
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("Xx3tNg");
   }
 }

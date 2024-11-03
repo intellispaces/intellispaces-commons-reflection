@@ -19,4 +19,9 @@ class StringInstanceImpl implements StringInstance {
   public String value() {
     return string;
   }
+
+  @Override
+  public String prettyDeclaration() {
+    return "\"" + string + "\"";
+  }
 }

@@ -47,6 +47,11 @@ public enum PrimitiveReferences implements PrimitiveReference {
     return StatementTypes.PrimitiveReference;
   }
 
+  @Override
+  public String prettyDeclaration() {
+    return primitive.typename();
+  }
+
   public String typename() {
     return primitive.typename();
   }
@@ -95,6 +100,8 @@ public enum PrimitiveReferences implements PrimitiveReference {
   public String formalBriefDeclaration() {
     return typename();
   }
+
+
 
   @Override
   public String toString() {

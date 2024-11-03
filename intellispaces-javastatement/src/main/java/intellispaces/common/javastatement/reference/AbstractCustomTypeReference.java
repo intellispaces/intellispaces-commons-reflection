@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.ClassType;
 import intellispaces.common.javastatement.customtype.Classes;
@@ -27,7 +27,7 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
     } else if (type.statementType() == StatementTypes.Interface) {
       return Interfaces.effectiveOf((InterfaceType) type, typeMapping);
     } else {
-      throw UnexpectedViolationException.withMessage("Not implemented yet (s0rZVg)");
+      throw NotImplementedException.withCode("s0rZVg");
     }
   }
 

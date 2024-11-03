@@ -20,4 +20,9 @@ class ClassInstanceImpl implements ClassInstance {
   public CustomType type() {
     return type;
   }
+
+  @Override
+  public String prettyDeclaration() {
+    return type.canonicalName() + ".class";
+  }
 }

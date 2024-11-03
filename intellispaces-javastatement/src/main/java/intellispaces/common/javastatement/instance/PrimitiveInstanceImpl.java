@@ -27,4 +27,9 @@ class PrimitiveInstanceImpl implements PrimitiveInstance {
   public PrimitiveReference type() {
     return type;
   }
+
+  @Override
+  public String prettyDeclaration() {
+    return value.toString();
+  }
 }

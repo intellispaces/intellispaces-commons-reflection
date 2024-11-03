@@ -2,6 +2,7 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
@@ -224,6 +225,11 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   @Override
   public Collection<String> dependencyTypenames() {
     return dependencyTypesGetter.get();
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("4RNy5Q");
   }
 
   private Collection<String> collectDependencyTypenames() {

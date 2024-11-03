@@ -84,6 +84,7 @@ public interface CustomTypeFunctions {
             .map(p -> MethodParams.build()
                 .name(p.name())
                 .type(getActualTypeReference(p.type(), typeContext))
+                .annotations(p.annotations())
                 .get())
             .toList()
         )

@@ -2,6 +2,7 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -250,6 +251,11 @@ class ClassTypeImpl implements ClassType {
   @Override
   public Collection<String> dependencyTypenames() {
     return dependencyTypesGetter.get();
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("zZPnvg");
   }
 
   private Collection<String> collectDependencyTypenames() {

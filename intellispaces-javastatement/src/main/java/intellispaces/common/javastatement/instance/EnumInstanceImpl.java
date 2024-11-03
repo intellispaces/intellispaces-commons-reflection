@@ -26,4 +26,9 @@ class EnumInstanceImpl implements EnumInstance {
   public String name() {
     return name;
   }
+
+  @Override
+  public String prettyDeclaration() {
+    return type.canonicalName() + "." + name;
+  }
 }

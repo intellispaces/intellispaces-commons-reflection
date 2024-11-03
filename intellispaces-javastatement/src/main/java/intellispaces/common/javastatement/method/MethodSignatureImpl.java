@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.method;
 
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
@@ -156,5 +157,10 @@ class MethodSignatureImpl implements MethodSignature {
         exceptions().stream().map(e -> (ThrowableReference) e.effective(typeMapping)).toList(),
         annotations()
     );
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("nzCKqg");
   }
 }

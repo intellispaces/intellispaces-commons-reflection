@@ -3,6 +3,7 @@ package intellispaces.common.javastatement.method;
 import intellispaces.common.action.runner.Runner;
 import intellispaces.common.base.function.Consumers;
 import intellispaces.common.base.text.TextActions;
+import intellispaces.common.javastatement.instance.AnnotationElement;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 
@@ -158,6 +159,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
     }
     for (MethodParam param : prototype.params()) {
       commaAppender.run();
+      appendParamAnnotations(sb, param, canonicalToSimpleNameMapper);
       if (paramDeclarationMapper != null) {
         sb.append(paramDeclarationMapper.apply(param.type()));
       } else if (paramMapper != null) {
@@ -171,6 +173,42 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       sb.append(" ");
       sb.append(param.name());
     }
+  }
+
+  private void appendParamAnnotations(
+      StringBuilder sb, MethodParam param, Function<String, String> canonicalToSimpleNameMapper
+  ) {
+    param.annotations().forEach(a -> {
+      sb.append("@");
+      sb.append(canonicalToSimpleNameMapper.apply(a.annotationStatement().canonicalName()));
+      if (!a.elements().isEmpty()) {
+        sb.append("(");
+      }
+      Runner ca = TextActions.skippingFirstTimeCommaAppender(sb);
+      if (a.elements().size() == 1) {
+        AnnotationElement e = a.elements().iterator().next();
+        if ("value".equals(e.name())) {
+          sb.append(e.value().prettyDeclaration());
+        } else {
+          appendAnnotationElement(sb, e);
+        }
+      } else {
+        a.elements().forEach(e -> {
+          ca.run();
+          appendAnnotationElement(sb, e);
+        });
+      }
+      if (!a.elements().isEmpty()) {
+        sb.append(")");
+      }
+      sb.append(" ");
+    });
+  }
+
+  private void appendAnnotationElement(StringBuilder sb, AnnotationElement e) {
+    sb.append(e.name());
+    sb.append(" = ");
+    sb.append(e.value().prettyDeclaration());
   }
 
   private void appendExceptions(

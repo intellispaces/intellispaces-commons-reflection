@@ -3,6 +3,7 @@ package intellispaces.common.javastatement.customtype;
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
 import intellispaces.common.base.collection.ArraysFunctions;
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.AnnotationInstances;
@@ -109,12 +110,12 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public String typeParametersFullDeclaration() {
-    throw new UnsupportedOperationException("Not implemented yet (bb+wMg)");
+    throw NotImplementedException.withCode("bb+wMg");
   }
 
   @Override
   public String typeParametersBriefDeclaration() {
-    throw new UnsupportedOperationException("Not implemented yet (9od2BA)");
+    throw NotImplementedException.withCode("9od2BA");
   }
 
   @Override
@@ -154,7 +155,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<AnnotationInstance> annotations() {
-    throw new UnsupportedOperationException("Not implemented yet (55fafQ)");
+    throw NotImplementedException.withCode("55fafQ");
   }
 
   @Override
@@ -187,7 +188,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<MethodStatement> declaredMethodsWithName(String name) {
-    throw new UnsupportedOperationException("Not implemented yet (kFoOiQ)");
+    throw NotImplementedException.withCode("kFoOiQ");
   }
 
   @Override
@@ -210,21 +211,26 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<MethodStatement> actualMethodsWithName(String name) {
-    throw new UnsupportedOperationException("Not implemented yet (v38ZbQ)");
+    throw NotImplementedException.withCode("v38ZbQ");
   }
 
   @Override
   public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes) {
-    throw new UnsupportedOperationException("Not implemented yet (EqL6XA)");
+    throw NotImplementedException.withCode("EqL6XA");
   }
 
   @Override
   public Collection<CustomType> dependencies() {
-    throw new UnsupportedOperationException("Not implemented yet (qT1OxQ)");
+    throw NotImplementedException.withCode("qT1OxQ");
   }
 
   @Override
   public Collection<String> dependencyTypenames() {
-    throw new UnsupportedOperationException("Not implemented yet (tOOLKQ)");
+    throw NotImplementedException.withCode("tOOLKQ");
+  }
+
+  @Override
+  public String prettyDeclaration() {
+    throw NotImplementedException.withCode("pfNdWQ");
   }
 }

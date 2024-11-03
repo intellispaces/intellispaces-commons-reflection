@@ -1,5 +1,6 @@
 package intellispaces.common.javastatement.customtype;
 
+import intellispaces.common.base.exception.NotImplementedException;
 import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -35,16 +36,16 @@ class ClassBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements 
 
   @Override
   public List<MethodStatement> constructors() {
-    throw new UnsupportedOperationException("Not implemented yet (r9BszQ)");
+    throw NotImplementedException.withCode("r9BszQ");
   }
 
   @Override
   public Optional<CustomTypeReference> extendedClass() {
-    throw new UnsupportedOperationException("Not implemented yet (1n/QHw)");
+    throw NotImplementedException.withCode("1n/QHw");
   }
 
   @Override
   public List<CustomTypeReference> implementedInterfaces() {
-    throw new UnsupportedOperationException("Not implemented yet (yHb2vQ)");
+    throw NotImplementedException.withCode("yHb2vQ");
   }
 }
