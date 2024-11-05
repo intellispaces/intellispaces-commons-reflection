@@ -31,9 +31,9 @@ public enum PrimitiveReferences implements PrimitiveReference {
   private final Primitive primitive;
 
   public static PrimitiveReference get(String typename) {
-    PrimitiveReference primitive = CACHE.get(typename);
+    PrimitiveReference primitive = VALUES.get(typename);
     if (primitive == null) {
-      throw UnexpectedViolationException.withMessage("Not primitive: {}", typename);
+      throw UnexpectedViolationException.withMessage("Not primitive typename: {}", typename);
     }
     return primitive;
   }
@@ -52,6 +52,46 @@ public enum PrimitiveReferences implements PrimitiveReference {
     return primitive.typename();
   }
 
+  @Override
+  public boolean isChar() {
+    return primitive.isChar();
+  }
+
+  @Override
+  public boolean isBoolean() {
+    return primitive.isBoolean();
+  }
+
+  @Override
+  public boolean isByte() {
+    return primitive.isByte();
+  }
+
+  @Override
+  public boolean isShort() {
+    return primitive.isShort();
+  }
+
+  @Override
+  public boolean isInt() {
+    return primitive.isInt();
+  }
+
+  @Override
+  public boolean isLong() {
+    return primitive.isLong();
+  }
+
+  @Override
+  public boolean isFloat() {
+    return primitive.isFloat();
+  }
+
+  @Override
+  public boolean isDouble() {
+    return primitive.isDouble();
+  }
+
   public String typename() {
     return primitive.typename();
   }
@@ -59,11 +99,6 @@ public enum PrimitiveReferences implements PrimitiveReference {
   @Override
   public Class<?> wrapperClass() {
     return primitive.wrapperClass();
-  }
-
-  @Override
-  public Primitive asPrimitive() {
-    return primitive;
   }
 
   @Override
@@ -101,22 +136,20 @@ public enum PrimitiveReferences implements PrimitiveReference {
     return typename();
   }
 
-
-
   @Override
   public String toString() {
     return actualDeclaration();
   }
 
-  private static final Map<String, PrimitiveReference> CACHE = new HashMap<>();
+  private static final Map<String, PrimitiveReference> VALUES = new HashMap<>();
   static {
-    CACHE.put("boolean", Boolean);
-    CACHE.put("char", Char);
-    CACHE.put("byte", Byte);
-    CACHE.put("short", Short);
-    CACHE.put("long", Long);
-    CACHE.put("int", Int);
-    CACHE.put("float", Float);
-    CACHE.put("double", Double);
+    VALUES.put("boolean", Boolean);
+    VALUES.put("char", Char);
+    VALUES.put("byte", Byte);
+    VALUES.put("short", Short);
+    VALUES.put("long", Long);
+    VALUES.put("int", Int);
+    VALUES.put("float", Float);
+    VALUES.put("double", Double);
   }
 }
