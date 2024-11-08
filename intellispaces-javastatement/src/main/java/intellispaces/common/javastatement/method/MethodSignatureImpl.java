@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
@@ -161,6 +161,6 @@ class MethodSignatureImpl implements MethodSignature {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("nzCKqg");
+    throw NotImplementedExceptions.withCode("nzCKqg");
   }
 }

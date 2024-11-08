@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;
@@ -21,11 +21,11 @@ public interface CustomTypes {
     if (aClass.isInterface()) {
       return Interfaces.of(aClass);
     } else if (aClass.isRecord()) {
-      throw NotImplementedException.withCode("Fee42g");
+      throw NotImplementedExceptions.withCode("Fee42g");
     } else if (aClass.isEnum()) {
-      throw NotImplementedException.withCode("YTWBWA");
+      throw NotImplementedExceptions.withCode("YTWBWA");
     } else if (aClass.isAnnotation()) {
-      throw NotImplementedException.withCode("TZCZ4g");
+      throw NotImplementedExceptions.withCode("TZCZ4g");
     } else {
       return Classes.of(aClass);
     }

@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.reference;
 
 import intellispaces.common.base.collection.ArraysFunctions;
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.UnexpectedExceptions;
 import intellispaces.common.javastatement.customtype.CustomType;
 
 import java.lang.reflect.ParameterizedType;
@@ -21,7 +21,7 @@ public interface TypeReferences {
       });
       return CustomTypeReferences.get(baseType, qualifiers);
     }
-    throw UnexpectedViolationException.withMessage("Unsupported type");
+    throw UnexpectedExceptions.withMessage("Unsupported type");
   }
 
   static TypeReference of(Class<?> aClass) {

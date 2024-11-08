@@ -5,7 +5,7 @@ import com.google.testing.compile.CompilationSubject;
 import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
 import intellispaces.common.base.collection.CollectionFunctions;
-import intellispaces.common.base.object.ObjectHandleFunctions;
+import intellispaces.common.base.object.ProcessingFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.reference.NamedReference;
@@ -83,7 +83,7 @@ class AbstractCustomStatementTest {
 
   protected void validateMethodUsingWildcard(MethodStatement method) {
     assertThat(method.returnType()).isPresent();
-    ObjectHandleFunctions.handle(method.returnType().orElseThrow().asCustomTypeReference().orElseThrow(), returnType -> {
+    ProcessingFunctions.handle(method.returnType().orElseThrow().asCustomTypeReference().orElseThrow(), returnType -> {
       assertThat(returnType.targetType().canonicalName()).isEqualTo(List.class.getCanonicalName());
       assertThat(returnType.targetType().className()).isEqualTo(List.class.getName());
       assertThat(returnType.typeArguments()).hasSize(1);
@@ -94,7 +94,7 @@ class AbstractCustomStatementTest {
     });
 
     assertThat(method.params()).hasSize(1);
-    ObjectHandleFunctions.handle(method.params().get(0), param -> {
+    ProcessingFunctions.handle(method.params().get(0), param -> {
       assertThat(param.name()).isEqualTo("arg");
       assertThat(param.type().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Collection.class.getCanonicalName());
       assertThat(param.type().asCustomTypeReference().orElseThrow().targetType().className()).isEqualTo(Collection.class.getName());
@@ -109,11 +109,11 @@ class AbstractCustomStatementTest {
   protected void validateMethodUsingWildcardThatExtendsOtherClass(MethodStatement method) {
     assertThat(method.returnType()).isEmpty();
     assertThat(method.params()).hasSize(1);
-    ObjectHandleFunctions.handle(method.params().get(0), param -> {
+    ProcessingFunctions.handle(method.params().get(0), param -> {
       assertThat(param.name()).isEqualTo("arg");
       assertThat(param.type().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Collection.class.getCanonicalName());
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments()).hasSize(1);
-      ObjectHandleFunctions.handle(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcard(), wildcard -> {
+      ProcessingFunctions.handle(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcard(), wildcard -> {
         assertThat(wildcard).isPresent();
         assertThat(wildcard.orElseThrow().extendedBound()).isPresent();
         assertThat(wildcard.orElseThrow().extendedBound().orElseThrow()
@@ -127,11 +127,11 @@ class AbstractCustomStatementTest {
   protected void validateMethodUsingWildcardThatSuperOtherClass(MethodStatement method) {
     assertThat(method.returnType()).isEmpty();
     assertThat(method.params()).hasSize(1);
-    ObjectHandleFunctions.handle(method.params().get(0), param -> {
+    ProcessingFunctions.handle(method.params().get(0), param -> {
       assertThat(param.name()).isEqualTo("arg");
       assertThat(param.type().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Collection.class.getCanonicalName());
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments()).hasSize(1);
-      ObjectHandleFunctions.handle(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcard(), wildcard -> {
+      ProcessingFunctions.handle(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcard(), wildcard -> {
         assertThat(wildcard).isPresent();
         assertThat(wildcard.orElseThrow().superBound()).isPresent();
         assertThat(wildcard.orElseThrow().superBound().orElseThrow()
@@ -149,7 +149,7 @@ class AbstractCustomStatementTest {
     NamedReference typeParamT = method.typeParameters().get(0);
 
     assertThat(method.returnType()).isPresent();
-    ObjectHandleFunctions.handle(method.returnType().orElseThrow().asCustomTypeReference().orElseThrow(), returnType -> {
+    ProcessingFunctions.handle(method.returnType().orElseThrow().asCustomTypeReference().orElseThrow(), returnType -> {
       assertThat(returnType.targetType().canonicalName()).isEqualTo(List.class.getCanonicalName());
       assertThat(returnType.targetType().className()).isEqualTo(List.class.getName());
       assertThat(returnType.typeArguments()).hasSize(1);
@@ -161,7 +161,7 @@ class AbstractCustomStatementTest {
     });
 
     assertThat(method.params()).hasSize(1);
-    ObjectHandleFunctions.handle(method.params().get(0), param -> {
+    ProcessingFunctions.handle(method.params().get(0), param -> {
       assertThat(param.name()).isEqualTo("arg");
       assertThat(param.type().asNamedReference()).isPresent();
       assertThat(param.type().asNamedReference().orElseThrow().name()).isEqualTo("T");

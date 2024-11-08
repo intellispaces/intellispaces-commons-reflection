@@ -2,8 +2,8 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedException;
-import intellispaces.common.base.type.TypeFunctions;
+import intellispaces.common.base.exception.NotImplementedExceptions;
+import intellispaces.common.base.type.ClassNameFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
@@ -108,12 +108,12 @@ class ClassTypeImpl implements ClassType {
 
   @Override
   public String simpleName() {
-    return TypeFunctions.getSimpleName(canonicalName);
+    return ClassNameFunctions.getSimpleName(canonicalName);
   }
 
   @Override
   public String packageName() {
-    return TypeFunctions.getPackageName(canonicalName);
+    return ClassNameFunctions.getPackageName(canonicalName);
   }
 
   @Override
@@ -255,7 +255,7 @@ class ClassTypeImpl implements ClassType {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("zZPnvg");
+    throw NotImplementedExceptions.withCode("zZPnvg");
   }
 
   private Collection<String> collectDependencyTypenames() {

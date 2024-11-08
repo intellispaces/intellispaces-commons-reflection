@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.type;
 
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.UnexpectedExceptions;
 import intellispaces.common.base.type.AbstractType;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.reference.TypeReference;
@@ -24,7 +24,7 @@ class TypeBaseOnReferenceImpl<T> extends AbstractType<T> implements Type<T> {
     if (reference.isCustomTypeReference()) {
       return CustomTypeReferences.get(reference.asCustomTypeReferenceOrElseThrow().targetType());
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
+      throw UnexpectedExceptions.withMessage("Unsupported reference type: {0}",
           reference.statementType().typename());
     }
   }
@@ -35,7 +35,7 @@ class TypeBaseOnReferenceImpl<T> extends AbstractType<T> implements Type<T> {
     if (reference.isCustomTypeReference()) {
       return (List) reference.asCustomTypeReferenceOrElseThrow().typeArguments();
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
+      throw UnexpectedExceptions.withMessage("Unsupported reference type: {0}",
           reference.statementType().typename());
     }
   }
@@ -46,7 +46,7 @@ class TypeBaseOnReferenceImpl<T> extends AbstractType<T> implements Type<T> {
     if (reference.isCustomTypeReference()) {
       return (Class<T>) reference.asCustomTypeReferenceOrElseThrow().targetClass();
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
+      throw UnexpectedExceptions.withMessage("Unsupported reference type: {0}",
         reference.statementType().typename());
     }
   }
@@ -59,7 +59,7 @@ class TypeBaseOnReferenceImpl<T> extends AbstractType<T> implements Type<T> {
         .map(TypeBaseOnReferenceImpl::new)
         .toList();
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
+      throw UnexpectedExceptions.withMessage("Unsupported reference type: {0}",
         reference.statementType().typename());
     }
   }

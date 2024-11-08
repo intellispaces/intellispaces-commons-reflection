@@ -3,7 +3,7 @@ package intellispaces.common.javastatement.customtype;
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
 import intellispaces.common.base.collection.ArraysFunctions;
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.AnnotationInstances;
@@ -110,12 +110,12 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public String typeParametersFullDeclaration() {
-    throw NotImplementedException.withCode("bb+wMg");
+    throw NotImplementedExceptions.withCode("bb+wMg");
   }
 
   @Override
   public String typeParametersBriefDeclaration() {
-    throw NotImplementedException.withCode("9od2BA");
+    throw NotImplementedExceptions.withCode("9od2BA");
   }
 
   @Override
@@ -155,7 +155,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<AnnotationInstance> annotations() {
-    throw NotImplementedException.withCode("55fafQ");
+    throw NotImplementedExceptions.withCode("55fafQ");
   }
 
   @Override
@@ -188,7 +188,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<MethodStatement> declaredMethodsWithName(String name) {
-    throw NotImplementedException.withCode("kFoOiQ");
+    throw NotImplementedExceptions.withCode("kFoOiQ");
   }
 
   @Override
@@ -211,26 +211,26 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   @Override
   public List<MethodStatement> actualMethodsWithName(String name) {
-    throw NotImplementedException.withCode("v38ZbQ");
+    throw NotImplementedExceptions.withCode("v38ZbQ");
   }
 
   @Override
   public Optional<MethodStatement> actualMethod(String name, List<TypeReference> parameterTypes) {
-    throw NotImplementedException.withCode("EqL6XA");
+    throw NotImplementedExceptions.withCode("EqL6XA");
   }
 
   @Override
   public Collection<CustomType> dependencies() {
-    throw NotImplementedException.withCode("qT1OxQ");
+    throw NotImplementedExceptions.withCode("qT1OxQ");
   }
 
   @Override
   public Collection<String> dependencyTypenames() {
-    throw NotImplementedException.withCode("tOOLKQ");
+    throw NotImplementedExceptions.withCode("tOOLKQ");
   }
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("pfNdWQ");
+    throw NotImplementedExceptions.withCode("pfNdWQ");
   }
 }

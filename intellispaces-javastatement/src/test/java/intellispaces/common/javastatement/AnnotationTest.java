@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement;
 
-import intellispaces.common.base.object.ObjectHandleFunctions;
+import intellispaces.common.base.object.ProcessingFunctions;
 import intellispaces.common.javastatement.customtype.AnnotationType;
 import intellispaces.common.javastatement.customtype.ClassType;
 import intellispaces.common.javastatement.customtype.CustomType;
@@ -56,7 +56,7 @@ public class AnnotationTest extends AbstractCustomStatementTest {
     Assertions.assertThat(annotationStatement.declaredMethods()).isEmpty();
 
     Assertions.assertThat(annotationStatement.annotations()).hasSize(1);
-    ObjectHandleFunctions.handle(annotationStatement.annotations().get(0), annInstance -> {
+    ProcessingFunctions.handle(annotationStatement.annotations().get(0), annInstance -> {
       Assertions.assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       Assertions.assertThat(annInstance.elements()).isEmpty();
     });
@@ -357,7 +357,7 @@ public class AnnotationTest extends AbstractCustomStatementTest {
       Assertions.assertThat(elementMethod.defaultValue().orElseThrow()
           .asArray().orElseThrow()
           .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
-      ObjectHandleFunctions.handle(elementMethod.defaultValue().orElseThrow().asArray().orElseThrow().elements(), elements -> {
+      ProcessingFunctions.handle(elementMethod.defaultValue().orElseThrow().asArray().orElseThrow().elements(), elements -> {
         Assertions.assertThat(elements).hasSize(1);
         Assertions.assertThat(elements.get(0).asAnnotation().orElseThrow().annotationStatement().canonicalName()).isEqualTo(TestAnnotation.class.getCanonicalName());
         Assertions.assertThat(elements.get(0).asAnnotation().orElseThrow().value().orElseThrow().asString().orElseThrow().value()).isEqualTo("a");
@@ -403,7 +403,7 @@ public class AnnotationTest extends AbstractCustomStatementTest {
     Assertions.assertThat(annotationStatement.parentTypes().get(0).targetType().canonicalName()).isEqualTo(Annotation.class.getCanonicalName());
 
     Assertions.assertThat(annotationStatement.annotations()).hasSize(1);
-    ObjectHandleFunctions.handle(annotationStatement.annotations().get(0), annInstance -> {
+    ProcessingFunctions.handle(annotationStatement.annotations().get(0), annInstance -> {
       Assertions.assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       Assertions.assertThat(annInstance.elements()).isEmpty();
     });

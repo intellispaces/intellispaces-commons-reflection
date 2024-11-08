@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.ClassType;
 import intellispaces.common.javastatement.customtype.Classes;
@@ -27,7 +27,7 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
     } else if (type.statementType() == StatementTypes.Interface) {
       return Interfaces.effectiveOf((InterfaceType) type, typeMapping);
     } else {
-      throw NotImplementedException.withCode("s0rZVg");
+      throw NotImplementedExceptions.withCode("s0rZVg");
     }
   }
 

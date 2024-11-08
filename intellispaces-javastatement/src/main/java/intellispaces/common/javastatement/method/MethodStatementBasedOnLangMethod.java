@@ -2,7 +2,7 @@ package intellispaces.common.javastatement.method;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
@@ -54,6 +54,6 @@ class MethodStatementBasedOnLangMethod implements MethodStatement {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("+JcDAQ");
+    throw NotImplementedExceptions.withCode("+JcDAQ");
   }
 }

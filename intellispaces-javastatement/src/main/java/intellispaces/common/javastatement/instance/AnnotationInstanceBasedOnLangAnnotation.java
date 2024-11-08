@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.instance;
 
-import intellispaces.common.base.exception.NotImplementedException;
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
+import intellispaces.common.base.exception.UnexpectedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationType;
@@ -36,7 +36,7 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
 
   @Override
   public Collection<AnnotationElement> elements() {
-    throw NotImplementedException.withCode("8boSmQ");
+    throw NotImplementedExceptions.withCode("8boSmQ");
   }
 
   @Override
@@ -53,18 +53,18 @@ class AnnotationInstanceBasedOnLangAnnotation implements AnnotationInstance {
     } catch (NoSuchMethodException e) {
       return Optional.empty();
     } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-      throw UnexpectedViolationException.withMessage("Failed to invoke method ''{0}'' of the class {1}",
+      throw UnexpectedExceptions.withMessage("Failed to invoke method '{0}' of the class {1}",
           elementName, annotationClass.getCanonicalName());
     }
   }
 
   @Override
   public <A extends Annotation> A asAnnotationOf(Class<A> aClass) {
-    throw NotImplementedException.withCode("iRc2Dw");
+    throw NotImplementedExceptions.withCode("iRc2Dw");
   }
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("MNhIMQ");
+    throw NotImplementedExceptions.withCode("MNhIMQ");
   }
 }

@@ -1,11 +1,11 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.exception.NotImplementedException;
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
+import intellispaces.common.base.exception.UnexpectedExceptions;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.CustomTypeFunctions;
-import intellispaces.common.javastatement.exception.JavaStatementException;
+import intellispaces.common.javastatement.exception.JavaStatementExceptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public interface TypeReferenceFunctions {
     } else if (StatementTypes.CustomReference.equals(typeReference.statementType())) {
       return getClass(typeReference.asCustomTypeReference().orElseThrow().targetType().canonicalName());
     } else {
-      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
+      throw JavaStatementExceptions.withMessage("Unsupported type {0}", typeReference.statementType().typename());
     }
   }
 
@@ -87,7 +87,7 @@ public interface TypeReferenceFunctions {
 
   static boolean isEqualTypes(List<TypeReference> types1, List<TypeReference> types2) {
     if (types1.size() != types2.size()) {
-      throw UnexpectedViolationException.withMessage("Expected two lists with equal size");
+      throw UnexpectedExceptions.withMessage("Expected two lists with equal size");
     }
     Iterator<TypeReference> iteratorTypes1 = types1.iterator();
     Iterator<TypeReference> iteratorTypes2 = types2.iterator();
@@ -218,7 +218,7 @@ public interface TypeReferenceFunctions {
     ) {
       return false;
     } else {
-      throw NotImplementedException.withCode("icwJwg");
+      throw NotImplementedExceptions.withCode("icwJwg");
     }
   }
 
@@ -246,11 +246,11 @@ public interface TypeReferenceFunctions {
   }
 
   private static String getActualTypeDeclaration(TypeReference typeReference, boolean blind) {
-    return getActualTypeDeclaration(typeReference, blind, intellispaces.common.base.type.TypeFunctions::getSimpleName);
+    return getActualTypeDeclaration(typeReference, blind, intellispaces.common.base.type.ClassNameFunctions::getSimpleName);
 }
 
   static String getSimpleTypeDeclaration(TypeReference typeReference) {
-    return getSimpleTypeDeclaration(typeReference, intellispaces.common.base.type.TypeFunctions::getSimpleName);
+    return getSimpleTypeDeclaration(typeReference, intellispaces.common.base.type.ClassNameFunctions::getSimpleName);
   }
 
   static String getSimpleTypeDeclaration(
@@ -269,7 +269,7 @@ public interface TypeReferenceFunctions {
     } else if (typeReference.asWildcard().isPresent()) {
       return "?";
     } else {
-      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
+      throw JavaStatementExceptions.withMessage("Unsupported type {0}", typeReference.statementType().typename());
     }
   }
 
@@ -293,7 +293,7 @@ public interface TypeReferenceFunctions {
     } else if (typeReference.asWildcard().isPresent()) {
       return getWildcardDeclaration(typeReference.asWildcard().get(), blind, true);
     } else {
-      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
+      throw JavaStatementExceptions.withMessage("Unsupported type {0}", typeReference.statementType().typename());
     }
   }
 
@@ -319,7 +319,7 @@ public interface TypeReferenceFunctions {
     } else if (typeReference.asWildcard().isPresent()) {
       return getWildcardDeclaration(typeReference.asWildcard().get(), false, fullDeclaration);
     } else {
-      throw JavaStatementException.withMessage("Unsupported type {0}", typeReference.statementType().typename());
+      throw JavaStatementExceptions.withMessage("Unsupported type {0}", typeReference.statementType().typename());
     }
   }
 
@@ -394,7 +394,7 @@ public interface TypeReferenceFunctions {
       return Map.of();
     }
     if (typeArguments.size() != typeParams.size()) {
-      throw UnexpectedViolationException.withMessage("Number of type arguments {0} does not match with " +
+      throw UnexpectedExceptions.withMessage("Number of type arguments {0} does not match with " +
           "number of type parameters {1}. See type {2}",
           typeArguments.size(), typeParams.size(), customTypeReference.formalFullDeclaration());
     }

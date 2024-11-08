@@ -1,22 +1,14 @@
 package intellispaces.common.javastatement.exception;
 
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.UnexpectedException;
 
-public class JavaStatementException extends UnexpectedViolationException {
+public class JavaStatementException extends UnexpectedException {
 
-  protected JavaStatementException(String messageTemplate, Object... arguments) {
-    super(messageTemplate, arguments);
+  public JavaStatementException(String message) {
+    super(message);
   }
 
-  protected JavaStatementException(Throwable cause, String messageTemplate, Object... arguments) {
-    super(cause, messageTemplate, arguments);
-  }
-
-  public static JavaStatementException withMessage(String messageTemplate, Object... arguments) {
-    return new JavaStatementException(messageTemplate, arguments);
-  }
-
-  public static JavaStatementException withCauseAndMessage(Throwable cause, String messageTemplate, Object... arguments) {
-    return new JavaStatementException(cause, messageTemplate, arguments);
+  public JavaStatementException(String message, Throwable cause) {
+    super(message, cause);
   }
 }

@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.type;
 
-import intellispaces.common.base.exception.NotImplementedException;
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
+import intellispaces.common.base.exception.UnexpectedExceptions;
 import intellispaces.common.base.type.AbstractType;
 import intellispaces.common.javastatement.reference.TypeReference;
 
@@ -21,7 +21,7 @@ class ReferenceBasedType<T> extends AbstractType<T> implements Type<T> {
     if (qualifiers.isEmpty()) {
       return base;
     }
-    throw NotImplementedException.withCode("BrAAig");
+    throw NotImplementedExceptions.withCode("BrAAig");
   }
 
   @Override
@@ -40,7 +40,7 @@ class ReferenceBasedType<T> extends AbstractType<T> implements Type<T> {
     if (base.isCustomTypeReference()) {
       return (Class<T>) base.asCustomTypeReferenceOrElseThrow().targetClass();
     } else {
-      throw UnexpectedViolationException.withMessage("Unsupported reference type: {0}",
+      throw UnexpectedExceptions.withMessage("Unsupported reference type: {0}",
         base.statementType().typename());
     }
   }

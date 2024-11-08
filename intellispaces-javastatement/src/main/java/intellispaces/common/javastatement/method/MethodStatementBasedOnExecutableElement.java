@@ -2,7 +2,7 @@ package intellispaces.common.javastatement.method;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -77,6 +77,6 @@ class MethodStatementBasedOnExecutableElement implements MethodStatement {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("QLOEfw");
+    throw NotImplementedExceptions.withCode("QLOEfw");
   }
 }

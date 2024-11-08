@@ -2,7 +2,7 @@ package intellispaces.common.javastatement.common;
 
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
-import intellispaces.common.javastatement.exception.JavaStatementException;
+import intellispaces.common.javastatement.exception.JavaStatementExceptions;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.Instance;
 import intellispaces.common.javastatement.method.MethodParam;
@@ -130,7 +130,7 @@ public interface DependenciesFunctions {
             typeReference.asWildcard().orElseThrow(), includeRelations, exclusions);
         case ArrayReference -> getArrayTypeReferenceDependencies(
             typeReference.asArrayReference().orElseThrow(), includeRelations, exclusions);
-        default -> throw JavaStatementException.withMessage("Unsupported statement type {0}", typeReference.statementType());
+        default -> throw JavaStatementExceptions.withMessage("Unsupported statement type {0}", typeReference.statementType());
       };
     }
   }

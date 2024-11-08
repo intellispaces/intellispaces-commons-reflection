@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.javastatement.AnnotatedStatement;
-import intellispaces.common.javastatement.exception.JavaStatementException;
+import intellispaces.common.javastatement.exception.JavaStatementExceptions;
 import intellispaces.common.javastatement.instance.AnnotationElement;
 import intellispaces.common.javastatement.instance.AnnotationElements;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
@@ -135,7 +135,7 @@ public interface AnnotationFunctions {
       AnnotationInstance instance, Class<A> annotationClass
   ) {
     if (!annotationClass.getCanonicalName().equals(instance.annotationStatement().canonicalName())) {
-      throw JavaStatementException.withMessage("Illegal annotation class. Expected {0}. Actual {1}",
+      throw JavaStatementExceptions.withMessage("Illegal annotation class. Expected {0}. Actual {1}",
           annotationClass.getCanonicalName(), instance.annotationStatement().canonicalName());
     }
     return (A) Proxy.newProxyInstance(
@@ -150,7 +150,7 @@ public interface AnnotationFunctions {
             }
             return result;
           } else {
-            throw JavaStatementException.withMessage("Unsupported method {0}", method.getName());
+            throw JavaStatementExceptions.withMessage("Unsupported method '{0}'", method.getName());
           }
         }
     );

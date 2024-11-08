@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.exception.UnexpectedViolationException;
+import intellispaces.common.base.exception.UnexpectedExceptions;
 import intellispaces.common.base.type.Primitive;
 import intellispaces.common.base.type.Primitives;
 import intellispaces.common.javastatement.StatementType;
@@ -33,7 +33,7 @@ public enum PrimitiveReferences implements PrimitiveReference {
   public static PrimitiveReference get(String typename) {
     PrimitiveReference primitive = VALUES.get(typename);
     if (primitive == null) {
-      throw UnexpectedViolationException.withMessage("Not primitive typename: {}", typename);
+      throw UnexpectedExceptions.withMessage("Not primitive typename: {}", typename);
     }
     return primitive;
   }

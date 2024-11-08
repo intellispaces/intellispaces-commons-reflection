@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.instance;
 
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.reference.TypeReference;
@@ -33,6 +33,6 @@ class ArrayInstanceImpl implements ArrayInstance {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("vu9rJw");
+    throw NotImplementedExceptions.withCode("vu9rJw");
   }
 }

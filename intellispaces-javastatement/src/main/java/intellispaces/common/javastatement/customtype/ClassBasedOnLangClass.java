@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.base.exception.NotImplementedException;
-import intellispaces.common.base.type.TypeFunctions;
+import intellispaces.common.base.exception.NotImplementedExceptions;
+import intellispaces.common.base.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -26,26 +26,26 @@ class ClassBasedOnLangClass extends AbstractCustomTypeBasedLandClass implements 
 
   @Override
   public boolean isAbstract() {
-    return TypeFunctions.isAbstractClass(aClass);
+    return ClassFunctions.isAbstractClass(aClass);
   }
 
   @Override
   public boolean isFinal() {
-    return TypeFunctions.isFinalClass(aClass);
+    return ClassFunctions.isFinalClass(aClass);
   }
 
   @Override
   public List<MethodStatement> constructors() {
-    throw NotImplementedException.withCode("r9BszQ");
+    throw NotImplementedExceptions.withCode("r9BszQ");
   }
 
   @Override
   public Optional<CustomTypeReference> extendedClass() {
-    throw NotImplementedException.withCode("1n/QHw");
+    throw NotImplementedExceptions.withCode("1n/QHw");
   }
 
   @Override
   public List<CustomTypeReference> implementedInterfaces() {
-    throw NotImplementedException.withCode("yHb2vQ");
+    throw NotImplementedExceptions.withCode("yHb2vQ");
   }
 }

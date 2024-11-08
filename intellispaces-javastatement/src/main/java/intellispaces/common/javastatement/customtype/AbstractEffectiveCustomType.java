@@ -2,7 +2,7 @@ package intellispaces.common.javastatement.customtype;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedException;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -197,7 +197,7 @@ abstract class AbstractEffectiveCustomType implements CustomType {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("AU1XBg");
+    throw NotImplementedExceptions.withCode("AU1XBg");
   }
 
   private Collection<String> collectDependencyTypenames() {

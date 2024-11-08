@@ -5,7 +5,7 @@ import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
 import intellispaces.common.javastatement.customtype.Classes;
 import intellispaces.common.javastatement.customtype.EnumType;
-import intellispaces.common.javastatement.exception.JavaStatementException;
+import intellispaces.common.javastatement.exception.JavaStatementExceptions;
 import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.reference.PrimitiveReference;
@@ -40,7 +40,7 @@ public interface InstanceFunctions {
     } else if (StatementTypes.AnnotationInstance.equals(instance.statementType())) {
       return asAnnotation((AnnotationInstance) instance);
     } else {
-      throw JavaStatementException.withMessage("Unsupported instance type {0}", instance.getClass().getName());
+      throw JavaStatementExceptions.withMessage("Unsupported instance type {0}", instance.getClass().getName());
     }
   }
 
@@ -87,7 +87,7 @@ public interface InstanceFunctions {
           .toList();
       instance = ArrayInstances.of(arrayItemsType(values), values);
     } else {
-      throw JavaStatementException.withMessage("Unsupported object class {0}", value.getClass().getCanonicalName());
+      throw JavaStatementExceptions.withMessage("Unsupported object class {0}", value.getClass().getCanonicalName());
     }
     return instance;
   }
@@ -111,7 +111,7 @@ public interface InstanceFunctions {
     } else if (StatementTypes.AnnotationInstance.equals(value.statementType())) {
       return CustomTypeReferences.get(value.asAnnotation().orElseThrow().annotationStatement());
     } else {
-      throw JavaStatementException.withMessage("Unsupported array element type in annotation element: " + value.statementType().typename());
+      throw JavaStatementExceptions.withMessage("Unsupported array element type in annotation element: " + value.statementType().typename());
     }
   }
 
@@ -123,7 +123,7 @@ public interface InstanceFunctions {
           instance.name()
       );
     } catch (ClassNotFoundException e) {
-      throw JavaStatementException.withCauseAndMessage(e, "Class by name {0} is not found", instance.type().canonicalName());
+      throw JavaStatementExceptions.withCauseAndMessage(e, "Class by name {0} is not found", instance.type().canonicalName());
     }
   }
 
@@ -131,7 +131,7 @@ public interface InstanceFunctions {
     try {
       return Class.forName(instance.type().canonicalName());
     } catch (ClassNotFoundException e) {
-      throw JavaStatementException.withCauseAndMessage(e, "Class by name {0} is not found", instance.type().canonicalName());
+      throw JavaStatementExceptions.withCauseAndMessage(e, "Class by name {0} is not found", instance.type().canonicalName());
     }
   }
 
@@ -148,7 +148,7 @@ public interface InstanceFunctions {
     String annotationClassName = instance.annotationStatement().canonicalName();
     Class<?> annotationClass = TypeReferenceFunctions.getClass(annotationClassName);
     if (!Annotation.class.isAssignableFrom(annotationClass)) {
-      throw JavaStatementException.withMessage("Class {0} does not extend {1}", annotationClassName, Annotation.class.getName());
+      throw JavaStatementExceptions.withMessage("Class {0} does not extend {1}", annotationClassName, Annotation.class.getName());
     }
     return AnnotationFunctions.asAnnotation(instance, (Class<Annotation>) annotationClass);
   }

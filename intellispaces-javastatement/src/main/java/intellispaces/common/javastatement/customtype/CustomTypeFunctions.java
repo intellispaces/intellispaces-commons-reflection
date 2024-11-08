@@ -4,7 +4,7 @@ import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.context.ContextTypeParameter;
 import intellispaces.common.javastatement.context.NameContextFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
-import intellispaces.common.javastatement.exception.JavaStatementException;
+import intellispaces.common.javastatement.exception.JavaStatementExceptions;
 import intellispaces.common.javastatement.method.MethodParam;
 import intellispaces.common.javastatement.method.MethodParams;
 import intellispaces.common.javastatement.method.MethodSignature;
@@ -35,7 +35,7 @@ public interface CustomTypeFunctions {
     return statement.parentTypes().stream()
         .filter(ref -> StatementTypes.Class.equals(ref.targetType().statementType()))
         .reduce((ref1, ref2) -> {
-          throw JavaStatementException.withMessage("Multiple extended classes: {0}, {1}", ref1, ref2);
+          throw JavaStatementExceptions.withMessage("Multiple extended classes: {0}, {1}", ref1, ref2);
         });
   }
 
@@ -132,7 +132,7 @@ public interface CustomTypeFunctions {
               methodReturnTypeReference, effectiveAddedMethodReturnTypeReference
           );
           if (narrowType.isEmpty()) {
-            throw JavaStatementException.withMessage("Incompatible types: {0} and {1} of method {2}",
+            throw JavaStatementExceptions.withMessage("Incompatible types: {0} and {1} of method {2}",
                 methodReturnTypeReference, effectiveAddedMethodReturnTypeReference, methodSignature.name());
           }
           return;

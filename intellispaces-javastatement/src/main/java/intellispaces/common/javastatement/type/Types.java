@@ -11,11 +11,11 @@ public interface Types {
     return new TypeBaseOnReferenceImpl<>(typeReference);
   }
 
-  static <R extends B, B> Type<R> of(Class<B> baseClass) {
+  static <R extends B, B> Type<R> get(Class<B> baseClass) {
     return new ReferenceBasedType<>(CustomTypeReferences.get(baseClass), List.of());
   }
 
-  static <R extends B, B, Q> Type<R> of(
+  static <R extends B, B, Q> Type<R> get(
       Class<B> baseClass,
       Class<Q> qualifierClass
   ) {
@@ -26,7 +26,7 @@ public interface Types {
     );
   }
 
-  static <R extends B, B, Q1, Q2> Type<R> of(
+  static <R extends B, B, Q1, Q2> Type<R> get(
       Class<B> baseClass,
       Class<Q1> qualifierClass1,
       Class<Q2> qualifierClass2
@@ -39,7 +39,7 @@ public interface Types {
     );
   }
 
-  static <R extends B, B, Q1, Q2, Q3> Type<R> of(
+  static <R extends B, B, Q1, Q2, Q3> Type<R> get(
       Class<B> baseClass,
       Class<Q1> qualifierClass1,
       Class<Q2> qualifierClass2,
@@ -54,7 +54,7 @@ public interface Types {
     );
   }
 
-  static <R extends B, B, Q> Type<R> of(
+  static <R extends B, B, Q> Type<R> get(
       Class<B> baseClass,
       Type<Q> qualifierType
   ) {
@@ -63,7 +63,7 @@ public interface Types {
     );
   }
 
-  static <R extends B, B, Q1, Q2> Type<R> of(
+  static <R extends B, B, Q1, Q2> Type<R> get(
       Class<B> baseClass,
       Type<Q1> qualifierType1,
       Type<Q2> qualifierType2
@@ -76,7 +76,7 @@ public interface Types {
     );
   }
 
-  static <R extends B, B, Q1, Q2, Q3> Type<R> of(
+  static <R extends B, B, Q1, Q2, Q3> Type<R> get(
       Class<B> baseClass,
       Type<Q1> qualifierType1,
       Type<Q2> qualifierType2,

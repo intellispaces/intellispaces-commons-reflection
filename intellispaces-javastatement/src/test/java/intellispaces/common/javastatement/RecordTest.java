@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement;
 
 import intellispaces.common.base.collection.CollectionFunctions;
-import intellispaces.common.base.object.ObjectHandleFunctions;
+import intellispaces.common.base.object.ProcessingFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.RecordType;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -57,7 +57,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     ).containsExactlyInAnyOrder("equals", "hashCode", "toString");
 
     assertThat(recordStatement.annotations()).hasSize(1);
-    ObjectHandleFunctions.handle(recordStatement.annotations().get(0), annInstance -> {
+    ProcessingFunctions.handle(recordStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });
@@ -91,25 +91,25 @@ public class RecordTest extends AbstractCustomStatementTest {
     assertThat(recordStatement.typeParameters()).isEmpty();
 
     assertThat(recordStatement.implementedInterfaces()).hasSize(2);
-    ObjectHandleFunctions.handle(recordStatement.implementedInterfaces().get(0), implInterface -> {
+    ProcessingFunctions.handle(recordStatement.implementedInterfaces().get(0), implInterface -> {
       assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
-    ObjectHandleFunctions.handle(recordStatement.implementedInterfaces().get(1), implInterface -> {
+    ProcessingFunctions.handle(recordStatement.implementedInterfaces().get(1), implInterface -> {
       assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
 
     assertThat(recordStatement.parentTypes()).hasSize(3);
-    ObjectHandleFunctions.handle(recordStatement.parentTypes().get(0), parentType -> {
+    ProcessingFunctions.handle(recordStatement.parentTypes().get(0), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(Record.class.getCanonicalName());
       assertThat(parentType.typeArguments()).isEmpty();
     });
-    ObjectHandleFunctions.handle(recordStatement.parentTypes().get(1), parentType -> {
+    ProcessingFunctions.handle(recordStatement.parentTypes().get(1), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
-    ObjectHandleFunctions.handle(recordStatement.parentTypes().get(2), parentType -> {
+    ProcessingFunctions.handle(recordStatement.parentTypes().get(2), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
@@ -121,7 +121,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     ).containsExactlyInAnyOrder("equals", "hashCode", "toString");
 
     assertThat(recordStatement.annotations()).hasSize(1);
-    ObjectHandleFunctions.handle(recordStatement.annotations().get(0), annInstance -> {
+    ProcessingFunctions.handle(recordStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });
@@ -365,7 +365,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     RecordType recordStatement = typeReference.targetType().asRecord().orElseThrow();
 
     assertThat(recordStatement.typeParameters()).hasSize(1);
-    ObjectHandleFunctions.handle(recordStatement.typeParameters().get(0), typeParam -> {
+    ProcessingFunctions.handle(recordStatement.typeParameters().get(0), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T");
       assertThat(typeParam.extendedBounds()).hasSize(1);
       assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(recordStatement);
@@ -394,10 +394,10 @@ public class RecordTest extends AbstractCustomStatementTest {
     RecordType recordStatement = typeReference.targetType().asRecord().orElseThrow();
 
     assertThat(recordStatement.typeParameters()).hasSize(1);
-    ObjectHandleFunctions.handle(recordStatement.typeParameters().get(0), classATypeParam -> {
+    ProcessingFunctions.handle(recordStatement.typeParameters().get(0), classATypeParam -> {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
-      ObjectHandleFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
+      ProcessingFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("intellispaces.common.javastatement.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB");
         assertThat(classBExtendedBound.className()).isEqualTo("intellispaces.common.javastatement.samples.GenericRecordWithCyclicTypeDependencyCase2$RecordB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
@@ -448,7 +448,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     methodValidator.accept(actualMethods.get(0));
 
     assertThat(recordStatement.annotations()).hasSize(1);
-    ObjectHandleFunctions.handle(recordStatement.annotations().get(0), annInstance -> {
+    ProcessingFunctions.handle(recordStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });

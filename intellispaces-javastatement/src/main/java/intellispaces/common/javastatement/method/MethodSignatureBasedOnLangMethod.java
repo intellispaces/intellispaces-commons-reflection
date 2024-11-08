@@ -1,7 +1,6 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.base.exception.NotImplementedException;
-import intellispaces.common.base.type.TypeFunctions;
+import intellispaces.common.base.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -131,12 +130,12 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public boolean isAbstract() {
-    return TypeFunctions.isAbstractMethod(method);
+    return intellispaces.common.base.type.MethodFunctions.isAbstractMethod(method);
   }
 
   @Override
   public boolean isPublic() {
-    return TypeFunctions.isPublicMethod(method);
+    return intellispaces.common.base.type.MethodFunctions.isPublicMethod(method);
   }
 
   @Override
@@ -146,7 +145,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public boolean isStatic() {
-    return TypeFunctions.isStaticMethod(method);
+    return intellispaces.common.base.type.MethodFunctions.isStaticMethod(method);
   }
 
   @Override
@@ -168,6 +167,6 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedException.withCode("Xx3tNg");
+    throw NotImplementedExceptions.withCode("Xx3tNg");
   }
 }

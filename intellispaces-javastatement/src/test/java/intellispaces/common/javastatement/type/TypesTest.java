@@ -12,11 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TypesTest {
 
   @Test
-  public void testOf_whenBaseTypeOnly() {
+  public void testGet_whenBaseTypeOnly() {
     // Given
-    Type<String> stringType = Types.of(String.class);
-    Type<Integer> integerType = Types.of(Integer.class);
-    Type<Integer> objectType = Types.of(Object.class);
+    Type<String> stringType = Types.get(String.class);
+    Type<Integer> integerType = Types.get(Integer.class);
+    Type<Integer> objectType = Types.get(Object.class);
 
     // Then
     assertThat(stringType.baseClass()).isSameAs(String.class);
@@ -29,9 +29,9 @@ public class TypesTest {
   }
 
   @Test
-  public void testOf_whenList() {
+  public void testGet_whenList() {
     // Given
-    Type<List<Integer>> listType = Types.of(List.class, Integer.class);
+    Type<List<Integer>> listType = Types.get(List.class, Integer.class);
 
     // Then
     assertThat(listType.baseClass()).isSameAs(List.class);

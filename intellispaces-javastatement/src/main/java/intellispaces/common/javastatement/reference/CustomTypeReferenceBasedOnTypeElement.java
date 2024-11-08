@@ -2,7 +2,7 @@ package intellispaces.common.javastatement.reference;
 
 import intellispaces.common.action.Actions;
 import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.type.TypeFunctions;
+import intellispaces.common.base.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
@@ -38,7 +38,7 @@ class CustomTypeReferenceBasedOnTypeElement extends AbstractCustomTypeReference 
 
   @Override
   public Class<?> targetClass() {
-    return TypeFunctions.getClass(targetType().canonicalName()).orElseThrow();
+    return ClassFunctions.getClass(targetType().canonicalName()).orElseThrow();
   }
 
   @Override
