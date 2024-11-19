@@ -4,7 +4,7 @@ import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.util.List;
 
-public interface Type<T> extends intellispaces.common.base.type.Type<T> {
+public interface Type<T> extends tech.intellispaces.entity.type.Type<T> {
 
   TypeReference typeReference();
 

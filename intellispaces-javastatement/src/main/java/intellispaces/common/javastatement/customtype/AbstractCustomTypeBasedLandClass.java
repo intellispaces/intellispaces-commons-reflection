@@ -1,9 +1,10 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.collection.ArraysFunctions;
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.collection.ArraysFunctions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.AnnotationInstances;
@@ -36,11 +37,11 @@ import java.util.stream.Collectors;
  */
 abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   protected final Class<?> aClass;
-  private final Getter<List<MethodStatement>> actualMethodsGetter;
+  private final SupplierAction<List<MethodStatement>> actualMethodsGetter;
 
   AbstractCustomTypeBasedLandClass(Class<?> aClass) {
     this.aClass = aClass;
-    this.actualMethodsGetter = Actions.cachedLazyGetter(
+    this.actualMethodsGetter = CacheActions.cachedLazySupplierAction(
         CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get()
     );
   }

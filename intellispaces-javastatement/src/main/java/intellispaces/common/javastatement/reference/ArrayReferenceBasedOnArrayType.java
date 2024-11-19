@@ -1,7 +1,8 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
@@ -14,13 +15,13 @@ import java.util.Map;
  * Adapter of {@link javax.lang.model.type.ArrayType} to {@link ArrayReference}.
  */
 class ArrayReferenceBasedOnArrayType extends AbstractTypeReference implements ArrayReference {
-  private final Getter<TypeReference> elementTypeGetter;
+  private final SupplierAction<TypeReference> elementTypeGetter;
 
   ArrayReferenceBasedOnArrayType(
       javax.lang.model.type.ArrayType arrayType, TypeContext typeContext, Session session
   ) {
     super();
-    this.elementTypeGetter = Actions.cachedLazyGetter(
+    this.elementTypeGetter = CacheActions.cachedLazySupplierAction(
         JavaModelFunctions::getTypeReference, arrayType.getComponentType(), typeContext, session);
   }
 

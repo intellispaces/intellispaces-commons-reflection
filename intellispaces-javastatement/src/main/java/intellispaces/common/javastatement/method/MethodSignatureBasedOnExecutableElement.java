@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
@@ -31,21 +32,21 @@ import java.util.Optional;
 class MethodSignatureBasedOnExecutableElement implements MethodSignature {
   private final ExecutableElement executableElement;
   private final List<NamedReference> typeParams;
-  private final Getter<Optional<TypeReference>> returnTypeGetter;
-  private final Getter<Optional<Instance>> defaultValueGetter;
-  private final Getter<List<MethodParam>> paramsGetter;
-  private final Getter<List<ThrowableReference>> exceptionsGetter;
-  private final Getter<List<AnnotationInstance>> annotationsGetter;
+  private final SupplierAction<Optional<TypeReference>> returnTypeGetter;
+  private final SupplierAction<Optional<Instance>> defaultValueGetter;
+  private final SupplierAction<List<MethodParam>> paramsGetter;
+  private final SupplierAction<List<ThrowableReference>> exceptionsGetter;
+  private final SupplierAction<List<AnnotationInstance>> annotationsGetter;
 
   MethodSignatureBasedOnExecutableElement(ExecutableElement executableElement, TypeContext typeContext, Session session) {
     this.executableElement = executableElement;
     this.typeParams = JavaModelFunctions.getTypeParameters(executableElement, typeContext, session);
     TypeContext classNameContext = createNameContext(typeContext, this.typeParams);
-    this.returnTypeGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodReturnType, executableElement, classNameContext, session);
-    this.defaultValueGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodDefaultValueInstance, executableElement, session);
-    this.paramsGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodParams, executableElement, classNameContext, session);
-    this.exceptionsGetter = Actions.cachedLazyGetter(MethodFunctions::getMethodExceptions, executableElement, classNameContext, session);
-    this.annotationsGetter = Actions.cachedLazyGetter(JavaModelFunctions::getAnnotations, executableElement, session);
+    this.returnTypeGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getMethodReturnType, executableElement, classNameContext, session);
+    this.defaultValueGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getMethodDefaultValueInstance, executableElement, session);
+    this.paramsGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getMethodParams, executableElement, classNameContext, session);
+    this.exceptionsGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getMethodExceptions, executableElement, classNameContext, session);
+    this.annotationsGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getAnnotations, executableElement, session);
   }
 
   @Override

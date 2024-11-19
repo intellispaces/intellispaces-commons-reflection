@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -22,14 +23,14 @@ import java.util.stream.Collectors;
 abstract class AbstractEffectiveCustomType implements CustomType {
   protected final CustomType actualType;
   protected final Map<String, NotPrimitiveReference> typeMapping;
-  private final Getter<Collection<CustomType>> dependenciesGetter;
-  private final Getter<Collection<String>> dependencyTypesGetter;
+  private final SupplierAction<Collection<CustomType>> dependenciesGetter;
+  private final SupplierAction<Collection<String>> dependencyTypesGetter;
 
   AbstractEffectiveCustomType(CustomType actualType, Map<String, NotPrimitiveReference> typeMapping) {
     this.actualType = actualType;
     this.typeMapping = typeMapping;
-    this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);
-    this.dependencyTypesGetter = Actions.cachedLazyGetter(AbstractEffectiveCustomType::collectDependencyTypenames, this);
+    this.dependenciesGetter = CacheActions.cachedLazySupplierAction(DependenciesFunctions::getCustomTypeDependencies, this);
+    this.dependencyTypesGetter = CacheActions.cachedLazySupplierAction(AbstractEffectiveCustomType::collectDependencyTypenames, this);
   }
 
   @Override

@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -21,14 +22,14 @@ import java.util.Map;
  * Adapter of {@link ExecutableElement} to {@link MethodStatement}.
  */
 class MethodStatementBasedOnExecutableElement implements MethodStatement {
-  private final Getter<CustomType> ownerGetter;
-  private final Getter<MethodSignature> signatureGetter;
-  private final Getter<List<MethodStatement>> overrideMethodsGetter;
+  private final SupplierAction<CustomType> ownerGetter;
+  private final SupplierAction<MethodSignature> signatureGetter;
+  private final SupplierAction<List<MethodStatement>> overrideMethodsGetter;
 
   MethodStatementBasedOnExecutableElement(ExecutableElement executableElement, Session session) {
     this(
         executableElement,
-        Actions.cachedLazyGetter(
+        CacheActions.cachedLazySupplierAction(
             JavaStatements::customTypeStatement, (TypeElement) executableElement.getEnclosingElement()),
         TypeContexts.empty(),
         session
@@ -38,16 +39,16 @@ class MethodStatementBasedOnExecutableElement implements MethodStatement {
   MethodStatementBasedOnExecutableElement(
       ExecutableElement executableElement, CustomType owner, TypeContext typeContext, Session session
   ) {
-    this(executableElement, Actions.getter(owner), typeContext, session);
+    this(executableElement, Actions.supplierAction(owner), typeContext, session);
   }
 
   MethodStatementBasedOnExecutableElement(
-      ExecutableElement executableElement, Getter<CustomType> ownerGetter, TypeContext typeContext, Session session
+      ExecutableElement executableElement, SupplierAction<CustomType> ownerGetter, TypeContext typeContext, Session session
   ) {
     this.ownerGetter = ownerGetter;
-    this.signatureGetter = Actions.cachedLazyGetter(
+    this.signatureGetter = CacheActions.cachedLazySupplierAction(
         MethodSignatures::of, executableElement, typeContext, session);
-    this.overrideMethodsGetter = Actions.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
+    this.overrideMethodsGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getOverrideMethods, this);
   }
 
   @Override

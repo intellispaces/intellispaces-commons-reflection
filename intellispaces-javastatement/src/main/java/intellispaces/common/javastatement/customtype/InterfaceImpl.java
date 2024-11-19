@@ -1,9 +1,10 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedExceptions;
-import intellispaces.common.base.type.ClassNameFunctions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.entity.type.ClassNameFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
@@ -31,18 +32,18 @@ class InterfaceImpl implements InterfaceType {
   private List<NamedReference> typeParameters;
   private List<CustomTypeReference> parentTypes;
   private List<MethodStatement> declaredMethods;
-  private final Getter<String> typeParametersFullDeclarationGetter;
-  private final Getter<String> typeParametersBriefDeclarationGetter;
-  private final Getter<List<MethodStatement>> actualMethodsGetter;
-  private final Getter<Collection<CustomType>> dependenciesGetter;
-  private final Getter<Collection<String>> dependencyTypesGetter;
+  private final SupplierAction<String> typeParametersFullDeclarationGetter;
+  private final SupplierAction<String> typeParametersBriefDeclarationGetter;
+  private final SupplierAction<List<MethodStatement>> actualMethodsGetter;
+  private final SupplierAction<Collection<CustomType>> dependenciesGetter;
+  private final SupplierAction<Collection<String>> dependencyTypesGetter;
 
   InterfaceImpl() {
-    this.typeParametersFullDeclarationGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
-    this.typeParametersBriefDeclarationGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
-    this.actualMethodsGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get());
-    this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getCustomTypeDependencies, this);
-    this.dependencyTypesGetter = Actions.cachedLazyGetter(InterfaceImpl::collectDependencyTypenames, this);
+    this.typeParametersFullDeclarationGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
+    this.typeParametersBriefDeclarationGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
+    this.actualMethodsGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get());
+    this.dependenciesGetter = CacheActions.cachedLazySupplierAction(DependenciesFunctions::getCustomTypeDependencies, this);
+    this.dependencyTypesGetter = CacheActions.cachedLazySupplierAction(InterfaceImpl::collectDependencyTypenames, this);
   }
 
   InterfaceImpl(

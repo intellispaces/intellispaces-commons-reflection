@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 
@@ -11,20 +12,20 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 abstract class AbstractTypeReference implements TypeReference {
-  private final Getter<Collection<CustomType>> dependenciesGetter;
-  private final Getter<Collection<String>> dependencyTypesGetter;
-  private final Getter<String> actualSimpleGetter;
-  private final Getter<String> actualDeclarationGetter;
-  private final Getter<String> formalFullDeclarationGetter;
-  private final Getter<String> formalBriefDeclarationGetter;
+  private final SupplierAction<Collection<CustomType>> dependenciesGetter;
+  private final SupplierAction<Collection<String>> dependencyTypesGetter;
+  private final SupplierAction<String> actualSimpleGetter;
+  private final SupplierAction<String> actualDeclarationGetter;
+  private final SupplierAction<String> formalFullDeclarationGetter;
+  private final SupplierAction<String> formalBriefDeclarationGetter;
 
   AbstractTypeReference() {
-    this.dependenciesGetter = Actions.cachedLazyGetter(DependenciesFunctions::getTypeReferenceDependencies, this);
-    this.dependencyTypesGetter = Actions.cachedLazyGetter(AbstractTypeReference::collectDependencyTypenames, this);
-    this.actualSimpleGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getSimpleTypeDeclaration, this);
-    this.actualDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getActualTypeDeclaration, this);
-    this.formalFullDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getFormalFullTypeReferenceDeclaration, this);
-    this.formalBriefDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getFormalBriefTypeReferenceDeclaration, this);
+    this.dependenciesGetter = CacheActions.cachedLazySupplierAction(DependenciesFunctions::getTypeReferenceDependencies, this);
+    this.dependencyTypesGetter = CacheActions.cachedLazySupplierAction(AbstractTypeReference::collectDependencyTypenames, this);
+    this.actualSimpleGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getSimpleTypeDeclaration, this);
+    this.actualDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getActualTypeDeclaration, this);
+    this.formalFullDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getFormalFullTypeReferenceDeclaration, this);
+    this.formalBriefDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getFormalBriefTypeReferenceDeclaration, this);
   }
 
   @Override

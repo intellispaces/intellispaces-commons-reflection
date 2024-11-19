@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
@@ -24,13 +25,13 @@ import java.util.Optional;
  */
 class MethodParamBasedOnVariableElement implements MethodParam {
   private final VariableElement variableElement;
-  private final Getter<TypeReference> typeGetter;
-  private final Getter<List<AnnotationInstance>> annotationsGetter;
+  private final SupplierAction<TypeReference> typeGetter;
+  private final SupplierAction<List<AnnotationInstance>> annotationsGetter;
 
   MethodParamBasedOnVariableElement(VariableElement variableElement, TypeContext typeContext, Session session) {
     this.variableElement = variableElement;
-    this.typeGetter = Actions.cachedLazyGetter(JavaModelFunctions::getTypeReference, variableElement.asType(), typeContext, session);
-    this.annotationsGetter = Actions.cachedLazyGetter(JavaModelFunctions::getAnnotations, variableElement, session);
+    this.typeGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getTypeReference, variableElement.asType(), typeContext, session);
+    this.annotationsGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getAnnotations, variableElement, session);
   }
 
   @Override

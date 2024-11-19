@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.base.exception.NotImplementedExceptions;
-import intellispaces.common.base.type.ClassFunctions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.entity.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.method.MethodStatement;

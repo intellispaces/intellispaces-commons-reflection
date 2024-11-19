@@ -1,8 +1,8 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.exception.UnexpectedExceptions;
-import intellispaces.common.base.type.Primitive;
-import intellispaces.common.base.type.Primitives;
+import tech.intellispaces.entity.exception.UnexpectedExceptions;
+import tech.intellispaces.entity.type.PrimitiveType;
+import tech.intellispaces.entity.type.PrimitiveTypes;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 
@@ -12,23 +12,23 @@ import java.util.function.Function;
 
 public enum PrimitiveReferences implements PrimitiveReference {
 
-  Boolean(Primitives.Boolean),
+  Boolean(PrimitiveTypes.Boolean),
 
-  Byte(Primitives.Byte),
+  Byte(PrimitiveTypes.Byte),
 
-  Short(Primitives.Short),
+  Short(PrimitiveTypes.Short),
 
-  Int(Primitives.Int),
+  Int(PrimitiveTypes.Int),
 
-  Long(Primitives.Long),
+  Long(PrimitiveTypes.Long),
 
-  Float(Primitives.Float),
+  Float(PrimitiveTypes.Float),
 
-  Double(Primitives.Double),
+  Double(PrimitiveTypes.Double),
 
-  Char(Primitives.Char);
+  Char(PrimitiveTypes.Char);
 
-  private final Primitive primitive;
+  private final PrimitiveType primitive;
 
   public static PrimitiveReference get(String typename) {
     PrimitiveReference primitive = VALUES.get(typename);
@@ -38,7 +38,7 @@ public enum PrimitiveReferences implements PrimitiveReference {
     return primitive;
   }
 
-  PrimitiveReferences(Primitive primitive) {
+  PrimitiveReferences(PrimitiveType primitive) {
     this.primitive = primitive;
   }
 

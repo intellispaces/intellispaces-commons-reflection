@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement;
 
-import intellispaces.common.base.collection.CollectionFunctions;
-import intellispaces.common.base.object.ProcessingFunctions;
+import tech.intellispaces.entity.collection.CollectionFunctions;
+import tech.intellispaces.entity.object.ObjectFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.InterfaceType;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -51,7 +51,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     assertThat(interfaceStatement.declaredMethods()).isEmpty();
 
     assertThat(interfaceStatement.annotations()).hasSize(1);
-    ProcessingFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {
+    ObjectFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });
@@ -99,21 +99,21 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     assertThat(interfaceStatement.typeParameters()).isEmpty();
 
     assertThat(interfaceStatement.extendedInterfaces()).hasSize(2);
-    ProcessingFunctions.handle(interfaceStatement.extendedInterfaces().get(0), extendedInterface -> {
+    ObjectFunctions.handle(interfaceStatement.extendedInterfaces().get(0), extendedInterface -> {
       assertThat(extendedInterface.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(extendedInterface.typeArguments()).isEmpty();
     });
-    ProcessingFunctions.handle(interfaceStatement.extendedInterfaces().get(1), extendedInterface -> {
+    ObjectFunctions.handle(interfaceStatement.extendedInterfaces().get(1), extendedInterface -> {
       assertThat(extendedInterface.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(extendedInterface.typeArguments()).isEmpty();
     });
 
     assertThat(interfaceStatement.parentTypes()).hasSize(2);
-    ProcessingFunctions.handle(interfaceStatement.parentTypes().get(0), parentType -> {
+    ObjectFunctions.handle(interfaceStatement.parentTypes().get(0), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
-    ProcessingFunctions.handle(interfaceStatement.parentTypes().get(1), parentType -> {
+    ObjectFunctions.handle(interfaceStatement.parentTypes().get(1), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
@@ -121,7 +121,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     assertThat(interfaceStatement.declaredMethods()).isEmpty();
 
     assertThat(interfaceStatement.annotations()).hasSize(1);
-    ProcessingFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {
+    ObjectFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });
@@ -345,7 +345,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     InterfaceType interfaceStatement = typeReference.targetType().asInterface().orElseThrow();
 
     assertThat(interfaceStatement.typeParameters()).hasSize(1);
-    ProcessingFunctions.handle(interfaceStatement.typeParameters().get(0), typeParam -> {
+    ObjectFunctions.handle(interfaceStatement.typeParameters().get(0), typeParam -> {
       assertThat(typeParam.name()).isEqualTo("T");
       assertThat(typeParam.extendedBounds()).hasSize(1);
       assertThat(typeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(interfaceStatement);
@@ -374,10 +374,10 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     InterfaceType interfaceStatement = typeReference.targetType().asInterface().orElseThrow();
 
     assertThat(interfaceStatement.typeParameters()).hasSize(1);
-    ProcessingFunctions.handle(interfaceStatement.typeParameters().get(0), classATypeParam -> {
+    ObjectFunctions.handle(interfaceStatement.typeParameters().get(0), classATypeParam -> {
       assertThat(classATypeParam.name()).isEqualTo("T1");
       assertThat(classATypeParam.extendedBounds()).hasSize(1);
-      ProcessingFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
+      ObjectFunctions.handle(classATypeParam.extendedBounds().get(0).asCustomTypeReference().orElseThrow().targetType(), classBExtendedBound -> {
         assertThat(classBExtendedBound.canonicalName()).isEqualTo("intellispaces.common.javastatement.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB");
         assertThat(classBExtendedBound.className()).isEqualTo("intellispaces.common.javastatement.samples.GenericInterfaceWithCyclicTypeDependencyCase2$InterfaceB");
         assertThat(classBExtendedBound.typeParameters()).hasSize(1);
@@ -427,7 +427,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     methodValidator.accept(actualMethods.get(0));
 
     assertThat(interfaceStatement.annotations()).hasSize(1);
-    ProcessingFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {
+    ObjectFunctions.handle(interfaceStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });

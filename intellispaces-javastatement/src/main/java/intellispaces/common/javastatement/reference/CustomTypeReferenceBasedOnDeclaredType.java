@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.type.ClassFunctions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
@@ -20,18 +21,18 @@ import java.util.function.Function;
  * Adapter od {@link DeclaredType} to {@link CustomTypeReference}.
  */
 class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomTypeReference {
-  private final Getter<CustomType> targetTypeGetter;
-  private final Getter<List<NotPrimitiveReference>> typeArgumentsGetter;
-  private final Getter<Map<String, NotPrimitiveReference>> typeArgumentMappingsGetter;
-  private final Getter<String> typeArgumentsDeclarationGetter;
+  private final SupplierAction<CustomType> targetTypeGetter;
+  private final SupplierAction<List<NotPrimitiveReference>> typeArgumentsGetter;
+  private final SupplierAction<Map<String, NotPrimitiveReference>> typeArgumentMappingsGetter;
+  private final SupplierAction<String> typeArgumentsDeclarationGetter;
 
   CustomTypeReferenceBasedOnDeclaredType(DeclaredType declaredType, TypeContext typeContext, Session session) {
     super();
     TypeElement typeElement = (TypeElement) declaredType.asElement();
-    this.targetTypeGetter = Actions.cachedLazyGetter(JavaModelFunctions::asCustomStatement, typeElement, session);
-    this.typeArgumentsGetter = Actions.cachedLazyGetter(JavaModelFunctions::getTypeArguments, declaredType, typeContext, session);
-    this.typeArgumentMappingsGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentMapping, this);
-    this.typeArgumentsDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
+    this.targetTypeGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::asCustomStatement, typeElement, session);
+    this.typeArgumentsGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getTypeArguments, declaredType, typeContext, session);
+    this.typeArgumentMappingsGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentMapping, this);
+    this.typeArgumentsDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
   }
 
   @Override

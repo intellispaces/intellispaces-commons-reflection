@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.exception;
 
-import intellispaces.common.base.exception.UnexpectedException;
+import tech.intellispaces.entity.exception.UnexpectedException;
 
 public class JavaStatementException extends UnexpectedException {
 

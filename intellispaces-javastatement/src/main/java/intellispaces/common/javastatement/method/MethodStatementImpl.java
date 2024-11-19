@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
@@ -14,12 +15,12 @@ import java.util.Map;
 class MethodStatementImpl implements MethodStatement {
   private final CustomType owner;
   private final MethodSignature signature;
-  private final Getter<List<MethodStatement>> overrideMethodsGetter;
+  private final SupplierAction<List<MethodStatement>> overrideMethodsGetter;
 
   MethodStatementImpl(CustomType owner, MethodSignature signature) {
     this.owner = owner;
     this.signature = signature;
-    this.overrideMethodsGetter = Actions.cachedLazyGetter(MethodFunctions::getOverrideMethods, this);
+    this.overrideMethodsGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getOverrideMethods, this);
   }
 
   @Override

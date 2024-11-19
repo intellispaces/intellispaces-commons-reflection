@@ -1,7 +1,8 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
@@ -18,15 +19,15 @@ import java.util.Optional;
  * Adapter of {@link TypeElement} to {@link ClassType}.
  */
 class ClassBasedOnTypeElement extends AbstractCustomTypeStatementBasedOnTypeElement implements ClassType {
-  private final Getter<List<MethodStatement>> constructorGetter;
-  private final Getter<Optional<CustomTypeReference>> extendedClassGetter;
-  private final Getter<List<CustomTypeReference>> implementedInterfacesGetter;
+  private final SupplierAction<List<MethodStatement>> constructorGetter;
+  private final SupplierAction<Optional<CustomTypeReference>> extendedClassGetter;
+  private final SupplierAction<List<CustomTypeReference>> implementedInterfacesGetter;
 
   ClassBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super(typeElement, typeContext, session);
-    this.constructorGetter = Actions.cachedLazyGetter(JavaModelFunctions::getConstructors, typeElement, this, customTypeContext(), session);
-    this.extendedClassGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getExtendedClass, this);
-    this.implementedInterfacesGetter = Actions.cachedLazyGetter(CustomTypeFunctions::getImplementedInterfaces, this);
+    this.constructorGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getConstructors, typeElement, this, customTypeContext(), session);
+    this.extendedClassGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getExtendedClass, this);
+    this.implementedInterfacesGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getImplementedInterfaces, this);
   }
 
   @Override

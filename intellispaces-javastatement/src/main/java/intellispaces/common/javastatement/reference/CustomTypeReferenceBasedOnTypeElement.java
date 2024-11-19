@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.type.ClassFunctions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
@@ -19,11 +20,11 @@ import java.util.function.Function;
  * Adapter of {@link TypeElement} to {@link CustomTypeReference}.
  */
 class CustomTypeReferenceBasedOnTypeElement extends AbstractCustomTypeReference {
-  private final Getter<CustomType> targetTypeGetter;
+  private final SupplierAction<CustomType> targetTypeGetter;
 
   CustomTypeReferenceBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super();
-    this.targetTypeGetter = Actions.cachedLazyGetter(JavaModelFunctions::asCustomStatement, typeElement, session);
+    this.targetTypeGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::asCustomStatement, typeElement, session);
   }
 
   @Override

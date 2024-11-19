@@ -1,7 +1,8 @@
 package intellispaces.common.javastatement.instance;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.session.Session;
 
 /**
@@ -9,11 +10,11 @@ import intellispaces.common.javastatement.session.Session;
  */
 class AnnotationElementBasedOnObject implements AnnotationElement {
   private final String name;
-  private final Getter<Instance> valueGetter;
+  private final SupplierAction<Instance> valueGetter;
 
   AnnotationElementBasedOnObject(String name, Object value, Session session) {
     this.name = name;
-    this.valueGetter = Actions.cachedLazyGetter(InstanceFunctions::objectToInstance, value, session);
+    this.valueGetter = CacheActions.cachedLazySupplierAction(InstanceFunctions::objectToInstance, value, session);
   }
 
   @Override

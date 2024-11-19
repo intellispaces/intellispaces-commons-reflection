@@ -1,7 +1,6 @@
 package intellispaces.common.javastatement;
 
-import intellispaces.common.base.collection.CollectionFunctions;
-import intellispaces.common.base.object.ProcessingFunctions;
+import tech.intellispaces.entity.collection.CollectionFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.EnumType;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -9,6 +8,7 @@ import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;
 import intellispaces.common.javastatement.support.TesteeType;
 import org.junit.jupiter.api.Test;
+import tech.intellispaces.entity.object.ObjectFunctions;
 
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
@@ -55,7 +55,8 @@ public class EnumTest extends AbstractCustomStatementTest {
     ).containsExactlyInAnyOrder("values", "valueOf");
 
     assertThat(enumStatement.annotations()).hasSize(1);
-    ProcessingFunctions.handle(enumStatement.annotations().get(0), annInstance -> {
+    
+    ObjectFunctions.handle(enumStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });
@@ -89,26 +90,26 @@ public class EnumTest extends AbstractCustomStatementTest {
     assertThat(enumStatement.typeParameters()).isEmpty();
 
     assertThat(enumStatement.implementedInterfaces()).hasSize(2);
-    ProcessingFunctions.handle(enumStatement.implementedInterfaces().get(0), implInterface -> {
+    ObjectFunctions.handle(enumStatement.implementedInterfaces().get(0), implInterface -> {
       assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
-    ProcessingFunctions.handle(enumStatement.implementedInterfaces().get(1), implInterface -> {
+    ObjectFunctions.handle(enumStatement.implementedInterfaces().get(1), implInterface -> {
       assertThat(implInterface.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(implInterface.typeArguments()).isEmpty();
     });
 
     assertThat(enumStatement.parentTypes()).hasSize(3);
-    ProcessingFunctions.handle(enumStatement.parentTypes().get(0), parentType -> {
+    ObjectFunctions.handle(enumStatement.parentTypes().get(0), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(Enum.class.getCanonicalName());
       assertThat(parentType.typeArguments()).hasSize(1);
       assertThat(parentType.typeArguments().get(0).asCustomTypeReference().orElseThrow().targetType()).isSameAs(enumStatement);
     });
-    ProcessingFunctions.handle(enumStatement.parentTypes().get(1), parentType -> {
+    ObjectFunctions.handle(enumStatement.parentTypes().get(1), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(interface1Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
-    ProcessingFunctions.handle(enumStatement.parentTypes().get(2), parentType -> {
+    ObjectFunctions.handle(enumStatement.parentTypes().get(2), parentType -> {
       assertThat(parentType.targetType().canonicalName()).isEqualTo(interface2Name);
       assertThat(parentType.typeArguments()).isEmpty();
     });
@@ -120,7 +121,7 @@ public class EnumTest extends AbstractCustomStatementTest {
     ).containsExactlyInAnyOrder("values", "valueOf");
 
     assertThat(enumStatement.annotations()).hasSize(1);
-    ProcessingFunctions.handle(enumStatement.annotations().get(0), annInstance -> {
+    ObjectFunctions.handle(enumStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });
@@ -404,7 +405,7 @@ public class EnumTest extends AbstractCustomStatementTest {
     methodValidator.accept(actualMethods.get(0));
 
     assertThat(enumStatement.annotations()).hasSize(1);
-    ProcessingFunctions.handle(enumStatement.annotations().get(0), annInstance -> {
+    ObjectFunctions.handle(enumStatement.annotations().get(0), annInstance -> {
       assertThat(annInstance.annotationStatement().canonicalName()).isEqualTo(TesteeType.class.getCanonicalName());
       assertThat(annInstance.elements()).isEmpty();
     });

@@ -1,8 +1,8 @@
 package intellispaces.common.javastatement.method;
 
-import intellispaces.common.action.runner.Runner;
-import intellispaces.common.base.function.Consumers;
-import intellispaces.common.base.text.TextActions;
+import tech.intellispaces.action.runnable.RunnableAction;
+import tech.intellispaces.action.text.StringActions;
+import tech.intellispaces.entity.function.Consumers;
 import intellispaces.common.javastatement.instance.AnnotationElement;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
@@ -111,7 +111,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   }
 
   private void appendTypeParams(StringBuilder sb) {
-    Runner commaAppender = TextActions.skippingFirstTimeCommaAppender(sb);
+    RunnableAction commaAppender = StringActions.skipFirstTimeCommaAppender(sb);
     for (NamedReference typeParam : prototype.typeParameters()) {
       commaAppender.run();
       sb.append(typeParam.formalFullDeclaration());
@@ -150,7 +150,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       Consumer<String> importConsumer,
       Function<String, String> canonicalToSimpleNameMapper
   ) {
-    Runner commaAppender = TextActions.skippingFirstTimeCommaAppender(sb);
+    RunnableAction commaAppender = StringActions.skipFirstTimeCommaAppender(sb);
     if (additionalParams != null) {
       for (String additionalParam : additionalParams) {
         commaAppender.run();
@@ -184,7 +184,7 @@ public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
       if (!a.elements().isEmpty()) {
         sb.append("(");
       }
-      Runner ca = TextActions.skippingFirstTimeCommaAppender(sb);
+      RunnableAction ca = StringActions.skipFirstTimeCommaAppender(sb);
       if (a.elements().size() == 1) {
         AnnotationElement e = a.elements().iterator().next();
         if ("value".equals(e.name())) {

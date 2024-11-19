@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.type;
 
-import intellispaces.common.base.exception.UnexpectedExceptions;
-import intellispaces.common.base.type.AbstractType;
+import tech.intellispaces.entity.exception.UnexpectedExceptions;
+import tech.intellispaces.entity.type.AbstractType;
 import intellispaces.common.javastatement.reference.CustomTypeReferences;
 import intellispaces.common.javastatement.reference.TypeReference;
 
@@ -53,7 +53,7 @@ class TypeBaseOnReferenceImpl<T> extends AbstractType<T> implements Type<T> {
 
   @Override
   @SuppressWarnings("unchecked, rawtypes")
-  public List<intellispaces.common.base.type.Type<?>> qualifierTypes() {
+  public List<tech.intellispaces.entity.type.Type<?>> qualifierTypes() {
     if (reference.isCustomTypeReference()) {
       return (List) reference.asCustomTypeReferenceOrElseThrow().typeArguments().stream()
         .map(TypeBaseOnReferenceImpl::new)

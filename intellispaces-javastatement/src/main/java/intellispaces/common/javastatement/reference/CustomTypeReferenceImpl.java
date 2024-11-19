@@ -1,8 +1,9 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
-import intellispaces.common.base.type.ClassFunctions;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
@@ -14,15 +15,15 @@ import java.util.function.Function;
 class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
   private final CustomType targetType;
   private final List<NotPrimitiveReference> typeArguments;
-  private final Getter<Map<String, NotPrimitiveReference>> typeArgumentMappingsGetter;
-  private final Getter<String> typeArgumentsDeclarationGetter;
+  private final SupplierAction<Map<String, NotPrimitiveReference>> typeArgumentMappingsGetter;
+  private final SupplierAction<String> typeArgumentsDeclarationGetter;
 
   CustomTypeReferenceImpl(CustomType targetType, List<NotPrimitiveReference> typeArguments) {
     super();
     this.targetType = targetType;
     this.typeArguments = typeArguments;
-    this.typeArgumentMappingsGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentMapping, this);
-    this.typeArgumentsDeclarationGetter = Actions.cachedLazyGetter(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
+    this.typeArgumentMappingsGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentMapping, this);
+    this.typeArgumentsDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
   }
 
   @Override

@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.type.Primitive;
+import tech.intellispaces.entity.type.PrimitiveType;
 import intellispaces.common.javastatement.customtype.CustomType;
 
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * Primitive type reference.
  */
-public interface PrimitiveReference extends TypeReference, Primitive {
+public interface PrimitiveReference extends TypeReference, PrimitiveType {
 
   String typename();
 

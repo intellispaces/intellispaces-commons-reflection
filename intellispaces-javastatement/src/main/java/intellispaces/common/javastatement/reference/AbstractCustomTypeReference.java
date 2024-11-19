@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.ClassType;
 import intellispaces.common.javastatement.customtype.Classes;

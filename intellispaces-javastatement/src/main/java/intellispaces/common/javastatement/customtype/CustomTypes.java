@@ -1,6 +1,6 @@
 package intellispaces.common.javastatement.customtype;
 
-import intellispaces.common.base.exception.NotImplementedExceptions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;

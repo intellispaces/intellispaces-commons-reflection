@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.common;
 
-import intellispaces.common.base.exception.UnexpectedExceptions;
-import intellispaces.common.base.function.TriFunction;
+import tech.intellispaces.entity.exception.UnexpectedExceptions;
+import tech.intellispaces.entity.function.TriFunction;
 import intellispaces.common.javastatement.Statement;
 import intellispaces.common.javastatement.context.ContextTypeParameter;
 import intellispaces.common.javastatement.context.TypeContext;

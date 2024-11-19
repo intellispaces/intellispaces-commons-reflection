@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.base.exception.NotImplementedExceptions;
-import intellispaces.common.base.exception.UnexpectedExceptions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.entity.exception.UnexpectedExceptions;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.CustomTypeFunctions;
@@ -246,11 +246,11 @@ public interface TypeReferenceFunctions {
   }
 
   private static String getActualTypeDeclaration(TypeReference typeReference, boolean blind) {
-    return getActualTypeDeclaration(typeReference, blind, intellispaces.common.base.type.ClassNameFunctions::getSimpleName);
+    return getActualTypeDeclaration(typeReference, blind, tech.intellispaces.entity.type.ClassNameFunctions::getSimpleName);
 }
 
   static String getSimpleTypeDeclaration(TypeReference typeReference) {
-    return getSimpleTypeDeclaration(typeReference, intellispaces.common.base.type.ClassNameFunctions::getSimpleName);
+    return getSimpleTypeDeclaration(typeReference, tech.intellispaces.entity.type.ClassNameFunctions::getSimpleName);
   }
 
   static String getSimpleTypeDeclaration(

@@ -1,7 +1,8 @@
 package intellispaces.common.javastatement.reference;
 
-import intellispaces.common.action.Actions;
-import intellispaces.common.action.getter.Getter;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CacheActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.Statement;
 import intellispaces.common.javastatement.StatementType;
@@ -20,16 +21,16 @@ import java.util.Map;
  */
 class NamedReferenceBasedOnTypeParameterElement extends AbstractTypeReference implements NamedReference {
   private final String name;
-  private final Getter<Statement> ownerGetter;
-  private final Getter<List<ReferenceBound>> extendedBoundsGetter;
+  private final SupplierAction<Statement> ownerGetter;
+  private final SupplierAction<List<ReferenceBound>> extendedBoundsGetter;
 
   NamedReferenceBasedOnTypeParameterElement(
       TypeParameterElement typeParameter, TypeContext typeContext, Session session
   ) {
     super();
-    ownerGetter = Actions.cachedLazyGetter(JavaStatements::statement, typeParameter.getGenericElement());
+    ownerGetter = CacheActions.cachedLazySupplierAction(JavaStatements::statement, typeParameter.getGenericElement());
     this.name = typeParameter.getSimpleName().toString();
-    this.extendedBoundsGetter = Actions.cachedLazyGetter(
+    this.extendedBoundsGetter = CacheActions.cachedLazySupplierAction(
         JavaModelFunctions::getExtendedBounds, typeParameter, typeContext, session);
   }
 
