@@ -1,11 +1,10 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -20,12 +19,12 @@ abstract class AbstractTypeReference implements TypeReference {
   private final SupplierAction<String> formalBriefDeclarationGetter;
 
   AbstractTypeReference() {
-    this.dependenciesGetter = CacheActions.cachedLazySupplierAction(DependenciesFunctions::getTypeReferenceDependencies, this);
-    this.dependencyTypesGetter = CacheActions.cachedLazySupplierAction(AbstractTypeReference::collectDependencyTypenames, this);
-    this.actualSimpleGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getSimpleTypeDeclaration, this);
-    this.actualDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getActualTypeDeclaration, this);
-    this.formalFullDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getFormalFullTypeReferenceDeclaration, this);
-    this.formalBriefDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getFormalBriefTypeReferenceDeclaration, this);
+    this.dependenciesGetter = CachedSupplierActions.get(DependenciesFunctions::getTypeReferenceDependencies, this);
+    this.dependencyTypesGetter = CachedSupplierActions.get(AbstractTypeReference::collectDependencyTypenames, this);
+    this.actualSimpleGetter = CachedSupplierActions.get(TypeReferenceFunctions::getSimpleTypeDeclaration, this);
+    this.actualDeclarationGetter = CachedSupplierActions.get(TypeReferenceFunctions::getActualTypeDeclaration, this);
+    this.formalFullDeclarationGetter = CachedSupplierActions.get(TypeReferenceFunctions::getFormalFullTypeReferenceDeclaration, this);
+    this.formalBriefDeclarationGetter = CachedSupplierActions.get(TypeReferenceFunctions::getFormalBriefTypeReferenceDeclaration, this);
   }
 
   @Override

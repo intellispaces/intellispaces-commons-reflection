@@ -1,12 +1,11 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.type.ClassFunctions;
 
 import java.util.List;
 import java.util.Map;
@@ -22,8 +21,8 @@ class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
     super();
     this.targetType = targetType;
     this.typeArguments = typeArguments;
-    this.typeArgumentMappingsGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentMapping, this);
-    this.typeArgumentsDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
+    this.typeArgumentMappingsGetter = CachedSupplierActions.get(TypeReferenceFunctions::getTypeArgumentMapping, this);
+    this.typeArgumentsDeclarationGetter = CachedSupplierActions.get(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
   }
 
   @Override

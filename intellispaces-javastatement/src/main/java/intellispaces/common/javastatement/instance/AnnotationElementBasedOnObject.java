@@ -1,9 +1,8 @@
 package intellispaces.common.javastatement.instance;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.session.Session;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 
 /**
  * Adapter of {@link Object} to {@link AnnotationElement}.
@@ -14,7 +13,7 @@ class AnnotationElementBasedOnObject implements AnnotationElement {
 
   AnnotationElementBasedOnObject(String name, Object value, Session session) {
     this.name = name;
-    this.valueGetter = CacheActions.cachedLazySupplierAction(InstanceFunctions::objectToInstance, value, session);
+    this.valueGetter = CachedSupplierActions.get(InstanceFunctions::objectToInstance, value, session);
   }
 
   @Override

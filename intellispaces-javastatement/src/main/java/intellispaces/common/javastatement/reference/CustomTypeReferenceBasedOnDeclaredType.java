@@ -1,15 +1,14 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.session.Session;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.type.ClassFunctions;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
@@ -29,10 +28,10 @@ class CustomTypeReferenceBasedOnDeclaredType extends AbstractCustomTypeReference
   CustomTypeReferenceBasedOnDeclaredType(DeclaredType declaredType, TypeContext typeContext, Session session) {
     super();
     TypeElement typeElement = (TypeElement) declaredType.asElement();
-    this.targetTypeGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::asCustomStatement, typeElement, session);
-    this.typeArgumentsGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getTypeArguments, declaredType, typeContext, session);
-    this.typeArgumentMappingsGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentMapping, this);
-    this.typeArgumentsDeclarationGetter = CacheActions.cachedLazySupplierAction(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
+    this.targetTypeGetter = CachedSupplierActions.get(JavaModelFunctions::asCustomStatement, typeElement, session);
+    this.typeArgumentsGetter = CachedSupplierActions.get(JavaModelFunctions::getTypeArguments, declaredType, typeContext, session);
+    this.typeArgumentMappingsGetter = CachedSupplierActions.get(TypeReferenceFunctions::getTypeArgumentMapping, this);
+    this.typeArgumentsDeclarationGetter = CachedSupplierActions.get(TypeReferenceFunctions::getTypeArgumentsDeclaration, this);
   }
 
   @Override

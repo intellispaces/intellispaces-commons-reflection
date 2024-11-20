@@ -1,7 +1,5 @@
 package intellispaces.common.javastatement.common;
 
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
-import tech.intellispaces.entity.function.TriFunction;
 import intellispaces.common.javastatement.Statement;
 import intellispaces.common.javastatement.context.ContextTypeParameter;
 import intellispaces.common.javastatement.context.TypeContext;
@@ -31,6 +29,8 @@ import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.Wildcards;
 import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;
+import tech.intellispaces.entity.exception.UnexpectedExceptions;
+import tech.intellispaces.entity.function.TriFunction;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;

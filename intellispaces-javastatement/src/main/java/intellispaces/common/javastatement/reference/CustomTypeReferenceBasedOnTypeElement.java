@@ -1,15 +1,14 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.type.ClassFunctions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.session.Session;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.type.ClassFunctions;
 
 import javax.lang.model.element.TypeElement;
 import java.util.List;
@@ -24,7 +23,7 @@ class CustomTypeReferenceBasedOnTypeElement extends AbstractCustomTypeReference 
 
   CustomTypeReferenceBasedOnTypeElement(TypeElement typeElement, TypeContext typeContext, Session session) {
     super();
-    this.targetTypeGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::asCustomStatement, typeElement, session);
+    this.targetTypeGetter = CachedSupplierActions.get(JavaModelFunctions::asCustomStatement, typeElement, session);
   }
 
   @Override

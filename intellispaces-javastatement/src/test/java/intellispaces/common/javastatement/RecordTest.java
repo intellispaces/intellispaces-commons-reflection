@@ -1,7 +1,5 @@
 package intellispaces.common.javastatement;
 
-import tech.intellispaces.entity.collection.CollectionFunctions;
-import tech.intellispaces.entity.object.ObjectFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.RecordType;
 import intellispaces.common.javastatement.method.MethodStatement;
@@ -11,6 +9,8 @@ import intellispaces.common.javastatement.session.Sessions;
 import intellispaces.common.javastatement.support.TesteeType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import tech.intellispaces.entity.collection.CollectionFunctions;
+import tech.intellispaces.entity.object.ObjectFunctions;
 
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;

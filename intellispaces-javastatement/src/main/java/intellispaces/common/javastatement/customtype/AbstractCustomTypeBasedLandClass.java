@@ -1,10 +1,5 @@
 package intellispaces.common.javastatement.customtype;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.collection.ArraysFunctions;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.instance.AnnotationInstance;
 import intellispaces.common.javastatement.instance.AnnotationInstances;
@@ -19,6 +14,10 @@ import intellispaces.common.javastatement.reference.ReferenceBound;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferences;
 import intellispaces.common.javastatement.session.Sessions;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.collection.ArraysFunctions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -41,7 +40,7 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
 
   AbstractCustomTypeBasedLandClass(Class<?> aClass) {
     this.aClass = aClass;
-    this.actualMethodsGetter = CacheActions.cachedLazySupplierAction(
+    this.actualMethodsGetter = CachedSupplierActions.get(
         CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get()
     );
   }

@@ -1,9 +1,9 @@
 package intellispaces.common.javastatement.instance;
 
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.reference.TypeReference;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import java.util.List;
 

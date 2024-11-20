@@ -1,10 +1,10 @@
 package intellispaces.common.javastatement.reference;
 
+import intellispaces.common.javastatement.StatementType;
+import intellispaces.common.javastatement.StatementTypes;
 import tech.intellispaces.entity.exception.UnexpectedExceptions;
 import tech.intellispaces.entity.type.PrimitiveType;
 import tech.intellispaces.entity.type.PrimitiveTypes;
-import intellispaces.common.javastatement.StatementType;
-import intellispaces.common.javastatement.StatementTypes;
 
 import java.util.HashMap;
 import java.util.Map;

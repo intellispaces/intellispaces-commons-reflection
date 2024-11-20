@@ -1,12 +1,12 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.ClassType;
 import intellispaces.common.javastatement.customtype.Classes;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.InterfaceType;
 import intellispaces.common.javastatement.customtype.Interfaces;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import java.util.ArrayList;
 import java.util.List;

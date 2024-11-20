@@ -1,8 +1,5 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.Statement;
 import intellispaces.common.javastatement.StatementType;
@@ -10,6 +7,8 @@ import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
 import intellispaces.common.javastatement.session.Session;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 
 import javax.lang.model.element.TypeParameterElement;
 import java.util.ArrayList;
@@ -28,9 +27,9 @@ class NamedReferenceBasedOnTypeParameterElement extends AbstractTypeReference im
       TypeParameterElement typeParameter, TypeContext typeContext, Session session
   ) {
     super();
-    ownerGetter = CacheActions.cachedLazySupplierAction(JavaStatements::statement, typeParameter.getGenericElement());
+    ownerGetter = CachedSupplierActions.get(JavaStatements::statement, typeParameter.getGenericElement());
     this.name = typeParameter.getSimpleName().toString();
-    this.extendedBoundsGetter = CacheActions.cachedLazySupplierAction(
+    this.extendedBoundsGetter = CachedSupplierActions.get(
         JavaModelFunctions::getExtendedBounds, typeParameter, typeContext, session);
   }
 

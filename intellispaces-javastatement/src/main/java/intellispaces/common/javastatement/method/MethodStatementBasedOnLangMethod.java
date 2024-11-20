@@ -1,14 +1,13 @@
 package intellispaces.common.javastatement.method;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.customtype.CustomTypes;
 import intellispaces.common.javastatement.reference.NotPrimitiveReference;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -24,8 +23,8 @@ class MethodStatementBasedOnLangMethod implements MethodStatement {
 
   MethodStatementBasedOnLangMethod(Method method) {
     this.owner = CustomTypes.of(method.getDeclaringClass());
-    this.signatureGetter = CacheActions.cachedLazySupplierAction(MethodSignatures::get, method);
-    this.overrideMethodsGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getOverrideMethods, this);
+    this.signatureGetter = CachedSupplierActions.get(MethodSignatures::get, method);
+    this.overrideMethodsGetter = CachedSupplierActions.get(MethodFunctions::getOverrideMethods, this);
   }
 
   @Override

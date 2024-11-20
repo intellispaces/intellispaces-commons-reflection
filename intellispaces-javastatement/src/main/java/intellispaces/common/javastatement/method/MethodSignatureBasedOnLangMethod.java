@@ -1,6 +1,5 @@
 package intellispaces.common.javastatement.method;
 
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -16,6 +15,7 @@ import intellispaces.common.javastatement.reference.ThrowableReference;
 import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferences;
 import intellispaces.common.javastatement.session.Sessions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

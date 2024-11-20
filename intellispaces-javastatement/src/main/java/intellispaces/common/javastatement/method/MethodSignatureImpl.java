@@ -1,6 +1,5 @@
 package intellispaces.common.javastatement.method;
 
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
@@ -10,6 +9,7 @@ import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.reference.ThrowableReference;
 import intellispaces.common.javastatement.reference.TypeReference;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

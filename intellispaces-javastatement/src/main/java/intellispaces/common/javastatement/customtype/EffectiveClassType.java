@@ -1,13 +1,12 @@
 package intellispaces.common.javastatement.customtype;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.reference.CustomTypeReference;
 import intellispaces.common.javastatement.reference.NotPrimitiveReference;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,8 @@ class EffectiveClassType extends AbstractEffectiveCustomType implements ClassTyp
       ClassType classStatement, Map<String, NotPrimitiveReference> typeMapping
   ) {
     super(classStatement, typeMapping);
-    this.extendedClassGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getExtendedClass, this);
-    this.implementedInterfacesGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getImplementedInterfaces, this);
+    this.extendedClassGetter = CachedSupplierActions.get(CustomTypeFunctions::getExtendedClass, this);
+    this.implementedInterfacesGetter = CachedSupplierActions.get(CustomTypeFunctions::getImplementedInterfaces, this);
   }
 
   @Override

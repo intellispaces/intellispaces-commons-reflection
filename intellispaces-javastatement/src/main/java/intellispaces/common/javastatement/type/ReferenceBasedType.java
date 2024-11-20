@@ -1,9 +1,9 @@
 package intellispaces.common.javastatement.type;
 
+import intellispaces.common.javastatement.reference.TypeReference;
 import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import tech.intellispaces.entity.exception.UnexpectedExceptions;
 import tech.intellispaces.entity.type.AbstractType;
-import intellispaces.common.javastatement.reference.TypeReference;
 
 import java.util.List;
 

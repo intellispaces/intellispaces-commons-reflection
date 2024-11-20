@@ -4,8 +4,6 @@ import com.google.testing.compile.Compilation;
 import com.google.testing.compile.CompilationSubject;
 import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
-import tech.intellispaces.entity.collection.CollectionFunctions;
-import tech.intellispaces.entity.object.ObjectFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.reference.NamedReference;
@@ -13,6 +11,8 @@ import intellispaces.common.javastatement.reference.PrimitiveReferences;
 import intellispaces.common.javastatement.samples.TestEnum;
 import intellispaces.common.javastatement.samples.TestRecord;
 import intellispaces.common.javastatement.support.TesteeTypeAnnotationProcessor;
+import tech.intellispaces.entity.collection.CollectionFunctions;
+import tech.intellispaces.entity.object.ObjectFunctions;
 
 import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;

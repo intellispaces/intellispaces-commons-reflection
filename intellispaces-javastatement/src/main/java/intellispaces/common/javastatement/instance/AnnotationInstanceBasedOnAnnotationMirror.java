@@ -1,15 +1,14 @@
 package intellispaces.common.javastatement.instance;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationFunctions;
 import intellispaces.common.javastatement.customtype.AnnotationType;
 import intellispaces.common.javastatement.customtype.Annotations;
 import intellispaces.common.javastatement.session.Session;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.TypeElement;
@@ -28,9 +27,9 @@ class AnnotationInstanceBasedOnAnnotationMirror implements AnnotationInstance {
   private final SupplierAction<Map<String, AnnotationElement>> elementsGetter;
 
   AnnotationInstanceBasedOnAnnotationMirror(AnnotationMirror annotationMirror, Session session) {
-    this.annotationStatementGetter = CacheActions.cachedLazySupplierAction(annMirror ->
+    this.annotationStatementGetter = CachedSupplierActions.get(annMirror ->
         Annotations.of((TypeElement) annMirror.getAnnotationType().asElement(), session), annotationMirror);
-    this.elementsGetter = CacheActions.cachedLazySupplierAction(annMirror ->
+    this.elementsGetter = CachedSupplierActions.get(annMirror ->
         AnnotationFunctions.getAnnotationElements(annMirror, session).stream()
             .collect(Collectors.toMap(AnnotationElement::name, Function.identity())), annotationMirror
     );

@@ -1,9 +1,5 @@
 package intellispaces.common.javastatement.method;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import intellispaces.common.javastatement.JavaStatements;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
@@ -12,6 +8,10 @@ import intellispaces.common.javastatement.context.TypeContexts;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.reference.NotPrimitiveReference;
 import intellispaces.common.javastatement.session.Session;
+import tech.intellispaces.action.Actions;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
@@ -29,7 +29,7 @@ class MethodStatementBasedOnExecutableElement implements MethodStatement {
   MethodStatementBasedOnExecutableElement(ExecutableElement executableElement, Session session) {
     this(
         executableElement,
-        CacheActions.cachedLazySupplierAction(
+        CachedSupplierActions.get(
             JavaStatements::customTypeStatement, (TypeElement) executableElement.getEnclosingElement()),
         TypeContexts.empty(),
         session
@@ -46,9 +46,9 @@ class MethodStatementBasedOnExecutableElement implements MethodStatement {
       ExecutableElement executableElement, SupplierAction<CustomType> ownerGetter, TypeContext typeContext, Session session
   ) {
     this.ownerGetter = ownerGetter;
-    this.signatureGetter = CacheActions.cachedLazySupplierAction(
+    this.signatureGetter = CachedSupplierActions.get(
         MethodSignatures::of, executableElement, typeContext, session);
-    this.overrideMethodsGetter = CacheActions.cachedLazySupplierAction(MethodFunctions::getOverrideMethods, this);
+    this.overrideMethodsGetter = CachedSupplierActions.get(MethodFunctions::getOverrideMethods, this);
   }
 
   @Override

@@ -1,7 +1,7 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.entity.type.PrimitiveType;
 import intellispaces.common.javastatement.customtype.CustomType;
+import tech.intellispaces.entity.type.PrimitiveType;
 
 import java.util.Collection;
 import java.util.List;

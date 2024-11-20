@@ -1,10 +1,5 @@
 package intellispaces.common.javastatement.customtype;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
-import tech.intellispaces.entity.type.ElementFunctions;
 import intellispaces.common.javastatement.common.DependenciesFunctions;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
@@ -18,6 +13,10 @@ import intellispaces.common.javastatement.reference.TypeReference;
 import intellispaces.common.javastatement.reference.TypeReferenceFunctions;
 import intellispaces.common.javastatement.session.Session;
 import intellispaces.common.javastatement.session.Sessions;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.entity.type.ElementFunctions;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -50,14 +49,14 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
     this.typeParams = JavaModelFunctions.getTypeParameters(typeElement, typeContext, session);
     this.customTypeContext = createNameContext(typeContext, this.typeParams);
 
-    this.typeParametersFullDeclarationGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
-    this.typeParametersBriefDeclarationGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
-    this.parentTypesGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getParentTypes, typeElement, typeContext, session);
-    this.annotationsGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getAnnotations, typeElement, session);
-    this.declaredMethodsGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getDeclaredMethods, typeElement, this, customTypeContext, session);
-    this.actualMethodsGetter = CacheActions.cachedLazySupplierAction(CustomTypeFunctions::getActualMethods, this, customTypeContext, session);
-    this.dependenciesGetter = CacheActions.cachedLazySupplierAction(DependenciesFunctions::getCustomTypeDependencies, this);
-    this.dependencyTypesGetter = CacheActions.cachedLazySupplierAction(AbstractCustomTypeStatementBasedOnTypeElement::collectDependencyTypenames, this);
+    this.typeParametersFullDeclarationGetter = CachedSupplierActions.get(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
+    this.typeParametersBriefDeclarationGetter = CachedSupplierActions.get(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
+    this.parentTypesGetter = CachedSupplierActions.get(JavaModelFunctions::getParentTypes, typeElement, typeContext, session);
+    this.annotationsGetter = CachedSupplierActions.get(JavaModelFunctions::getAnnotations, typeElement, session);
+    this.declaredMethodsGetter = CachedSupplierActions.get(JavaModelFunctions::getDeclaredMethods, typeElement, this, customTypeContext, session);
+    this.actualMethodsGetter = CachedSupplierActions.get(CustomTypeFunctions::getActualMethods, this, customTypeContext, session);
+    this.dependenciesGetter = CachedSupplierActions.get(DependenciesFunctions::getCustomTypeDependencies, this);
+    this.dependencyTypesGetter = CachedSupplierActions.get(AbstractCustomTypeStatementBasedOnTypeElement::collectDependencyTypenames, this);
   }
 
   protected TypeContext customTypeContext() {

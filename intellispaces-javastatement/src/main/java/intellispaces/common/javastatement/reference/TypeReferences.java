@@ -1,8 +1,8 @@
 package intellispaces.common.javastatement.reference;
 
+import intellispaces.common.javastatement.customtype.CustomType;
 import tech.intellispaces.entity.collection.ArraysFunctions;
 import tech.intellispaces.entity.exception.UnexpectedExceptions;
-import intellispaces.common.javastatement.customtype.CustomType;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;

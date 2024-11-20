@@ -1,12 +1,12 @@
 package intellispaces.common.javastatement.instance;
 
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.customtype.AnnotationType;
 import intellispaces.common.javastatement.customtype.Annotations;
 import intellispaces.common.javastatement.session.Sessions;
+import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.entity.exception.UnexpectedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;

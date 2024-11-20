@@ -1,11 +1,11 @@
 package intellispaces.common.javastatement.method;
 
-import tech.intellispaces.action.runnable.RunnableAction;
-import tech.intellispaces.action.text.StringActions;
-import tech.intellispaces.entity.function.Consumers;
 import intellispaces.common.javastatement.instance.AnnotationElement;
 import intellispaces.common.javastatement.reference.NamedReference;
 import intellispaces.common.javastatement.reference.TypeReference;
+import tech.intellispaces.action.runnable.RunnableAction;
+import tech.intellispaces.action.text.StringActions;
+import tech.intellispaces.entity.function.Consumers;
 
 import java.util.ArrayList;
 import java.util.List;

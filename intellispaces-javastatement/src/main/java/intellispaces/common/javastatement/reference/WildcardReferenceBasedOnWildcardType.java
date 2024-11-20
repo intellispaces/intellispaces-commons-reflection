@@ -1,13 +1,12 @@
 package intellispaces.common.javastatement.reference;
 
-import tech.intellispaces.action.Actions;
-import tech.intellispaces.action.cache.CacheActions;
-import tech.intellispaces.action.supplier.SupplierAction;
 import intellispaces.common.javastatement.StatementType;
 import intellispaces.common.javastatement.StatementTypes;
 import intellispaces.common.javastatement.common.JavaModelFunctions;
 import intellispaces.common.javastatement.context.TypeContext;
 import intellispaces.common.javastatement.session.Session;
+import tech.intellispaces.action.cache.CachedSupplierActions;
+import tech.intellispaces.action.supplier.SupplierAction;
 
 import java.util.Map;
 import java.util.Optional;
@@ -21,8 +20,8 @@ class WildcardReferenceBasedOnWildcardType extends AbstractTypeReference impleme
 
   WildcardReferenceBasedOnWildcardType(javax.lang.model.type.WildcardType wildcardType, TypeContext typeContext, Session session) {
     super();
-    this.extendedBoundGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getExtendedBound, wildcardType, typeContext, session);
-    this.superBoundGetter = CacheActions.cachedLazySupplierAction(JavaModelFunctions::getSuperBound, wildcardType, typeContext, session);
+    this.extendedBoundGetter = CachedSupplierActions.get(JavaModelFunctions::getExtendedBound, wildcardType, typeContext, session);
+    this.superBoundGetter = CachedSupplierActions.get(JavaModelFunctions::getSuperBound, wildcardType, typeContext, session);
   }
 
   @Override
