@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Primitive type reference provider.
+ */
 public enum PrimitiveReferences implements PrimitiveReference {
 
   Boolean(PrimitiveTypes.Boolean),
@@ -28,7 +31,7 @@ public enum PrimitiveReferences implements PrimitiveReference {
 
   Char(PrimitiveTypes.Char);
 
-  private final PrimitiveType primitive;
+  private final PrimitiveType primitiveType;
 
   public static PrimitiveReference get(String typename) {
     PrimitiveReference primitive = VALUES.get(typename);
@@ -38,8 +41,8 @@ public enum PrimitiveReferences implements PrimitiveReference {
     return primitive;
   }
 
-  PrimitiveReferences(PrimitiveType primitive) {
-    this.primitive = primitive;
+  PrimitiveReferences(PrimitiveType primitiveType) {
+    this.primitiveType = primitiveType;
   }
 
   @Override
@@ -49,56 +52,12 @@ public enum PrimitiveReferences implements PrimitiveReference {
 
   @Override
   public String prettyDeclaration() {
-    return primitive.typename();
+    return primitiveType.typename();
   }
 
   @Override
-  public boolean isChar() {
-    return primitive.isChar();
-  }
-
-  @Override
-  public boolean isBoolean() {
-    return primitive.isBoolean();
-  }
-
-  @Override
-  public boolean isByte() {
-    return primitive.isByte();
-  }
-
-  @Override
-  public boolean isShort() {
-    return primitive.isShort();
-  }
-
-  @Override
-  public boolean isInt() {
-    return primitive.isInt();
-  }
-
-  @Override
-  public boolean isLong() {
-    return primitive.isLong();
-  }
-
-  @Override
-  public boolean isFloat() {
-    return primitive.isFloat();
-  }
-
-  @Override
-  public boolean isDouble() {
-    return primitive.isDouble();
-  }
-
-  public String typename() {
-    return primitive.typename();
-  }
-
-  @Override
-  public Class<?> wrapperClass() {
-    return primitive.wrapperClass();
+  public PrimitiveType primitiveType() {
+    return primitiveType;
   }
 
   @Override
@@ -138,7 +97,12 @@ public enum PrimitiveReferences implements PrimitiveReference {
 
   @Override
   public String toString() {
-    return actualDeclaration();
+    return typename();
+  }
+
+  @Override
+  public String typename() {
+    return primitiveType.typename();
   }
 
   private static final Map<String, PrimitiveReference> VALUES = new HashMap<>();

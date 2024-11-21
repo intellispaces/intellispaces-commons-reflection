@@ -99,8 +99,8 @@ public interface InstanceFunctions {
 
     Instance value = values.get(0);
     if (StatementTypes.PrimitiveInstance.equals(value.statementType())) {
-      PrimitiveReference primitiveType = value.asPrimitive().orElseThrow().type();
-      final Class<?> wrapperClass = primitiveType.wrapperClass();
+      PrimitiveReference primitiveTypeReference = value.asPrimitive().orElseThrow().type();
+      final Class<?> wrapperClass = primitiveTypeReference.primitiveType().wrapperClass();
       return CustomTypeReferences.get(Classes.of(wrapperClass));
     } else if (StatementTypes.StringInstance.equals(value.statementType())) {
       return CustomTypeReferences.get(Classes.of(String.class));

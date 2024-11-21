@@ -20,7 +20,7 @@ public interface TypeReferenceFunctions {
 
   static Class<?> getClass(TypeReference typeReference) {
     if (StatementTypes.PrimitiveReference.equals(typeReference.statementType())) {
-      return typeReference.asPrimitiveReference().orElseThrow().wrapperClass();
+      return typeReference.asPrimitiveReferenceOrElseThrow().primitiveType().wrapperClass();
     } else if (StatementTypes.CustomReference.equals(typeReference.statementType())) {
       return getClass(typeReference.asCustomTypeReference().orElseThrow().targetType().canonicalName());
     } else {
@@ -42,8 +42,8 @@ public interface TypeReferenceFunctions {
       TypeReference typeReferenceReference1, TypeReference typeReferenceReference2
   ) {
     if (typeReferenceReference1.asPrimitiveReference().isPresent() && typeReferenceReference2.asPrimitiveReference().isPresent()) {
-      String typename1 = typeReferenceReference1.asPrimitiveReference().orElseThrow().typename();
-      String typename2 = typeReferenceReference2.asPrimitiveReference().orElseThrow().typename();
+      String typename1 = typeReferenceReference1.asPrimitiveReferenceOrElseThrow().primitiveType().typename();
+      String typename2 = typeReferenceReference2.asPrimitiveReferenceOrElseThrow().primitiveType().typename();
       if (typename1.equals(typename2)) {
         return Optional.of(typeReferenceReference1);
       } else {
@@ -130,7 +130,7 @@ public interface TypeReferenceFunctions {
   private static boolean isEqualPrimitiveTypeReferences(
       PrimitiveReference typeReference1, PrimitiveReference typeReference2
   ) {
-    return typeReference1.typename().equals(typeReference2.typename());
+    return typeReference1.primitiveType().typename().equals(typeReference2.primitiveType().typename());
   }
 
   private static boolean isEqualCustomTypeReferences(
@@ -199,9 +199,9 @@ public interface TypeReferenceFunctions {
 
   static boolean isEquivalentTypes(TypeReference typeReference1, TypeReference typeReference2) {
     if (typeReference1.isPrimitiveReference() && typeReference2.isPrimitiveReference()) {
-      PrimitiveReference primitiveType1 = typeReference1.asPrimitiveReferenceOrElseThrow();
-      PrimitiveReference primitiveType2 = typeReference2.asPrimitiveReferenceOrElseThrow();
-      return primitiveType1.typename().equals(primitiveType2.typename());
+      PrimitiveReference primitiveTypeReference1 = typeReference1.asPrimitiveReferenceOrElseThrow();
+      PrimitiveReference primitiveTypeReference2 = typeReference2.asPrimitiveReferenceOrElseThrow();
+      return primitiveTypeReference1.primitiveType().typename().equals(primitiveTypeReference2.primitiveType().typename());
     } else if (typeReference1.isCustomTypeReference() && typeReference2.isCustomTypeReference()) {
       CustomType customType1 = typeReference1.asCustomTypeReferenceOrElseThrow().targetType();
       CustomType customType2 = typeReference2.asCustomTypeReferenceOrElseThrow().targetType();
@@ -257,7 +257,7 @@ public interface TypeReferenceFunctions {
       TypeReference typeReference, Function<String, String> nameMapper
   ) {
     if (typeReference.asPrimitiveReference().isPresent()) {
-      return typeReference.asPrimitiveReference().get().typename();
+      return typeReference.asPrimitiveReference().get().primitiveType().typename();
     } else if (typeReference.asArrayReference().isPresent()) {
       TypeReference elementTypeReference = typeReference.asArrayReference().get().elementType();
       return getSimpleTypeDeclaration(elementTypeReference) + "[]";
@@ -280,7 +280,7 @@ public interface TypeReferenceFunctions {
       TypeReference typeReference, boolean blind, Function<String, String> simpleNameMapper
   ) {
     if (typeReference.asPrimitiveReference().isPresent()) {
-      return typeReference.asPrimitiveReference().get().typename();
+      return typeReference.asPrimitiveReference().get().primitiveType().typename();
     } else if (typeReference.asArrayReference().isPresent()) {
       TypeReference elementTypeReference = typeReference.asArrayReference().get().elementType();
       return getActualTypeDeclaration(elementTypeReference, blind) + "[]";
@@ -307,7 +307,7 @@ public interface TypeReferenceFunctions {
 
   static String getFormalTypeReferenceDeclaration(TypeReference typeReference, boolean fullDeclaration) {
     if (typeReference.asPrimitiveReference().isPresent()) {
-      return typeReference.asPrimitiveReference().get().typename();
+      return typeReference.asPrimitiveReference().get().primitiveType().typename();
     } else if (typeReference.asArrayReference().isPresent()) {
       TypeReference elementTypeReference = typeReference.asArrayReference().get().elementType();
       return getFormalTypeReferenceDeclaration(elementTypeReference, fullDeclaration) + "[]";

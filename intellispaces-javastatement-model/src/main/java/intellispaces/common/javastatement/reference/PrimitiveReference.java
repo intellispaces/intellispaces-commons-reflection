@@ -11,11 +11,14 @@ import java.util.Optional;
 /**
  * Primitive type reference.
  */
-public interface PrimitiveReference extends TypeReference, PrimitiveType {
+public interface PrimitiveReference extends TypeReference {
+
+  /**
+   * The primitive type corresponding to this type reference.
+   */
+  PrimitiveType primitiveType();
 
   String typename();
-
-  Class<?> wrapperClass();
 
   @Override
   default boolean isPrimitiveReference() {

@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * Tests for {@link TypeBuilder}.
  */
-public class TypeBuilderTest {
+public class DerivedTypeBuilderTest {
 
   @Test
   public void test_whenString() {
     // When
-    Type<String> type = new TypeBuilder<String>() {}.get();
+    DerivedType<String> type = new TypeBuilder<String>() {}.get();
 
     // Then
     Assertions.assertThat(type.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
@@ -23,7 +23,7 @@ public class TypeBuilderTest {
   @Test
   public void test_whenStringList() {
     // When
-    Type<List<String>> type = new TypeBuilder<List<String>>() {}.get();
+    DerivedType<List<String>> type = new TypeBuilder<List<String>>() {}.get();
 
     // Then
     Assertions.assertThat(type.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isEqualTo(List.class.getCanonicalName());
