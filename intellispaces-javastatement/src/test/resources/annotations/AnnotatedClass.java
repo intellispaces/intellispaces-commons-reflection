@@ -1,6 +1,9 @@
-package intellispaces.common.javastatement.samples;
+package tech.intellispaces.java.reflection.samples;
 
-import intellispaces.common.javastatement.support.TesteeType;
+import tech.intellispaces.java.reflection.samples.AnnotationWithElementsView;
+import tech.intellispaces.java.reflection.samples.TestAnnotation;
+import tech.intellispaces.java.reflection.samples.TestEnum;
+import tech.intellispaces.java.reflection.support.TesteeType;
 
 public interface AnnotatedClass {
 
