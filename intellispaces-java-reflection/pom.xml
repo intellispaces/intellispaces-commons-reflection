@@ -3,11 +3,11 @@
 
     <parent>
         <groupId>tech.intellispaces.common</groupId>
-        <artifactId>intellispaces-javastatement-parent</artifactId>
+        <artifactId>intellispaces-java-reflection-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>intellispaces-javastatement</artifactId>
+    <artifactId>intellispaces-java-reflection</artifactId>
     <packaging>jar</packaging>
 	
     <build>
@@ -31,7 +31,7 @@
         <!-- Intellispaces -->
         <dependency>
             <groupId>tech.intellispaces.common</groupId>
-            <artifactId>intellispaces-javastatement-model</artifactId>
+            <artifactId>intellispaces-java-reflection-model</artifactId>
         </dependency>
         <dependency>
             <groupId>tech.intellispaces.common</groupId>

@@ -8,12 +8,12 @@
     </parent>
 
     <groupId>tech.intellispaces.common</groupId>
-    <artifactId>intellispaces-javastatement-parent</artifactId>
+    <artifactId>intellispaces-java-reflection-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-javastatement-model</module>
-        <module>intellispaces-javastatement</module>
+        <module>intellispaces-java-reflection-model</module>
+        <module>intellispaces-java-reflection</module>
     </modules>
 
     <dependencyManagement>
@@ -21,7 +21,7 @@
             <!-- Intellispaces -->
             <dependency>
                 <groupId>tech.intellispaces.common</groupId>
-                <artifactId>intellispaces-javastatement-model</artifactId>
+                <artifactId>intellispaces-java-reflection-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
