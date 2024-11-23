@@ -7,7 +7,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>intellispaces-common</groupId>
+    <groupId>tech.intellispaces.common</groupId>
     <artifactId>intellispaces-javastatement-parent</artifactId>
     <packaging>pom</packaging>
 
@@ -20,7 +20,7 @@
         <dependencies>
             <!-- Intellispaces -->
             <dependency>
-                <groupId>intellispaces-common</groupId>
+                <groupId>tech.intellispaces.common</groupId>
                 <artifactId>intellispaces-javastatement-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
@@ -35,7 +35,7 @@
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>intellispaces-common</groupId>
+                <groupId>tech.intellispaces.common</groupId>
                 <artifactId>intellispaces-actions</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>

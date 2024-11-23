@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>intellispaces-common</groupId>
+        <groupId>tech.intellispaces.common</groupId>
         <artifactId>intellispaces-javastatement-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -30,7 +30,7 @@
     <dependencies>
         <!-- Intellispaces -->
         <dependency>
-            <groupId>intellispaces-common</groupId>
+            <groupId>tech.intellispaces.common</groupId>
             <artifactId>intellispaces-javastatement-model</artifactId>
         </dependency>
         <dependency>
