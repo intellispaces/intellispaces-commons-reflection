@@ -3,11 +3,11 @@ package tech.intellispaces.java.reflection.type;
 import tech.intellispaces.java.reflection.reference.TypeReference;
 import tech.intellispaces.entity.exception.NotImplementedExceptions;
 import tech.intellispaces.entity.exception.UnexpectedExceptions;
-import tech.intellispaces.entity.type.AbstractType;
+import tech.intellispaces.entity.type.AbstractClassType;
 
 import java.util.List;
 
-class ReferenceBasedDerivedType<T> extends AbstractType<T> implements DerivedType<T> {
+class ReferenceBasedDerivedType<T> extends AbstractClassType<T> implements DerivedType<T> {
   private final TypeReference base;
   private final List<TypeReference> qualifiers;
 

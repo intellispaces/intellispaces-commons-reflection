@@ -19,9 +19,9 @@ public class DerivedTypesTest {
     DerivedType<Integer> objectType = DerivedTypes.get(Object.class);
 
     // Then
-    assertThat(stringType.baseClass()).isSameAs(String.class);
-    assertThat(integerType.baseClass()).isSameAs(Integer.class);
-    assertThat(objectType.baseClass()).isSameAs(Object.class);
+    assertThat(stringType.asClassType().baseClass()).isSameAs(String.class);
+    assertThat(integerType.asClassType().baseClass()).isSameAs(Integer.class);
+    assertThat(objectType.asClassType().baseClass()).isSameAs(Object.class);
 
     assertThat(stringType.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(String.class.getCanonicalName());
     assertThat(integerType.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(Integer.class.getCanonicalName());
@@ -34,7 +34,7 @@ public class DerivedTypesTest {
     DerivedType<List<Integer>> listType = DerivedTypes.get(List.class, Integer.class);
 
     // Then
-    assertThat(listType.baseClass()).isSameAs(List.class);
+    assertThat(listType.asClassType().baseClass()).isSameAs(List.class);
 
     assertThat(listType.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isSameAs(List.class.getCanonicalName());
     assertThat(listType.qualifierTypeReferences()).hasSize(1);
