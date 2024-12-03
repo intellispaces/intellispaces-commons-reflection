@@ -29,8 +29,8 @@ import tech.intellispaces.java.reflection.reference.TypeReference;
 import tech.intellispaces.java.reflection.reference.Wildcards;
 import tech.intellispaces.java.reflection.session.Session;
 import tech.intellispaces.java.reflection.session.Sessions;
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
-import tech.intellispaces.entity.function.TriFunction;
+import tech.intellispaces.general.exception.UnexpectedExceptions;
+import tech.intellispaces.general.function.TriFunction;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;

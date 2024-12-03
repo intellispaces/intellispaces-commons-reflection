@@ -1,6 +1,6 @@
 package tech.intellispaces.java.reflection.exception;
 
-import tech.intellispaces.entity.text.StringFunctions;
+import tech.intellispaces.general.text.StringFunctions;
 
 /**
  * Provider of the exception {@link JavaStatementException}.

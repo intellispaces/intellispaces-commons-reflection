@@ -4,8 +4,8 @@ import tech.intellispaces.java.reflection.StatementTypes;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.customtype.CustomTypeFunctions;
 import tech.intellispaces.java.reflection.exception.JavaStatementExceptions;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.UnexpectedExceptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -246,11 +246,11 @@ public interface TypeReferenceFunctions {
   }
 
   private static String getActualTypeDeclaration(TypeReference typeReference, boolean blind) {
-    return getActualTypeDeclaration(typeReference, blind, tech.intellispaces.entity.type.ClassNameFunctions::getSimpleName);
+    return getActualTypeDeclaration(typeReference, blind, tech.intellispaces.general.type.ClassNameFunctions::getSimpleName);
 }
 
   static String getSimpleTypeDeclaration(TypeReference typeReference) {
-    return getSimpleTypeDeclaration(typeReference, tech.intellispaces.entity.type.ClassNameFunctions::getSimpleName);
+    return getSimpleTypeDeclaration(typeReference, tech.intellispaces.general.type.ClassNameFunctions::getSimpleName);
   }
 
   static String getSimpleTypeDeclaration(

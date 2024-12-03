@@ -3,7 +3,7 @@ package tech.intellispaces.java.reflection.instance;
 import tech.intellispaces.java.reflection.StatementType;
 import tech.intellispaces.java.reflection.StatementTypes;
 import tech.intellispaces.java.reflection.reference.TypeReference;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
 
 import java.util.List;
 

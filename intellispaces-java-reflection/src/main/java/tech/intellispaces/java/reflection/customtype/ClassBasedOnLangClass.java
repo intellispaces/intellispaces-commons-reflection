@@ -4,8 +4,8 @@ import tech.intellispaces.java.reflection.StatementType;
 import tech.intellispaces.java.reflection.StatementTypes;
 import tech.intellispaces.java.reflection.method.MethodStatement;
 import tech.intellispaces.java.reflection.reference.CustomTypeReference;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
-import tech.intellispaces.entity.type.ClassFunctions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
+import tech.intellispaces.general.type.ClassFunctions;
 
 import java.util.List;
 import java.util.Optional;

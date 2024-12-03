@@ -2,7 +2,7 @@ package tech.intellispaces.java.reflection.context;
 
 import tech.intellispaces.java.reflection.reference.NamedReference;
 import tech.intellispaces.java.reflection.reference.NotPrimitiveReference;
-import tech.intellispaces.entity.object.ObjectFunctions;
+import tech.intellispaces.general.object.ObjectFunctions;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package tech.intellispaces.java.reflection.type;
 
 import tech.intellispaces.java.reflection.reference.TypeReference;
-import tech.intellispaces.entity.type.Type;
+import tech.intellispaces.general.type.Type;
 
 import java.util.List;
 

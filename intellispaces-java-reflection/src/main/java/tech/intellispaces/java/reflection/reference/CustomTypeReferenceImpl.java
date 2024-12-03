@@ -5,7 +5,7 @@ import tech.intellispaces.java.reflection.StatementTypes;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.action.cache.CachedSupplierActions;
 import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.type.ClassFunctions;
+import tech.intellispaces.general.type.ClassFunctions;
 
 import java.util.List;
 import java.util.Map;

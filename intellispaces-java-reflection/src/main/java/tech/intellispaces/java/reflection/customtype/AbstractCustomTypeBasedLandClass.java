@@ -16,8 +16,8 @@ import tech.intellispaces.java.reflection.reference.TypeReferences;
 import tech.intellispaces.java.reflection.session.Sessions;
 import tech.intellispaces.action.cache.CachedSupplierActions;
 import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.collection.ArraysFunctions;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.general.collection.ArraysFunctions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

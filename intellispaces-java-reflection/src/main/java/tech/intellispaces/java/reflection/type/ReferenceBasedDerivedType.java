@@ -1,9 +1,9 @@
 package tech.intellispaces.java.reflection.type;
 
 import tech.intellispaces.java.reflection.reference.TypeReference;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
-import tech.intellispaces.entity.type.AbstractClassType;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.UnexpectedExceptions;
+import tech.intellispaces.general.type.AbstractClassType;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ class ReferenceBasedDerivedType<T> extends AbstractClassType<T> implements Deriv
 
   @Override
   @SuppressWarnings("unchecked, rawtypes")
-  public List<tech.intellispaces.entity.type.Type<?>> qualifierTypes() {
+  public List<tech.intellispaces.general.type.Type<?>> qualifierTypes() {
     return (List) qualifiers.stream()
       .map(DerivedTypeBaseOnReferenceImpl::new)
       .toList();

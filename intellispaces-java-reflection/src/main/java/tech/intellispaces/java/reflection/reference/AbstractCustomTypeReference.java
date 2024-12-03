@@ -6,7 +6,7 @@ import tech.intellispaces.java.reflection.customtype.Classes;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.customtype.InterfaceType;
 import tech.intellispaces.java.reflection.customtype.Interfaces;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
 
 import java.util.ArrayList;
 import java.util.List;

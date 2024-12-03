@@ -15,8 +15,8 @@ import tech.intellispaces.java.reflection.session.Session;
 import tech.intellispaces.java.reflection.session.Sessions;
 import tech.intellispaces.action.cache.CachedSupplierActions;
 import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
-import tech.intellispaces.entity.type.ElementFunctions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
+import tech.intellispaces.general.type.ElementFunctions;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;

@@ -7,7 +7,7 @@ import tech.intellispaces.java.reflection.customtype.CustomTypes;
 import tech.intellispaces.java.reflection.reference.NotPrimitiveReference;
 import tech.intellispaces.action.cache.CachedSupplierActions;
 import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
 
 import java.lang.reflect.Method;
 import java.util.List;

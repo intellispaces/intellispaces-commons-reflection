@@ -15,7 +15,7 @@ import tech.intellispaces.java.reflection.session.Sessions;
 import tech.intellispaces.java.reflection.support.TesteeType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.entity.object.ObjectFunctions;
+import tech.intellispaces.general.object.ObjectFunctions;
 
 import javax.lang.model.element.TypeElement;
 import java.lang.annotation.Annotation;

@@ -1,7 +1,7 @@
 package tech.intellispaces.java.reflection.reference;
 
 import tech.intellispaces.java.reflection.customtype.CustomType;
-import tech.intellispaces.entity.type.PrimitiveType;
+import tech.intellispaces.general.type.PrimitiveType;
 
 import java.util.Collection;
 import java.util.List;

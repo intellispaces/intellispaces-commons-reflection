@@ -5,7 +5,7 @@ import tech.intellispaces.java.reflection.reference.NamedReference;
 import tech.intellispaces.java.reflection.reference.TypeReference;
 import tech.intellispaces.action.runnable.RunnableAction;
 import tech.intellispaces.action.text.StringActions;
-import tech.intellispaces.entity.function.Consumers;
+import tech.intellispaces.general.function.Consumers;
 
 import java.util.ArrayList;
 import java.util.List;

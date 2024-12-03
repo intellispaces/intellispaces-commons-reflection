@@ -3,7 +3,7 @@ package tech.intellispaces.java.reflection.customtype;
 import tech.intellispaces.java.reflection.common.JavaModelFunctions;
 import tech.intellispaces.java.reflection.session.Session;
 import tech.intellispaces.java.reflection.session.Sessions;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
 
 import javax.lang.model.element.TypeElement;
 

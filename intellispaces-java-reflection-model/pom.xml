@@ -26,7 +26,7 @@
     <dependencies>
         <dependency>
             <groupId>tech.intellispaces.common</groupId>
-            <artifactId>intellispaces-entities-model</artifactId>
+            <artifactId>intellispaces-general-model</artifactId>
         </dependency>
     </dependencies>
 </project>

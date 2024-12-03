@@ -8,7 +8,7 @@ import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.session.Session;
 import tech.intellispaces.action.cache.CachedSupplierActions;
 import tech.intellispaces.action.supplier.SupplierAction;
-import tech.intellispaces.entity.type.ClassFunctions;
+import tech.intellispaces.general.type.ClassFunctions;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;

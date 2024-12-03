@@ -6,7 +6,7 @@ import tech.intellispaces.java.reflection.customtype.AnnotationFunctions;
 import tech.intellispaces.java.reflection.instance.AnnotationInstance;
 import tech.intellispaces.java.reflection.reference.NotPrimitiveReference;
 import tech.intellispaces.java.reflection.reference.TypeReference;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

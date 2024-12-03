@@ -5,8 +5,8 @@ import tech.intellispaces.java.reflection.StatementTypes;
 import tech.intellispaces.java.reflection.customtype.AnnotationType;
 import tech.intellispaces.java.reflection.customtype.Annotations;
 import tech.intellispaces.java.reflection.session.Sessions;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.UnexpectedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;

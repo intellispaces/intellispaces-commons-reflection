@@ -2,9 +2,9 @@ package tech.intellispaces.java.reflection.reference;
 
 import tech.intellispaces.java.reflection.StatementType;
 import tech.intellispaces.java.reflection.StatementTypes;
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
-import tech.intellispaces.entity.type.PrimitiveType;
-import tech.intellispaces.entity.type.PrimitiveTypes;
+import tech.intellispaces.general.exception.UnexpectedExceptions;
+import tech.intellispaces.general.type.PrimitiveType;
+import tech.intellispaces.general.type.PrimitiveTypes;
 
 import java.util.HashMap;
 import java.util.Map;

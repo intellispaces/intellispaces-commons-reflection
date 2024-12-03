@@ -15,7 +15,7 @@ import tech.intellispaces.java.reflection.reference.ThrowableReference;
 import tech.intellispaces.java.reflection.reference.TypeReference;
 import tech.intellispaces.java.reflection.reference.TypeReferences;
 import tech.intellispaces.java.reflection.session.Sessions;
-import tech.intellispaces.entity.exception.NotImplementedExceptions;
+import tech.intellispaces.general.exception.NotImplementedExceptions;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -130,12 +130,12 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public boolean isAbstract() {
-    return tech.intellispaces.entity.type.MethodFunctions.isAbstractMethod(method);
+    return tech.intellispaces.general.type.MethodFunctions.isAbstractMethod(method);
   }
 
   @Override
   public boolean isPublic() {
-    return tech.intellispaces.entity.type.MethodFunctions.isPublicMethod(method);
+    return tech.intellispaces.general.type.MethodFunctions.isPublicMethod(method);
   }
 
   @Override
@@ -145,7 +145,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public boolean isStatic() {
-    return tech.intellispaces.entity.type.MethodFunctions.isStaticMethod(method);
+    return tech.intellispaces.general.type.MethodFunctions.isStaticMethod(method);
   }
 
   @Override
