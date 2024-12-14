@@ -8,6 +8,7 @@ import tech.intellispaces.java.reflection.session.Session;
 
 import javax.lang.model.element.ExecutableElement;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public interface Methods {
 
@@ -34,5 +35,9 @@ public interface Methods {
       throw UnexpectedExceptions.withCauseAndMessage(e,
           "Could not find method {0} in class {1}", name, aClass.getCanonicalName());
     }
+  }
+
+  static MethodStatement of(Class<?> aClass, String name, List<Class<?>> paramClasses) {
+    return of(aClass, name, paramClasses.toArray(new Class<?>[0]));
   }
 }
