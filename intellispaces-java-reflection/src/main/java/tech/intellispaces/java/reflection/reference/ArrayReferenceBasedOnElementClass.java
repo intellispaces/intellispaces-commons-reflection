@@ -17,6 +17,11 @@ class ArrayReferenceBasedOnElementClass extends AbstractTypeReference implements
   }
 
   @Override
+  public boolean isVoidType() {
+    return false;
+  }
+
+  @Override
   public StatementType statementType() {
     return StatementTypes.ArrayReference;
   }

@@ -51,4 +51,9 @@ class WildcardReferenceBasedOnWildcardType extends AbstractTypeReference impleme
     }
     return new WildcardReferenceImpl(extendedBound, superBound);
   }
+
+  @Override
+  public boolean isVoidType() {
+    return false;
+  }
 }

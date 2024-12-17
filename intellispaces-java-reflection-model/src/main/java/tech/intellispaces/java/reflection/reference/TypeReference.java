@@ -23,6 +23,8 @@ public interface TypeReference extends Statement {
 
   boolean isWildcard();
 
+  boolean isVoidType();
+
   /**
    * Related primitive type.
    */

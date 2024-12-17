@@ -19,6 +19,11 @@ abstract class AbstractCustomTypeReference extends AbstractTypeReference impleme
   }
 
   @Override
+  public boolean isVoidType() {
+    return Void.class.getCanonicalName().equals(targetType().canonicalName());
+  }
+
+  @Override
   public CustomType effectiveTargetType() {
     Map<String, NotPrimitiveReference> typeMapping = typeArgumentMapping();
     CustomType type = targetType();

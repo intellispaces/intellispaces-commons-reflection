@@ -39,4 +39,9 @@ class ArrayReferenceBasedOnArrayType extends AbstractTypeReference implements Ar
     TypeReference elementTypeReference = elementType().effective(typeMapping);
     return new ArrayReferenceImpl(elementTypeReference);
   }
+
+  @Override
+  public boolean isVoidType() {
+    return false;
+  }
 }

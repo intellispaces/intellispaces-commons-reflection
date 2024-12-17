@@ -28,4 +28,9 @@ class ArrayReferenceImpl extends AbstractTypeReference implements ArrayReference
     TypeReference elementTypeReference = elementType().effective(typeMapping);
     return new ArrayReferenceImpl(elementTypeReference);
   }
+
+  @Override
+  public boolean isVoidType() {
+    return false;
+  }
 }

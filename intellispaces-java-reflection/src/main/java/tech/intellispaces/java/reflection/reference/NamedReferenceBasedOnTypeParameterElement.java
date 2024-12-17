@@ -66,4 +66,9 @@ class NamedReferenceBasedOnTypeParameterElement extends AbstractTypeReference im
     }
     return new NamedReferenceImpl(name, owner(), newExtendedBounds);
   }
+
+  @Override
+  public boolean isVoidType() {
+    return false;
+  }
 }

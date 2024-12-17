@@ -53,4 +53,9 @@ class NamedReferenceImpl extends AbstractTypeReference implements NamedReference
     }
     return new NamedReferenceImpl(name, owner(), newExtendedBounds);
   }
+
+  @Override
+  public boolean isVoidType() {
+    return false;
+  }
 }

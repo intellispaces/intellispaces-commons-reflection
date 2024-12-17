@@ -67,4 +67,9 @@ class CustomTypeReferenceBasedOnClass extends AbstractTypeReference implements C
   public String typeArgumentsDeclaration(Function<String, String> simpleNameMapper) {
     return "";
   }
+
+  @Override
+  public boolean isVoidType() {
+    return false;
+  }
 }

@@ -61,6 +61,11 @@ public enum PrimitiveReferences implements PrimitiveReference {
   }
 
   @Override
+  public boolean isVoidType() {
+    return false;
+  }
+
+  @Override
   public String simpleDeclaration() {
     return typename();
   }
@@ -104,6 +109,8 @@ public enum PrimitiveReferences implements PrimitiveReference {
   public String typename() {
     return primitiveType.typename();
   }
+
+
 
   private static final Map<String, PrimitiveReference> VALUES = new HashMap<>();
   static {
