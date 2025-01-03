@@ -1,5 +1,6 @@
 package tech.intellispaces.java.reflection.reference;
 
+import tech.intellispaces.general.type.ClassNameFunctions;
 import tech.intellispaces.java.reflection.StatementTypes;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.customtype.CustomTypeFunctions;
@@ -246,11 +247,11 @@ public interface TypeReferenceFunctions {
   }
 
   private static String getActualTypeDeclaration(TypeReference typeReference, boolean blind) {
-    return getActualTypeDeclaration(typeReference, blind, tech.intellispaces.general.type.ClassNameFunctions::getSimpleName);
+    return getActualTypeDeclaration(typeReference, blind, Function.identity());
 }
 
   static String getSimpleTypeDeclaration(TypeReference typeReference) {
-    return getSimpleTypeDeclaration(typeReference, tech.intellispaces.general.type.ClassNameFunctions::getSimpleName);
+    return getSimpleTypeDeclaration(typeReference, ClassNameFunctions::getSimpleName);
   }
 
   static String getSimpleTypeDeclaration(

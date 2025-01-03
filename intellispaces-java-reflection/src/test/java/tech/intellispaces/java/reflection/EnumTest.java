@@ -130,8 +130,8 @@ public class EnumTest extends AbstractCustomStatementTest {
         "tech.intellispaces.java.reflection.support.TesteeType"
     );
 
-    assertThat(enumStatement.implementedInterfaces().get(0).actualDeclaration()).isEqualTo("Interface1");
-    assertThat(enumStatement.implementedInterfaces().get(1).actualDeclaration()).isEqualTo("Interface2");
+    assertThat(enumStatement.implementedInterfaces().get(0).actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.EnumImplementedTwoInterfaces.Interface1");
+    assertThat(enumStatement.implementedInterfaces().get(1).actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.EnumImplementedTwoInterfaces.Interface2");
   }
 
   @Test

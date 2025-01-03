@@ -130,8 +130,8 @@ public class RecordTest extends AbstractCustomStatementTest {
         "tech.intellispaces.java.reflection.support.TesteeType"
     );
 
-    assertThat(recordStatement.implementedInterfaces().get(0).actualDeclaration()).isEqualTo("Interface1");
-    assertThat(recordStatement.implementedInterfaces().get(1).actualDeclaration()).isEqualTo("Interface2");
+    assertThat(recordStatement.implementedInterfaces().get(0).actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.RecordImplementedTwoInterfaces.Interface1");
+    assertThat(recordStatement.implementedInterfaces().get(1).actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.RecordImplementedTwoInterfaces.Interface2");
   }
 
   @Test
@@ -355,10 +355,10 @@ public class RecordTest extends AbstractCustomStatementTest {
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
-    assertThat(typeReference.actualDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1");
-    assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase1");
+    assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T>");
-    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
     Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();
@@ -384,10 +384,10 @@ public class RecordTest extends AbstractCustomStatementTest {
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
-    assertThat(typeReference.actualDeclaration()).isEqualTo("RecordA");
-    assertThat(typeReference.formalFullDeclaration()).isEqualTo("RecordA<T1 extends RecordB<?>>");
+    assertThat(typeReference.actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordA");
+    assertThat(typeReference.formalFullDeclaration()).isEqualTo("RecordA<T1 extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB<?>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("RecordA<T1>");
-    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends RecordB<?>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB<?>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
     Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();

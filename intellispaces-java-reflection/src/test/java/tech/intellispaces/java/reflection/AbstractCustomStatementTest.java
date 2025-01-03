@@ -90,7 +90,7 @@ class AbstractCustomStatementTest {
       assertThat(returnType.typeArguments().get(0).asWildcard()).isPresent();
       assertThat(returnType.typeArguments().get(0).asWildcard().orElseThrow().extendedBound()).isEmpty();
       assertThat(returnType.typeArguments().get(0).asWildcard().orElseThrow().superBound()).isEmpty();
-      assertThat(returnType.actualDeclaration()).isEqualTo("List<?>");
+      assertThat(returnType.actualDeclaration()).isEqualTo("java.util.List<?>");
     });
 
     assertThat(method.params()).hasSize(1);
@@ -102,7 +102,7 @@ class AbstractCustomStatementTest {
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcard()).isPresent();
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcard().orElseThrow().extendedBound()).isEmpty();
       assertThat(param.type().asCustomTypeReference().orElseThrow().typeArguments().get(0).asWildcard().orElseThrow().superBound()).isEmpty();
-      assertThat(param.type().actualDeclaration()).isEqualTo("Collection<?>");
+      assertThat(param.type().actualDeclaration()).isEqualTo("java.util.Collection<?>");
     });
   }
 
@@ -120,7 +120,7 @@ class AbstractCustomStatementTest {
             .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(Number.class.getCanonicalName());
         assertThat(wildcard.orElseThrow().superBound()).isEmpty();
       });
-      assertThat(param.type().actualDeclaration()).isEqualTo("Collection<? extends Number>");
+      assertThat(param.type().actualDeclaration()).isEqualTo("java.util.Collection<? extends java.lang.Number>");
     });
   }
 
@@ -140,7 +140,7 @@ class AbstractCustomStatementTest {
             .targetType().canonicalName()).isEqualTo(Number.class.getCanonicalName());
         assertThat(wildcard.orElseThrow().extendedBound()).isEmpty();
       });
-      assertThat(param.type().actualDeclaration()).isEqualTo("Collection<? super Number[]>");
+      assertThat(param.type().actualDeclaration()).isEqualTo("java.util.Collection<? super java.lang.Number[]>");
     });
   }
 
@@ -157,7 +157,7 @@ class AbstractCustomStatementTest {
       assertThat(returnType.typeArguments().get(0).asNamedReference().orElseThrow().name()).isEqualTo("T");
       assertThat(returnType.typeArguments().get(0).asNamedReference().orElseThrow().extendedBounds()).isEmpty();
       assertThat(returnType.typeArguments().get(0).asNamedReference().orElseThrow()).isSameAs(typeParamT);
-      assertThat(returnType.actualDeclaration()).isEqualTo("List<T>");
+      assertThat(returnType.actualDeclaration()).isEqualTo("java.util.List<T>");
     });
 
     assertThat(method.params()).hasSize(1);
@@ -287,7 +287,7 @@ class AbstractCustomStatementTest {
     assertThat(method.isAbstract()).isFalse();
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("java.lang.String");
     assertThat(method.params()).isEmpty();
   }
 
@@ -295,7 +295,7 @@ class AbstractCustomStatementTest {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("java.lang.String");
     assertThat(method.params()).isEmpty();
   }
 
@@ -323,7 +323,7 @@ class AbstractCustomStatementTest {
         .asArrayReference().orElseThrow()
         .elementType().asArrayReference().orElseThrow()
         .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String[][]");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("java.lang.String[][]");
     assertThat(method.params()).isEmpty();
   }
 
@@ -333,7 +333,7 @@ class AbstractCustomStatementTest {
         .asArrayReference().orElseThrow()
         .elementType().asArrayReference().orElseThrow()
         .elementType().asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("String[][]");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("java.lang.String[][]");
     assertThat(method.params()).isEmpty();
   }
 
@@ -341,7 +341,7 @@ class AbstractCustomStatementTest {
     assertThat(method.isAbstract()).isFalse();
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestEnum");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.TestEnum");
     assertThat(method.params()).isEmpty();
   }
 
@@ -349,7 +349,7 @@ class AbstractCustomStatementTest {
     assertThat(method.isAbstract()).isTrue();
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestEnum.class.getCanonicalName());
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestEnum");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.TestEnum");
     assertThat(method.params()).isEmpty();
   }
 
@@ -358,7 +358,7 @@ class AbstractCustomStatementTest {
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestRecord.class.getCanonicalName());
     assertThat(method.params()).isEmpty();
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestRecord");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.TestRecord");
   }
 
   protected void validateAbstractRecordGetter(MethodStatement method) {
@@ -366,7 +366,7 @@ class AbstractCustomStatementTest {
     assertThat(method.returnType().orElseThrow()
         .asCustomTypeReference().orElseThrow().targetType().canonicalName()).isEqualTo(TestRecord.class.getCanonicalName());
     assertThat(method.params()).isEmpty();
-    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("TestRecord");
+    assertThat(method.returnType().orElseThrow().actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.TestRecord");
   }
 
   protected void testCustomTypeWithInheritedMethod(String filePath) {

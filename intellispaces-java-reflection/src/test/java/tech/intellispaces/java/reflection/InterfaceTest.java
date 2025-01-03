@@ -130,8 +130,8 @@ public class InterfaceTest extends AbstractCustomStatementTest {
         "tech.intellispaces.java.reflection.support.TesteeType"
     );
 
-    assertThat(interfaceStatement.extendedInterfaces().get(0).actualDeclaration()).isEqualTo("Interface1");
-    assertThat(interfaceStatement.extendedInterfaces().get(1).actualDeclaration()).isEqualTo("Interface2");
+    assertThat(interfaceStatement.extendedInterfaces().get(0).actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.InterfaceExtendedTwoInterfaces.Interface1");
+    assertThat(interfaceStatement.extendedInterfaces().get(1).actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.InterfaceExtendedTwoInterfaces.Interface2");
   }
 
   @Test
@@ -335,10 +335,10 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
-    assertThat(typeReference.actualDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1");
-    assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1<T extends GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase1");
+    assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1<T extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1<T>");
-    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
     Assertions.assertThat(typeReference.targetType().asInterface()).isPresent();
@@ -364,10 +364,10 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     CustomTypeReference typeReference = JavaStatements.customTypeReference(typeElement);
 
     // Then
-    assertThat(typeReference.actualDeclaration()).isEqualTo("InterfaceA");
-    assertThat(typeReference.formalFullDeclaration()).isEqualTo("InterfaceA<T1 extends InterfaceB<?>>");
+    assertThat(typeReference.actualDeclaration()).isEqualTo("tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceA");
+    assertThat(typeReference.formalFullDeclaration()).isEqualTo("InterfaceA<T1 extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB<?>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("InterfaceA<T1>");
-    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends InterfaceB<?>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB<?>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
     Assertions.assertThat(typeReference.targetType().asInterface()).isPresent();
