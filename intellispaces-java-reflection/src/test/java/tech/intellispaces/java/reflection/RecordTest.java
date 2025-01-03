@@ -1,5 +1,6 @@
 package tech.intellispaces.java.reflection;
 
+import tech.intellispaces.general.type.ClassNameFunctions;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.customtype.RecordType;
 import tech.intellispaces.java.reflection.method.MethodStatement;
@@ -359,6 +360,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("GenericRecordWithCyclicTypeDependencyCase1<T>");
     assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration(ClassNameFunctions::getSimpleName)).isEqualTo("<T extends GenericRecordWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
     Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();
@@ -388,6 +390,7 @@ public class RecordTest extends AbstractCustomStatementTest {
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("RecordA<T1 extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB<?>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("RecordA<T1>");
     assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends tech.intellispaces.java.reflection.samples.GenericRecordWithCyclicTypeDependencyCase2.RecordB<?>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration(ClassNameFunctions::getSimpleName)).isEqualTo("<T1 extends RecordB<?>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
     Assertions.assertThat(typeReference.targetType().asRecord()).isPresent();

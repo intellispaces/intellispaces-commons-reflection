@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -210,8 +211,14 @@ public interface CustomTypeFunctions {
   }
 
   static String getTypeParametersDeclaration(CustomType customType, boolean fullDeclaration) {
+    return getTypeParametersDeclaration(customType, fullDeclaration, Function.identity());
+  }
+
+  static String getTypeParametersDeclaration(
+      CustomType customType, boolean fullDeclaration, Function<String, String> nameMapper
+  ) {
     var parametersSource = customType.typeParameters().stream()
-        .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, fullDeclaration))
+        .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, false, fullDeclaration, nameMapper))
         .collect(Collectors.joining(", "));
     return (parametersSource.isEmpty() ? "" : "<" + parametersSource + ">");
   }

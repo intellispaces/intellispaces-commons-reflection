@@ -64,6 +64,8 @@ public interface CustomType extends AnnotatedStatement {
    */
   String typeParametersFullDeclaration();
 
+  String typeParametersFullDeclaration(Function<String, String> nameMapper);
+
   /**
    * Brief declaration of the type parameters.
    */

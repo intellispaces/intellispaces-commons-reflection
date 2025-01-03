@@ -132,6 +132,11 @@ abstract class AbstractCustomTypeStatementBasedOnTypeElement implements CustomTy
   }
 
   @Override
+  public String typeParametersFullDeclaration(Function<String, String> nameMapper) {
+    return CustomTypeFunctions.getTypeParametersDeclaration(this, true, nameMapper);
+  }
+
+  @Override
   public String typeParametersBriefDeclaration() {
     return typeParametersBriefDeclarationGetter.get();
   }

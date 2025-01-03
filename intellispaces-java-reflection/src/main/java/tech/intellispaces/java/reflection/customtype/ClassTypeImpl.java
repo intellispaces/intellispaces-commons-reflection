@@ -172,6 +172,11 @@ class ClassTypeImpl implements ClassType {
   }
 
   @Override
+  public String typeParametersFullDeclaration(Function<String, String> nameMapper) {
+    return CustomTypeFunctions.getTypeParametersDeclaration(this, true, nameMapper);
+  }
+
+  @Override
   public String typeParametersBriefDeclaration() {
     return typeParametersBriefDeclarationGetter.get();
   }

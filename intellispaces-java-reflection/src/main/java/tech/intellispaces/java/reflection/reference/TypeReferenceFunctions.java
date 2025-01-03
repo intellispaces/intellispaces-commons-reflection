@@ -278,7 +278,7 @@ public interface TypeReferenceFunctions {
    * Returns actual type declaration.
    */
   private static String getActualTypeDeclaration(
-      TypeReference typeReference, boolean blind, Function<String, String> simpleNameMapper
+      TypeReference typeReference, boolean blind, Function<String, String> nameMapper
   ) {
     if (typeReference.asPrimitiveReference().isPresent()) {
       return typeReference.asPrimitiveReference().get().primitiveType().typename();
@@ -287,8 +287,8 @@ public interface TypeReferenceFunctions {
       return getActualTypeDeclaration(elementTypeReference, blind) + "[]";
     } else if (typeReference.asCustomTypeReference().isPresent()) {
       CustomType customType = typeReference.asCustomTypeReference().get().targetType();
-      String simpleName = simpleNameMapper.apply(customType.canonicalName());
-      return simpleName + getTypeArgumentsDeclaration(typeReference.asCustomTypeReference().get(), blind, simpleNameMapper);
+      String actualName = nameMapper.apply(customType.canonicalName());
+      return actualName + getTypeArgumentsDeclaration(typeReference.asCustomTypeReference().get(), blind, nameMapper);
     } else if (typeReference.asNamedReference().isPresent()) {
       return getNamedTypeReferenceDeclaration(typeReference.asNamedReference().get(), blind, false);
     } else if (typeReference.asWildcard().isPresent()) {
@@ -350,6 +350,12 @@ public interface TypeReferenceFunctions {
   static String getNamedTypeReferenceDeclaration(
       NamedReference typeReference, boolean blind, boolean fullDeclaration
   ) {
+    return getNamedTypeReferenceDeclaration(typeReference, blind, fullDeclaration, Function.identity());
+  }
+
+  static String getNamedTypeReferenceDeclaration(
+      NamedReference typeReference, boolean blind, boolean fullDeclaration, Function<String, String> nameMapper
+  ) {
     if (!fullDeclaration || typeReference.extendedBounds().isEmpty()) {
       return blind ? "?" : typeReference.name();
     } else {
@@ -360,7 +366,7 @@ public interface TypeReferenceFunctions {
           sb.append(" & ");
         }
         first = false;
-        sb.append(getActualTypeDeclaration(extendedTypeReference, blind));
+        sb.append(getActualTypeDeclaration(extendedTypeReference, blind, nameMapper));
       }
       return (blind ? "?" : typeReference.name()) + " extends " + sb;
     }

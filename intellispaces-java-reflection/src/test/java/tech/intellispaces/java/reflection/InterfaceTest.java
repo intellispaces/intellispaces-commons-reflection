@@ -1,5 +1,6 @@
 package tech.intellispaces.java.reflection;
 
+import tech.intellispaces.general.type.ClassNameFunctions;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.customtype.InterfaceType;
 import tech.intellispaces.java.reflection.method.MethodStatement;
@@ -339,6 +340,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1<T extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("GenericInterfaceWithCyclicTypeDependencyCase1<T>");
     assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration(ClassNameFunctions::getSimpleName)).isEqualTo("<T extends GenericInterfaceWithCyclicTypeDependencyCase1<T>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T>");
 
     Assertions.assertThat(typeReference.targetType().asInterface()).isPresent();
@@ -368,6 +370,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("InterfaceA<T1 extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB<?>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("InterfaceA<T1>");
     assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends tech.intellispaces.java.reflection.samples.GenericInterfaceWithCyclicTypeDependencyCase2.InterfaceB<?>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration(ClassNameFunctions::getSimpleName)).isEqualTo("<T1 extends InterfaceB<?>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
     Assertions.assertThat(typeReference.targetType().asInterface()).isPresent();

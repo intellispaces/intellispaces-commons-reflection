@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 abstract class AbstractEffectiveCustomType implements CustomType {
@@ -107,6 +108,11 @@ abstract class AbstractEffectiveCustomType implements CustomType {
   @Override
   public String typeParametersFullDeclaration() {
     return actualType.typeParametersFullDeclaration();
+  }
+
+  @Override
+  public String typeParametersFullDeclaration(Function<String, String> nameMapper) {
+    return actualType.typeParametersFullDeclaration(nameMapper);
   }
 
   @Override

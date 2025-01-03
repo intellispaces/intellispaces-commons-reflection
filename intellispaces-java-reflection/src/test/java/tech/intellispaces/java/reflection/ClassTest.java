@@ -1,5 +1,6 @@
 package tech.intellispaces.java.reflection;
 
+import tech.intellispaces.general.type.ClassNameFunctions;
 import tech.intellispaces.java.reflection.customtype.ClassType;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.method.MethodStatement;
@@ -461,6 +462,7 @@ public class ClassTest extends AbstractCustomStatementTest {
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("GenericClassWithMultipleTypeParameters<T1, T2 extends T1, T3 extends java.lang.Number, T4 extends java.lang.AutoCloseable & java.io.DataInput>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("GenericClassWithMultipleTypeParameters<T1, T2, T3, T4>");
     assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1, T2 extends T1, T3 extends java.lang.Number, T4 extends java.lang.AutoCloseable & java.io.DataInput>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration(ClassNameFunctions::getSimpleName)).isEqualTo("<T1, T2 extends T1, T3 extends Number, T4 extends AutoCloseable & DataInput>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1, T2, T3, T4>");
 
     Assertions.assertThat(typeReference.targetType().asClass()).isPresent();
@@ -561,6 +563,7 @@ public class ClassTest extends AbstractCustomStatementTest {
     assertThat(typeReference.formalFullDeclaration()).isEqualTo("ClassA<T1 extends tech.intellispaces.java.reflection.samples.GenericClassWithCyclicTypeDependencyCase2.ClassB<?>>");
     assertThat(typeReference.formalBriefDeclaration()).isEqualTo("ClassA<T1>");
     assertThat(typeReference.targetType().typeParametersFullDeclaration()).isEqualTo("<T1 extends tech.intellispaces.java.reflection.samples.GenericClassWithCyclicTypeDependencyCase2.ClassB<?>>");
+    assertThat(typeReference.targetType().typeParametersFullDeclaration(ClassNameFunctions::getSimpleName)).isEqualTo("<T1 extends ClassB<?>>");
     assertThat(typeReference.targetType().typeParametersBriefDeclaration()).isEqualTo("<T1>");
 
     Assertions.assertThat(typeReference.targetType().asClass()).isPresent();

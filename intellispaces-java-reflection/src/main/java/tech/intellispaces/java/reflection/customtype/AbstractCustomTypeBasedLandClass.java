@@ -114,6 +114,11 @@ abstract class AbstractCustomTypeBasedLandClass implements CustomType {
   }
 
   @Override
+  public String typeParametersFullDeclaration(Function<String, String> nameMapper) {
+    throw NotImplementedExceptions.withCode("FMvXmbg4");
+  }
+
+  @Override
   public String typeParametersBriefDeclaration() {
     throw NotImplementedExceptions.withCode("9od2BA");
   }
