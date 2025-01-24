@@ -55,11 +55,7 @@ class MutableImportListImpl implements MutableImportList {
 
     String packageName = ClassNameFunctions.getPackageName(canonicalName);
     if (packageName.equals(currentClassPackageName())) {
-      if (simpleName.equals(currentClassSimpleName())) {
-        return canonicalName;
-      } else {
-        return simpleName;
-      }
+      return simpleName;
     }
 
     String importedCanonicalName = imports.get(simpleName);
