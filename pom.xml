@@ -7,36 +7,36 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>tech.intellispaces.common</groupId>
-    <artifactId>intellispaces-java-reflection-parent</artifactId>
+    <groupId>tech.intellispaces.commons</groupId>
+    <artifactId>intellispaces-commons-java-reflection-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-java-reflection-model</module>
-        <module>intellispaces-java-reflection</module>
+        <module>intellispaces-commons-java-reflection-model</module>
+        <module>intellispaces-commons-java-reflection</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <!-- Intellispaces -->
             <dependency>
-                <groupId>tech.intellispaces.common</groupId>
-                <artifactId>intellispaces-java-reflection-model</artifactId>
+                <groupId>tech.intellispaces.commons</groupId>
+                <artifactId>intellispaces-commons-java-reflection-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces.common</groupId>
-                <artifactId>intellispaces-general</artifactId>
+                <groupId>tech.intellispaces.commons</groupId>
+                <artifactId>intellispaces-commons-base</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces.common</groupId>
-                <artifactId>intellispaces-general-model</artifactId>
+                <groupId>tech.intellispaces.commons</groupId>
+                <artifactId>intellispaces-commons-base-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces.common</groupId>
-                <artifactId>intellispaces-actions</artifactId>
+                <groupId>tech.intellispaces.commons</groupId>
+                <artifactId>intellispaces-commons-action</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
