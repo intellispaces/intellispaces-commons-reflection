@@ -2,6 +2,7 @@ package tech.intellispaces.commons.java.reflection.reference;
 
 import tech.intellispaces.commons.action.cache.CachedSupplierActions;
 import tech.intellispaces.commons.action.supplier.SupplierAction;
+import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.base.type.ClassFunctions;
 import tech.intellispaces.commons.java.reflection.StatementType;
 import tech.intellispaces.commons.java.reflection.StatementTypes;
@@ -37,7 +38,9 @@ class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
 
   @Override
   public Class<?> targetClass() {
-    return ClassFunctions.getClass(targetType.canonicalName()).orElseThrow();
+    return ClassFunctions.getClass(targetType.canonicalName()).orElseThrow(() -> UnexpectedExceptions.withMessage(
+        "Cannot to get class by name {0}", targetType.canonicalName()
+    ));
   }
 
   @Override
