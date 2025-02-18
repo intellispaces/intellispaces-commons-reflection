@@ -217,7 +217,8 @@ public interface JavaModelFunctions {
       case TYPEVAR -> getTypeReference((TypeVariable) typeMirror, typeContext);
       case WILDCARD -> Wildcards.of((WildcardType) typeMirror, typeContext, session);
       case ARRAY -> ArrayTypeReferences.of((ArrayType) typeMirror, typeContext, session);
-      default -> throw JavaStatementExceptions.withMessage("Unsupported type mirror kind {0}", typeMirror.getKind());
+      default -> throw JavaStatementExceptions.withMessage("Unsupported type mirror kind: {0}. Type: {1}",
+          typeMirror.getKind(), typeMirror);
     };
   }
 
