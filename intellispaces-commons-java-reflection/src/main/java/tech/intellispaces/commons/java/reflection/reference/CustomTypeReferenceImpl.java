@@ -62,4 +62,9 @@ class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
   public String typeArgumentsDeclaration(Function<String, String> simpleNameMapper) {
     return TypeReferenceFunctions.getTypeArgumentsDeclaration(this, simpleNameMapper);
   }
+
+  @Override
+  public String toString() {
+    return targetType.canonicalName();
+  }
 }

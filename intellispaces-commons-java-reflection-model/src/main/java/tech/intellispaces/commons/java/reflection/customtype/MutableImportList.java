@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface MutableImportList {
 
+  void addHidden(String canonicalName);
+
   void add(String canonicalName);
 
   void add(Class<?> aClass);

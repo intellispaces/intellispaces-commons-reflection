@@ -47,12 +47,17 @@ public interface CustomTypeFunctions {
   }
 
   static List<MethodStatement> getActualMethods(CustomType customType, TypeContext typeContext, Session session) {
-    List<MethodStatement> actualMethods = new ArrayList<>();
-    customType.declaredMethods().stream()
-        .map(method -> getEffectiveMethod(method, typeContext))
-        .forEach(actualMethods::add);
-    addInheritedMethods(customType, actualMethods, typeContext);
-    return actualMethods;
+    try {
+      List<MethodStatement> actualMethods = new ArrayList<>();
+      customType.declaredMethods().stream()
+          .map(method -> getEffectiveMethod(method, typeContext))
+          .forEach(actualMethods::add);
+      addInheritedMethods(customType, actualMethods, typeContext);
+      return actualMethods;
+    } catch (Exception e) {
+      throw JavaStatementExceptions.withCauseAndMessage(e, "Unable to get actual methods of type {0}",
+          customType.canonicalName());
+    }
   }
 
   private static MethodStatement getEffectiveMethod(MethodStatement originMethod, TypeContext typeContext) {
@@ -99,45 +104,31 @@ public interface CustomTypeFunctions {
   private static void addInheritedMethods(
       CustomType customType, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
-    customType.parentTypes().forEach(parent -> addParentMethods(parent, actualMethods, typeContext));
+    customType.parentTypes().forEach(parent -> addInheritedMethods(parent, actualMethods, typeContext));
   }
 
-  private static void addParentMethods(
+  private static void addInheritedMethods(
       CustomTypeReference parentReference, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
     CustomType parentType = parentReference.targetType();
     TypeContext actualNameContext = NameContextFunctions.getActualNameContext(
         typeContext, parentType.typeParameters(), parentReference.typeArguments()
     );
-    parentType.declaredMethods().forEach(m -> addMethod(m, actualMethods, actualNameContext));
+    parentType.declaredMethods().forEach(m -> addInheritedMethod(m, actualMethods, actualNameContext));
     addInheritedMethods(parentType, actualMethods, actualNameContext);
   }
 
-  private static void addMethod(
+  private static void addInheritedMethod(
       MethodStatement addedMethod, List<MethodStatement> actualMethods, TypeContext typeContext
   ) {
     MethodStatement effectiveAddedMethod = getEffectiveMethod(addedMethod, typeContext);
     MethodSignature effectiveAddedSignature = effectiveAddedMethod.signature();
     for (MethodStatement method : actualMethods) {
       MethodSignature methodSignature = method.signature();
-      if (effectiveAddedSignature.name().equals(methodSignature.name())) {
-        if (isSameParams(effectiveAddedSignature, methodSignature)) {
-          if (effectiveAddedSignature.returnType().isEmpty() && methodSignature.returnType().isEmpty()) {
-            // Ignore override method
-            return;
-          }
-          TypeReference methodReturnTypeReference = methodSignature.returnType().get();
-          TypeReference effectiveAddedMethodReturnTypeReference = effectiveAddedSignature.returnType().get();
-
-          Optional<TypeReference> narrowType = TypeReferenceFunctions.narrowestOf(
-              methodReturnTypeReference, effectiveAddedMethodReturnTypeReference
-          );
-          if (narrowType.isEmpty()) {
-            throw JavaStatementExceptions.withMessage("Incompatible types: {0} and {1} of method {2}",
-                methodReturnTypeReference, effectiveAddedMethodReturnTypeReference, methodSignature.name());
-          }
-          return;
-        }
+      if (effectiveAddedSignature.name().equals(methodSignature.name()) &&
+          isSameParams(effectiveAddedSignature, methodSignature)
+      ) {
+        return;
       }
     }
     actualMethods.add(effectiveAddedMethod);

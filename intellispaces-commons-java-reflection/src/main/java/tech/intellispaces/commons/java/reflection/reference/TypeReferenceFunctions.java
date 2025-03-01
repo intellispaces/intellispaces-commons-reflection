@@ -61,9 +61,9 @@ public interface TypeReferenceFunctions {
     } else if (typeReferenceReference1.asCustomTypeReference().isPresent() && typeReferenceReference2.asCustomTypeReference().isPresent()) {
       CustomType type1 = typeReferenceReference1.asCustomTypeReference().orElseThrow().targetType();
       CustomType type2 = typeReferenceReference2.asCustomTypeReference().orElseThrow().targetType();
-      if (allTypes(type1).contains(type2.canonicalName())) {
+      if (allParentCanonicalNames(type1).contains(type2.canonicalName())) {
         return Optional.of(typeReferenceReference1);
-      } else if (allTypes(type2).contains(type1.canonicalName())) {
+      } else if (allParentCanonicalNames(type2).contains(type1.canonicalName())) {
         return Optional.of(typeReferenceReference2);
       } else {
         return Optional.empty();
@@ -77,7 +77,7 @@ public interface TypeReferenceFunctions {
     }
   }
 
-  private static List<String> allTypes(CustomType customType) {
+  private static List<String> allParentCanonicalNames(CustomType customType) {
     List<CustomType> types = new ArrayList<>();
     types.add(customType);
     types.addAll(CustomTypeFunctions.allParents(customType));
