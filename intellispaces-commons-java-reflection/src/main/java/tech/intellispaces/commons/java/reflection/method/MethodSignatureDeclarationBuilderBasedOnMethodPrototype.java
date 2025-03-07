@@ -2,7 +2,7 @@ package tech.intellispaces.commons.java.reflection.method;
 
 import tech.intellispaces.commons.action.runnable.RunnableAction;
 import tech.intellispaces.commons.action.text.StringActions;
-import tech.intellispaces.commons.base.function.Consumers;
+import tech.intellispaces.commons.function.Consumers;
 import tech.intellispaces.commons.java.reflection.instance.AnnotationElement;
 import tech.intellispaces.commons.java.reflection.reference.NamedReference;
 import tech.intellispaces.commons.java.reflection.reference.TypeReference;

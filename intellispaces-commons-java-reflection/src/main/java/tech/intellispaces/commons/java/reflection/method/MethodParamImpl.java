@@ -1,6 +1,6 @@
 package tech.intellispaces.commons.java.reflection.method;
 
-import tech.intellispaces.commons.base.exception.NotImplementedExceptions;
+import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.java.reflection.StatementType;
 import tech.intellispaces.commons.java.reflection.StatementTypes;
 import tech.intellispaces.commons.java.reflection.customtype.AnnotationFunctions;

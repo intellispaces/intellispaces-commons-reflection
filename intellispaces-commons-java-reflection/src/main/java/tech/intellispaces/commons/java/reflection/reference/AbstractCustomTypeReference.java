@@ -1,6 +1,6 @@
 package tech.intellispaces.commons.java.reflection.reference;
 
-import tech.intellispaces.commons.base.exception.NotImplementedExceptions;
+import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.java.reflection.StatementTypes;
 import tech.intellispaces.commons.java.reflection.customtype.ClassType;
 import tech.intellispaces.commons.java.reflection.customtype.Classes;

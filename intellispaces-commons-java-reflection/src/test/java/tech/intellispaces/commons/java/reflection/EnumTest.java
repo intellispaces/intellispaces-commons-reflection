@@ -1,8 +1,8 @@
 package tech.intellispaces.commons.java.reflection;
 
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.commons.base.collection.CollectionFunctions;
-import tech.intellispaces.commons.base.object.ObjectFunctions;
+import tech.intellispaces.commons.collection.CollectionFunctions;
+import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 import tech.intellispaces.commons.java.reflection.customtype.EnumType;
 import tech.intellispaces.commons.java.reflection.method.MethodStatement;

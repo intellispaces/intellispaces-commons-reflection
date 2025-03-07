@@ -3,7 +3,7 @@ package tech.intellispaces.commons.java.reflection.method;
 import tech.intellispaces.commons.action.Actions;
 import tech.intellispaces.commons.action.cache.CachedSupplierActions;
 import tech.intellispaces.commons.action.supplier.SupplierAction;
-import tech.intellispaces.commons.base.exception.NotImplementedExceptions;
+import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.java.reflection.JavaStatements;
 import tech.intellispaces.commons.java.reflection.StatementType;
 import tech.intellispaces.commons.java.reflection.StatementTypes;

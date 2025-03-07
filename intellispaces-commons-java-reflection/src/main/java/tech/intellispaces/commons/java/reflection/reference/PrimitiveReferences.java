@@ -1,8 +1,8 @@
 package tech.intellispaces.commons.java.reflection.reference;
 
-import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
-import tech.intellispaces.commons.base.type.PrimitiveType;
-import tech.intellispaces.commons.base.type.PrimitiveTypes;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.type.PrimitiveType;
+import tech.intellispaces.commons.type.PrimitiveTypes;
 import tech.intellispaces.commons.java.reflection.StatementType;
 import tech.intellispaces.commons.java.reflection.StatementTypes;
 

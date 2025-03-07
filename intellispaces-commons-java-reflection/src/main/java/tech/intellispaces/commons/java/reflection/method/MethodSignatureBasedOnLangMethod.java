@@ -1,6 +1,6 @@
 package tech.intellispaces.commons.java.reflection.method;
 
-import tech.intellispaces.commons.base.exception.NotImplementedExceptions;
+import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.java.reflection.JavaStatements;
 import tech.intellispaces.commons.java.reflection.StatementType;
 import tech.intellispaces.commons.java.reflection.StatementTypes;
@@ -130,12 +130,12 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public boolean isAbstract() {
-    return tech.intellispaces.commons.base.type.MethodFunctions.isAbstractMethod(method);
+    return tech.intellispaces.commons.type.MethodFunctions.isAbstractMethod(method);
   }
 
   @Override
   public boolean isPublic() {
-    return tech.intellispaces.commons.base.type.MethodFunctions.isPublicMethod(method);
+    return tech.intellispaces.commons.type.MethodFunctions.isPublicMethod(method);
   }
 
   @Override
@@ -145,7 +145,7 @@ class MethodSignatureBasedOnLangMethod implements MethodSignature {
 
   @Override
   public boolean isStatic() {
-    return tech.intellispaces.commons.base.type.MethodFunctions.isStaticMethod(method);
+    return tech.intellispaces.commons.type.MethodFunctions.isStaticMethod(method);
   }
 
   @Override

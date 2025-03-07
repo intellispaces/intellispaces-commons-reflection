@@ -2,8 +2,8 @@ package tech.intellispaces.commons.java.reflection.customtype;
 
 import tech.intellispaces.commons.action.cache.CachedSupplierActions;
 import tech.intellispaces.commons.action.supplier.SupplierAction;
-import tech.intellispaces.commons.base.collection.ArraysFunctions;
-import tech.intellispaces.commons.base.exception.NotImplementedExceptions;
+import tech.intellispaces.commons.collection.ArraysFunctions;
+import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.java.reflection.context.TypeContexts;
 import tech.intellispaces.commons.java.reflection.instance.AnnotationInstance;
 import tech.intellispaces.commons.java.reflection.instance.AnnotationInstances;

@@ -1,6 +1,6 @@
 package tech.intellispaces.commons.java.reflection.type;
 
-import tech.intellispaces.commons.base.type.Type;
+import tech.intellispaces.commons.type.Type;
 import tech.intellispaces.commons.java.reflection.reference.TypeReference;
 
 import java.util.List;

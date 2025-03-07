@@ -1,8 +1,8 @@
 package tech.intellispaces.commons.java.reflection.reference;
 
-import tech.intellispaces.commons.base.exception.NotImplementedExceptions;
-import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
-import tech.intellispaces.commons.base.type.ClassNameFunctions;
+import tech.intellispaces.commons.exception.NotImplementedExceptions;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.type.ClassNameFunctions;
 import tech.intellispaces.commons.java.reflection.StatementTypes;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 import tech.intellispaces.commons.java.reflection.customtype.CustomTypeFunctions;

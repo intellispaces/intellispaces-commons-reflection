@@ -2,8 +2,8 @@ package tech.intellispaces.commons.java.reflection.reference;
 
 import tech.intellispaces.commons.action.cache.CachedSupplierActions;
 import tech.intellispaces.commons.action.supplier.SupplierAction;
-import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
-import tech.intellispaces.commons.base.type.ClassFunctions;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.type.ClassFunctions;
 import tech.intellispaces.commons.java.reflection.StatementType;
 import tech.intellispaces.commons.java.reflection.StatementTypes;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;

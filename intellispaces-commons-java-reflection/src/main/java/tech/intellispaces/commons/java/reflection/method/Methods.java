@@ -1,6 +1,6 @@
 package tech.intellispaces.commons.java.reflection.method;
 
-import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.java.reflection.context.TypeContext;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 import tech.intellispaces.commons.java.reflection.customtype.CustomTypes;

@@ -1,7 +1,7 @@
 package tech.intellispaces.commons.java.reflection.reference;
 
-import tech.intellispaces.commons.base.collection.ArraysFunctions;
-import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.collection.ArraysFunctions;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 
 import java.lang.reflect.ParameterizedType;

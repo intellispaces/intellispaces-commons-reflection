@@ -2,9 +2,9 @@ package tech.intellispaces.commons.java.reflection;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.commons.base.collection.CollectionFunctions;
-import tech.intellispaces.commons.base.object.ObjectFunctions;
-import tech.intellispaces.commons.base.type.ClassNameFunctions;
+import tech.intellispaces.commons.collection.CollectionFunctions;
+import tech.intellispaces.commons.object.ObjectFunctions;
+import tech.intellispaces.commons.type.ClassNameFunctions;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 import tech.intellispaces.commons.java.reflection.customtype.InterfaceType;
 import tech.intellispaces.commons.java.reflection.method.MethodStatement;

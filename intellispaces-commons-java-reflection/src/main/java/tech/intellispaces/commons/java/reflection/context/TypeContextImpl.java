@@ -1,6 +1,6 @@
 package tech.intellispaces.commons.java.reflection.context;
 
-import tech.intellispaces.commons.base.object.ObjectFunctions;
+import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.commons.java.reflection.reference.NamedReference;
 import tech.intellispaces.commons.java.reflection.reference.NotPrimitiveReference;
 

@@ -1,7 +1,7 @@
 package tech.intellispaces.commons.java.reflection.common;
 
-import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
-import tech.intellispaces.commons.base.function.TriFunction;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.function.TriFunction;
 import tech.intellispaces.commons.java.reflection.Statement;
 import tech.intellispaces.commons.java.reflection.context.ContextTypeParameter;
 import tech.intellispaces.commons.java.reflection.context.TypeContext;

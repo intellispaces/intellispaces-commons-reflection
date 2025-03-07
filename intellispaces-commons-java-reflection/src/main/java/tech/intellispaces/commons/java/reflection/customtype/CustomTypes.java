@@ -1,6 +1,6 @@
 package tech.intellispaces.commons.java.reflection.customtype;
 
-import tech.intellispaces.commons.base.exception.NotImplementedExceptions;
+import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.java.reflection.common.JavaModelFunctions;
 import tech.intellispaces.commons.java.reflection.session.Session;
 import tech.intellispaces.commons.java.reflection.session.Sessions;

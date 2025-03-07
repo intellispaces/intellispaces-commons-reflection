@@ -1,10 +1,10 @@
 package tech.intellispaces.commons.java.reflection.customtype;
 
-import tech.intellispaces.commons.base.collection.ArraysFunctions;
-import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
-import tech.intellispaces.commons.base.type.ClassFunctions;
-import tech.intellispaces.commons.base.type.ClassNameFunctions;
-import tech.intellispaces.commons.base.type.PrimitiveFunctions;
+import tech.intellispaces.commons.collection.ArraysFunctions;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.type.ClassFunctions;
+import tech.intellispaces.commons.type.ClassNameFunctions;
+import tech.intellispaces.commons.type.PrimitiveFunctions;
 
 import java.util.HashMap;
 import java.util.HashSet;
