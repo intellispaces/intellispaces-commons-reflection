@@ -12,8 +12,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-commons-java-reflection-model</module>
-        <module>intellispaces-commons-java-reflection</module>
+        <module>intellispaces-commons-reflection-model</module>
+        <module>intellispaces-commons-reflection</module>
     </modules>
 
     <dependencyManagement>
@@ -21,7 +21,7 @@
             <!-- Intellispaces -->
             <dependency>
                 <groupId>tech.intellispaces.commons</groupId>
-                <artifactId>intellispaces-commons-java-reflection-model</artifactId>
+                <artifactId>intellispaces-commons-reflection-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
