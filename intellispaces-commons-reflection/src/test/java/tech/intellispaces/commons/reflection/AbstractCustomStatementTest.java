@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AbstractCustomStatementTest {
+public class AbstractCustomStatementTest {
 
   protected TypeElement getTestElement(String sourceName) {
     var annotationProcessor = new TesteeTypeAnnotationProcessor();

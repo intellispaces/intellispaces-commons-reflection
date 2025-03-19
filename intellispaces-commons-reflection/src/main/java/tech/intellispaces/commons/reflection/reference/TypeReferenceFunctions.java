@@ -416,4 +416,63 @@ public interface TypeReferenceFunctions {
     }
     return mapping;
   }
+
+  static Map<String, NotPrimitiveReference> getTypeArgumentMapping(
+      CustomType originType, CustomType targetType
+  ) {
+    if (targetType.typeParameters().isEmpty()) {
+      return Map.of();
+    }
+
+    for (CustomTypeReference parent : originType.parentTypes()) {
+      if (parent.targetType().canonicalName().equals(targetType.canonicalName())) {
+        return getTypeArgumentMapping(parent);
+      }
+      if (parent.targetType().hasParent(targetType)) {
+        Map<String, NotPrimitiveReference> typeArgumentMapping = getTypeArgumentMapping(parent);
+        return getTypeArgumentMapping(parent.targetType(), targetType, typeArgumentMapping);
+      }
+    }
+    return Map.of();
+  }
+
+  private static Map<String, NotPrimitiveReference> getTypeArgumentMapping(
+      CustomType originType,
+      CustomType targetType,
+      Map<String, NotPrimitiveReference> initialTypeArgumentMapping
+  ) {
+    for (CustomTypeReference parent : originType.parentTypes()) {
+      if (parent.targetType().canonicalName().equals(targetType.canonicalName())) {
+        return mergeTypeArgumentMapping(parent, initialTypeArgumentMapping);
+      }
+      if (parent.targetType().hasParent(targetType)) {
+        return getTypeArgumentMapping(
+            parent.targetType(), targetType, mergeTypeArgumentMapping(parent, initialTypeArgumentMapping)
+        );
+      }
+    }
+    return Map.of();
+  }
+
+  private static Map<String, NotPrimitiveReference> mergeTypeArgumentMapping(
+      CustomTypeReference typeReference,
+      Map<String, NotPrimitiveReference> typeArgumentMapping
+  ) {
+    Map<String, NotPrimitiveReference> mapping = new HashMap<>();
+    Iterator<NotPrimitiveReference> typeArgumentIterator = typeReference.typeArguments().iterator();
+    Iterator<NamedReference> typeParamIterator = typeReference.targetType().typeParameters().iterator();
+    while (typeArgumentIterator.hasNext()) {
+      NotPrimitiveReference typeArgument = typeArgumentIterator.next();
+      if (typeArgument.isNamedReference()) {
+        String name = typeArgument.asNamedReference().orElseThrow().name();
+        NotPrimitiveReference value = typeArgumentMapping.get(name);
+        if (value != null) {
+          typeArgument = value;
+        }
+      }
+      NamedReference typeParam = typeParamIterator.next();
+      mapping.put(typeParam.name(), typeArgument);
+    }
+    return mapping;
+  }
 }
