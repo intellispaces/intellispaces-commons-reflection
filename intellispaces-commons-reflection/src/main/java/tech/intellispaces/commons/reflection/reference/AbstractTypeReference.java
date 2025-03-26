@@ -82,4 +82,9 @@ abstract class AbstractTypeReference implements TypeReference {
   public String prettyDeclaration() {
     throw NotImplementedExceptions.withCode("GG8tDA");
   }
+
+  @Override
+  public String typeExpression(Function<String, String> nameMapper) {
+    return TypeReferenceFunctions.getTypeExpression(this, nameMapper);
+  }
 }

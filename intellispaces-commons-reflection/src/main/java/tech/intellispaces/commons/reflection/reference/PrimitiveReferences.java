@@ -101,6 +101,11 @@ public enum PrimitiveReferences implements PrimitiveReference {
   }
 
   @Override
+  public String typeExpression(Function<String, String> nameMapper) {
+    return TypeReferenceFunctions.getTypeExpression(this, nameMapper);
+  }
+
+  @Override
   public String toString() {
     return typename();
   }
@@ -109,7 +114,6 @@ public enum PrimitiveReferences implements PrimitiveReference {
   public String typename() {
     return primitiveType.typename();
   }
-
 
 
   private static final Map<String, PrimitiveReference> VALUES = new HashMap<>();

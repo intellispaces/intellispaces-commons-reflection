@@ -118,4 +118,6 @@ public interface TypeReference extends Statement {
    * Formal brief type declaration.
    */
   String formalBriefDeclaration();
+
+  String typeExpression(Function<String, String> nameMapper);
 }

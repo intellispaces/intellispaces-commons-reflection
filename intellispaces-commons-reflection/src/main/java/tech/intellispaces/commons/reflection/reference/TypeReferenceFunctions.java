@@ -7,6 +7,7 @@ import tech.intellispaces.commons.reflection.StatementTypes;
 import tech.intellispaces.commons.reflection.customtype.CustomType;
 import tech.intellispaces.commons.reflection.customtype.CustomTypeFunctions;
 import tech.intellispaces.commons.reflection.exception.JavaStatementExceptions;
+import tech.intellispaces.commons.type.Types;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -389,6 +390,67 @@ public interface TypeReferenceFunctions {
         sb.append(getActualTypeDeclaration(typeReference.superBound().get(), blind));
       }
       return sb.toString();
+    }
+  }
+
+  static String getTypeExpression(TypeReference typeReference, Function<String, String> nameMapper) {
+    var sb = new StringBuilder();
+    getTypeExpression(typeReference, sb, true, true, nameMapper);
+    return sb.toString();
+  }
+
+  private static void getTypeExpression(
+      TypeReference type,
+      StringBuilder sb,
+      boolean includeTypesPrefix,
+      boolean includeClassPostfix,
+      Function<String, String> nameMapper
+  ) {
+    if (includeTypesPrefix) {
+      sb.append(nameMapper.apply(Types.class.getCanonicalName()));
+      sb.append(".get(");
+    }
+
+    if (type.isCustomTypeReference()) {
+      CustomTypeReference customTypeReference = type.asCustomTypeReferenceOrElseThrow();
+      sb.append(nameMapper.apply(customTypeReference.targetType().canonicalName()));
+      if (includeClassPostfix) {
+        sb.append(".class");
+      }
+      if (!customTypeReference.typeArguments().isEmpty()) {
+        sb.append(", ");
+        for (NotPrimitiveReference typeArgument : customTypeReference.typeArguments()) {
+          getTypeExpression(typeArgument, sb, true, true, nameMapper);
+        }
+      }
+    } else if (type.isPrimitiveReference()) {
+      PrimitiveReference primitiveReference = type.asPrimitiveReferenceOrElseThrow();
+      sb.append(primitiveReference.typename());
+      if (includeClassPostfix) {
+        sb.append(".class");
+      }
+    } else if (type.isNamedReference()) {
+      NamedReference namedReference = type.asNamedReferenceOrElseThrow();
+      if (namedReference.extendedBounds().isEmpty()) {
+        sb.append(nameMapper.apply(Object.class.getCanonicalName()));
+        if (includeClassPostfix) {
+          sb.append(".class");
+        }
+      } else {
+        getTypeExpression(
+            namedReference.extendedBounds().get(0), sb, includeTypesPrefix, includeClassPostfix, nameMapper
+        );
+      }
+    } else if (type.isArrayReference()) {
+      ArrayReference arrayReference = type.asArrayReferenceOrElseThrow();
+      getTypeExpression(arrayReference.elementType(), sb, false, false, nameMapper);
+      sb.append("[].class");
+    } else {
+      throw NotImplementedExceptions.withCode("WFRyVXBa");
+    }
+
+    if (includeTypesPrefix) {
+      sb.append(")");
     }
   }
 
