@@ -1,5 +1,7 @@
 package tech.intellispaces.commons.reflection.reference;
 
+import tech.intellispaces.commons.action.runnable.RunnableAction;
+import tech.intellispaces.commons.action.text.StringActions;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
@@ -419,7 +421,9 @@ public interface TypeReferenceFunctions {
       }
       if (!customTypeReference.typeArguments().isEmpty()) {
         sb.append(", ");
+        RunnableAction commaAppender = StringActions.skipFirstTimeCommaAppender(sb);
         for (NotPrimitiveReference typeArgument : customTypeReference.typeArguments()) {
+          commaAppender.run();
           getTypeExpression(typeArgument, sb, true, true, nameMapper);
         }
       }
