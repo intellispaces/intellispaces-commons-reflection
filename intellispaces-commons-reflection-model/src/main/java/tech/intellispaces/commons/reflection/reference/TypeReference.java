@@ -109,6 +109,8 @@ public interface TypeReference extends Statement {
 
   String actualBlindDeclaration(Function<String, String> nameMapper);
 
+  String actualRawDeclaration(Function<String, String> nameMapper);
+
   /**
    * Formal full type declaration.
    */

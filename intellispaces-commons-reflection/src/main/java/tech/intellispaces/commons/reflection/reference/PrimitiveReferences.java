@@ -91,6 +91,12 @@ public enum PrimitiveReferences implements PrimitiveReference {
   }
 
   @Override
+  public String actualRawDeclaration(Function<String, String> nameMapper) {
+    return typename();
+  }
+
+
+  @Override
   public String formalFullDeclaration() {
     return typename();
   }

@@ -69,6 +69,11 @@ abstract class AbstractTypeReference implements TypeReference {
   }
 
   @Override
+  public String actualRawDeclaration(Function<String, String> nameMapper) {
+    return TypeReferenceFunctions.getActualRawTypeReferenceDeclaration(this, nameMapper);
+  }
+
+  @Override
   public String formalFullDeclaration() {
     return formalFullDeclarationGetter.get();
   }

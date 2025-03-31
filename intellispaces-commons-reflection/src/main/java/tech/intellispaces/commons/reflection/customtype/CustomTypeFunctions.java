@@ -209,7 +209,7 @@ public interface CustomTypeFunctions {
       CustomType customType, boolean fullDeclaration, Function<String, String> nameMapper
   ) {
     var parametersSource = customType.typeParameters().stream()
-        .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, false, fullDeclaration, nameMapper))
+        .map(param -> TypeReferenceFunctions.getNamedTypeReferenceDeclaration(param, false, false, fullDeclaration, nameMapper))
         .collect(Collectors.joining(", "));
     return (parametersSource.isEmpty() ? "" : "<" + parametersSource + ">");
   }
