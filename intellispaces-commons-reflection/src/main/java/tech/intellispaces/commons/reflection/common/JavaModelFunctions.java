@@ -1,7 +1,7 @@
 package tech.intellispaces.commons.reflection.common;
 
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
-import tech.intellispaces.commons.function.TriFunction;
+import tech.intellispaces.commons.function.Function3;
 import tech.intellispaces.commons.reflection.Statement;
 import tech.intellispaces.commons.reflection.context.ContextTypeParameter;
 import tech.intellispaces.commons.reflection.context.TypeContext;
@@ -315,7 +315,7 @@ public interface JavaModelFunctions {
   static <T extends CustomType> T asCustomStatement(
       TypeElement typeElement,
       ElementKind expectedElementKind,
-      TriFunction<TypeElement, TypeContext, Session, T> factory,
+      Function3<TypeElement, TypeContext, Session, T> factory,
       TypeContext typeContext,
       Session session
   ) {
