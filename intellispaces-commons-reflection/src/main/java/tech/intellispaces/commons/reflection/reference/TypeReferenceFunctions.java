@@ -469,6 +469,20 @@ public interface TypeReferenceFunctions {
       ArrayReference arrayReference = type.asArrayReferenceOrElseThrow();
       getTypeExpression(arrayReference.elementType(), sb, false, false, nameMapper);
       sb.append("[].class");
+    } else if (type.isWildcard()) {
+      WildcardReference wildcardReference = type.asWildcardOrElseThrow();
+      if (wildcardReference.extendedBound().isEmpty() && wildcardReference.superBound().isEmpty()) {
+        sb.append(nameMapper.apply(Object.class.getCanonicalName()));
+        if (includeClassPostfix) {
+          sb.append(".class");
+        }
+      } else if (wildcardReference.superBound().isEmpty()) {
+        getTypeExpression(
+            wildcardReference.extendedBound().get(), sb, false, includeClassPostfix, nameMapper
+        );
+      } else {
+        throw NotImplementedExceptions.withCode("yujJVg");
+      }
     } else {
       throw NotImplementedExceptions.withCode("WFRyVXBa");
     }
