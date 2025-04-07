@@ -2,41 +2,40 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>tech.intellispaces.parent</groupId>
+        <groupId>tech.intellispaces</groupId>
         <artifactId>intellispaces-parent-pom</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>tech.intellispaces.commons</groupId>
-    <artifactId>intellispaces-commons-java-reflection-parent</artifactId>
+    <artifactId>intellispaces-reflection-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-commons-reflection-model</module>
-        <module>intellispaces-commons-reflection</module>
+        <module>intellispaces-reflection-model</module>
+        <module>intellispaces-reflection</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <!-- Intellispaces -->
             <dependency>
-                <groupId>tech.intellispaces.commons</groupId>
-                <artifactId>intellispaces-commons-reflection-model</artifactId>
+                <groupId>tech.intellispaces</groupId>
+                <artifactId>intellispaces-reflection-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces.commons</groupId>
+                <groupId>tech.intellispaces</groupId>
                 <artifactId>intellispaces-commons</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces.commons</groupId>
+                <groupId>tech.intellispaces</groupId>
                 <artifactId>intellispaces-commons-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces.commons</groupId>
-                <artifactId>intellispaces-commons-action</artifactId>
+                <groupId>tech.intellispaces</groupId>
+                <artifactId>intellispaces-actions</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
