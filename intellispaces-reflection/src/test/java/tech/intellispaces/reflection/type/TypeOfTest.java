@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 /**
- * Tests for {@link TypeBuilder}.
+ * Tests for {@link TypeOf}.
  */
-public class DerivedTypeBuilderTest {
+public class TypeOfTest {
 
   @Test
   public void test_whenString() {
     // When
-    DerivedType<String> type = new TypeBuilder<String>() {}.get();
+    Type<String> type = new TypeOf<String>() {};
 
     // Then
     Assertions.assertThat(type.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isEqualTo(String.class.getCanonicalName());
@@ -23,7 +23,7 @@ public class DerivedTypeBuilderTest {
   @Test
   public void test_whenStringList() {
     // When
-    DerivedType<List<String>> type = new TypeBuilder<List<String>>() {}.get();
+    Type<List<String>> type = new TypeOf<List<String>>() {};
 
     // Then
     Assertions.assertThat(type.baseTypeReference().asCustomTypeReferenceOrElseThrow().targetType().canonicalName()).isEqualTo(List.class.getCanonicalName());

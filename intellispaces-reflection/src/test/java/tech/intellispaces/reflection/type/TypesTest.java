@@ -7,16 +7,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for {@link DerivedTypes}
+ * Tests for {@link Types}
  */
-public class DerivedTypesTest {
+public class TypesTest {
 
   @Test
   public void testGet_whenBaseTypeOnly() {
     // Given
-    DerivedType<String> stringType = DerivedTypes.get(String.class);
-    DerivedType<Integer> integerType = DerivedTypes.get(Integer.class);
-    DerivedType<Integer> objectType = DerivedTypes.get(Object.class);
+    Type<String> stringType = Types.get(String.class);
+    Type<Integer> integerType = Types.get(Integer.class);
+    Type<Integer> objectType = Types.get(Object.class);
 
     // Then
     assertThat(stringType.asClassType().baseClass()).isSameAs(String.class);
@@ -31,7 +31,7 @@ public class DerivedTypesTest {
   @Test
   public void testGet_whenList() {
     // Given
-    DerivedType<List<Integer>> listType = DerivedTypes.get(List.class, Integer.class);
+    Type<List<Integer>> listType = Types.get(List.class, Integer.class);
 
     // Then
     assertThat(listType.asClassType().baseClass()).isSameAs(List.class);

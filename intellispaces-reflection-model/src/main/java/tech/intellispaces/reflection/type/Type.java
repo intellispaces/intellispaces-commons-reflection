@@ -1,6 +1,5 @@
 package tech.intellispaces.reflection.type;
 
-import tech.intellispaces.commons.type.Type;
 import tech.intellispaces.reflection.reference.TypeReference;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
  *
  * @param <T> associated type.
  */
-public interface DerivedType<T> extends Type<T> {
+public interface Type<T> extends tech.intellispaces.commons.type.Type<T> {
 
   /**
    * The type reference from which the type was derived.

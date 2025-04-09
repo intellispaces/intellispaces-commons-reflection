@@ -5,30 +5,30 @@ import tech.intellispaces.reflection.reference.TypeReference;
 
 import java.util.List;
 
-public interface DerivedTypes {
+public interface Types {
 
-  static <T> DerivedType<T> get(TypeReference typeReference) {
-    return new DerivedTypeBaseOnReferenceImpl<>(typeReference);
+  static <T> Type<T> get(TypeReference typeReference) {
+    return new TypeBaseOnReferenceImpl<>(typeReference);
   }
 
-  static <T extends B, B> DerivedType<T> get(Class<B> baseClass) {
-    return new ReferenceBasedDerivedType<>(CustomTypeReferences.get(baseClass), List.of());
+  static <T extends B, B> Type<T> get(Class<B> baseClass) {
+    return new ReferenceBasedType<>(CustomTypeReferences.get(baseClass), List.of());
   }
 
-  static <T extends B, B, Q> DerivedType<T> get(
+  static <T extends B, B, Q> Type<T> get(
       Class<B> baseClass, Class<Q> qualifierClass
   ) {
-    return new ReferenceBasedDerivedType<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
             CustomTypeReferences.get(qualifierClass)
         )
     );
   }
 
-  static <T extends B, B, Q1, Q2> DerivedType<T> get(
+  static <T extends B, B, Q1, Q2> Type<T> get(
       Class<B> baseClass, Class<Q1> qualifierClass1, Class<Q2> qualifierClass2
   ) {
-    return new ReferenceBasedDerivedType<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
             CustomTypeReferences.get(qualifierClass1),
             CustomTypeReferences.get(qualifierClass2)
@@ -36,13 +36,13 @@ public interface DerivedTypes {
     );
   }
 
-  static <T extends B, B, Q1, Q2, Q3> DerivedType<T> get(
+  static <T extends B, B, Q1, Q2, Q3> Type<T> get(
       Class<B> baseClass,
       Class<Q1> qualifierClass1,
       Class<Q2> qualifierClass2,
       Class<Q3> qualifierClass3
   ) {
-    return new ReferenceBasedDerivedType<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
             CustomTypeReferences.get(qualifierClass1),
             CustomTypeReferences.get(qualifierClass2),
@@ -51,20 +51,20 @@ public interface DerivedTypes {
     );
   }
 
-  static <T extends B, B, Q> DerivedType<T> get(
-      Class<B> baseClass, DerivedType<Q> qualifierType
+  static <T extends B, B, Q> Type<T> get(
+      Class<B> baseClass, Type<Q> qualifierType
   ) {
-    return new ReferenceBasedDerivedType<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(qualifierType.typeReference())
     );
   }
 
-  static <T extends B, B, Q1, Q2> DerivedType<T> get(
+  static <T extends B, B, Q1, Q2> Type<T> get(
       Class<B> baseClass,
-      DerivedType<Q1> qualifierType1,
-      DerivedType<Q2> qualifierType2
+      Type<Q1> qualifierType1,
+      Type<Q2> qualifierType2
   ) {
-    return new ReferenceBasedDerivedType<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
         qualifierType1.typeReference(),
         qualifierType2.typeReference()
@@ -72,13 +72,13 @@ public interface DerivedTypes {
     );
   }
 
-  static <T extends B, B, Q1, Q2, Q3> DerivedType<T> get(
+  static <T extends B, B, Q1, Q2, Q3> Type<T> get(
       Class<B> baseClass,
-      DerivedType<Q1> qualifierType1,
-      DerivedType<Q2> qualifierType2,
-      DerivedType<Q3> qualifierType3
+      Type<Q1> qualifierType1,
+      Type<Q2> qualifierType2,
+      Type<Q3> qualifierType3
   ) {
-    return new ReferenceBasedDerivedType<>(
+    return new ReferenceBasedType<>(
         CustomTypeReferences.get(baseClass), List.of(
         qualifierType1.typeReference(),
         qualifierType2.typeReference(),

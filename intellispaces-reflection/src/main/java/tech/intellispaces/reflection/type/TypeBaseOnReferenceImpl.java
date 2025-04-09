@@ -7,10 +7,10 @@ import tech.intellispaces.reflection.reference.TypeReference;
 
 import java.util.List;
 
-class DerivedTypeBaseOnReferenceImpl<T> extends AbstractClassType<T> implements DerivedType<T> {
+class TypeBaseOnReferenceImpl<T> extends AbstractClassType<T> implements Type<T> {
   private final TypeReference reference;
 
-  DerivedTypeBaseOnReferenceImpl(TypeReference reference) {
+  TypeBaseOnReferenceImpl(TypeReference reference) {
     this.reference = reference;
   }
 
@@ -56,7 +56,7 @@ class DerivedTypeBaseOnReferenceImpl<T> extends AbstractClassType<T> implements 
   public List<tech.intellispaces.commons.type.Type<?>> qualifierTypes() {
     if (reference.isCustomTypeReference()) {
       return (List) reference.asCustomTypeReferenceOrElseThrow().typeArguments().stream()
-        .map(DerivedTypeBaseOnReferenceImpl::new)
+        .map(TypeBaseOnReferenceImpl::new)
         .toList();
     } else {
       throw UnexpectedExceptions.withMessage("Unsupported reference type: {0}",

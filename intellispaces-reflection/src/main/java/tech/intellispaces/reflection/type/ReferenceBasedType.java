@@ -7,11 +7,11 @@ import tech.intellispaces.reflection.reference.TypeReference;
 
 import java.util.List;
 
-class ReferenceBasedDerivedType<T> extends AbstractClassType<T> implements DerivedType<T> {
+class ReferenceBasedType<T> extends AbstractClassType<T> implements Type<T> {
   private final TypeReference base;
   private final List<TypeReference> qualifiers;
 
-  ReferenceBasedDerivedType(TypeReference base, List<TypeReference> qualifiers) {
+  ReferenceBasedType(TypeReference base, List<TypeReference> qualifiers) {
     this.base = base;
     this.qualifiers = qualifiers;
   }
@@ -49,7 +49,7 @@ class ReferenceBasedDerivedType<T> extends AbstractClassType<T> implements Deriv
   @SuppressWarnings("unchecked, rawtypes")
   public List<tech.intellispaces.commons.type.Type<?>> qualifierTypes() {
     return (List) qualifiers.stream()
-      .map(DerivedTypeBaseOnReferenceImpl::new)
+      .map(TypeBaseOnReferenceImpl::new)
       .toList();
   }
 }
