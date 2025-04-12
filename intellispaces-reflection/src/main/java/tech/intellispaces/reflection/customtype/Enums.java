@@ -10,6 +10,10 @@ import javax.lang.model.element.TypeElement;
 
 public interface Enums {
 
+  static EnumType of(Class<?> enumClass) {
+    return new EnumBasedOnClass(enumClass);
+  }
+
   static EnumType of(TypeElement typeElement, Session session) {
     return of(typeElement, TypeContexts.empty(), session);
   }

@@ -5,6 +5,7 @@ import tech.intellispaces.reflection.common.JavaModelFunctions;
 import tech.intellispaces.reflection.customtype.AnnotationFunctions;
 import tech.intellispaces.reflection.customtype.Classes;
 import tech.intellispaces.reflection.customtype.EnumType;
+import tech.intellispaces.reflection.customtype.Enums;
 import tech.intellispaces.reflection.exception.JavaStatementExceptions;
 import tech.intellispaces.reflection.reference.CustomTypeReference;
 import tech.intellispaces.reflection.reference.CustomTypeReferences;
@@ -70,8 +71,8 @@ public interface InstanceFunctions {
     } else if (value instanceof VariableElement variableElement) {
       // Enum value
       TypeReference typeReference = JavaModelFunctions.getTypeReference(variableElement.asType(), session);
-      EnumType enumStatement = typeReference.asCustomTypeReference().orElseThrow().targetType().asEnum().orElseThrow();
-      return EnumInstances.of(enumStatement, variableElement.getSimpleName().toString());
+      EnumType enumType = typeReference.asCustomTypeReference().orElseThrow().targetType().asEnum().orElseThrow();
+      return EnumInstances.of(enumType, variableElement.getSimpleName().toString());
     } else if (value instanceof DeclaredType declaredType) {
       // Class value
       CustomTypeReference typeReference = JavaModelFunctions.getTypeReference(declaredType, session);
@@ -86,8 +87,11 @@ public interface InstanceFunctions {
           .map(v -> InstanceFunctions.objectToInstance(v, session))
           .toList();
       instance = ArrayInstances.of(arrayItemsType(values), values);
+    } else if (value.getClass().isEnum()) {
+      // Enum
+      return EnumInstances.of(Enums.of(value.getClass()), ((Enum<?>) value).name() );
     } else {
-      throw JavaStatementExceptions.withMessage("Unsupported object class {0}", value.getClass().getCanonicalName());
+      throw JavaStatementExceptions.withMessage("Unsupported instance class {0}", value.getClass().getCanonicalName());
     }
     return instance;
   }

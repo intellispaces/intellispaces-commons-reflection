@@ -554,7 +554,7 @@ public interface TypeReferenceFunctions {
     return Map.of();
   }
 
-  private static Map<String, NotPrimitiveReference> mergeTypeArgumentMapping(
+  static Map<String, NotPrimitiveReference> mergeTypeArgumentMapping(
       CustomTypeReference typeReference,
       Map<String, NotPrimitiveReference> typeArgumentMapping
   ) {
