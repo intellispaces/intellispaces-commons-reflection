@@ -1,9 +1,9 @@
 package tech.intellispaces.reflection.reference;
 
+import javax.lang.model.element.TypeParameterElement;
+
 import tech.intellispaces.reflection.context.TypeContext;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.TypeParameterElement;
 
 public interface NamedTypes {
 

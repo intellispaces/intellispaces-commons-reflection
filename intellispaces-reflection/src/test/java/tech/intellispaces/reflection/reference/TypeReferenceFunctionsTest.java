@@ -1,12 +1,13 @@
 package tech.intellispaces.reflection.reference;
 
+import java.util.Map;
+import javax.lang.model.element.TypeElement;
+
 import org.junit.Test;
+
 import tech.intellispaces.reflection.AbstractCustomStatementTest;
 import tech.intellispaces.reflection.JavaStatements;
 import tech.intellispaces.reflection.customtype.CustomType;
-
-import javax.lang.model.element.TypeElement;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

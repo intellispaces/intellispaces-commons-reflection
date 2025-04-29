@@ -1,11 +1,11 @@
 package tech.intellispaces.reflection.instance;
 
+import java.util.List;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.reference.TypeReference;
-
-import java.util.List;
 
 class ArrayInstanceImpl implements ArrayInstance {
   private final TypeReference elementTypeReference;

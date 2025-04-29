@@ -1,5 +1,14 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
@@ -15,15 +24,6 @@ import tech.intellispaces.reflection.reference.NamedReference;
 import tech.intellispaces.reflection.reference.TypeReference;
 import tech.intellispaces.reflection.reference.TypeReferenceFunctions;
 import tech.intellispaces.reflection.session.Sessions;
-
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 class ClassTypeImpl implements ClassType {
   private boolean isAbstract;

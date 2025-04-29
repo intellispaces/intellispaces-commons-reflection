@@ -1,5 +1,12 @@
 package tech.intellispaces.reflection.method;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
@@ -7,13 +14,6 @@ import tech.intellispaces.reflection.customtype.AnnotationFunctions;
 import tech.intellispaces.reflection.instance.AnnotationInstance;
 import tech.intellispaces.reflection.reference.NotPrimitiveReference;
 import tech.intellispaces.reflection.reference.TypeReference;
-
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 class MethodParamImpl implements MethodParam {
   private final String name;

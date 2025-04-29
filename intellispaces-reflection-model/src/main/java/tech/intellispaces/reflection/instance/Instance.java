@@ -1,8 +1,8 @@
 package tech.intellispaces.reflection.instance;
 
-import tech.intellispaces.reflection.Statement;
-
 import java.util.Optional;
+
+import tech.intellispaces.reflection.Statement;
 
 /**
  * Specific object instance.

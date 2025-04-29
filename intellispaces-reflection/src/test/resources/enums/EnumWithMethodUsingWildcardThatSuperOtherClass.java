@@ -1,8 +1,8 @@
 package tech.intellispaces.reflection.samples;
 
-import tech.intellispaces.reflection.support.TesteeType;
-
 import java.util.Collection;
+
+import tech.intellispaces.reflection.support.TesteeType;
 
 @TesteeType
 public enum EnumWithMethodUsingWildcardThatSuperOtherClass {

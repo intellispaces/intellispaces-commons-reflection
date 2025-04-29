@@ -1,7 +1,16 @@
 package tech.intellispaces.reflection;
 
+import java.io.DataInput;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import javax.lang.model.element.TypeElement;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
@@ -12,14 +21,6 @@ import tech.intellispaces.reflection.reference.CustomTypeReference;
 import tech.intellispaces.reflection.session.Session;
 import tech.intellispaces.reflection.session.Sessions;
 import tech.intellispaces.reflection.support.TesteeType;
-
-import javax.lang.model.element.TypeElement;
-import java.io.DataInput;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -164,7 +165,10 @@ public class ClassTest extends AbstractCustomStatementTest {
     });
 
     assertThat(classStatement.dependencyTypenames()).containsExactlyInAnyOrder(
-        "tech.intellispaces.reflection.support.TesteeType"
+        "tech.intellispaces.reflection.support.TesteeType",
+        "tech.intellispaces.reflection.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface1",
+        "tech.intellispaces.reflection.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.Interface2",
+        "tech.intellispaces.reflection.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.SuperClass"
     );
 
     assertThat(classStatement.extendedClass().orElseThrow().actualDeclaration()).isEqualTo("tech.intellispaces.reflection.samples.ClassExtendedSuperClassAndImplementedTwoInterfaces.SuperClass");
@@ -203,7 +207,7 @@ public class ClassTest extends AbstractCustomStatementTest {
         "ClassWithMethodThrowsTwoExceptions",
         "methodThrowsTwoExceptions",
         this::validateMethodThrowsTwoExceptions,
-        List.of(IOException.class.getCanonicalName()));
+        List.of(IOException.class.getCanonicalName(), ClassNotFoundException.class.getCanonicalName()));
   }
 
   @Test
@@ -239,7 +243,7 @@ public class ClassTest extends AbstractCustomStatementTest {
         "ClassWithMethodUsingWildcardThatExtendsOtherClass",
         "methodUsingWildcardThatExtendsOtherClass",
         this::validateMethodUsingWildcardThatExtendsOtherClass,
-        List.of(Collection.class.getCanonicalName()));
+        List.of(Collection.class.getCanonicalName(), Number.class.getCanonicalName()));
   }
 
   @Test
@@ -248,7 +252,7 @@ public class ClassTest extends AbstractCustomStatementTest {
         "ClassWithMethodUsingWildcardThatSuperOtherClass",
         "methodUsingWildcardThatSuperOtherClass",
         this::validateMethodUsingWildcardThatSuperOtherClass,
-        List.of(Collection.class.getCanonicalName()));
+        List.of(Collection.class.getCanonicalName(), Number.class.getCanonicalName()));
   }
 
   @Test
@@ -329,7 +333,7 @@ public class ClassTest extends AbstractCustomStatementTest {
         "ClassWithStringGetter",
         "stringGetter",
         this::validateStringGetter,
-        List.of());
+        List.of(String.class.getCanonicalName()));
   }
 
   @Test
@@ -347,7 +351,7 @@ public class ClassTest extends AbstractCustomStatementTest {
         "ClassWithDoubleArrayOfStringGetter",
         "doubleArrayOfStringGetter",
         this::validateDoubleArrayOfStringGetter,
-        List.of());
+        List.of(String.class.getCanonicalName()));
   }
 
   @Test
@@ -356,7 +360,7 @@ public class ClassTest extends AbstractCustomStatementTest {
         "ClassWithEnumGetter",
         "enumGetter",
         this::validateEnumGetter,
-        List.of());
+        List.of("tech.intellispaces.reflection.samples.TestEnum"));
   }
 
   @Test
@@ -365,7 +369,7 @@ public class ClassTest extends AbstractCustomStatementTest {
         "ClassWithRecordGetter",
         "recordGetter",
         this::validateRecordGetter,
-        List.of());
+        List.of("tech.intellispaces.reflection.samples.TestRecord"));
   }
 
   @Test
@@ -519,7 +523,9 @@ public class ClassTest extends AbstractCustomStatementTest {
 
     assertThat(classStatement.dependencyTypenames()).containsExactlyInAnyOrder(
         "tech.intellispaces.reflection.support.TesteeType",
-        "java.io.DataInput"
+        "java.io.DataInput",
+        Number.class.getCanonicalName(),
+        AutoCloseable.class.getCanonicalName()
     );
   }
 

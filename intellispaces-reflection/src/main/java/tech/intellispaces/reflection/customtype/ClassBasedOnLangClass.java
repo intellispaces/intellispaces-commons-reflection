@@ -1,14 +1,14 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.util.List;
+import java.util.Optional;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.type.ClassFunctions;
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.method.MethodStatement;
 import tech.intellispaces.reflection.reference.CustomTypeReference;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Adapter of {@link Class} to {@link ClassType}.

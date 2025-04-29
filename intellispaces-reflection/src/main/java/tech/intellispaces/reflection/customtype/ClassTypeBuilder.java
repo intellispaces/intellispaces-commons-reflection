@@ -1,13 +1,13 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import tech.intellispaces.reflection.instance.AnnotationInstance;
 import tech.intellispaces.reflection.method.MethodStatement;
 import tech.intellispaces.reflection.reference.CustomTypeReference;
 import tech.intellispaces.reflection.reference.NamedReference;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class ClassTypeBuilder {
   private boolean isAbstract = false;

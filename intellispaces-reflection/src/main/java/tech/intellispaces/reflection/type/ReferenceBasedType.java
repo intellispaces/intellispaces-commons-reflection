@@ -1,11 +1,11 @@
 package tech.intellispaces.reflection.type;
 
+import java.util.List;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.type.AbstractClassType;
 import tech.intellispaces.reflection.reference.TypeReference;
-
-import java.util.List;
 
 class ReferenceBasedType<T> extends AbstractClassType<T> implements Type<T> {
   private final TypeReference base;

@@ -1,14 +1,14 @@
 package tech.intellispaces.reflection.reference;
 
+import java.util.Collection;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.reflection.common.DependenciesFunctions;
 import tech.intellispaces.reflection.customtype.CustomType;
-
-import java.util.Collection;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 abstract class AbstractTypeReference implements TypeReference {
   private final SupplierAction<Collection<CustomType>> dependenciesGetter;

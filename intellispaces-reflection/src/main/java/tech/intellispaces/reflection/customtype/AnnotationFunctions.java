@@ -1,20 +1,5 @@
 package tech.intellispaces.reflection.customtype;
 
-import tech.intellispaces.reflection.AnnotatedStatement;
-import tech.intellispaces.reflection.exception.JavaStatementExceptions;
-import tech.intellispaces.reflection.instance.AnnotationElement;
-import tech.intellispaces.reflection.instance.AnnotationElements;
-import tech.intellispaces.reflection.instance.AnnotationInstance;
-import tech.intellispaces.reflection.instance.Instance;
-import tech.intellispaces.reflection.instance.InstanceFunctions;
-import tech.intellispaces.reflection.method.MethodFunctions;
-import tech.intellispaces.reflection.reference.CustomTypeReference;
-import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.AnnotationValue;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.ExecutableElement;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Proxy;
@@ -27,6 +12,21 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.IntStream;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+
+import tech.intellispaces.reflection.AnnotatedStatement;
+import tech.intellispaces.reflection.exception.JavaStatementExceptions;
+import tech.intellispaces.reflection.instance.AnnotationElement;
+import tech.intellispaces.reflection.instance.AnnotationElements;
+import tech.intellispaces.reflection.instance.AnnotationInstance;
+import tech.intellispaces.reflection.instance.Instance;
+import tech.intellispaces.reflection.instance.InstanceFunctions;
+import tech.intellispaces.reflection.method.MethodFunctions;
+import tech.intellispaces.reflection.reference.CustomTypeReference;
+import tech.intellispaces.reflection.session.Session;
 
 /**
  * Annotation related functions.

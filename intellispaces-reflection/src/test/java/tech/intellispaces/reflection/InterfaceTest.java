@@ -1,7 +1,15 @@
 package tech.intellispaces.reflection;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import javax.lang.model.element.TypeElement;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
@@ -12,13 +20,6 @@ import tech.intellispaces.reflection.reference.CustomTypeReference;
 import tech.intellispaces.reflection.session.Session;
 import tech.intellispaces.reflection.session.Sessions;
 import tech.intellispaces.reflection.support.TesteeType;
-
-import javax.lang.model.element.TypeElement;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -128,7 +129,9 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     });
 
     assertThat(interfaceStatement.dependencyTypenames()).containsExactlyInAnyOrder(
-        "tech.intellispaces.reflection.support.TesteeType"
+        "tech.intellispaces.reflection.support.TesteeType",
+        "tech.intellispaces.reflection.samples.InterfaceExtendedTwoInterfaces.Interface1",
+        "tech.intellispaces.reflection.samples.InterfaceExtendedTwoInterfaces.Interface2"
     );
 
     assertThat(interfaceStatement.extendedInterfaces().get(0).actualDeclaration()).isEqualTo("tech.intellispaces.reflection.samples.InterfaceExtendedTwoInterfaces.Interface1");
@@ -147,8 +150,11 @@ public class InterfaceTest extends AbstractCustomStatementTest {
 
   @Test
   public void testInterfaceWithMethodThrowsTwoExceptions() {
-    testInterfaceWithOneMethod("InterfaceWithMethodThrowsTwoExceptions", "methodThrowsTwoExceptions", this::validateMethodThrowsTwoExceptions,
-        List.of(IOException.class.getCanonicalName()));
+    testInterfaceWithOneMethod(
+            "InterfaceWithMethodThrowsTwoExceptions",
+            "methodThrowsTwoExceptions",
+            this::validateMethodThrowsTwoExceptions,
+        List.of(IOException.class.getCanonicalName(), ClassNotFoundException.class.getCanonicalName()));
   }
 
   @Test
@@ -170,14 +176,20 @@ public class InterfaceTest extends AbstractCustomStatementTest {
 
   @Test
   public void testInterfaceWithMethodUsingWildcardThatExtendsOtherClass() {
-    testInterfaceWithOneMethod("InterfaceWithMethodUsingWildcardThatExtendsOtherClass", "methodUsingWildcardThatExtendsOtherClass", this::validateMethodUsingWildcardThatExtendsOtherClass,
-        List.of(Collection.class.getCanonicalName()));
+    testInterfaceWithOneMethod(
+            "InterfaceWithMethodUsingWildcardThatExtendsOtherClass",
+            "methodUsingWildcardThatExtendsOtherClass",
+            this::validateMethodUsingWildcardThatExtendsOtherClass,
+        List.of(Collection.class.getCanonicalName(), Number.class.getCanonicalName()));
   }
 
   @Test
   public void testInterfaceWithMethodUsingWildcardThatSuperOtherClass() {
-    testInterfaceWithOneMethod("InterfaceWithMethodUsingWildcardThatSuperOtherClass", "methodUsingWildcardThatSuperOtherClass", this::validateMethodUsingWildcardThatSuperOtherClass,
-        List.of(Collection.class.getCanonicalName()));
+    testInterfaceWithOneMethod(
+            "InterfaceWithMethodUsingWildcardThatSuperOtherClass",
+            "methodUsingWildcardThatSuperOtherClass",
+            this::validateMethodUsingWildcardThatSuperOtherClass,
+        List.of(Collection.class.getCanonicalName(), Number.class.getCanonicalName()));
   }
 
   @Test
@@ -258,7 +270,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
         "InterfaceWithStringGetter",
         "stringGetter",
         this::validateAbstractStringGetter,
-        List.of());
+        List.of(String.class.getCanonicalName()));
   }
 
   @Test
@@ -276,7 +288,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
         "InterfaceWithDoubleArrayOfStringGetter",
         "doubleArrayOfStringGetter",
         this::validateAbstractDoubleArrayOfStringGetter,
-        List.of());
+        List.of(String.class.getCanonicalName()));
   }
 
   @Test
@@ -285,7 +297,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
         "InterfaceWithEnumGetter",
         "enumGetter",
         this::validateAbstractEnumGetter,
-        List.of());
+        List.of("tech.intellispaces.reflection.samples.TestEnum"));
   }
 
   @Test
@@ -294,7 +306,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
         "InterfaceWithRecordGetter",
         "recordGetter",
         this::validateAbstractRecordGetter,
-        List.of());
+        List.of("tech.intellispaces.reflection.samples.TestRecord"));
   }
 
   @Test
@@ -436,7 +448,7 @@ public class InterfaceTest extends AbstractCustomStatementTest {
     });
 
     assertThat(interfaceStatement.dependencyTypenames()).containsExactlyInAnyOrderElementsOf(
-        CollectionFunctions.join(additionalImports, "tech.intellispaces.reflection.support.TesteeType")
+        CollectionFunctions.join(additionalImports,"tech.intellispaces.reflection.support.TesteeType")
     );
 
     assertThat(session.getType(canonicalClassName)).isSameAs(interfaceStatement);

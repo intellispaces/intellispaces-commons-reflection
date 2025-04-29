@@ -1,10 +1,10 @@
 package tech.intellispaces.reflection;
 
-import tech.intellispaces.reflection.instance.AnnotationInstance;
-
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
+
+import tech.intellispaces.reflection.instance.AnnotationInstance;
 
 /**
  * Statement to which the annotation attachment is applicable.

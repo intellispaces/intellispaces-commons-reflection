@@ -1,5 +1,12 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.context.ContextTypeParameter;
 import tech.intellispaces.reflection.context.NameContextFunctions;
@@ -19,13 +26,6 @@ import tech.intellispaces.reflection.reference.ThrowableReference;
 import tech.intellispaces.reflection.reference.TypeReference;
 import tech.intellispaces.reflection.reference.TypeReferenceFunctions;
 import tech.intellispaces.reflection.session.Session;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Custom type related functions.

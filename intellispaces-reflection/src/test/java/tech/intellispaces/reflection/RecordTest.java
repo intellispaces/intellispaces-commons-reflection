@@ -1,7 +1,15 @@
 package tech.intellispaces.reflection;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import javax.lang.model.element.TypeElement;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
@@ -12,13 +20,6 @@ import tech.intellispaces.reflection.reference.CustomTypeReference;
 import tech.intellispaces.reflection.session.Session;
 import tech.intellispaces.reflection.session.Sessions;
 import tech.intellispaces.reflection.support.TesteeType;
-
-import javax.lang.model.element.TypeElement;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -128,7 +129,9 @@ public class RecordTest extends AbstractCustomStatementTest {
     });
 
     assertThat(recordStatement.dependencyTypenames()).containsExactlyInAnyOrder(
-        "tech.intellispaces.reflection.support.TesteeType"
+        "tech.intellispaces.reflection.support.TesteeType",
+        "tech.intellispaces.reflection.samples.RecordImplementedTwoInterfaces.Interface1",
+        "tech.intellispaces.reflection.samples.RecordImplementedTwoInterfaces.Interface2"
     );
 
     assertThat(recordStatement.implementedInterfaces().get(0).actualDeclaration()).isEqualTo("tech.intellispaces.reflection.samples.RecordImplementedTwoInterfaces.Interface1");
@@ -150,7 +153,7 @@ public class RecordTest extends AbstractCustomStatementTest {
         "RecordWithMethodThrowsTwoExceptions",
         "methodThrowsTwoExceptions",
         this::validateMethodThrowsTwoExceptions,
-        List.of(IOException.class.getCanonicalName()));
+        List.of(IOException.class.getCanonicalName(), ClassNotFoundException.class.getCanonicalName()));
   }
 
   @Test
@@ -186,7 +189,7 @@ public class RecordTest extends AbstractCustomStatementTest {
         "RecordWithMethodUsingWildcardThatExtendsOtherClass",
         "methodUsingWildcardThatExtendsOtherClass",
         this::validateMethodUsingWildcardThatExtendsOtherClass,
-        List.of(Collection.class.getCanonicalName()));
+        List.of(Collection.class.getCanonicalName(), Number.class.getCanonicalName()));
   }
 
   @Test
@@ -195,7 +198,8 @@ public class RecordTest extends AbstractCustomStatementTest {
         "RecordWithMethodUsingWildcardThatSuperOtherClass",
         "methodUsingWildcardThatSuperOtherClass",
         this::validateMethodUsingWildcardThatSuperOtherClass,
-        List.of(Collection.class.getCanonicalName()));
+        List.of(Collection.class.getCanonicalName(), Number.class.getCanonicalName())
+    );
   }
 
   @Test
@@ -276,7 +280,7 @@ public class RecordTest extends AbstractCustomStatementTest {
         "RecordWithStringGetter",
         "stringGetter",
         this::validateStringGetter,
-        List.of());
+        List.of(String.class.getCanonicalName()));
   }
 
   @Test
@@ -294,7 +298,7 @@ public class RecordTest extends AbstractCustomStatementTest {
         "RecordWithDoubleArrayOfStringGetter",
         "doubleArrayOfStringGetter",
         this::validateDoubleArrayOfStringGetter,
-        List.of());
+        List.of(String.class.getCanonicalName()));
   }
 
   @Test
@@ -303,7 +307,7 @@ public class RecordTest extends AbstractCustomStatementTest {
         "RecordWithEnumGetter",
         "enumGetter",
         this::validateEnumGetter,
-        List.of());
+        List.of("tech.intellispaces.reflection.samples.TestEnum"));
   }
 
   @Test
@@ -312,7 +316,7 @@ public class RecordTest extends AbstractCustomStatementTest {
         "RecordWithRecordGetter",
         "recordGetter",
         this::validateRecordGetter,
-        List.of());
+        List.of("tech.intellispaces.reflection.samples.TestRecord"));
   }
 
   @Test

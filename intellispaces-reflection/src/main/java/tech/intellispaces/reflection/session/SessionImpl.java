@@ -1,9 +1,9 @@
 package tech.intellispaces.reflection.session;
 
-import tech.intellispaces.reflection.customtype.CustomType;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import tech.intellispaces.reflection.customtype.CustomType;
 
 class SessionImpl implements Session {
   private final Map<String, CustomType> types = new HashMap<>();

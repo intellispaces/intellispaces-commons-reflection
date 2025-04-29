@@ -1,5 +1,14 @@
 package tech.intellispaces.reflection.instance;
 
+import java.lang.annotation.Annotation;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
@@ -9,15 +18,6 @@ import tech.intellispaces.reflection.customtype.AnnotationFunctions;
 import tech.intellispaces.reflection.customtype.AnnotationType;
 import tech.intellispaces.reflection.customtype.Annotations;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.TypeElement;
-import java.lang.annotation.Annotation;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Adapter of {@link AnnotationMirror} to {@link AnnotationInstance}.

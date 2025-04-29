@@ -1,5 +1,15 @@
 package tech.intellispaces.reflection.method;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.reflection.JavaStatements;
 import tech.intellispaces.reflection.StatementType;
@@ -16,16 +26,6 @@ import tech.intellispaces.reflection.reference.ThrowableReference;
 import tech.intellispaces.reflection.reference.TypeReference;
 import tech.intellispaces.reflection.reference.TypeReferences;
 import tech.intellispaces.reflection.session.Sessions;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * Adapter of {@link Method} to {@link MethodSignature}.

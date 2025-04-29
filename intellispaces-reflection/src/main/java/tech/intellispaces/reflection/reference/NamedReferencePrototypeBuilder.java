@@ -1,8 +1,8 @@
 package tech.intellispaces.reflection.reference;
 
-import tech.intellispaces.reflection.Statement;
-
 import java.util.List;
+
+import tech.intellispaces.reflection.Statement;
 
 public class NamedReferencePrototypeBuilder {
   private String name;

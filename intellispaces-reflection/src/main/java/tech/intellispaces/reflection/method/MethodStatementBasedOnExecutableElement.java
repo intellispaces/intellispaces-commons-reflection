@@ -1,5 +1,10 @@
 package tech.intellispaces.reflection.method;
 
+import java.util.List;
+import java.util.Map;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.actions.Actions;
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
@@ -12,11 +17,6 @@ import tech.intellispaces.reflection.context.TypeContexts;
 import tech.intellispaces.reflection.customtype.CustomType;
 import tech.intellispaces.reflection.reference.NotPrimitiveReference;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.TypeElement;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Adapter of {@link ExecutableElement} to {@link MethodStatement}.

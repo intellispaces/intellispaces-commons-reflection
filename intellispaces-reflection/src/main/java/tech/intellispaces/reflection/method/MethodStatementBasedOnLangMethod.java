@@ -1,5 +1,9 @@
 package tech.intellispaces.reflection.method;
 
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
@@ -8,10 +12,6 @@ import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.customtype.CustomType;
 import tech.intellispaces.reflection.customtype.CustomTypes;
 import tech.intellispaces.reflection.reference.NotPrimitiveReference;
-
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Adapter of {@link Method} to {@link MethodStatement}.

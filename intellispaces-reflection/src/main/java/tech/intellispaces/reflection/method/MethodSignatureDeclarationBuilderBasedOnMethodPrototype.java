@@ -1,17 +1,17 @@
 package tech.intellispaces.reflection.method;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.actions.runnable.RunnableAction;
 import tech.intellispaces.actions.text.StringActions;
 import tech.intellispaces.commons.function.Consumers;
 import tech.intellispaces.reflection.instance.AnnotationElement;
 import tech.intellispaces.reflection.reference.NamedReference;
 import tech.intellispaces.reflection.reference.TypeReference;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public final class MethodSignatureDeclarationBuilderBasedOnMethodPrototype {
   private final MethodStatement prototype;

@@ -1,10 +1,10 @@
 package tech.intellispaces.reflection.method;
 
+import java.lang.reflect.Method;
+import javax.lang.model.element.ExecutableElement;
+
 import tech.intellispaces.reflection.context.TypeContext;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.ExecutableElement;
-import java.lang.reflect.Method;
 
 public interface MethodSignatures {
 

@@ -1,8 +1,8 @@
 package tech.intellispaces.reflection.samples;
 
-import tech.intellispaces.reflection.support.TesteeType;
-
 import java.io.IOException;
+
+import tech.intellispaces.reflection.support.TesteeType;
 
 @TesteeType
 public class ClassWithMethodThrowsTwoExceptions {

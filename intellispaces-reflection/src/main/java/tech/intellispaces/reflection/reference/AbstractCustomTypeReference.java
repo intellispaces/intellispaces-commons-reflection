@@ -1,5 +1,9 @@
 package tech.intellispaces.reflection.reference;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.customtype.ClassType;
@@ -7,10 +11,6 @@ import tech.intellispaces.reflection.customtype.Classes;
 import tech.intellispaces.reflection.customtype.CustomType;
 import tech.intellispaces.reflection.customtype.InterfaceType;
 import tech.intellispaces.reflection.customtype.Interfaces;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 abstract class AbstractCustomTypeReference extends AbstractTypeReference implements CustomTypeReference {
 

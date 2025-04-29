@@ -1,14 +1,14 @@
 package tech.intellispaces.reflection.reference;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.type.PrimitiveType;
 import tech.intellispaces.commons.type.PrimitiveTypes;
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * Primitive type reference provider.

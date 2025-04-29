@@ -1,5 +1,15 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.lang.annotation.Annotation;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
@@ -17,16 +27,6 @@ import tech.intellispaces.reflection.reference.TypeReference;
 import tech.intellispaces.reflection.reference.TypeReferenceFunctions;
 import tech.intellispaces.reflection.session.Session;
 import tech.intellispaces.reflection.session.Sessions;
-
-import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
-import java.lang.annotation.Annotation;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Abstract adapter of {@link TypeElement} to {@link CustomType}.

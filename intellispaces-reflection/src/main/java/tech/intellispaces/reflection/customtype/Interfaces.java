@@ -1,14 +1,14 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.util.Map;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.reflection.common.JavaModelFunctions;
 import tech.intellispaces.reflection.context.TypeContext;
 import tech.intellispaces.reflection.context.TypeContexts;
 import tech.intellispaces.reflection.reference.NotPrimitiveReference;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.TypeElement;
-import java.util.Map;
 
 public interface Interfaces {
 

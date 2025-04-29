@@ -1,8 +1,8 @@
 package tech.intellispaces.reflection.instance;
 
-import tech.intellispaces.reflection.customtype.EnumType;
-
 import java.util.Optional;
+
+import tech.intellispaces.reflection.customtype.EnumType;
 
 /**
  * Enum instance.

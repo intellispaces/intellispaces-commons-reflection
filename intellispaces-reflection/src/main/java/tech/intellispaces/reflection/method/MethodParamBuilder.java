@@ -1,10 +1,10 @@
 package tech.intellispaces.reflection.method;
 
-import tech.intellispaces.reflection.instance.AnnotationInstance;
-import tech.intellispaces.reflection.reference.TypeReference;
-
 import java.util.List;
 import java.util.Objects;
+
+import tech.intellispaces.reflection.instance.AnnotationInstance;
+import tech.intellispaces.reflection.reference.TypeReference;
 
 public final class MethodParamBuilder {
   private String name;

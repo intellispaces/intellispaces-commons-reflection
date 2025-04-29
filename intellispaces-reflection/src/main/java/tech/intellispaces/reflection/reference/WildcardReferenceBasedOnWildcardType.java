@@ -1,5 +1,8 @@
 package tech.intellispaces.reflection.reference;
 
+import java.util.Map;
+import java.util.Optional;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.reflection.StatementType;
@@ -7,9 +10,6 @@ import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.common.JavaModelFunctions;
 import tech.intellispaces.reflection.context.TypeContext;
 import tech.intellispaces.reflection.session.Session;
-
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * Adapter of {@link javax.lang.model.type.WildcardType} to {@link WildcardReference}.

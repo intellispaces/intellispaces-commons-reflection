@@ -1,9 +1,9 @@
 package tech.intellispaces.reflection.reference;
 
+import java.util.Map;
+
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
-
-import java.util.Map;
 
 /**
  * Adapter of {@link javax.lang.model.type.ArrayType} to {@link ArrayReference}.

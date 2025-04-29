@@ -1,10 +1,10 @@
 package tech.intellispaces.reflection.method;
 
+import java.util.Map;
+
 import tech.intellispaces.reflection.AnnotatedStatement;
 import tech.intellispaces.reflection.reference.NotPrimitiveReference;
 import tech.intellispaces.reflection.reference.TypeReference;
-
-import java.util.Map;
 
 /**
  * Formal method parameter.

@@ -1,9 +1,9 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.lang.annotation.Annotation;
+
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
-
-import java.lang.annotation.Annotation;
 
 class AnnotationBasedOnLangAnnotation extends AbstractCustomTypeBasedLandClass implements AnnotationType {
   private final Class<? extends Annotation> annotationClass;

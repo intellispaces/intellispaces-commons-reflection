@@ -1,12 +1,12 @@
 package tech.intellispaces.reflection.reference;
 
-import tech.intellispaces.commons.type.PrimitiveType;
-import tech.intellispaces.reflection.customtype.CustomType;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import tech.intellispaces.commons.type.PrimitiveType;
+import tech.intellispaces.reflection.customtype.CustomType;
 
 /**
  * Primitive type reference.

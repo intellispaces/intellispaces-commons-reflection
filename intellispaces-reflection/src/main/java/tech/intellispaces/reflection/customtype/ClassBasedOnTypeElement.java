@@ -1,5 +1,9 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.util.List;
+import java.util.Optional;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.reflection.StatementType;
@@ -9,10 +13,6 @@ import tech.intellispaces.reflection.context.TypeContext;
 import tech.intellispaces.reflection.method.MethodStatement;
 import tech.intellispaces.reflection.reference.CustomTypeReference;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.TypeElement;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Adapter of {@link TypeElement} to {@link ClassType}.

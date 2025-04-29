@@ -1,11 +1,11 @@
 package tech.intellispaces.reflection.customtype;
 
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.reflection.common.JavaModelFunctions;
 import tech.intellispaces.reflection.session.Session;
 import tech.intellispaces.reflection.session.Sessions;
-
-import javax.lang.model.element.TypeElement;
 
 public interface CustomTypes {
 

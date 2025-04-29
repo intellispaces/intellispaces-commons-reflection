@@ -1,5 +1,13 @@
 package tech.intellispaces.reflection.instance;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
+import java.util.List;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.DeclaredType;
+
 import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.common.JavaModelFunctions;
 import tech.intellispaces.reflection.customtype.AnnotationFunctions;
@@ -14,14 +22,6 @@ import tech.intellispaces.reflection.reference.PrimitiveReferences;
 import tech.intellispaces.reflection.reference.TypeReference;
 import tech.intellispaces.reflection.reference.TypeReferenceFunctions;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.AnnotationValue;
-import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.DeclaredType;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
-import java.util.List;
 
 public interface InstanceFunctions {
 

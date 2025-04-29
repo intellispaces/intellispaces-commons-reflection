@@ -1,6 +1,6 @@
-import tech.intellispaces.reflection.support.TesteeType;
-
 import java.io.DataInput;
+
+import tech.intellispaces.reflection.support.TesteeType;
 
 @TesteeType
 public class GenericClassWithMultipleTypeParameters<T1, T2 extends T1, T3 extends Number, T4 extends AutoCloseable & DataInput> {

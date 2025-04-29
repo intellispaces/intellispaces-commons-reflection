@@ -1,11 +1,11 @@
 package tech.intellispaces.reflection.customtype;
 
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.context.TypeContext;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.TypeElement;
 
 /**
  * Adapter of {@link TypeElement} to {@link InterfaceType}.

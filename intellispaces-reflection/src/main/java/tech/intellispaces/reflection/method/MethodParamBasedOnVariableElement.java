@@ -1,5 +1,11 @@
 package tech.intellispaces.reflection.method;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import javax.lang.model.element.VariableElement;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
@@ -12,12 +18,6 @@ import tech.intellispaces.reflection.instance.AnnotationInstance;
 import tech.intellispaces.reflection.reference.NotPrimitiveReference;
 import tech.intellispaces.reflection.reference.TypeReference;
 import tech.intellispaces.reflection.session.Session;
-
-import javax.lang.model.element.VariableElement;
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * Adapter of {@link VariableElement} to {@link MethodParam}.

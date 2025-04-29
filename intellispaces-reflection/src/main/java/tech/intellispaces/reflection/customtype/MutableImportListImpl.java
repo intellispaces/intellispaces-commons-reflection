@@ -1,19 +1,18 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.function.Supplier;
+
 import tech.intellispaces.commons.collection.ArraysFunctions;
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.type.ClassFunctions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
 import tech.intellispaces.commons.type.PrimitiveFunctions;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.function.Supplier;
-
 class MutableImportListImpl implements MutableImportList {
   private final Supplier<String> currentClassName;
   private final HashMap<String, String> imports = new HashMap<>();
-  private final HashMap<String, String> impliedImports = new HashMap<>();
 
   public MutableImportListImpl(String currentClassName) {
     this.currentClassName = () -> currentClassName;
@@ -24,22 +23,9 @@ class MutableImportListImpl implements MutableImportList {
   }
 
   @Override
-  public void addImplied(String canonicalName) {
-    String simpleName = ClassNameFunctions.getSimpleName(canonicalName);
-    impliedImports.put(simpleName, canonicalName);
-  }
-
-  @Override
   public void add(String canonicalName) {
-    if (ClassFunctions.isLanguageClass(canonicalName)) {
-      return;
-    }
     String simpleName = ClassNameFunctions.getSimpleName(canonicalName);
-    String impliedClassCanonicalName = impliedImports.get(simpleName);
-    String impliedClassPackageName = (impliedClassCanonicalName != null ? ClassNameFunctions.getPackageName(impliedClassCanonicalName) : null);
-    if (impliedClassCanonicalName == null || !impliedClassPackageName.equals(currentClassPackageName())) {
-      imports.putIfAbsent(simpleName, canonicalName);
-    }
+    imports.putIfAbsent(simpleName, canonicalName);
   }
 
   @Override
@@ -60,33 +46,9 @@ class MutableImportListImpl implements MutableImportList {
   @Override
   public String simpleNameOf(String canonicalName) {
     String simpleName = ClassNameFunctions.getSimpleName(canonicalName);
-    String packageName = ClassNameFunctions.getPackageName(canonicalName);
-    String currentClassPackageName = currentClassPackageName();
-
-    String impliedClassCanonicalName = impliedImports.get(simpleName);
-    String impliedClassPackageName = (impliedClassCanonicalName != null ? ClassNameFunctions.getPackageName(impliedClassCanonicalName) : null);
-    if (impliedClassCanonicalName != null
-            && impliedClassPackageName.equals(currentClassPackageName)
-            && !canonicalName.equals(impliedClassCanonicalName)
-    ) {
-      return canonicalName;
-    }
-
-    if (ClassFunctions.isLanguageClass(canonicalName)) {
-      return simpleName;
-    }
-    if (ClassFunctions.getClass(ClassFunctions.JAVA_LANG_PACKAGE + simpleName).isPresent()) {
-      return canonicalName;
-    }
-
-    if (packageName.equals(currentClassPackageName)) {
-      return simpleName;
-    }
-
     String importedCanonicalName = imports.get(simpleName);
     if (importedCanonicalName == null) {
-      throw UnexpectedExceptions.withMessage("Class {0} is missing from list of imported classes",
-          canonicalName);
+      throw UnexpectedExceptions.withMessage("Class {0} is missing from list of imported classes", canonicalName);
     }
     if (canonicalName.equals(importedCanonicalName)) {
       return simpleName;

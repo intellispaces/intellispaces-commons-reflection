@@ -1,11 +1,11 @@
 package tech.intellispaces.reflection.customtype;
 
+import java.util.List;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.reflection.StatementType;
 import tech.intellispaces.reflection.StatementTypes;
 import tech.intellispaces.reflection.reference.CustomTypeReference;
-
-import javax.lang.model.element.TypeElement;
-import java.util.List;
 
 /**
  * Adapter of {@link TypeElement} to {@link EnumType}.

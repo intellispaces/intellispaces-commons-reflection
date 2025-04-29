@@ -1,16 +1,16 @@
 package tech.intellispaces.reflection.customtype;
 
-import tech.intellispaces.reflection.AnnotatedStatement;
-import tech.intellispaces.reflection.method.MethodStatement;
-import tech.intellispaces.reflection.reference.CustomTypeReference;
-import tech.intellispaces.reflection.reference.NamedReference;
-import tech.intellispaces.reflection.reference.TypeReference;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+
+import tech.intellispaces.reflection.AnnotatedStatement;
+import tech.intellispaces.reflection.method.MethodStatement;
+import tech.intellispaces.reflection.reference.CustomTypeReference;
+import tech.intellispaces.reflection.reference.NamedReference;
+import tech.intellispaces.reflection.reference.TypeReference;
 
 /**
  * Abstract custom type statement.

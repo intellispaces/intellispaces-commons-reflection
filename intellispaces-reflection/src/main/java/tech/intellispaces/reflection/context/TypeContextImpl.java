@@ -1,12 +1,12 @@
 package tech.intellispaces.reflection.context;
 
-import tech.intellispaces.commons.object.ObjectFunctions;
-import tech.intellispaces.reflection.reference.NamedReference;
-import tech.intellispaces.reflection.reference.NotPrimitiveReference;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import tech.intellispaces.commons.object.ObjectFunctions;
+import tech.intellispaces.reflection.reference.NamedReference;
+import tech.intellispaces.reflection.reference.NotPrimitiveReference;
 
 class TypeContextImpl implements TypeContext, TypeContextBlank {
   private TypeContext parentContext;

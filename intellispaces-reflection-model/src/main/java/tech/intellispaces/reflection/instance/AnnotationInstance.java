@@ -1,10 +1,10 @@
 package tech.intellispaces.reflection.instance;
 
-import tech.intellispaces.reflection.customtype.AnnotationType;
-
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Optional;
+
+import tech.intellispaces.reflection.customtype.AnnotationType;
 
 /**
  * The annotation instance.

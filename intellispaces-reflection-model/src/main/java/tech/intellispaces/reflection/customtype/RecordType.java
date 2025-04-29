@@ -1,9 +1,9 @@
 package tech.intellispaces.reflection.customtype;
 
-import tech.intellispaces.reflection.reference.CustomTypeReference;
-
 import java.util.List;
 import java.util.Optional;
+
+import tech.intellispaces.reflection.reference.CustomTypeReference;
 
 /**
  * The record type.
