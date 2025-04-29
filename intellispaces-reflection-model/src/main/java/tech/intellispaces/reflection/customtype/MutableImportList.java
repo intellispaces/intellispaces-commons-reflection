@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface MutableImportList {
 
-  void addHidden(String canonicalName);
+  void addImplied(String canonicalName);
 
   void add(String canonicalName);
 

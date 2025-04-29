@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 class MutableImportListImpl implements MutableImportList {
   private final Supplier<String> currentClassName;
   private final HashMap<String, String> imports = new HashMap<>();
-  private final HashMap<String, String> hiddenImports = new HashMap<>();
+  private final HashMap<String, String> impliedImports = new HashMap<>();
 
   public MutableImportListImpl(String currentClassName) {
     this.currentClassName = () -> currentClassName;
@@ -24,9 +24,9 @@ class MutableImportListImpl implements MutableImportList {
   }
 
   @Override
-  public void addHidden(String canonicalName) {
+  public void addImplied(String canonicalName) {
     String simpleName = ClassNameFunctions.getSimpleName(canonicalName);
-    hiddenImports.put(simpleName, canonicalName);
+    impliedImports.put(simpleName, canonicalName);
   }
 
   @Override
@@ -35,9 +35,9 @@ class MutableImportListImpl implements MutableImportList {
       return;
     }
     String simpleName = ClassNameFunctions.getSimpleName(canonicalName);
-    String hiddenClassCanonicalName = hiddenImports.get(simpleName);
-    String hiddenClassPackageName = (hiddenClassCanonicalName != null ? ClassNameFunctions.getPackageName(hiddenClassCanonicalName) : null);
-    if (hiddenClassCanonicalName == null || !hiddenClassPackageName.equals(currentClassPackageName())) {
+    String impliedClassCanonicalName = impliedImports.get(simpleName);
+    String impliedClassPackageName = (impliedClassCanonicalName != null ? ClassNameFunctions.getPackageName(impliedClassCanonicalName) : null);
+    if (impliedClassCanonicalName == null || !impliedClassPackageName.equals(currentClassPackageName())) {
       imports.putIfAbsent(simpleName, canonicalName);
     }
   }
@@ -63,14 +63,20 @@ class MutableImportListImpl implements MutableImportList {
     String packageName = ClassNameFunctions.getPackageName(canonicalName);
     String currentClassPackageName = currentClassPackageName();
 
-    String hiddenClassCanonicalName = hiddenImports.get(simpleName);
-    String hiddenClassPackageName = (hiddenClassCanonicalName != null ? ClassNameFunctions.getPackageName(hiddenClassCanonicalName) : null);
-    if (hiddenClassCanonicalName != null && hiddenClassPackageName.equals(currentClassPackageName) && !canonicalName.equals(hiddenClassCanonicalName)) {
+    String impliedClassCanonicalName = impliedImports.get(simpleName);
+    String impliedClassPackageName = (impliedClassCanonicalName != null ? ClassNameFunctions.getPackageName(impliedClassCanonicalName) : null);
+    if (impliedClassCanonicalName != null
+            && impliedClassPackageName.equals(currentClassPackageName)
+            && !canonicalName.equals(impliedClassCanonicalName)
+    ) {
       return canonicalName;
     }
 
     if (ClassFunctions.isLanguageClass(canonicalName)) {
       return simpleName;
+    }
+    if (ClassFunctions.getClass(ClassFunctions.JAVA_LANG_PACKAGE + simpleName).isPresent()) {
+      return canonicalName;
     }
 
     if (packageName.equals(currentClassPackageName)) {
