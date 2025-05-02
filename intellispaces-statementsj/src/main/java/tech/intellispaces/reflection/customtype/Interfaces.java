@@ -1,0 +1,48 @@
+package tech.intellispaces.statementsj.customtype;
+
+import java.util.Map;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
+
+import tech.intellispaces.statementsj.common.JavaModelFunctions;
+import tech.intellispaces.statementsj.context.TypeContext;
+import tech.intellispaces.statementsj.context.TypeContexts;
+import tech.intellispaces.statementsj.reference.NotPrimitiveReference;
+import tech.intellispaces.statementsj.session.Session;
+
+public interface Interfaces {
+
+  static InterfaceType of(Class<?> aClass) {
+    return new InterfaceBasedOnLangClass(aClass);
+  }
+
+  static InterfaceType of(TypeElement typeElement, Session session) {
+    return of(typeElement, TypeContexts.empty(), session);
+  }
+
+  static InterfaceType of(TypeElement typeElement, TypeContext typeContext, Session session) {
+    return JavaModelFunctions.asCustomStatement(
+        typeElement,
+        ElementKind.INTERFACE,
+        Interfaces::create,
+        typeContext,
+        session
+    );
+  }
+
+  private static InterfaceType create(
+      TypeElement typeElement, TypeContext typeContext, Session session
+  ) {
+    return new InterfaceBasedOnTypeElement(typeElement, typeContext, session);
+  }
+
+  static InterfacePrototypeBuilder build(InterfaceType prototype) {
+    return new InterfacePrototypeBuilder(prototype);
+  }
+
+  static InterfaceType effectiveOf(
+      InterfaceType actualType, Map<String, NotPrimitiveReference> typeMapping
+  ) {
+    return new EffectiveInterfaceType(actualType, typeMapping);
+  }
+}
