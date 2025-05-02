@@ -1,8 +1,8 @@
-package tech.intellispaces.statementsj.customtype;
+package tech.intellispaces.statementsj.dependencies;
 
 import java.util.List;
 
-public interface MutableImportList {
+public interface MutableDependencySet {
 
   void add(String canonicalName);
 

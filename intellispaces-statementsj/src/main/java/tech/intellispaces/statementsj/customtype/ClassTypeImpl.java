@@ -1,6 +1,7 @@
 package tech.intellispaces.statementsj.customtype;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
 import tech.intellispaces.statementsj.StatementType;
 import tech.intellispaces.statementsj.StatementTypes;
-import tech.intellispaces.statementsj.common.DependenciesFunctions;
+import tech.intellispaces.statementsj.dependencies.DependenciesFunctions;
 import tech.intellispaces.statementsj.context.TypeContexts;
 import tech.intellispaces.statementsj.instance.AnnotationInstance;
 import tech.intellispaces.statementsj.method.MethodStatement;
@@ -24,77 +25,75 @@ import tech.intellispaces.statementsj.reference.TypeReference;
 import tech.intellispaces.statementsj.reference.TypeReferenceFunctions;
 import tech.intellispaces.statementsj.session.Sessions;
 
-class InterfaceImpl implements InterfaceType {
+class ClassTypeImpl implements ClassType {
+  private boolean isAbstract;
+  private boolean isFinal;
   private String canonicalName;
   private CustomType enclosingType;
   private List<AnnotationInstance> annotations;
   private List<NamedReference> typeParameters;
-  private List<CustomTypeReference> parentTypes;
+  private CustomTypeReference extendedClass;
+  private List<CustomTypeReference> implementedInterfaces;
+  private List<MethodStatement> constructors;
   private List<MethodStatement> declaredMethods;
+
   private final SupplierAction<String> typeParametersFullDeclarationGetter;
   private final SupplierAction<String> typeParametersBriefDeclarationGetter;
   private final SupplierAction<List<MethodStatement>> actualMethodsGetter;
   private final SupplierAction<Collection<CustomType>> dependenciesGetter;
   private final SupplierAction<Collection<String>> dependencyTypesGetter;
 
-  InterfaceImpl() {
+  ClassTypeImpl() {
     this.typeParametersFullDeclarationGetter = CachedSupplierActions.get(CustomTypeFunctions::getTypeParametersDeclaration, this, true);
     this.typeParametersBriefDeclarationGetter = CachedSupplierActions.get(CustomTypeFunctions::getTypeParametersDeclaration, this, false);
     this.actualMethodsGetter = CachedSupplierActions.get(CustomTypeFunctions::getActualMethods, this, TypeContexts.empty(), Sessions.get());
     this.dependenciesGetter = CachedSupplierActions.get(DependenciesFunctions::getCustomTypeDependencies, this);
-    this.dependencyTypesGetter = CachedSupplierActions.get(InterfaceImpl::collectDependencyTypenames, this);
+    this.dependencyTypesGetter = CachedSupplierActions.get(ClassTypeImpl::collectDependencyTypenames, this);
   }
 
-  InterfaceImpl(
+  ClassTypeImpl(
+      boolean isAbstract,
+      boolean isFinal,
       String canonicalName,
       CustomType enclosingType,
       List<AnnotationInstance> annotations,
       List<NamedReference> typeParameters,
-      List<CustomTypeReference> parentTypes,
+      CustomTypeReference extendedClass,
+      List<CustomTypeReference> implementedInterfaces,
+      List<MethodStatement> constructors,
       List<MethodStatement> declaredMethods
   ) {
     this();
+    this.isAbstract = isAbstract;
+    this.isFinal = isFinal;
     this.canonicalName = canonicalName;
     this.enclosingType = enclosingType;
     this.annotations = annotations;
     this.typeParameters = typeParameters;
-    this.parentTypes = parentTypes;
-    this.declaredMethods = declaredMethods;
-  }
-
-  void setCanonicalName(String canonicalName) {
-    this.canonicalName = canonicalName;
-  }
-
-  void setAnnotations(List<AnnotationInstance> annotations) {
-    this.annotations = annotations;
-  }
-
-  void setTypeParameters(List<NamedReference> typeParameters) {
-    this.typeParameters = typeParameters;
-  }
-
-  void setParentTypes(List<CustomTypeReference> parentTypes) {
-    this.parentTypes = parentTypes;
-  }
-
-  void setDeclaredMethods(List<MethodStatement> declaredMethods) {
+    this.extendedClass = extendedClass;
+    this.implementedInterfaces = implementedInterfaces;
+    this.constructors = constructors;
     this.declaredMethods = declaredMethods;
   }
 
   @Override
-  public StatementType statementType() {
-    return StatementTypes.Interface;
+  public boolean isNested() {
+    return enclosingType != null;
+  }
+
+  @Override
+  public Optional<CustomType> enclosingType() {
+    return Optional.ofNullable(enclosingType);
   }
 
   @Override
   public boolean isAbstract() {
-    return true;
+    return isAbstract;
   }
 
   @Override
   public boolean isFinal() {
-    return false;
+    return isFinal;
   }
 
   @Override
@@ -109,22 +108,12 @@ class InterfaceImpl implements InterfaceType {
 
   @Override
   public String simpleName() {
-    return ClassNameFunctions.getSimpleName(canonicalName());
+    return ClassNameFunctions.getSimpleName(canonicalName);
   }
 
   @Override
   public String packageName() {
-    return ClassNameFunctions.getPackageName(canonicalName());
-  }
-
-  @Override
-  public boolean isNested() {
-    return enclosingType != null;
-  }
-
-  @Override
-  public Optional<CustomType> enclosingType() {
-    return Optional.ofNullable(enclosingType);
+    return ClassNameFunctions.getPackageName(canonicalName);
   }
 
   @Override
@@ -145,6 +134,26 @@ class InterfaceImpl implements InterfaceType {
   @Override
   public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
     return AnnotationFunctions.hasAnnotation(this, annotationClass);
+  }
+
+  @Override
+  public StatementType statementType() {
+    return StatementTypes.Class;
+  }
+
+  @Override
+  public List<MethodStatement> constructors() {
+    return constructors;
+  }
+
+  @Override
+  public Optional<CustomTypeReference> extendedClass() {
+    return Optional.ofNullable(extendedClass);
+  }
+
+  @Override
+  public List<CustomTypeReference> implementedInterfaces() {
+    return implementedInterfaces;
   }
 
   @Override
@@ -174,7 +183,12 @@ class InterfaceImpl implements InterfaceType {
 
   @Override
   public List<CustomTypeReference> parentTypes() {
-    return parentTypes;
+    List<CustomTypeReference> parents = new ArrayList<>();
+    if (extendedClass != null) {
+      parents.add(extendedClass);
+    }
+    parents.addAll(implementedInterfaces);
+    return parents;
   }
 
   @Override
@@ -246,7 +260,7 @@ class InterfaceImpl implements InterfaceType {
 
   @Override
   public String prettyDeclaration() {
-    throw NotImplementedExceptions.withCode("sXN0Kw");
+    throw NotImplementedExceptions.withCode("zZPnvg");
   }
 
   private Collection<String> collectDependencyTypenames() {

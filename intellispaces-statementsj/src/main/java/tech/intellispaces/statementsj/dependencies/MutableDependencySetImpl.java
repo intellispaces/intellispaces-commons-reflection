@@ -1,4 +1,4 @@
-package tech.intellispaces.statementsj.customtype;
+package tech.intellispaces.statementsj.dependencies;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +10,15 @@ import tech.intellispaces.commons.type.ClassFunctions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
 import tech.intellispaces.commons.type.PrimitiveFunctions;
 
-class MutableImportListImpl implements MutableImportList {
+class MutableDependencySetImpl implements MutableDependencySet {
   private final Supplier<String> currentClassName;
   private final HashMap<String, String> imports = new HashMap<>();
 
-  public MutableImportListImpl(String currentClassName) {
+  public MutableDependencySetImpl(String currentClassName) {
     this.currentClassName = () -> currentClassName;
   }
 
-  public MutableImportListImpl(Supplier<String> currentClassName) {
+  public MutableDependencySetImpl(Supplier<String> currentClassName) {
     this.currentClassName = currentClassName;
   }
 

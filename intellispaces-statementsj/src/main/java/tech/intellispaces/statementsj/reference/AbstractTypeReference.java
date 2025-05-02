@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
-import tech.intellispaces.statementsj.common.DependenciesFunctions;
+import tech.intellispaces.statementsj.dependencies.DependenciesFunctions;
 import tech.intellispaces.statementsj.customtype.CustomType;
 
 abstract class AbstractTypeReference implements TypeReference {

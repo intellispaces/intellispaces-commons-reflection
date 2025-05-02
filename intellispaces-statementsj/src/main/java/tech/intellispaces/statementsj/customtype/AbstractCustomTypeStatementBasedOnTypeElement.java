@@ -14,7 +14,7 @@ import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.type.ElementFunctions;
-import tech.intellispaces.statementsj.common.DependenciesFunctions;
+import tech.intellispaces.statementsj.dependencies.DependenciesFunctions;
 import tech.intellispaces.statementsj.common.JavaModelFunctions;
 import tech.intellispaces.statementsj.context.TypeContext;
 import tech.intellispaces.statementsj.context.TypeContextBuilder;

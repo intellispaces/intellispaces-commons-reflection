@@ -1,4 +1,4 @@
-package tech.intellispaces.statementsj.common;
+package tech.intellispaces.statementsj.dependencies;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
