@@ -2,39 +2,39 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>tech.intellispaces</groupId>
+        <groupId>tech.intellispaces.commons</groupId>
         <artifactId>intellispaces-parent-pom</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>intellispaces-statementj-parent</artifactId>
+    <artifactId>intellispaces-jstatement-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-statementsj-model</module>
-        <module>intellispaces-statementsj</module>
+        <module>intellispaces-jstatements-model</module>
+        <module>intellispaces-jstatements</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <!-- Intellispaces -->
             <dependency>
-                <groupId>tech.intellispaces</groupId>
-                <artifactId>intellispaces-statementsj-model</artifactId>
+                <groupId>tech.intellispaces.commons</groupId>
+                <artifactId>intellispaces-jstatements-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces</groupId>
+                <groupId>tech.intellispaces.commons</groupId>
                 <artifactId>intellispaces-commons</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces</groupId>
+                <groupId>tech.intellispaces.commons</groupId>
                 <artifactId>intellispaces-commons-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.intellispaces</groupId>
+                <groupId>tech.intellispaces.commons</groupId>
                 <artifactId>intellispaces-actions</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
