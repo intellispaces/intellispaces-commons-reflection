@@ -7,12 +7,12 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>intellispaces-jstatement-parent</artifactId>
+    <artifactId>intellispaces-javareflection-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-jstatements-model</module>
-        <module>intellispaces-jstatements</module>
+        <module>intellispaces-javareflection-model</module>
+        <module>intellispaces-javareflection</module>
     </modules>
 
     <dependencyManagement>
@@ -20,7 +20,7 @@
             <!-- Intellispaces -->
             <dependency>
                 <groupId>tech.intellispaces.commons</groupId>
-                <artifactId>intellispaces-jstatements-model</artifactId>
+                <artifactId>intellispaces-javareflection-model</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
