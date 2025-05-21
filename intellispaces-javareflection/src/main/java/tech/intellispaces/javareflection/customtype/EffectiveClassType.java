@@ -1,5 +1,9 @@
 package tech.intellispaces.javareflection.customtype;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.javareflection.StatementType;
@@ -7,10 +11,6 @@ import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.method.MethodStatement;
 import tech.intellispaces.javareflection.reference.CustomTypeReference;
 import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 class EffectiveClassType extends AbstractEffectiveCustomType implements ClassType {
   private final SupplierAction<Optional<CustomTypeReference>> extendedClassGetter;

@@ -1,11 +1,11 @@
 package tech.intellispaces.javareflection.type;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+
 import tech.intellispaces.commons.type.ClassType;
 import tech.intellispaces.javareflection.reference.TypeReference;
 import tech.intellispaces.javareflection.reference.TypeReferences;
-
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
 
 public abstract class TypeOf<T> implements Type<T> {
   private final Type<T> type;

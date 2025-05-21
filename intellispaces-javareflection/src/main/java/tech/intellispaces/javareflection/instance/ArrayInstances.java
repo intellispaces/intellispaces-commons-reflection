@@ -1,8 +1,8 @@
 package tech.intellispaces.javareflection.instance;
 
-import tech.intellispaces.javareflection.reference.TypeReference;
-
 import java.util.List;
+
+import tech.intellispaces.javareflection.reference.TypeReference;
 
 public interface ArrayInstances {
 

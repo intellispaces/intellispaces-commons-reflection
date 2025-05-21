@@ -1,10 +1,10 @@
 package tech.intellispaces.javareflection.reference;
 
-import tech.intellispaces.javareflection.StatementType;
-import tech.intellispaces.javareflection.StatementTypes;
-
 import java.util.Map;
 import java.util.Optional;
+
+import tech.intellispaces.javareflection.StatementType;
+import tech.intellispaces.javareflection.StatementTypes;
 
 class WildcardReferenceImpl extends AbstractTypeReference implements WildcardReference {
   private final ReferenceBound extendedBound;

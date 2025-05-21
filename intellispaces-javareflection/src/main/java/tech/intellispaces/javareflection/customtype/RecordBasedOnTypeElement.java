@@ -1,5 +1,8 @@
 package tech.intellispaces.javareflection.customtype;
 
+import java.util.List;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.javareflection.StatementType;
@@ -7,9 +10,6 @@ import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.context.TypeContext;
 import tech.intellispaces.javareflection.reference.CustomTypeReference;
 import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.TypeElement;
-import java.util.List;
 
 /**
  * Adapter of {@link TypeElement} to {@link RecordType}.

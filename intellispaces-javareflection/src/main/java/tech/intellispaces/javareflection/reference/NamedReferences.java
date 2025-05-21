@@ -1,8 +1,8 @@
 package tech.intellispaces.javareflection.reference;
 
-import tech.intellispaces.javareflection.Statement;
-
 import java.util.List;
+
+import tech.intellispaces.javareflection.Statement;
 
 public interface NamedReferences {
 

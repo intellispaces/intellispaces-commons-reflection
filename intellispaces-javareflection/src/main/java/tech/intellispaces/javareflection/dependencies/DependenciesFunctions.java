@@ -1,5 +1,12 @@
 package tech.intellispaces.javareflection.dependencies;
 
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.customtype.CustomType;
 import tech.intellispaces.javareflection.exception.JavaStatementExceptions;
@@ -12,13 +19,6 @@ import tech.intellispaces.javareflection.reference.CustomTypeReference;
 import tech.intellispaces.javareflection.reference.NamedReference;
 import tech.intellispaces.javareflection.reference.TypeReference;
 import tech.intellispaces.javareflection.reference.WildcardReference;
-
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Functions to calculate statement dependencies.

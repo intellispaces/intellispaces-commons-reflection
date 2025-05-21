@@ -1,9 +1,17 @@
 package tech.intellispaces.javareflection;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.lang.model.element.TypeElement;
+import javax.tools.JavaFileObject;
+
 import com.google.testing.compile.Compilation;
 import com.google.testing.compile.CompilationSubject;
 import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
+
 import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.javareflection.customtype.CustomType;
@@ -13,13 +21,6 @@ import tech.intellispaces.javareflection.reference.PrimitiveReferences;
 import tech.intellispaces.javareflection.samples.TestEnum;
 import tech.intellispaces.javareflection.samples.TestRecord;
 import tech.intellispaces.javareflection.support.TesteeTypeAnnotationProcessor;
-
-import javax.lang.model.element.TypeElement;
-import javax.tools.JavaFileObject;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

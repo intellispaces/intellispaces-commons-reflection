@@ -1,5 +1,12 @@
 package tech.intellispaces.javareflection.method;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.javareflection.StatementType;
 import tech.intellispaces.javareflection.StatementTypes;
@@ -10,13 +17,6 @@ import tech.intellispaces.javareflection.reference.NamedReference;
 import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
 import tech.intellispaces.javareflection.reference.ThrowableReference;
 import tech.intellispaces.javareflection.reference.TypeReference;
-
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 class MethodSignatureImpl implements MethodSignature {
   private final String name;

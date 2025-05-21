@@ -1,12 +1,12 @@
 package tech.intellispaces.javareflection.reference;
 
-import tech.intellispaces.javareflection.Statement;
-import tech.intellispaces.javareflection.customtype.CustomType;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+
+import tech.intellispaces.javareflection.Statement;
+import tech.intellispaces.javareflection.customtype.CustomType;
 
 /**
  * The type reference.

@@ -1,5 +1,8 @@
 package tech.intellispaces.javareflection.method;
 
+import java.util.List;
+import java.util.Map;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
@@ -7,9 +10,6 @@ import tech.intellispaces.javareflection.StatementType;
 import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.customtype.CustomType;
 import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
-
-import java.util.List;
-import java.util.Map;
 
 class MethodStatementImpl implements MethodStatement {
   private final CustomType owner;

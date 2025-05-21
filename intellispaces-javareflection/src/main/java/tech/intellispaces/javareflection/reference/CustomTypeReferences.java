@@ -1,13 +1,13 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.List;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+
 import tech.intellispaces.javareflection.context.TypeContext;
 import tech.intellispaces.javareflection.context.TypeContexts;
 import tech.intellispaces.javareflection.customtype.CustomType;
 import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.DeclaredType;
-import java.util.List;
 
 public interface CustomTypeReferences {
 

@@ -1,5 +1,11 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.type.ClassFunctions;
@@ -9,12 +15,6 @@ import tech.intellispaces.javareflection.common.JavaModelFunctions;
 import tech.intellispaces.javareflection.context.TypeContext;
 import tech.intellispaces.javareflection.customtype.CustomType;
 import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.DeclaredType;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * Adapter od {@link DeclaredType} to {@link CustomTypeReference}.

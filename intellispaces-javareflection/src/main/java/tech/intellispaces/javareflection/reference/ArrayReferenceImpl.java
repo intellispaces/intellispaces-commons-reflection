@@ -1,9 +1,9 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.Map;
+
 import tech.intellispaces.javareflection.StatementType;
 import tech.intellispaces.javareflection.StatementTypes;
-
-import java.util.Map;
 
 class ArrayReferenceImpl extends AbstractTypeReference implements ArrayReference {
   private final TypeReference elementTypeReference;

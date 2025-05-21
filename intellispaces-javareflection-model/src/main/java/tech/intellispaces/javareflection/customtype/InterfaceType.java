@@ -1,9 +1,9 @@
 package tech.intellispaces.javareflection.customtype;
 
-import tech.intellispaces.javareflection.reference.CustomTypeReference;
-
 import java.util.List;
 import java.util.Optional;
+
+import tech.intellispaces.javareflection.reference.CustomTypeReference;
 
 /**
  * The interface type.

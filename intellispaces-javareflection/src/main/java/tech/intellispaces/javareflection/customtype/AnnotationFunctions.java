@@ -1,20 +1,5 @@
 package tech.intellispaces.javareflection.customtype;
 
-import tech.intellispaces.javareflection.AnnotatedStatement;
-import tech.intellispaces.javareflection.exception.JavaStatementExceptions;
-import tech.intellispaces.javareflection.instance.AnnotationElement;
-import tech.intellispaces.javareflection.instance.AnnotationElements;
-import tech.intellispaces.javareflection.instance.AnnotationInstance;
-import tech.intellispaces.javareflection.instance.Instance;
-import tech.intellispaces.javareflection.instance.InstanceFunctions;
-import tech.intellispaces.javareflection.method.MethodFunctions;
-import tech.intellispaces.javareflection.reference.CustomTypeReference;
-import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.AnnotationValue;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.ExecutableElement;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Proxy;
@@ -27,6 +12,21 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.IntStream;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+
+import tech.intellispaces.javareflection.AnnotatedStatement;
+import tech.intellispaces.javareflection.exception.JavaStatementExceptions;
+import tech.intellispaces.javareflection.instance.AnnotationElement;
+import tech.intellispaces.javareflection.instance.AnnotationElements;
+import tech.intellispaces.javareflection.instance.AnnotationInstance;
+import tech.intellispaces.javareflection.instance.Instance;
+import tech.intellispaces.javareflection.instance.InstanceFunctions;
+import tech.intellispaces.javareflection.method.MethodFunctions;
+import tech.intellispaces.javareflection.reference.CustomTypeReference;
+import tech.intellispaces.javareflection.session.Session;
 
 /**
  * Annotation related functions.

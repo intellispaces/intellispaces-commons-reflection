@@ -1,5 +1,10 @@
 package tech.intellispaces.javareflection.method;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import tech.intellispaces.javareflection.AnnotatedStatement;
 import tech.intellispaces.javareflection.customtype.CustomType;
 import tech.intellispaces.javareflection.instance.AnnotationInstance;
@@ -8,11 +13,6 @@ import tech.intellispaces.javareflection.reference.NamedReference;
 import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
 import tech.intellispaces.javareflection.reference.ThrowableReference;
 import tech.intellispaces.javareflection.reference.TypeReference;
-
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public interface MethodStatement extends AnnotatedStatement {
 

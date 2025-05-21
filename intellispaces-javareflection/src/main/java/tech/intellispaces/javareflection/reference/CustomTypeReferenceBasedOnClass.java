@@ -1,13 +1,13 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
 import tech.intellispaces.javareflection.StatementType;
 import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.customtype.CustomType;
 import tech.intellispaces.javareflection.customtype.CustomTypes;
-
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * Adapter of {@link Class} to {@link CustomTypeReference}.

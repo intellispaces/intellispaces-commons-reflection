@@ -1,5 +1,17 @@
 package tech.intellispaces.javareflection.customtype;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.collection.ArraysFunctions;
@@ -18,18 +30,6 @@ import tech.intellispaces.javareflection.reference.ReferenceBound;
 import tech.intellispaces.javareflection.reference.TypeReference;
 import tech.intellispaces.javareflection.reference.TypeReferences;
 import tech.intellispaces.javareflection.session.Sessions;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Abstract adapter of {@link Class} to {@link CustomType}.

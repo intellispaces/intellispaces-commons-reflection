@@ -1,14 +1,14 @@
 package tech.intellispaces.javareflection.customtype;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tech.intellispaces.javareflection.instance.AnnotationInstance;
 import tech.intellispaces.javareflection.method.MethodSignature;
 import tech.intellispaces.javareflection.method.MethodStatement;
 import tech.intellispaces.javareflection.method.Methods;
 import tech.intellispaces.javareflection.reference.CustomTypeReference;
 import tech.intellispaces.javareflection.reference.NamedReference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class InterfacePrototypeBuilder {
   private String canonicalName;

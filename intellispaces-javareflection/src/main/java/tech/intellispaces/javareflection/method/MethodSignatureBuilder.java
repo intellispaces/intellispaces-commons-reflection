@@ -1,13 +1,13 @@
 package tech.intellispaces.javareflection.method;
 
+import java.util.List;
+import java.util.Objects;
+
 import tech.intellispaces.javareflection.instance.AnnotationInstance;
 import tech.intellispaces.javareflection.instance.Instance;
 import tech.intellispaces.javareflection.reference.NamedReference;
 import tech.intellispaces.javareflection.reference.ThrowableReference;
 import tech.intellispaces.javareflection.reference.TypeReference;
-
-import java.util.List;
-import java.util.Objects;
 
 public final class MethodSignatureBuilder {
   private String name;

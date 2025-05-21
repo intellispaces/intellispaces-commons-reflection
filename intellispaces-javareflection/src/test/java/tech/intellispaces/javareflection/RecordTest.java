@@ -1,7 +1,15 @@
 package tech.intellispaces.javareflection;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import javax.lang.model.element.TypeElement;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
@@ -12,13 +20,6 @@ import tech.intellispaces.javareflection.reference.CustomTypeReference;
 import tech.intellispaces.javareflection.session.Session;
 import tech.intellispaces.javareflection.session.Sessions;
 import tech.intellispaces.javareflection.support.TesteeType;
-
-import javax.lang.model.element.TypeElement;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

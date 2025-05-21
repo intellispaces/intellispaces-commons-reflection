@@ -1,8 +1,8 @@
 package tech.intellispaces.javareflection.instance;
 
-import tech.intellispaces.javareflection.customtype.CustomType;
-
 import java.util.Optional;
+
+import tech.intellispaces.javareflection.customtype.CustomType;
 
 /**
  * Class instance.

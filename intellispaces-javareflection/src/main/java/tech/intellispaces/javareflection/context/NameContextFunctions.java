@@ -1,11 +1,11 @@
 package tech.intellispaces.javareflection.context;
 
-import tech.intellispaces.javareflection.reference.NamedReference;
-import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
+import tech.intellispaces.javareflection.reference.NamedReference;
+import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
 
 public interface NameContextFunctions {
 

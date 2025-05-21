@@ -1,9 +1,9 @@
 package tech.intellispaces.javareflection.type;
 
+import java.util.List;
+
 import tech.intellispaces.javareflection.reference.CustomTypeReferences;
 import tech.intellispaces.javareflection.reference.TypeReference;
-
-import java.util.List;
 
 public interface Types {
 

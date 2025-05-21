@@ -1,7 +1,14 @@
 package tech.intellispaces.javareflection;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import javax.lang.model.element.TypeElement;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import tech.intellispaces.commons.collection.CollectionFunctions;
 import tech.intellispaces.commons.object.ObjectFunctions;
 import tech.intellispaces.javareflection.customtype.AnnotationType;
@@ -17,12 +24,6 @@ import tech.intellispaces.javareflection.samples.TestEnum;
 import tech.intellispaces.javareflection.session.Session;
 import tech.intellispaces.javareflection.session.Sessions;
 import tech.intellispaces.javareflection.support.TesteeType;
-
-import javax.lang.model.element.TypeElement;
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

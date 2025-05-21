@@ -1,5 +1,11 @@
 package tech.intellispaces.javareflection.instance;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.Optional;
+
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.javareflection.StatementType;
@@ -7,12 +13,6 @@ import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.customtype.AnnotationType;
 import tech.intellispaces.javareflection.customtype.Annotations;
 import tech.intellispaces.javareflection.session.Sessions;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Optional;
 
 /**
  * Adapter of {@link Annotation} to {@link AnnotationInstance}.

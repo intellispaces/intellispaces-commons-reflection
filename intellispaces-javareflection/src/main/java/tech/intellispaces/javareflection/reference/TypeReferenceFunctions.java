@@ -1,5 +1,14 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import tech.intellispaces.actions.runnable.RunnableAction;
 import tech.intellispaces.actions.text.StringActions;
 import tech.intellispaces.commons.exception.NotImplementedExceptions;
@@ -10,15 +19,6 @@ import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.customtype.CustomType;
 import tech.intellispaces.javareflection.customtype.CustomTypeFunctions;
 import tech.intellispaces.javareflection.exception.JavaStatementExceptions;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public interface TypeReferenceFunctions {
 

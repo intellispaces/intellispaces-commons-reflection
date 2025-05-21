@@ -1,5 +1,9 @@
 package tech.intellispaces.javareflection;
 
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+
 import tech.intellispaces.javareflection.common.JavaModelFunctions;
 import tech.intellispaces.javareflection.customtype.AnnotationType;
 import tech.intellispaces.javareflection.customtype.Annotations;
@@ -17,10 +21,6 @@ import tech.intellispaces.javareflection.reference.CustomTypeReference;
 import tech.intellispaces.javareflection.reference.CustomTypeReferences;
 import tech.intellispaces.javareflection.session.Session;
 import tech.intellispaces.javareflection.session.Sessions;
-
-import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.DeclaredType;
 
 /**
  * Java statements facade.

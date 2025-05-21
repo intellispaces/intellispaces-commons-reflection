@@ -1,5 +1,17 @@
 package tech.intellispaces.javareflection.method;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
+
 import tech.intellispaces.javareflection.JavaStatements;
 import tech.intellispaces.javareflection.common.JavaModelFunctions;
 import tech.intellispaces.javareflection.context.TypeContext;
@@ -13,18 +25,6 @@ import tech.intellispaces.javareflection.reference.ThrowableReference;
 import tech.intellispaces.javareflection.reference.TypeReference;
 import tech.intellispaces.javareflection.reference.TypeReferenceFunctions;
 import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.type.TypeKind;
-import javax.lang.model.type.TypeMirror;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public interface MethodFunctions {
 

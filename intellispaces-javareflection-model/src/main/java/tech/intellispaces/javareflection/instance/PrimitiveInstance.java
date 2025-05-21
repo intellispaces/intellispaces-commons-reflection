@@ -1,8 +1,8 @@
 package tech.intellispaces.javareflection.instance;
 
-import tech.intellispaces.javareflection.reference.PrimitiveReference;
-
 import java.util.Optional;
+
+import tech.intellispaces.javareflection.reference.PrimitiveReference;
 
 /**
  * Primitive instance.

@@ -1,14 +1,14 @@
 package tech.intellispaces.javareflection.dependencies;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.function.Supplier;
+
 import tech.intellispaces.commons.collection.ArraysFunctions;
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.type.ClassFunctions;
 import tech.intellispaces.commons.type.ClassNameFunctions;
 import tech.intellispaces.commons.type.PrimitiveFunctions;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.function.Supplier;
 
 class MutableDependencySetImpl implements MutableDependencySet {
   private final Supplier<String> currentClassName;

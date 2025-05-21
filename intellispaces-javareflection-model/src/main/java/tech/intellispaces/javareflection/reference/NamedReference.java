@@ -1,9 +1,9 @@
 package tech.intellispaces.javareflection.reference;
 
-import tech.intellispaces.javareflection.Statement;
-
 import java.util.List;
 import java.util.Optional;
+
+import tech.intellispaces.javareflection.Statement;
 
 /**
  * Named type reference.

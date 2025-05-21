@@ -1,8 +1,8 @@
 package tech.intellispaces.javareflection.type;
 
-import tech.intellispaces.javareflection.reference.TypeReference;
-
 import java.util.List;
+
+import tech.intellispaces.javareflection.reference.TypeReference;
 
 /**
  * The type associated with the type reference.</p>

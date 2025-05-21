@@ -1,11 +1,11 @@
 package tech.intellispaces.javareflection.context;
 
-import tech.intellispaces.javareflection.reference.NamedReference;
-import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import tech.intellispaces.javareflection.reference.NamedReference;
+import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
 
 public class TypeContextBuilder {
   private TypeContext parentContext = TypeContexts.empty();

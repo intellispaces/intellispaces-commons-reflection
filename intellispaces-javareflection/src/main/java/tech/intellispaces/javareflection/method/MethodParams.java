@@ -1,9 +1,9 @@
 package tech.intellispaces.javareflection.method;
 
+import javax.lang.model.element.VariableElement;
+
 import tech.intellispaces.javareflection.context.TypeContext;
 import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.VariableElement;
 
 public interface MethodParams {
 

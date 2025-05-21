@@ -1,12 +1,12 @@
 package tech.intellispaces.javareflection.reference;
 
-import tech.intellispaces.commons.collection.ArraysFunctions;
-import tech.intellispaces.commons.exception.UnexpectedExceptions;
-import tech.intellispaces.javareflection.customtype.CustomType;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+
+import tech.intellispaces.commons.collection.ArraysFunctions;
+import tech.intellispaces.commons.exception.UnexpectedExceptions;
+import tech.intellispaces.javareflection.customtype.CustomType;
 
 public interface TypeReferences {
 

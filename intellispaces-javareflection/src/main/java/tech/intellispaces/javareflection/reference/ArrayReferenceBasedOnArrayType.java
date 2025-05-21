@@ -1,5 +1,7 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.Map;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.javareflection.StatementType;
@@ -7,8 +9,6 @@ import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.common.JavaModelFunctions;
 import tech.intellispaces.javareflection.context.TypeContext;
 import tech.intellispaces.javareflection.session.Session;
-
-import java.util.Map;
 
 /**
  * Adapter of {@link javax.lang.model.type.ArrayType} to {@link ArrayReference}.

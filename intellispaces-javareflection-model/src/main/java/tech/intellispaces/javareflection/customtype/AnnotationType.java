@@ -1,10 +1,10 @@
 package tech.intellispaces.javareflection.customtype;
 
-import tech.intellispaces.javareflection.reference.NamedReference;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import tech.intellispaces.javareflection.reference.NamedReference;
 
 /**
  * The annotation type.

@@ -1,5 +1,10 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.lang.model.element.TypeParameterElement;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.javareflection.JavaStatements;
@@ -9,11 +14,6 @@ import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.common.JavaModelFunctions;
 import tech.intellispaces.javareflection.context.TypeContext;
 import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.TypeParameterElement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Adapter of {@link TypeParameterElement} to {@link NamedReference}.

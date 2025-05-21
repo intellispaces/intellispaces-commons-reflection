@@ -1,12 +1,12 @@
 package tech.intellispaces.javareflection.reference;
 
-import tech.intellispaces.javareflection.Statement;
-import tech.intellispaces.javareflection.StatementType;
-import tech.intellispaces.javareflection.StatementTypes;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import tech.intellispaces.javareflection.Statement;
+import tech.intellispaces.javareflection.StatementType;
+import tech.intellispaces.javareflection.StatementTypes;
 
 class NamedReferenceImpl extends AbstractTypeReference implements NamedReference {
   private final String name;

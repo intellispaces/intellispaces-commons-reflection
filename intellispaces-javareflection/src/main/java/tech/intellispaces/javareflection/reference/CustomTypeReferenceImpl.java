@@ -1,5 +1,9 @@
 package tech.intellispaces.javareflection.reference;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
 import tech.intellispaces.actions.cache.CachedSupplierActions;
 import tech.intellispaces.actions.supplier.SupplierAction;
 import tech.intellispaces.commons.exception.UnexpectedExceptions;
@@ -7,10 +11,6 @@ import tech.intellispaces.commons.type.ClassFunctions;
 import tech.intellispaces.javareflection.StatementType;
 import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.customtype.CustomType;
-
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 class CustomTypeReferenceImpl extends AbstractCustomTypeReference {
   private final CustomType targetType;

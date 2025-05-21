@@ -1,15 +1,15 @@
 package tech.intellispaces.javareflection.method;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import tech.intellispaces.javareflection.AnnotatedStatement;
 import tech.intellispaces.javareflection.instance.Instance;
 import tech.intellispaces.javareflection.reference.NamedReference;
 import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
 import tech.intellispaces.javareflection.reference.ThrowableReference;
 import tech.intellispaces.javareflection.reference.TypeReference;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * The method signature.

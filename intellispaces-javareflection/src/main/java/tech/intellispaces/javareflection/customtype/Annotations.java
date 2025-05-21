@@ -1,13 +1,13 @@
 package tech.intellispaces.javareflection.customtype;
 
+import java.lang.annotation.Annotation;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
+
 import tech.intellispaces.javareflection.common.JavaModelFunctions;
 import tech.intellispaces.javareflection.context.TypeContext;
 import tech.intellispaces.javareflection.context.TypeContexts;
 import tech.intellispaces.javareflection.session.Session;
-
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.TypeElement;
-import java.lang.annotation.Annotation;
 
 public interface Annotations {
 

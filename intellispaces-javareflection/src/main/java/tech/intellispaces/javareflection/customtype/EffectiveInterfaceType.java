@@ -1,10 +1,10 @@
 package tech.intellispaces.javareflection.customtype;
 
+import java.util.Map;
+
 import tech.intellispaces.javareflection.StatementType;
 import tech.intellispaces.javareflection.StatementTypes;
 import tech.intellispaces.javareflection.reference.NotPrimitiveReference;
-
-import java.util.Map;
 
 class EffectiveInterfaceType extends AbstractEffectiveCustomType implements InterfaceType {
 
