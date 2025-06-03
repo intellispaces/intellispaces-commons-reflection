@@ -11,15 +11,21 @@ import tech.intellispaces.commons.type.ClassNameFunctions;
 import tech.intellispaces.commons.type.PrimitiveFunctions;
 
 class MutableDependencySetImpl implements MutableDependencySet {
-  private final Supplier<String> currentClassName;
+  private final boolean excludeJavaLangClasses;
+  private final Supplier<String> currentClassNameSupplier;
   private final HashMap<String, String> imports = new HashMap<>();
+  private String currentClassName;
+  private String currentClassSimpleName;
+  private String currentClassPackageName;
 
-  public MutableDependencySetImpl(String currentClassName) {
-    this.currentClassName = () -> currentClassName;
+  public MutableDependencySetImpl(boolean excludeJavaLangClasses, String currentClassName) {
+    this.excludeJavaLangClasses = excludeJavaLangClasses;
+    this.currentClassNameSupplier = () -> currentClassName;
   }
 
-  public MutableDependencySetImpl(Supplier<String> currentClassName) {
-    this.currentClassName = currentClassName;
+  public MutableDependencySetImpl(boolean excludeJavaLangClasses, Supplier<String> currentClassNameSupplier) {
+    this.excludeJavaLangClasses = excludeJavaLangClasses;
+    this.currentClassNameSupplier = currentClassNameSupplier;
   }
 
   @Override
@@ -45,7 +51,18 @@ class MutableDependencySetImpl implements MutableDependencySet {
 
   @Override
   public String simpleNameOf(String canonicalName) {
+    if (!excludeJavaLangClasses && ClassFunctions.isLanguageClass(canonicalName)) {
+      return canonicalName;
+    }
+
     String simpleName = ClassNameFunctions.getSimpleName(canonicalName);
+    if (simpleName.equals(currentClassSimpleName())) {
+      if (canonicalName.equals(currentClassName())) {
+        return simpleName;
+      } else {
+        return canonicalName;
+      }
+    }
     String importedCanonicalName = imports.get(simpleName);
     if (importedCanonicalName == null) {
       throw UnexpectedExceptions.withMessage("Class {0} is missing from list of imported classes", canonicalName);
@@ -79,11 +96,24 @@ class MutableDependencySetImpl implements MutableDependencySet {
         .toList();
   }
 
+  private String currentClassName() {
+    if (currentClassName == null) {
+      currentClassName = currentClassNameSupplier.get();
+    }
+    return currentClassName;
+  }
+
   private String currentClassSimpleName() {
-    return ClassNameFunctions.getSimpleName(currentClassName.get());
+    if (currentClassSimpleName == null) {
+      currentClassSimpleName = ClassNameFunctions.getSimpleName(currentClassNameSupplier.get());
+    }
+    return currentClassSimpleName;
   }
 
   private String currentClassPackageName() {
-    return ClassNameFunctions.getPackageName(currentClassName.get());
+    if (currentClassPackageName == null) {
+      currentClassPackageName = ClassNameFunctions.getPackageName(currentClassNameSupplier.get());
+    }
+    return currentClassPackageName;
   }
 }

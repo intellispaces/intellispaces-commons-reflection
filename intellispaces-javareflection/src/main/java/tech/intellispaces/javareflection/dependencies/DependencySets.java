@@ -5,10 +5,10 @@ import java.util.function.Supplier;
 public interface DependencySets {
 
   static MutableDependencySet get(String currentClassName) {
-    return new MutableDependencySetImpl(currentClassName);
+    return new MutableDependencySetImpl(false, currentClassName);
   }
 
   static MutableDependencySet get(Supplier<String> currentClassName) {
-    return new MutableDependencySetImpl(currentClassName);
+    return new MutableDependencySetImpl(false, currentClassName);
   }
 }
